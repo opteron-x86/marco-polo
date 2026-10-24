@@ -1,0 +1,16 @@
+# Game testing for 0.1.0
+
+Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, exports and the runtime gate. **These do not substitute for the checks below.**
+
+Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
+
+1. **Startup:** confirm `MarcoPolo.log` names 1.6.1170, loads configuration and installs barter integration. Load an existing save and open a merchant. Ensure no crash or unsupported-menu notification. Repeat with your actual UI replacer.
+2. **Quotes:** record player and merchant gold. Buy and sell one ordinary ingot, then a stack of 20. Check list/card values, the selected quantity total and exact gold changes. Move the slider both directions; cancel it. Cancelling must not alter stocks or cash. Repeat near an affordability limit, after a Speech increase, with relevant perks and enchanted/tempered items.
+3. **Inventory:** buy a shop's ordinary stock out, wait one and then three game days, return and compare. Supply can constrain replenishment. Test vanilla reset timing, sleeping/fast travel, saving in a shop and merchant death. Verify unique, quest, enchanted and named instances are not replaced or duplicated. Test theft from a registered chest.
+4. **Regional effects:** sell a large supply of one commodity and observe its price fall. Compare the same good in another hold. Check stock and price after several days and after long waits. Verify reaching a location inside each hold resolves to the correct market.
+5. **Save isolation:** save, trade, reload and compare the restored state. Repeat across two characters and through the main menu. Load-order changes must resolve stable form keys. Keep both save files when transferring a test save.
+6. **Missives:** enable the addon. Each original capital board should contain a market report. After shortages develop, read and close a supply order, accept, deliver the exact item near that board and verify exact quantity removal and reward. Try a partial order, delivery in another hold, repeat delivery, cancellation, expiry and reloading an accepted order. Copies show the current posting; the accepted contract's terms stay fixed.
+7. **Coexistence:** repeat board checks with Notes and Announcements and Tessera Missives enabled. Their notes/jobs must remain. Check board replacers that retain references. Then repeat trade checks with your other merchant/perk mods.
+8. **Optional ledger:** verify it appears only when Menu Framework is installed, opens through your usual Menu Framework/Risa entry, shows markets/contracts, and exports a readable diagnostic file. Repeat without Menu Framework or Missives: core trading should still function.
+
+Report the exact core/archive version, UI/economy mods, merchant/hold, item, count, quoted total, gold before/after, game day, and steps. Include `MarcoPolo.log` and the exported state. The first game pass should prioritize quotes, gold settlement, merchant reset behavior and loading saves; they are the engine-facing boundaries.

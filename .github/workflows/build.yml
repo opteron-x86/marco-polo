@@ -1,0 +1,101 @@
+name: Build, test, package and release
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: marco-polo-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ !startsWith(github.ref, 'refs/tags/') }}
+jobs:
+  native:
+    name: Linux sanitizer tests
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Validate release version
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: python3 tools/release.py --tag "$RELEASE_TAG"
+      - name: Check addon and release tooling
+        run: python3 -m unittest discover -s tests -p '*_test.py' -v
+      - name: Install compiler
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y g++-14 ninja-build
+      - name: Build simulation
+        env:
+          CXX: g++-14
+        run: |
+          cmake --preset native-tests
+          cmake --build --preset native-tests
+      - name: Test simulation
+        run: ctest --preset native-tests --verbose
+  windows:
+    name: Windows DLL and packages
+    needs: native
+    runs-on: windows-2025
+    timeout-minutes: 45
+    env:
+      PYTHONUTF8: '1'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Check out pinned vcpkg
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          repository: microsoft/vcpkg
+          ref: ee12231b20c95013c6638d845d04c91559a1d1ff
+          path: .deps/vcpkg
+          persist-credentials: false
+      - name: Set up compiler
+        run: ./.github/scripts/windows-env.ps1
+      - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
+        with:
+          path: .deps/binary-cache
+          key: marco-polo-vcpkg-windows-2025-${{ hashFiles('vcpkg.json') }}
+      - name: Bootstrap dependencies
+        run: ./.deps/vcpkg/bootstrap-vcpkg.bat -disableMetrics
+      - name: Configure
+        run: cmake --preset windows-release
+      - name: Build
+        run: cmake --build --preset windows-release
+      - name: Test Windows build
+        run: ctest --test-dir build/windows-release --verbose
+      - name: Package tested build
+        run: python tools/package.py --build build/windows-release --output dist
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9
+        with:
+          name: marco-polo-${{ github.sha }}
+          path: dist/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+  release:
+    name: Publish GitHub release
+    needs: windows
+    if: startsWith(github.ref, 'refs/tags/v') && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      actions: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      RELEASE_TAG: ${{ github.ref_name }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Download tested packages
+        run: gh run download "$GITHUB_RUN_ID" --name "marco-polo-$GITHUB_SHA" --dir dist
+      - name: Validate and publish
+        run: python3 tools/release.py --tag "$RELEASE_TAG" --dist dist --commit "$GITHUB_SHA"

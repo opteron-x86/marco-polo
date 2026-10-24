@@ -1,0 +1,9 @@
+{
+  "version": 6,
+  "configurePresets": [
+    {"name":"native-tests","generator":"Ninja","binaryDir":"${sourceDir}/build/native-tests","cacheVariables":{"CMAKE_BUILD_TYPE":"Debug","MARCO_BUILD_PLUGIN":"OFF","MARCO_SANITIZERS":"ON"}},
+    {"name":"windows-release","generator":"Ninja","binaryDir":"${sourceDir}/build/windows-release","cacheVariables":{"CMAKE_BUILD_TYPE":"Release","CMAKE_CXX_COMPILER":"clang-cl","CMAKE_C_COMPILER":"clang-cl","CMAKE_TOOLCHAIN_FILE":"$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake","VCPKG_TARGET_TRIPLET":"x64-windows-static-md","MARCO_BUILD_PLUGIN":"ON"}}
+  ],
+  "buildPresets": [{"name":"native-tests","configurePreset":"native-tests"},{"name":"windows-release","configurePreset":"windows-release"}],
+  "testPresets": [{"name":"native-tests","configurePreset":"native-tests","output":{"outputOnFailure":true}}]
+}

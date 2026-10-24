@@ -1,0 +1,76 @@
+name: Upload tested release to Nexus
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published standard release tag (for example v0.1.0)
+        type: string
+        required: true
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: nexus-upload
+  cancel-in-progress: false
+jobs:
+  upload:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    environment: nexus
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
+      - name: Check publishing configuration
+        env:
+          NEXUSMODS_API_KEY: ${{ secrets.NEXUSMODS_API_KEY }}
+          NEXUSMODS_FILE_ID: ${{ vars.NEXUSMODS_FILE_ID }}
+          NEXUSMODS_MOD_ID: ${{ vars.NEXUSMODS_MOD_ID }}
+        run: |
+          python3 - <<'PY'
+          import os
+          if os.environ['GITHUB_REF'] != 'refs/heads/master':
+              raise SystemExit('Run the upload workflow from master')
+          missing = [key for key in ('NEXUSMODS_API_KEY','NEXUSMODS_FILE_ID','NEXUSMODS_MOD_ID') if not os.environ.get(key,'').strip()]
+          if missing:
+              raise SystemExit('Configure the nexus environment: ' + ', '.join(missing))
+          PY
+      - name: Download and verify release
+        id: release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: python3 tools/prepare-nexus.py --repo "$GITHUB_REPOSITORY" --tag "$RELEASE_TAG" --output build/nexus
+      - name: Upload core
+        uses: Nexus-Mods/upload-action@98532f7670c27cbecc78fae03fa3e278147827e2
+        with:
+          api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+          file_id: ${{ vars.NEXUSMODS_FILE_ID }}
+          mod_id: ${{ vars.NEXUSMODS_MOD_ID }}
+          filename: ${{ steps.release.outputs.filename }}
+          version: ${{ steps.release.outputs.version }}
+          display_name: Marco Polo - A Skyrim Economy Mod
+          description: Native economy simulation and dynamic merchant trading. Optional Missives addon is a separate file.
+          category: main
+          archive_existing_version: 'true'
+          primary_mod_manager_download: 'true'
+          allow_mod_manager_download: 'true'
+          update_mod_version: 'true'
+          changelog: ${{ steps.release.outputs.changelog }}
+      - name: Upload Missives addon
+        if: vars.NEXUSMODS_MISSIVES_FILE_ID != ''
+        uses: Nexus-Mods/upload-action@98532f7670c27cbecc78fae03fa3e278147827e2
+        with:
+          api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+          file_id: ${{ vars.NEXUSMODS_MISSIVES_FILE_ID }}
+          mod_id: ${{ vars.NEXUSMODS_MOD_ID }}
+          filename: ${{ steps.release.outputs.missives }}
+          version: ${{ steps.release.outputs.version }}
+          display_name: Marco Polo - Missives
+          description: Optional market bulletins and supply contracts. Requires Marco Polo and Missives.
+          category: optional
+          archive_existing_version: 'true'
+          primary_mod_manager_download: 'false'
+          allow_mod_manager_download: 'true'
+          update_mod_version: 'false'
+          changelog: ${{ steps.release.outputs.changelog }}

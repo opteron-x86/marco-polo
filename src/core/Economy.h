@@ -1,0 +1,143 @@
+#pragma once
+#include <cstdint>
+#include <map>
+#include <nlohmann/json.hpp>
+#include <string>
+#include <vector>
+
+namespace marco {
+using Money = std::int64_t;
+using json = nlohmann::json;
+struct Commodity {
+    std::string id, name;
+    double referenceValue{10}, elasticity{0.5}, shelfLife{0};
+    bool seasonal{false}, military{false};
+};
+struct MarketSpec {
+    std::string id, name, location;
+    double population{1}, winterSeverity{0.3};
+    std::map<std::string, double> output, demand;
+};
+struct RouteSpec {
+    std::string id, from, to;
+    double days{2}, capacity{50}, cost{0.04}, risk{0.02};
+};
+struct Recipe {
+    std::string market, output;
+    double amount{1};
+    std::map<std::string, double> inputs;
+};
+struct Config {
+    std::vector<Commodity> commodities;
+    std::vector<MarketSpec> markets;
+    std::vector<RouteSpec> routes;
+    std::vector<Recipe> recipes;
+    double targetDays{10}, minMultiplier{0.4}, maxMultiplier{3.0}, dailyAdjustment{0.12};
+    double merchantTurnover{0.08};
+    Money treasury{20000};
+    void Validate() const;
+    const Commodity &Good(const std::string &) const;
+    const MarketSpec &Market(const std::string &) const;
+    static Config Parse(const json &);
+};
+struct Stock {
+    double quantity{}, price{1}, produced{}, consumed{}, imported{}, exported{}, lost{};
+};
+struct Market {
+    std::map<std::string, Stock> goods;
+    Money treasury{};
+    double war{}, disruption{};
+};
+struct Shipment {
+    std::uint64_t id{};
+    std::string route, from, to, commodity;
+    double quantity{}, arrives{}, loss{};
+};
+struct Item {
+    std::string form, commodity;
+    int quantity{}, target{};
+    double units{1}, value{1};
+    bool protectedItem{};
+};
+struct Merchant {
+    std::string id, market;
+    Money cash{};
+    std::map<std::string, Item> items;
+    double lastVisit{}, lastRestock{};
+};
+enum class ContractStatus { offered, accepted, fulfilled, expired, cancelled };
+struct Contract {
+    std::uint64_t id{};
+    std::string market, commodity;
+    int quantity{};
+    Money reward{};
+    double issued{}, deadline{};
+    ContractStatus status{ContractStatus::offered};
+    // The adapter freezes the exact requested item, so cheap substitutes cannot
+    // satisfy a more valuable commodity contract after a configuration change.
+    std::string item, itemName;
+};
+struct Bulletin {
+    std::string market, commodity, condition, text;
+    double issued{}, multiplier{};
+};
+struct State {
+    int schema{1};
+    double day{}, epoch{};
+    std::uint64_t rng{1}, nextID{1}, revision{};
+    std::map<std::string, Market> markets;
+    std::map<std::string, Merchant> merchants;
+    std::vector<Shipment> shipments;
+    std::vector<Contract> contracts;
+};
+struct Quote {
+    Money total{};
+    int quantity{};
+    double multiplier{1};
+};
+class Economy {
+  public:
+    explicit Economy(Config config);
+    void NewGame(double day, std::uint64_t seed);
+    // Advances at most budget full days. Repeated calls converge to target.
+    unsigned Advance(double targetDay, unsigned budget = 32);
+    double Multiplier(const std::string &market, const std::string &commodity,
+                      double delta = 0) const;
+    Quote Price(const std::string &market, const std::string &commodity, double unitValue,
+                int count, bool buying, double units = 1) const;
+    void Trade(const std::string &merchant, const std::string &form, int count, bool buying,
+               Money actualGold);
+    void RegisterMerchant(Merchant merchant);
+    void SetConditions(const std::string &market, double war, double disruption);
+    std::vector<Bulletin> Reports(const std::string &market) const;
+    std::uint64_t Offer(const std::string &market, const std::string &commodity, int maximum = 50,
+                        std::string item = {}, std::string itemName = {}, double unitValue = 0);
+    bool Accept(std::uint64_t id);
+    bool Cancel(std::uint64_t id);
+    Money Deliver(std::uint64_t id, int available);
+    const Contract *FindContract(std::uint64_t id) const;
+    json Save() const;
+    void Load(const json &);
+    void Validate() const;
+    const Config &Definitions() const {
+        return config_;
+    }
+    const State &Get() const {
+        return state_;
+    }
+    State &Edit() {
+        return state_;
+    }
+
+  private:
+    Config config_;
+    State state_;
+    void Tick();
+    double Random();
+    double Target(const std::string &, const std::string &) const;
+    double Total(const std::string &, const std::string &) const;
+    double Reserved(const std::string &, const std::string &) const;
+};
+json Encode(const State &);
+State Decode(const json &);
+} // namespace marco
