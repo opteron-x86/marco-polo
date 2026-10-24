@@ -1,5 +1,5 @@
-#include "Runtime.h"
 #include "HookTargets.h"
+#include "Runtime.h"
 #include <MinHook.h>
 #include <algorithm>
 #include <cmath>
@@ -49,7 +49,8 @@ Quote QuoteFor(RE::BarterMenu *menu, const RE::InventoryEntryData *item, int cou
     if (!root.GetMember(buy ? "_buyMult" : "_sellMult", &mult) || !mult.IsNumber() ||
         !std::isfinite(mult.GetNumber()) || mult.GetNumber() <= 0)
         return {};
-    double baseline = RawValue(item) * mult.GetNumber();
+    double baseline =
+        RawValue(item) * economy->Definitions().BarterMultiplier(mult.GetNumber(), buy);
     if (!std::isfinite(baseline) || baseline < 0 || baseline > 100000000)
         return {};
     return economy->Price(c.market, good, baseline, count, buy);
@@ -86,7 +87,8 @@ void RefreshGold(RE::BarterMenu *menu, const Context &context) {
 void Select(const RE::FxDelegateArgs &args) {
     if (debugLogging)
         SKSE::log::info("ItemSelect: active={}, attached={}, arguments={}", active.load(),
-                        Ready(static_cast<RE::BarterMenu *>(args.GetHandler())), args.GetArgCount());
+                        Ready(static_cast<RE::BarterMenu *>(args.GetHandler())),
+                        args.GetArgCount());
     if (!active || !Ready(static_cast<RE::BarterMenu *>(args.GetHandler())) ||
         args.GetArgCount() < 3 || !selectOriginal) {
         if (selectOriginal)
@@ -100,7 +102,8 @@ void Select(const RE::FxDelegateArgs &args) {
     if (!c || !item || !args[0].IsNumber() || !args[2].IsBool()) {
         if (debugLogging)
             SKSE::log::warn("Unquoted ItemSelect: vendor={}, selected={}, number={}, bool={}",
-                            static_cast<bool>(c), item != nullptr, args[0].IsNumber(), args[2].IsBool());
+                            static_cast<bool>(c), item != nullptr, args[0].IsNumber(),
+                            args[2].IsBool());
         selectOriginal(args);
         return;
     }
@@ -121,8 +124,8 @@ void Select(const RE::FxDelegateArgs &args) {
     auto *object = item->object;
     auto *selected = menu->GetRuntimeData().itemList->GetSelectedItem();
     RE::GFxValue rowCount;
-    int offered = selected && selected->obj.GetMember("count", &rowCount) &&
-                          rowCount.IsNumber() && std::isfinite(rowCount.GetNumber())
+    int offered = selected && selected->obj.GetMember("count", &rowCount) && rowCount.IsNumber() &&
+                          std::isfinite(rowCount.GetNumber())
                       ? static_cast<int>(std::clamp(rowCount.GetNumber(), 0.0, 100000.0))
                       : 0;
     int chestBefore = Count(c.chest, object);
@@ -131,9 +134,10 @@ void Select(const RE::FxDelegateArgs &args) {
         RE::GFxValue listValue;
         if (selected)
             selected->obj.GetMember("infoValue", &listValue);
-        SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player gold={}, vendor gold={}, offered={}, chest={}",
-                        buy ? "BUY" : "SELL", n, Key(item->object), item->object->GetName(), q.total,
-                        args[1].IsNumber() ? args[1].GetNumber() : -1,
+        SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player "
+                        "gold={}, vendor gold={}, offered={}, chest={}",
+                        buy ? "BUY" : "SELL", n, Key(item->object), item->object->GetName(),
+                        q.total, args[1].IsNumber() ? args[1].GetNumber() : -1,
                         listValue.IsNumber() ? listValue.GetNumber() : -1, playerGold, vendorGold,
                         offered, chestBefore);
     }
@@ -141,8 +145,8 @@ void Select(const RE::FxDelegateArgs &args) {
     // Check that row's available count; let Skyrim transfer from its sources.
     if (offered < n || q.total > (buy ? playerGold : vendorGold) || q.total > 100000000 ||
         playerGold + q.total > 1000000000 || vendorGold + q.total > 1000000000) {
-        SKSE::log::warn("Transaction rejected: quantity={}, offered={}, total={}, payer gold={}",
-                        n, offered, q.total, buy ? playerGold : vendorGold);
+        SKSE::log::warn("Transaction rejected: quantity={}, offered={}, total={}, payer gold={}", n,
+                        offered, q.total, buy ? playerGold : vendorGold);
         RE::SendHUDMessage::ShowHUDMessage(
             "Marco Polo: insufficient stock or gold for this quantity.");
         return;
@@ -162,8 +166,9 @@ void Select(const RE::FxDelegateArgs &args) {
         selectOriginal(forwarded);
         int transferred = Count(player, object) - before;
         if (debugLogging)
-            SKSE::log::info("Engine transaction returned: items={}, player gold delta={}, vendor gold delta={}",
-                            transferred, Count(player, gold) - playerGold, Count(c.chest, gold) - vendorGold);
+            SKSE::log::info(
+                "Engine transaction returned: items={}, player gold delta={}, vendor gold delta={}",
+                transferred, Count(player, gold) - playerGold, Count(c.chest, gold) - vendorGold);
         if (transferred != (buy ? n : -n)) {
             SKSE::log::warn("Transaction declined or partial: expected {}, observed {}",
                             buy ? n : -n, transferred);
@@ -191,7 +196,8 @@ void Select(const RE::FxDelegateArgs &args) {
     RefreshGold(menu, c);
     Publish();
     if (debugLogging)
-        SKSE::log::info("{} {} x {}: {} gold, market {}, external={}, player gold delta={}, vendor gold delta={}",
+        SKSE::log::info("{} {} x {}: {} gold, market {}, external={}, player gold delta={}, vendor "
+                        "gold delta={}",
                         buy ? "BUY" : "SELL", n, key, q.total, c.market, fromExternal,
                         Count(player, gold) - playerGold, Count(c.chest, gold) - vendorGold);
     auto gen = generation.load();
@@ -315,7 +321,9 @@ bool WrapQuantity(RE::BarterMenu *menu) {
     RE::GFxValue config, buyMult, sellMult;
     if (!root.GetMember("_config", &config) || !config.IsObject() ||
         !root.GetMember("_buyMult", &buyMult) || !buyMult.IsNumber() ||
-        !root.GetMember("_sellMult", &sellMult) || !sellMult.IsNumber())
+        !root.GetMember("_sellMult", &sellMult) || !sellMult.IsNumber() ||
+        !std::isfinite(buyMult.GetNumber()) || buyMult.GetNumber() <= 0 ||
+        !std::isfinite(sellMult.GetNumber()) || sellMult.GetNumber() <= 0)
         return false;
     constexpr const char *methods[]{"UpdateItemCardInfo", "onQuantitySliderChange",
                                     "onQuantityMenuSelect", "doTransaction"};
@@ -341,7 +349,13 @@ bool WrapQuantity(RE::BarterMenu *menu) {
     if (!items->root.Invoke("addDataProcessor", nullptr, &processor, 1))
         return false;
     root.SetMember("MarcoPoloQuantity", RE::GFxValue(true));
-    SKSE::log::info("SkyUI quotes attached; ItemSelect callback {}", selectOriginal ? "captured" : "MISSING");
+    SKSE::log::info("SkyUI quotes attached; ItemSelect callback {}",
+                    selectOriginal ? "captured" : "MISSING");
+    if (debugLogging)
+        SKSE::log::info("Barter multipliers: native buy={}, sell={}; Marco Polo buy={}, sell={}",
+                        buyMult.GetNumber(), sellMult.GetNumber(),
+                        economy->Definitions().BarterMultiplier(buyMult.GetNumber(), true),
+                        economy->Definitions().BarterMultiplier(sellMult.GetNumber(), false));
     return true;
 }
 void AdvanceMovie(RE::BarterMenu *menu, float interval, std::uint32_t time) {
@@ -454,7 +468,8 @@ bool InstallBarter() {
     if (manageInventory) {
         // Detour the independently verified engine ID, never whatever code a
         // vtable slot currently points at. CID installs a virtual override here.
-        REL::Relocation<std::uintptr_t> resetAddress{REL::ID(hooks::ResetInventoryAE)};
+        const REL::RelocationID resetID{hooks::ResetInventorySE, hooks::ResetInventoryAE};
+        REL::Relocation<std::uintptr_t> resetAddress{resetID};
         auto *reset = reinterpret_cast<void *>(resetAddress.address());
         if (MH_CreateHook(reset, reinterpret_cast<void *>(ResetInventory),
                           reinterpret_cast<void **>(&resetOriginal)) != MH_OK ||
@@ -470,10 +485,9 @@ bool InstallBarter() {
             resetVirtualOriginal = reinterpret_cast<ResetFn>(
                 refTable.write_vfunc(hooks::ResetInventorySlot, ResetInventoryVirtual));
             SKSE::log::info("ResetInventory: engine ID {}, existing virtual hook chained ({:x})",
-                            hooks::ResetInventoryAE, reinterpret_cast<std::uintptr_t>(current));
+                            resetID.id(), reinterpret_cast<std::uintptr_t>(current));
         } else {
-            SKSE::log::info("ResetInventory: engine ID {}, original virtual entry",
-                            hooks::ResetInventoryAE);
+            SKSE::log::info("ResetInventory: engine ID {}, original virtual entry", resetID.id());
         }
     }
     REL::Relocation<std::uintptr_t> table{RE::VTABLE_BarterMenu[0]};

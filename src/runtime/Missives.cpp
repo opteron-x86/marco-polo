@@ -87,10 +87,10 @@ std::string Text(unsigned region, bool contract) {
     });
     for (unsigned i = 0; i < std::min<std::size_t>(4, reports.size()); ++i) {
         auto name = economy->Definitions().Good(reports[i].commodity).name;
-        const char *report =
-            reports[i].condition == "shortage"  ? "Stocks are running low. Prices are high."
-            : reports[i].condition == "surplus" ? "Plenty for sale, at low prices."
-                                                : "Supplies and prices are steady.";
+        const char *report = reports[i].condition == "expensive"
+                                 ? "These goods fetch high prices here."
+                             : reports[i].condition == "cheap" ? "These goods sell cheaply here."
+                                                               : "Prices are steady.";
         out += name + " — " + report + "\n\n";
     }
     return out;

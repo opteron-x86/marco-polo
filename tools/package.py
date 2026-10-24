@@ -58,7 +58,7 @@ def main():
                 source[f'dependencies/{name}/{relative.as_posix()}']=path
     write('-source',source)
     meta={'version':version(),'commit':commit,'dirty':dirty,'dll_sha256':sha(dll),
-          'workflow_run':os.getenv('GITHUB_RUN_ID'),'runtime':'Skyrim Steam 1.6.1170',
+          'workflow_run':os.getenv('GITHUB_RUN_ID'),'runtime':'Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x',
           'commonlib_commit':'12d61f3c39f7d4ba1b1ab543df2bca0e613dc747',
           'in_game_validation':'pending',
           'test_report':'Linux sanitizer tests and Windows CTest in linked CI run' if os.getenv('GITHUB_ACTIONS') else 'Local build; consult the local test logs'}

@@ -31,6 +31,21 @@ const MarketSpec &Config::Market(const std::string &id) const {
             return m;
     throw std::runtime_error("Unknown market: " + id);
 }
+double Config::PriceFactor(const std::string &market, const std::string &commodity) const {
+    const auto &factors = Market(market).priceFactors;
+    auto it = factors.find(commodity);
+    return it == factors.end() ? 1.0 : it->second;
+}
+double Config::BarterMultiplier(double nativeMultiplier, bool buying) const {
+    Require(Finite(nativeMultiplier) && nativeMultiplier > 0, "Invalid barter multiplier");
+    if (barterExponent == 1 && minimumBarterMargin == 0)
+        return nativeMultiplier;
+    // Retain the game's Speech/perk/merchant ordering while narrowing its spread.
+    // A separate floor keeps even the best bonuses from creating local arbitrage.
+    double adjusted = std::pow(nativeMultiplier, barterExponent);
+    return buying ? std::max(1 + minimumBarterMargin, adjusted)
+                  : std::min(1 - minimumBarterMargin, adjusted);
+}
 void Config::Validate() const {
     Require(!commodities.empty() && commodities.size() <= 128 && !markets.empty() &&
                 markets.size() <= 128,
@@ -44,6 +59,10 @@ void Config::Validate() const {
     Require(Finite(merchantTurnover) && merchantTurnover >= 0 && merchantTurnover <= 1 &&
                 treasury >= 0,
             "Invalid merchant policy");
+    Require(Finite(barterExponent) && barterExponent >= 0 && barterExponent <= 1 &&
+                Finite(minimumBarterMargin) && minimumBarterMargin >= 0 &&
+                minimumBarterMargin <= 0.5,
+            "Invalid barter policy");
     std::set<std::string> ids;
     for (auto &c : commodities) {
         Require(!c.id.empty() && ids.insert(c.id).second, "Duplicate commodity");
@@ -63,6 +82,11 @@ void Config::Validate() const {
                 Require(Finite(value) && value >= 0 && value <= 1000000,
                         "Invalid production or demand");
             }
+        for (auto &[key, value] : m.priceFactors) {
+            Good(key);
+            Require(Finite(value) && value >= minMultiplier && value <= maxMultiplier,
+                    "Invalid regional price factor");
+        }
     }
     ids.clear();
     for (auto &r : routes) {
@@ -94,6 +118,8 @@ Config Config::Parse(const json &j) {
     c.dailyAdjustment = p.value("dailyAdjustment", 0.12);
     c.merchantTurnover = p.value("merchantTurnover", 0.08);
     c.treasury = p.value("treasury", Money{20000});
+    c.barterExponent = p.value("barterExponent", 1.0);
+    c.minimumBarterMargin = p.value("minimumBarterMargin", 0.0);
     for (auto &v : j.at("commodities"))
         c.commodities.push_back({v.at("id"), v.at("name"), v.value("referenceValue", 10.0),
                                  v.value("elasticity", 0.5), v.value("shelfLife", 0.0),
@@ -102,7 +128,8 @@ Config Config::Parse(const json &j) {
         c.markets.push_back({v.at("id"), v.at("name"), v.value("location", std::string{}),
                              v.value("population", 1.0), v.value("winterSeverity", 0.3),
                              v.at("output").get<std::map<std::string, double>>(),
-                             v.at("demand").get<std::map<std::string, double>>()});
+                             v.at("demand").get<std::map<std::string, double>>(),
+                             v.value("priceFactors", std::map<std::string, double>{})});
     for (auto &v : j.at("routes"))
         c.routes.push_back({v.at("id"), v.at("from"), v.at("to"), v.value("days", 2.0),
                             v.value("capacity", 50.0), v.value("cost", 0.04),
@@ -126,8 +153,10 @@ void Economy::NewGame(double day, std::uint64_t seed) {
     for (auto &m : config_.markets) {
         auto &market = state_.markets[m.id];
         market.treasury = config_.treasury;
-        for (auto &c : config_.commodities)
+        for (auto &c : config_.commodities) {
             market.goods[c.id].quantity = Target(m.id, c.id);
+            market.goods[c.id].price = config_.PriceFactor(m.id, c.id);
+        }
     }
 }
 double Economy::Random() {
@@ -189,10 +218,9 @@ void Economy::RegisterMerchant(Merchant m) {
     Require(!m.id.empty() && m.cash >= 0 && m.cash <= 1000000000, "Invalid merchant");
     for (auto &[f, i] : m.items) {
         config_.Good(i.commodity);
-        Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 &&
-                    i.externalQuantity >= 0 && i.externalQuantity <= 100000 && i.target >= 0 &&
-                    i.target <= 100000 && Finite(i.units) && i.units > 0 && Finite(i.value) &&
-                    i.value >= 0,
+        Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 && i.externalQuantity >= 0 &&
+                    i.externalQuantity <= 100000 && i.target >= 0 && i.target <= 100000 &&
+                    Finite(i.units) && i.units > 0 && Finite(i.value) && i.value >= 0,
                 "Invalid inventory");
     }
     // Reconciliation includes outside changes and travelling merchants, without
@@ -206,8 +234,7 @@ void Economy::RegisterMerchant(Merchant m) {
             changes[{old->second.market, item.commodity}] -=
                 (item.quantity + item.externalQuantity) * item.units;
     for (auto &[key, item] : m.items)
-        changes[{m.market, item.commodity}] +=
-            (item.quantity + item.externalQuantity) * item.units;
+        changes[{m.market, item.commodity}] += (item.quantity + item.externalQuantity) * item.units;
     for (auto &[pair, delta] : changes)
         before[pair] = Total(pair.first, pair.second);
     state_.merchants[m.id] = std::move(m);
@@ -233,8 +260,8 @@ void Economy::Trade(const std::string &mid, const std::string &form, int n, bool
     auto &m = state_.merchants.at(mid);
     auto &item = m.items.at(form);
     Require(!item.protectedItem, "Protected item");
-    Require(!buy || (item.quantity >= n - fromExternal &&
-                    item.externalQuantity >= fromExternal), "Insufficient merchant stock");
+    Require(!buy || (item.quantity >= n - fromExternal && item.externalQuantity >= fromExternal),
+            "Insufficient merchant stock");
     Require(buy || m.cash >= gold, "Insufficient merchant gold");
     Require(buy ? gold <= 1000000000 - m.cash : item.quantity <= 100000 - n,
             "Transaction exceeds ledger limits");
@@ -337,7 +364,10 @@ void Economy::Tick() {
                 sales = 1;
             i.quantity -= sales;
             s.consumed += sales * i.units;
-            v.cash += static_cast<Money>(sales * i.value * 0.5);
+            // Background customers and restocking must use the same local
+            // value scale, or import merchants lose money on every NPC sale.
+            v.cash += static_cast<Money>(std::min(static_cast<double>(1000000000 - v.cash),
+                                                  std::floor(sales * i.value * 0.5 * s.price)));
             int need = std::max(0, i.target - i.quantity);
             double cost = std::max(1.0, i.value * 0.35 * s.price);
             int delivery = std::min(
@@ -384,9 +414,10 @@ void Economy::Tick() {
         for (auto &c : config_.commodities) {
             auto &s = state_.markets.at(def.id).goods.at(c.id);
             double target =
-                std::clamp(std::pow((Target(def.id, c.id) * 1.25) /
-                                        (Total(def.id, c.id) + Target(def.id, c.id) * 0.25),
-                                    c.elasticity),
+                std::clamp(config_.PriceFactor(def.id, c.id) *
+                               std::pow((Target(def.id, c.id) * 1.25) /
+                                            (Total(def.id, c.id) + Target(def.id, c.id) * 0.25),
+                                        c.elasticity),
                            config_.minMultiplier, config_.maxMultiplier);
             s.price +=
                 std::clamp(target - s.price, -config_.dailyAdjustment, config_.dailyAdjustment);
@@ -472,11 +503,11 @@ std::vector<Bulletin> Economy::Reports(const std::string &m) const {
     auto &market = state_.markets.at(m);
     for (auto &c : config_.commodities) {
         auto &s = market.goods.at(c.id);
-        std::string condition = s.price > 1.25 ? "shortage" : s.price < 0.8 ? "surplus" : "steady";
+        std::string condition = s.price > 1.25 ? "expensive" : s.price < 0.8 ? "cheap" : "steady";
         out.push_back({m, c.id, condition,
-                       config_.Market(m).name + ": " + c.name + " supplies are " +
-                           (condition == "shortage"  ? "scarce"
-                            : condition == "surplus" ? "plentiful"
+                       config_.Market(m).name + ": " + c.name + " prices are " +
+                           (condition == "expensive" ? "high"
+                            : condition == "cheap"   ? "low"
                                                      : "steady") +
                            ".",
                        state_.day, s.price});
@@ -484,8 +515,8 @@ std::vector<Bulletin> Economy::Reports(const std::string &m) const {
     return out;
 }
 void Economy::Validate() const {
-    Require(state_.schema == SaveSchema && Finite(state_.day) && state_.day >= 0 && state_.rng != 0 &&
-                state_.nextID > 0,
+    Require(state_.schema == SaveSchema && Finite(state_.day) && state_.day >= 0 &&
+                state_.rng != 0 && state_.nextID > 0,
             "Invalid save header");
     Require(state_.markets.size() == config_.markets.size() && state_.merchants.size() <= 10000 &&
                 state_.shipments.size() <= 100000 && state_.contracts.size() <= 2048,

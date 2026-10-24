@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
-"""Verify hook slots against CommonLib; optionally audit a local 1.6.1170 PE.
+"""Verify CommonLib hook slots and supplied desktop runtime address tables.
 
 Reads game files only. Does not copy/distribute executable code or modify them.
 The PE's code may be packed; this verifies vtable addresses, not instructions.
 """
 import argparse
+import csv
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -43,8 +45,17 @@ def addresses(path):
         pos += struct.calcsize('<' + fmt)
         return result[0] if len(result) == 1 else result
 
-    if read('I') != 2 or read('4I') != (1, 6, 1170, 0):
-        raise ValueError('Expected the AE 1.6.1170.0 address database')
+    fmt = read('I')
+    version = read('4I')
+    if fmt == 5:
+        pos += 64  # Fixed executable name; dense RVA table indexed by ID.
+        pointer_size, data_format, count = read('3I')
+        if pointer_size != 8 or pos + count * 4 != len(blob):
+            raise ValueError('Invalid format-5 address database')
+        return version, {i: value[0] for i, value in
+                         enumerate(struct.iter_unpack('<I', blob[pos:])) if value[0]}
+    if fmt not in (1, 2):
+        raise ValueError('Expected Address Library format 1, 2 or 5')
     name_size = read('I')
     pos += name_size
     pointer_size, count = read('2I')
@@ -73,10 +84,10 @@ def addresses(path):
         result[ident] = offset
     if pos != len(blob):
         raise ValueError('Trailing address database data')
-    return result
+    return version, result
 
 
-def check_exe(path, database, hook):
+def check_exe(path, version, database, hook):
     data = path.read_bytes()
     pe = struct.unpack_from('<I', data, 0x3c)[0]
     if data[pe:pe + 4] != b'PE\0\0':
@@ -92,20 +103,50 @@ def check_exe(path, database, hook):
                 return raw + rva - va
         raise ValueError(f'RVA {rva:#x} is outside file-backed sections')
 
+    ae = version >= (1, 6, 0, 0)
+    ref_table, barter_table = (190259, 214926) if ae else (235511, 267991)
+    reset_id = hook['ResetInventoryAE' if ae else 'ResetInventorySE']
+    reverse = {rva: ident for ident, rva in database.items()}
     result = []
     for label, table, slot, ident in [
-        ('ResetInventory', 190259, hook['ResetInventorySlot'], hook['ResetInventoryAE']),
-        ('BarterMenu::Accept', 214926, hook['BarterAcceptSlot'], 50947),
-        ('BarterMenu::AdvanceMovie', 214926, hook['BarterAdvanceSlot'], 82307),
+        ('ResetInventory', ref_table, hook['ResetInventorySlot'], reset_id),
+        ('BarterMenu::Accept', barter_table, hook['BarterAcceptSlot'], None),
+        ('BarterMenu::AdvanceMovie', barter_table, hook['BarterAdvanceSlot'], None),
     ]:
         actual = struct.unpack_from('<Q', data, offset(database[table]) + slot * 8)[0] - image_base
-        if actual != database[ident]:
+        if ident is None:
+            ident = reverse.get(actual)
+        if ident is None or actual != database[ident]:
             raise ValueError(f'{label}: slot {slot:#x} points to {actual:#x}, not ID {ident}')
+        offset(actual)
         result.append({'hook': label, 'slot': hex(slot), 'id': ident, 'rva': hex(actual)})
     # Description detour uses the ID bound by CommonLib's TESDescription wrapper.
-    offset(database[14552])
-    result.append({'hook': 'TESDescription::GetDescription', 'id': 14552, 'rva': hex(database[14552])})
+    description = 14552 if ae else 14399
+    offset(database[description])
+    result.append({'hook': 'TESDescription::GetDescription', 'id': description,
+                   'rva': hex(database[description])})
     return result
+
+
+def check_table(database, ae, hook):
+    sites = [('TESObjectREFR::ResetInventory', hook['ResetInventorySE'], hook['ResetInventoryAE']),
+             ('TESDescription::GetDescription', 14399, 14552),
+             ('TESObjectREFR vtable', 235511, 190259),
+             ('BarterMenu vtable', 267991, 214926),
+             ('BarterMenu target handle', 519283, 405823)]
+    result = []
+    for name, se_id, ae_id in sites:
+        ident = ae_id if ae else se_id
+        if not database.get(ident):
+            raise ValueError(f'Missing {name}: ID {ident}')
+        result.append({'site': name, 'id': ident, 'address': hex(database[ident])})
+    return result
+
+
+def csv_addresses(path, ae):
+    with path.open(encoding='utf-8-sig', newline='') as stream:
+        return {int(row['aeid' if ae else 'sseid']): int(row['ae_addr' if ae else 'sse_addr'], 16)
+                for row in csv.DictReader(stream)}
 
 
 if __name__ == '__main__':
@@ -113,6 +154,10 @@ if __name__ == '__main__':
     parser.add_argument('--commonlib', type=Path, required=True)
     parser.add_argument('--exe', type=Path)
     parser.add_argument('--address-library', type=Path)
+    parser.add_argument('--se-csv', type=Path)
+    parser.add_argument('--ae17-csv', type=Path)
+    parser.add_argument('--database-directory', type=Path)
+    parser.add_argument('--report', type=Path)
     args = parser.parse_args()
     if bool(args.exe) != bool(args.address_library):
         parser.error('--exe and --address-library must be supplied together')
@@ -120,5 +165,24 @@ if __name__ == '__main__':
     check_commonlib(args.commonlib, hook)
     print('PASS: hook slots match pinned CommonLib SE/AE declarations and dispatch')
     if args.exe:
-        print(json.dumps(check_exe(args.exe, addresses(args.address_library), hook), indent=2))
-        print('PASS: hook targets match the supplied 1.6.1170 executable vtables')
+        version, database = addresses(args.address_library)
+        print(json.dumps(check_exe(args.exe, version, database, hook), indent=2))
+        print('PASS: hook slots resolve in the supplied executable; reset target matches its ID')
+    tables = []
+    for path, ae, version in [(args.se_csv, False, (1, 5, 97, 0)),
+                               (args.ae17_csv, True, (1, 7, 104, 0))]:
+        if path:
+            tables.append((path, version, csv_addresses(path, ae)))
+    if args.database_directory:
+        for path in sorted(args.database_directory.glob('version*.bin')):
+            version, database = addresses(path)
+            tables.append((path, version, database))
+    records = []
+    for path, version, database in tables:
+        sites = check_table(database, version >= (1, 6, 0, 0), hook)
+        records.append({'version': '.'.join(map(str, version)), 'table': path.name,
+                        'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'sites': sites})
+    if records:
+        print(f'PASS: hook relocation availability in {len(records)} runtime databases')
+    if args.report:
+        args.report.write_text(json.dumps({'databases': records, 'passed': True}, indent=2)+'\n')

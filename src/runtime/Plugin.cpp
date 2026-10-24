@@ -36,11 +36,20 @@ extern "C" __declspec(dllexport) constinit auto SKSEPlugin_Version = []() noexce
     d.AuthorName("opteron-x86");
     d.PluginVersion(REL::Version(MARCO_VERSION_MAJOR, MARCO_VERSION_MINOR, MARCO_VERSION_PATCH, 0));
     d.UsesAddressLibrary();
-    d.UsesUpdatedStructs();
-    d.versionIndependenceEx |= SKSE::PluginVersionData::kVersionIndependentEx_AddressLibraryV5;
-    d.CompatibleVersions({REL::Version(1, 6, 1170, 0)});
+    // CommonLib selects layouts at runtime, including pre/post-629 and 1.7.x.
+    // Match the cross-runtime declaration used by Quickslot and Tessera.
+    d.UsesNoStructs();
     return d;
 }();
+extern "C" __declspec(dllexport) bool SKSEPlugin_Query(const SKSE::QueryInterface *skse,
+                                                       SKSE::PluginInfo *info) {
+    if (!skse || !info)
+        return false;
+    info->infoVersion = SKSE::PluginInfo::kVersion;
+    info->name = "MarcoPolo";
+    info->version = SKSEPlugin_Version.pluginVersion;
+    return !skse->IsEditor() && skse->RuntimeVersion() >= SKSE::RUNTIME_SSE_1_5_97;
+}
 extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface *skse) {
     if (!skse || skse->IsEditor())
         return false;
@@ -51,7 +60,8 @@ extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface 
         *p /= "MarcoPolo.log";
         // Retain the previous session: restarting to enable diagnostics must not
         // destroy the transaction/save evidence that prompted the restart.
-        auto sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(p->string(), 2 * 1024 * 1024, 3);
+        auto sink =
+            std::make_shared<spdlog::sinks::rotating_file_sink_mt>(p->string(), 2 * 1024 * 1024, 3);
         auto logger = std::make_shared<spdlog::logger>("global", sink);
         logger->set_level(spdlog::level::info);
         logger->flush_on(spdlog::level::info);
@@ -61,11 +71,6 @@ extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface 
         SKSE::Init(skse, init);
         SKSE::log::info("Marco Polo {} | Skyrim {}", MARCO_VERSION,
                         skse->RuntimeVersion().string());
-        // Runtime-dependent barter ABI is deliberately gated to the tested target.
-        if (skse->RuntimeVersion() != REL::Version(1, 6, 1170, 0)) {
-            SKSE::log::error("This build targets Skyrim 1.6.1170. No hooks installed.");
-            return false;
-        }
         auto *s = SKSE::GetSerializationInterface();
         if (!s || !SKSE::GetTaskInterface())
             return false;

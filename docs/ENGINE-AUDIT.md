@@ -1,4 +1,10 @@
-# Skyrim 1.6.1170 engine boundary audit
+# Skyrim desktop runtime and engine audit
+
+Version 0.1.5 removes the explicit 1.6.1170 load check and metadata whitelist. Like Quickslot and Tessera, it declares CommonLib runtime-selected layouts and exports both `SKSEPlugin_Query` and `SKSEPlugin_Version`. The pinned alandtse CommonLibSSE-NG 13.1.0 supports Address Library formats 1, 2 and 5. The inventory-reset detour uses `REL::RelocationID(19375, 19802)` for SE/AE; desktop virtual slots remain 0x8A, 0x01 and 0x05. The SE reset identity is recorded in alandtse's address database as `TESObjectREFR::ResetInventory_140298C80` at 0x140298C80.
+
+`tools/audit-runtime.py` verifies the slots against CommonLib and can check supplied SE/AE CSV tables, compressed databases and format-5 dense tables. Local audits cover the hook relocations and barter target handle in SE 1.5.97, the supplied 1.6.x databases and AE 1.7.99 / 1.7.104. The DLL audit requires the legacy Query export, runtime-independent layout metadata, format-5 support and an empty whitelist. These checks establish loading/relocation coverage, not execution of Marco Polo's barter callbacks on every runtime. Earlier live evidence below remains specific to 1.6.1170.
+
+## Earlier 1.6.1170 investigation
 
 The 0.1.0 reset detour used slot 0x8B from a misleading header comment. CommonLib's actual `TESObjectREFR::ResetInventory` dispatch selects 0x8A for SE/AE and 0x8B for VR. SE/AE slot 0x8B is GetFireNode and has a different signature and return value. A successful build and simulation tests did not detect this error.
 

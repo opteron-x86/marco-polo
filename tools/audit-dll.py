@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check the architecture, exports and deliberately narrow runtime metadata."""
+"""Check x64 exports and CommonLib's cross-runtime SKSE metadata."""
 import argparse
 from pathlib import Path
 import struct
@@ -19,11 +19,11 @@ def audit(data):
     exports=offset(u32(opt+112));functions,names,ordinals=(offset(u32(exports+i)) for i in (28,32,36));symbols={}
     for i in range(u32(exports+24)):
         pos=offset(u32(names+i*4));name=data[pos:data.index(b'\0',pos)].decode();symbols[name]=u32(functions+u16(ordinals+i*2)*4)
-    if not {'SKSEPlugin_Load','SKSEPlugin_Version'}.issubset(symbols):raise ValueError('Missing SKSE exports')
+    if not {'SKSEPlugin_Load','SKSEPlugin_Query','SKSEPlugin_Version'}.issubset(symbols):raise ValueError('Missing SKSE exports')
     v=offset(symbols['SKSEPlugin_Version'])
-    if u32(v)!=1 or not(u32(v+776)&1) or not(u32(v+776)&4):raise ValueError('Incorrect Address Library/struct metadata')
+    if u32(v)!=1 or not(u32(v+776)&1) or not(u32(v+772)&1):raise ValueError('Incorrect Address Library/runtime-layout metadata')
     if not(u32(v+772)&2):raise ValueError('Current Address Library metadata is required')
-    if u32(v+780)!=((1<<24)|(6<<16)|(1170<<4)) or any(u32(v+780+i*4) for i in range(1,16)):raise ValueError('Unexpected runtime whitelist')
+    if any(u32(v+780+i*4) for i in range(16)):raise ValueError('A runtime whitelist would restrict cross-runtime loading')
     return symbols
 
 if __name__=='__main__':

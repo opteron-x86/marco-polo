@@ -3,11 +3,11 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.1.4 is experimental and needs in-game testing.** It adds household goods to the economy and keeps supply contracts in the optional Missives integration. Existing economy saves gain the new commodity without resetting established markets or merchants. Automated tests exercise the model, save data and release tooling. They cannot verify Skyrim's menus, merchant resets or interactions with an installed mod list. See [the game test checklist](docs/TESTING.md).
+**0.1.5 makes regional merchanting viable and broadens runtime loading.** It narrows the barter spread, establishes regional export/import specialties and tracks vanilla/DLC alcohol plus supported mod keywords. Selected long routes return at least twice the purchase outlay in controlled simulation tests with starting Speech, finite merchant cash and travel time. Actual offers depend on merchants, stock, bonuses and elapsed time. See [the game test checklist](docs/TESTING.md).
 
 ## Install
 
-Requires **Skyrim SE Steam 1.6.1170**, its matching SKSE and Address Library, and **SkyUI** with a compatible barter menu. Other runtime versions are deliberately rejected until their integration is verified.
+Built for **Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x**, using one DLL and alandtse CommonLibSSE-NG. Install the matching **SKSE and Address Library** for your executable, plus **SkyUI** with a compatible barter menu. There is no single-version whitelist. Previous Marco Polo game checks used 1.6.1170; broader loading and relocation audits are described in [the engine audit](docs/ENGINE-AUDIT.md).
 
 Install `Marco-Polo-<version>-<commit>.zip` with MO2 or Vortex. The core has **no ESP and no Papyrus scripts**.
 
@@ -20,13 +20,17 @@ Use a separate test save/profile. Keep the `.skse` co-save alongside its matchin
 
 Ten markets cover the nine holds and Solstheim. They track 25 commodities, finite warehouse stock, production, consumption, spoilage and steel processing. Regional specialties, seasons and Civil War demand affect supply and prices. Twenty-six directed routes move finite shipments with travel time, capacity and saved loss outcomes.
 
-Prices move gradually within configured bounds. Trades also follow a supply curve: bulk quotes use the same curve and per-unit rounding as individual trades. The item's original value, Speech and barter multipliers remain inputs. The list, card and quantity total share the quote calculation; actual inventory movement must occur before gold rounding is reconciled and a transaction is recorded.
+Each region has underlying production costs and import needs, expressed as `priceFactors`. Stocks move prices around those values within the configured bounds. The Rift exports drinks, Whiterun exports weapons, the Reach exports precious metals, and northern markets depend more on imports. Production, demand, NPC shipments and player deliveries change the margins.
+
+Trades follow a supply curve: bulk quotes use the same curve and per-unit rounding as individual trades. Speech, perks and merchant effects remain inputs through the game's live barter multipliers. By default, raising each multiplier to the power `0.2` compresses the vanilla starting-Speech spread to approximately 1.25 times local value when buying and 0.80 when selling. A minimum 5% margin on either side prevents bonuses from producing immediate local resale profits. The list, card and quantity total share the quote calculation; actual inventory movement must occur before gold rounding is reconciled and a transaction is recorded.
 
 Merchants register on first contact. Background customers buy ordinary stock, and merchants pay for replenishment from the regional warehouse. The next visit applies that ledger to their chest. Quest items, enchanted/custom instances and unknown extra data are protected from automatic inventory management. Base-form values and global barter settings are not rewritten.
 
 Goods displayed around a shop remain available through Skyrim's barter menu. These purchases affect regional supply and prices, but Marco Polo does not move, duplicate or replenish the display objects.
 
 Household goods include plates, bowls, cutlery and other items tagged `VendorItemClutter`, including those added by mods. Explicit mappings cover untagged vanilla silverware, linen wraps, charcoal and Hearthfire Extended rugs. Each item's value still contributes to its offer. Unknown miscellaneous items remain outside the economy unless classified; gold, lockpicks and quest items retain their exclusions or protections.
+
+Drink includes ale, mead, wine, brandy and alcoholic drinks from Hearthfire and Dragonborn. Mod-added alcohol tagged `OCF_AlchDrinkAlcohol` or `VendorItemDrinkAlcohol` (including Moderate/Strong variants) joins the same market. Those keyword providers remain optional. Quest instances are still protected. Previously registered bottles move from Food to Drink accounting when their merchant is observed again, without changing their physical count.
 
 Regional production and NPC consumption are explicit sources and sinks. This release does not simulate physical caravans, individual NPC households, service prices, training or house purchases.
 
@@ -48,9 +52,11 @@ Files live under `SKSE/Plugins/MarcoPolo/`:
 
 Restart Skyrim after edits. Saved market/commodity definitions must remain compatible. Invalid definitions and unsupported save schemas are logged and disabled. `manageInventory: false` leaves replenishment to the game for price-only compatibility testing. Mods that replace barter transactions or merchant restocking need compatibility testing. Unknown barter UIs retain game prices and produce a notification; inventory simulation can still run.
 
+`economy.json` policy fields `barterExponent` and `minimumBarterMargin` control the spread. Set them to `1` and `0` to retain the game's original multipliers. Market `priceFactors` default to `1` when omitted, so existing custom definitions remain valid. These settings affect classified goods; unclassified goods use the game's pricing.
+
 The co-save stores stocks, merchants, shipments, contracts, time and RNG state. Loading a save restores its economy; switching characters clears the previous session. `MarcoPolo.log` is beside the SKSE logs. With `debugLogging` enabled, the optional ledger can export `MarcoPolo-state.json` there.
 
-Version 0.1.4 reads schema-1 saves and initializes only the new household-goods stock at the saved day. New saves use schema 2; earlier DLLs cannot read them. Retain the original save/co-save pair when testing an upgrade.
+Version 0.1.5 retains schema 2 and reads both schema-1 and schema-2 economies. No new game is needed. The barter spread changes immediately; saved regional prices remain intact and approach the new regional values as days pass. Allow roughly two in-game weeks for the new trading pattern to develop. Loading schema 1 initializes only the household-goods stock introduced in 0.1.4. Pre-0.1.4 DLLs cannot read schema 2.
 
 ## Build
 

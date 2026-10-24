@@ -3,8 +3,9 @@
 #include <cstdint>
 
 namespace marco::runtime::hooks {
-// Skyrim SE/AE. The plugin gates installation to 1.6.1170.
+// Desktop SE/AE slots are shared; function IDs use their Address Library family.
 inline constexpr std::size_t ResetInventorySlot = 0x8A;
+inline constexpr std::uint64_t ResetInventorySE = 19375;
 inline constexpr std::uint64_t ResetInventoryAE = 19802;
 inline constexpr std::size_t BarterAcceptSlot = 1;
 inline constexpr std::size_t BarterAdvanceSlot = 5;

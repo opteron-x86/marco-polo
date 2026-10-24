@@ -18,6 +18,8 @@ struct MarketSpec {
     std::string id, name, location;
     double population{1}, winterSeverity{0.3};
     std::map<std::string, double> output, demand;
+    // Local production costs and import dependence, before stock scarcity.
+    std::map<std::string, double> priceFactors;
 };
 struct RouteSpec {
     std::string id, from, to;
@@ -35,10 +37,13 @@ struct Config {
     std::vector<Recipe> recipes;
     double targetDays{10}, minMultiplier{0.4}, maxMultiplier{3.0}, dailyAdjustment{0.12};
     double merchantTurnover{0.08};
+    double barterExponent{1}, minimumBarterMargin{0};
     Money treasury{20000};
     void Validate() const;
     const Commodity &Good(const std::string &) const;
     const MarketSpec &Market(const std::string &) const;
+    double PriceFactor(const std::string &market, const std::string &commodity) const;
+    double BarterMultiplier(double nativeMultiplier, bool buying) const;
     static Config Parse(const json &);
 };
 struct Stock {

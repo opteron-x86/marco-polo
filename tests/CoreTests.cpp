@@ -54,6 +54,7 @@ int main(int argc, char **argv) {
         Merchant merchant{"smith", "whiterun", 100000, {}, 0, 0};
         merchant.items["iron"] = {"iron", "iron", 100, 100, 1, 12, false};
         e.RegisterMerchant(merchant);
+        auto beforeBuy = e.Multiplier("whiterun", "iron");
         auto bulk = e.Price("whiterun", "iron", 12, 20, true).total;
         Money singles = 0;
         for (int i = 0; i < 20; ++i) {
@@ -63,7 +64,7 @@ int main(int argc, char **argv) {
         }
         CHECK(bulk == singles);
         CHECK(e.Get().merchants.at("smith").items.at("iron").quantity == 80);
-        CHECK(e.Multiplier("whiterun", "iron") > 1);
+        CHECK(e.Multiplier("whiterun", "iron") > beforeBuy);
         auto afterBuy = e.Multiplier("whiterun", "iron");
         e.Trade("smith", "iron", 20, false, 100);
         CHECK(e.Multiplier("whiterun", "iron") < afterBuy);
@@ -111,7 +112,8 @@ int main(int argc, char **argv) {
         CHECK(e.Get().merchants.at("shop").items.at("display").quantity == 0);
         CHECK(e.Get().merchants.at("shop").items.at("display").externalQuantity == 2);
         CHECK(e.Get().merchants.at("shop").cash == 1000 + displayQuote.total);
-        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported == displayBefore.exported + 2);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported ==
+              displayBefore.exported + 2);
         CHECK(e.Get().markets.at("whiterun").goods.at("iron").price > displayBefore.price);
         e.Trade("shop", "mixed", 4, true, 48, 2);
         CHECK(e.Get().merchants.at("shop").items.at("mixed").quantity == 0);
@@ -151,6 +153,7 @@ int main(int argc, char **argv) {
         for (auto &market : previousConfig.markets) {
             market.demand.erase("housewares");
             market.output.erase("housewares");
+            market.priceFactors.erase("housewares");
         }
         Economy previous(previousConfig);
         previous.NewGame(20, 123);
@@ -171,7 +174,8 @@ int main(int argc, char **argv) {
         CHECK(established == oldSave);
         for (auto &market : config.markets) {
             auto &stock = other.Get().markets.at(market.id).goods.at("housewares");
-            CHECK(stock.quantity == std::max(5.0, market.demand.at("housewares") * config.targetDays));
+            CHECK(stock.quantity ==
+                  std::max(5.0, market.demand.at("housewares") * config.targetDays));
             CHECK(stock.price == 1);
         }
         Merchant housewares{"housewares-shop", "whiterun", 1000, {}, 27, 27};
