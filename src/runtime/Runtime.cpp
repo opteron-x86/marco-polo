@@ -353,6 +353,7 @@ void Reset() {
     std::lock_guard lock(mutex);
     loaded = false;
     loadFailed = false;
+    ResetMissives();
     if (economy)
         economy->NewGame(0, 1);
     {
@@ -371,7 +372,7 @@ void Start() {
                                     std::chrono::steady_clock::now().time_since_epoch().count()));
     loaded = true;
     active = enabled;
-    UpdateBoards();
+    UpdateBoards(true);
     Publish();
 }
 void Tick() {

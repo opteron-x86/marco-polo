@@ -1,6 +1,23 @@
-# Game testing for 0.1.5
+# Game testing for 0.1.6
 
 Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, cross-runtime metadata and both legacy/modern exports. **These do not substitute for the checks below.**
+
+## Missives paper lifecycle in 0.1.6
+
+Install both the core and updated Missives ESP after exiting Skyrim. Continue the existing character; no new game is required. Native UI behavior still needs this game pass, including the installed menu replacer.
+
+1. Load a save with duplicate Marco Polo papers and an accepted order. Old reports should disappear and each accepted order should have one numbered paper. Its item, quantity, payment and deadline must match the old terms. Other mods' notes must remain.
+2. Read the same market report several times from its board using mouse/keyboard and controller where available. It should stay on the board without adding a carried copy. Repeat with an offered order and close without accepting; no paper or job should appear.
+3. Use Take All at the board. Ordinary Missives should retain their usual behavior. Marco Polo postings must remain available, produce no carried stack and accept no order.
+4. Accept an order at its board. Check for exactly one numbered paper, read its terms while traveling and confirm it offers no action buttons. Save to a new slot, exit to desktop and reload; the paper and accepted terms must survive.
+5. Return to the issuing board, read the order and choose Deliver. Try first with insufficient goods, then with the full quantity. Failure should keep the paper; success should remove the exact goods and paper, pay once and prevent repeat delivery. Another hold's board must not complete this order.
+6. Accept other orders and test cancellation and expiry separately. Each must retire its carried paper. In an unpaused-menu setup, let an offer expire with its confirmation open, then press Accept: it must not accept a replacement order.
+7. Drop or store an accepted paper, read it, and revisit its board to get a replacement. End the order, then inspect the stored copy: it should read as closed, even if a later order exists. Picking it up should remove it. Repeated reads/loads must not accumulate carried duplicates.
+8. Check Notes and Announcements, Tessera Missives and ordinary Missives jobs on the same board. Check a normal storage container afterward: its reading, transfer and Take All controls must work normally. The SKSE ledger must still have no contract listing/actions.
+
+Debug logs include `Read board posting`, `Read accepted-order paper` and paper reconciliation messages. An accepted paper displaying “This order is closed” while its job is active is a failure; record its name and send the log.
+
+## Trading and broader regression checks
 
 For 0.1.5, continue the existing test character. No additional pre-upgrade diagnostic save is required. The narrower spread applies immediately; existing regional prices converge over subsequent game days. After roughly two in-game weeks, compare drinks from the Rift to the Pale, weapons from Whiterun to Winterhold, and silver from the Reach to Haafingar. Buy a small shipment, travel normally, and compare the exact gold paid and received. Record travel expenses separately. Actual merchant inventories, cash and player bonuses can differ from simulation fixtures. Verify that delivering more reduces the next offer, local buy/resell loses money, and better Speech or barter gear improves offers. Test ordinary wine/mead and supported mod-added alcohol.
 
@@ -20,14 +37,14 @@ The user confirmed that 0.1.3 permits the previously blocked purchases. A repeat
 
 Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
 
-When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.5 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
+When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.6 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
 
 1. **Startup:** confirm `MarcoPolo.log` names the actual Skyrim runtime, loads configuration and installs barter integration. Load an existing save and open a merchant. Ensure no crash or unsupported-menu notification. Repeat with your actual UI replacer.
 2. **Quotes:** record player and merchant gold. Buy and sell one ordinary ingot, then a stack of 20. Check list/card values, the selected quantity total and exact gold changes. Move the slider both directions; cancel it. Cancelling must not alter stocks or cash. Repeat near an affordability limit, after a Speech increase, with relevant perks and enchanted/tempered items.
 3. **Inventory:** buy a shop's ordinary stock out, wait one and then three game days, return and compare. Supply can constrain replenishment. Test vanilla reset timing, sleeping/fast travel, saving in a shop and merchant death. Verify unique, quest, enchanted and named instances are not replaced or duplicated. Test theft from a registered chest.
 4. **Regional effects:** sell a large supply of one commodity and observe its price fall. Compare the same good in another hold. Check stock and price after several days and after long waits. Verify reaching a location inside each hold resolves to the correct market.
 5. **Save isolation:** save, trade, reload and compare the restored state. Repeat across two characters and through the main menu. Load-order changes must resolve stable form keys. Keep both save files when transferring a test save.
-6. **Missives:** enable the addon. Each original capital board should contain a market report. After shortages develop, read and close a supply order, accept, deliver the exact item near that board and verify exact quantity removal and reward. Try a partial order, delivery in another hold, repeat delivery, cancellation, expiry and reloading an accepted order. Copies show the current posting; the accepted contract's terms stay fixed.
+6. **Missives:** enable the addon. Each original capital board should contain a market report. After shortages develop, read and close a supply order, accept, deliver the exact item near that board and verify exact quantity removal and reward. Try a partial order, delivery in another hold, repeat delivery, cancellation, expiry and reloading an accepted order. Postings stay on the board; the accepted paper keeps its original terms and is removed when the order ends.
 7. **Coexistence:** repeat board checks with Notes and Announcements and Tessera Missives enabled. Their notes/jobs must remain. Check board replacers that retain references. Then repeat trade checks with your other merchant/perk mods.
 8. **Optional ledger:** verify it appears only when Menu Framework is installed, opens through your usual Menu Framework/Risa entry, shows markets without any contract listings/actions, and exports a readable diagnostic file. Repeat without Menu Framework or Missives: core trading should still function, and contracts should require the Missives addon.
 

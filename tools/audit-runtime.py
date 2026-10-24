@@ -28,7 +28,9 @@ def check_commonlib(path, hook):
     if not match or int(match[1], 0) != hook['ResetInventorySlot']:
         raise ValueError('ResetInventory slot does not match CommonLib SE/AE dispatch')
     for relative, method, key in [('include/RE/B/BarterMenu.h', 'Accept', 'BarterAcceptSlot'),
-                              ('include/RE/I/IMenu.h', 'AdvanceMovie', 'BarterAdvanceSlot')]:
+                              ('include/RE/I/IMenu.h', 'AdvanceMovie', 'BarterAdvanceSlot'),
+                              ('include/RE/C/ContainerMenu.h', 'Accept', 'ContainerAcceptSlot'),
+                              ('include/RE/I/IMenu.h', 'AdvanceMovie', 'ContainerAdvanceSlot')]:
         text = (path / relative).read_text()
         match = re.search(r'\b' + method + r'\([^\n]*//\s*([0-9A-Fa-f]{2})\b', text)
         if not match or int(match[1], 16) != hook[key]:
@@ -105,6 +107,7 @@ def check_exe(path, version, database, hook):
 
     ae = version >= (1, 6, 0, 0)
     ref_table, barter_table = (190259, 214926) if ae else (235511, 267991)
+    container_table = 215061 if ae else 268222
     reset_id = hook['ResetInventoryAE' if ae else 'ResetInventorySE']
     reverse = {rva: ident for ident, rva in database.items()}
     result = []
@@ -112,6 +115,8 @@ def check_exe(path, version, database, hook):
         ('ResetInventory', ref_table, hook['ResetInventorySlot'], reset_id),
         ('BarterMenu::Accept', barter_table, hook['BarterAcceptSlot'], None),
         ('BarterMenu::AdvanceMovie', barter_table, hook['BarterAdvanceSlot'], None),
+        ('ContainerMenu::Accept', container_table, hook['ContainerAcceptSlot'], None),
+        ('ContainerMenu::AdvanceMovie', container_table, hook['ContainerAdvanceSlot'], None),
     ]:
         actual = struct.unpack_from('<Q', data, offset(database[table]) + slot * 8)[0] - image_base
         if ident is None:
@@ -120,11 +125,11 @@ def check_exe(path, version, database, hook):
             raise ValueError(f'{label}: slot {slot:#x} points to {actual:#x}, not ID {ident}')
         offset(actual)
         result.append({'hook': label, 'slot': hex(slot), 'id': ident, 'rva': hex(actual)})
-    # Description detour uses the ID bound by CommonLib's TESDescription wrapper.
-    description = 14552 if ae else 14399
-    offset(database[description])
-    result.append({'hook': 'TESDescription::GetDescription', 'id': description,
-                   'rva': hex(database[description])})
+    # Direct detours use the IDs bound by the corresponding CommonLib wrappers.
+    for label, ident in [('TESDescription::GetDescription', 14552 if ae else 14399),
+                         ('BookMenu::OpenMenu', 51053 if ae else 50122)]:
+        offset(database[ident])
+        result.append({'hook': label, 'id': ident, 'rva': hex(database[ident])})
     return result
 
 
@@ -133,7 +138,10 @@ def check_table(database, ae, hook):
              ('TESDescription::GetDescription', 14399, 14552),
              ('TESObjectREFR vtable', 235511, 190259),
              ('BarterMenu vtable', 267991, 214926),
-             ('BarterMenu target handle', 519283, 405823)]
+             ('BarterMenu target handle', 519283, 405823),
+             ('ContainerMenu vtable', 268222, 215061),
+             ('ContainerMenu target handle', 519421, 405962),
+             ('BookMenu::OpenMenu', 50122, 51053)]
     result = []
     for name, se_id, ae_id in sites:
         ident = ae_id if ae else se_id

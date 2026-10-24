@@ -62,15 +62,27 @@ class AddonTests(unittest.TestCase):
         offset=24+struct.unpack_from('<I',blob,4)[0]
         self.assertEqual(blob[offset:offset+4],b'GRUP');self.assertEqual(blob[offset+8:offset+12],b'BOOK')
         self.assertEqual(offset+struct.unpack_from('<I',blob,offset+4)[0],len(blob))
-        offset+=24;forms=[]
+        offset+=24;forms=[];book_data={}
         while offset<len(blob):
             self.assertEqual(blob[offset:offset+4],b'BOOK');size=struct.unpack_from('<I',blob,offset+4)[0]
             forms.append(struct.unpack_from('<I',blob,offset+12)[0]);end=offset+24+size;offset+=24
             fields=[]
             while offset<end:
-                fields.append(blob[offset:offset+4]);n=struct.unpack_from('<H',blob,offset+4)[0];offset+=6+n
+                field=blob[offset:offset+4];fields.append(field);n=struct.unpack_from('<H',blob,offset+4)[0]
+                if field==b'DATA':book_data[forms[-1]]=blob[offset+6:offset+6+n]
+                offset+=6+n
             self.assertEqual(offset,end);self.assertNotIn(b'VMAD',fields)
             self.assertTrue({b'EDID',b'FULL',b'DESC',b'DATA',b'INAM'}.issubset(fields))
-        self.assertEqual(forms,list(range(0x03000800,0x03000812)))
+        self.assertEqual(sorted(forms),list(range(0x03000800,0x0300081B)))
+        self.assertEqual(len(forms),len(set(forms)))
+        excluded=json.loads((ROOT/'package/SKSE/Plugins/MarcoPolo/classification.json').read_text())['excluded']
+        for form in forms:
+            self.assertIn(f'Marco Polo - Missives.esp|{form & 0xffffff:06X}',excluded)
+        for form,data in book_data.items():
+            # Preserve old IDs: odd forms below 812 are the portable receipts.
+            receipt=form<0x03000812 and form%2==1
+            self.assertEqual(bool(data[0]&2),not receipt)
+            self.assertEqual(data[1],0xff)
+            self.assertEqual(struct.unpack_from('<If',data,8),(0,0.0))
 
 if __name__=='__main__':unittest.main()

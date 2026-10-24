@@ -1,9 +1,13 @@
+#include "HookTargets.h"
 #include "Runtime.h"
+#include "core/Notices.h"
 #include <MinHook.h>
 #include <algorithm>
 #include <array>
 #include <cmath>
+#include <cstring>
 #include <format>
+#include <optional>
 
 namespace marco::runtime {
 namespace {
@@ -39,13 +43,34 @@ constexpr std::array<std::pair<const char *, RE::FormID>, 15> delivery{{{"grain"
                                                                         {"quicksilver", 0x5ADA0},
                                                                         {"ebony", 0x5AD9D}}};
 bool installed = false;
-int pendingBoard = -1;
-std::uint64_t pendingGeneration{};
+bool paperCleanupQueued = false, papersDirty = false, receiptGrantPending = false;
+std::uint64_t readSequence{};
+enum class Paper { bulletin, posting, receipt };
+struct Reading {
+    unsigned region{};
+    Paper paper{};
+    std::uint64_t contract{}, generation{}, sequence{};
+    bool opened{};
+};
+std::optional<Reading> reading;
+std::map<RE::TESDescription *, std::pair<unsigned, Paper>> descriptions;
 using DescriptionFn = void (*)(RE::TESDescription *, RE::BSString &, RE::TESForm *, std::uint32_t);
 DescriptionFn descriptionOriginal{};
-RE::TESObjectBOOK *Note(unsigned region, bool contract) {
+using OpenBookFn = void (*)(const RE::BSString &, const RE::ExtraDataList *, RE::TESObjectREFR *,
+                            RE::TESObjectBOOK *, const RE::NiPoint3 &, const RE::NiMatrix3 &, float,
+                            bool);
+OpenBookFn openBookOriginal{};
+using AcceptFn = void (*)(RE::ContainerMenu *, RE::FxDelegateHandler::CallbackProcessor *);
+REL::Relocation<AcceptFn> containerAcceptOriginal;
+using AdvanceFn = void (*)(RE::ContainerMenu *, float, std::uint32_t);
+REL::Relocation<AdvanceFn> containerAdvanceOriginal;
+RE::FxDelegateHandler::CallbackFn *transferOriginal{}, *equipOriginal{}, *takeAllOriginal{},
+    *disabledOriginal{};
+RE::TESObjectBOOK *Note(unsigned region, Paper paper) {
     return RE::TESDataHandler::GetSingleton()->LookupForm<RE::TESObjectBOOK>(
-        0x800 + region * 2 + (contract ? 1 : 0), Addon);
+        paper == Paper::posting ? 0x812 + region
+                                : 0x800 + region * 2 + (paper == Paper::receipt ? 1 : 0),
+        Addon);
 }
 RE::TESObjectREFR *BoardRef(unsigned region) {
     return RE::TESDataHandler::GetSingleton()->LookupForm<RE::TESObjectREFR>(
@@ -66,15 +91,44 @@ const Contract *Current(unsigned region) {
             return &c;
     return nullptr;
 }
+std::optional<std::pair<unsigned, Paper>> Identify(RE::TESForm *form) {
+    if (!form || form->IsDynamicForm())
+        return std::nullopt;
+    auto id = form->GetLocalFormID();
+    if (id < 0x800 || id >= 0x81B)
+        return std::nullopt;
+    unsigned region = id < 0x812 ? (id - 0x800) / 2 : id - 0x812;
+    auto kind = id >= 0x812 ? Paper::posting : id % 2 ? Paper::receipt : Paper::bulletin;
+    if (form == Note(region, kind))
+        return {{region, kind}};
+    return std::nullopt;
+}
+bool AtBoardContainer() {
+    auto target = RE::TESObjectREFR::LookupByHandle(RE::ContainerMenu::GetTargetRefHandle());
+    if (target)
+        for (unsigned i = 0; i < boards.size(); ++i)
+            if (target.get() == BoardRef(i))
+                return true;
+    return false;
+}
 std::string Terms(const Contract &c) {
     auto hold = economy->Definitions().Market(c.market).name;
     return std::format("Goods wanted\n\n{}: {}\nPayment: {} septims\nDeliver by {}\n"
                        "Delivery: {} noticeboard\n\n— The merchants of {}",
                        c.itemName, c.quantity, c.reward, DateForDay(c.deadline), hold, hold);
 }
-std::string Text(unsigned region, bool contract) {
-    if (contract) {
-        if (auto *c = Current(region))
+std::string ReceiptName(unsigned region, std::uint64_t id) {
+    return OrderPaperName(Note(region, Paper::receipt)->GetName(), id);
+}
+std::uint64_t ReceiptID(unsigned region, const RE::ExtraDataList *extra) {
+    auto *display = extra ? extra->GetByType<RE::ExtraTextDisplayData>() : nullptr;
+    if (!display || !display->displayName.c_str())
+        return 0;
+    return OrderPaperID(Note(region, Paper::receipt)->GetName(), display->displayName.c_str());
+}
+std::string Text(unsigned region, Paper paper) {
+    if (paper != Paper::bulletin) {
+        if (auto *c = Current(region); c && paper == Paper::posting)
             return Terms(*c);
         return "This order is closed.";
     }
@@ -113,19 +167,316 @@ std::string Escape(std::string input) {
 }
 void Description(RE::TESDescription *self, RE::BSString &out, RE::TESForm *parent,
                  std::uint32_t type) {
-    if (active) {
+    auto match = descriptions.find(self);
+    if (active && match != descriptions.end()) {
         std::lock_guard lock(mutex);
-        for (unsigned i = 0; i < boards.size(); ++i)
-            for (bool contract : {false, true})
-                if (auto *book = Note(i, contract);
-                    book && static_cast<RE::TESDescription *>(book) == self) {
-                    auto text =
-                        "<font face=\"$HandwrittenFont\">" + Escape(Text(i, contract)) + "</font>";
-                    out = text.c_str();
-                    return;
-                }
+        auto [region, paper] = match->second;
+        auto text = "<font face=\"$HandwrittenFont\">" + Escape(Text(region, paper)) + "</font>";
+        out = text.c_str();
+        return;
     }
     descriptionOriginal(self, out, parent, type);
+}
+void OpenBook(const RE::BSString &description, const RE::ExtraDataList *extra,
+              RE::TESObjectREFR *reference, RE::TESObjectBOOK *book, const RE::NiPoint3 &position,
+              const RE::NiMatrix3 &rotation, float scale, bool defaultPosition) {
+    auto paper = active && installed ? Identify(book) : std::nullopt;
+    if (!paper || paper->second != Paper::receipt) {
+        openBookOriginal(description, extra, reference, book, position, rotation, scale,
+                         defaultPosition);
+        return;
+    }
+    // Bind the physical receipt to its order number, including copies dropped
+    // or stored elsewhere. A later order in the same hold cannot rewrite it.
+    std::string text = "This order is closed.";
+    std::uint64_t id{};
+    {
+        std::lock_guard lock(mutex);
+        id = ReceiptID(paper->first, extra ? extra : reference ? &reference->extraList : nullptr);
+        if (auto *c = economy->FindContract(id);
+            c && c->market == boards[paper->first].market && c->status == ContractStatus::accepted)
+            text = Terms(*c);
+    }
+    if (debugLogging)
+        SKSE::log::info("Read accepted-order paper: {}, order {}", boards[paper->first].market, id);
+    RE::BSString rendered(("<font face=\"$HandwrittenFont\">" + Escape(text) + "</font>").c_str());
+    openBookOriginal(rendered, extra, reference, book, position, rotation, scale, defaultPosition);
+}
+struct InternalScope {
+    bool previous = internal;
+    InternalScope() {
+        internal = true;
+    }
+    ~InternalScope() {
+        internal = previous;
+    }
+};
+void SetCount(RE::TESObjectREFR *owner, RE::TESObjectBOOK *book, int count, int wanted) {
+    if (!book || count == wanted)
+        return;
+    if (count < wanted)
+        owner->AddObjectToContainer(book, nullptr, wanted - count, nullptr);
+    else
+        owner->RemoveItem(book, count - wanted, RE::ITEM_REMOVE_REASON::kRemove, nullptr, nullptr);
+}
+void ReconcilePapers(bool issueReceipts = false) {
+    if (!installed || !active || !economy)
+        return;
+    receiptGrantPending = receiptGrantPending || issueReceipts;
+    auto *ui = RE::UI::GetSingleton();
+    auto *player = RE::PlayerCharacter::GetSingleton();
+    // Never retire an item while BookMenu still holds its inventory extra data.
+    if (!ui || !player || ui->IsMenuOpen(RE::BookMenu::MENU_NAME)) {
+        papersDirty = true;
+        return;
+    }
+    InternalScope guard;
+    auto carried = player->GetInventory([](auto &form) { return Identify(&form).has_value(); });
+    for (unsigned i = 0; i < boards.size(); ++i) {
+        auto plan = NoticesFor(Current(i));
+        auto *bulletin = Note(i, Paper::bulletin);
+        auto *posting = Note(i, Paper::posting);
+        auto *receipt = Note(i, Paper::receipt);
+        SetCount(player, bulletin, carried[bulletin].first, 0);
+        SetCount(player, posting, carried[posting].first, 0);
+        auto &[count, entry] = carried[receipt];
+        int wanted = plan.ReceiptsToKeep(count, receiptGrantPending);
+        auto *contract = Current(i);
+        bool matches = false;
+        if (wanted && count == 1 && entry && entry->extraLists)
+            for (auto *extra : *entry->extraLists)
+                matches = matches || (extra && contract && ReceiptID(i, extra) == contract->id);
+        if (!matches) {
+            SetCount(player, receipt, count, 0);
+            if (wanted) {
+                // Skyrim owns the extra list after AddObjectToContainer and
+                // serializes its custom name with the ordinary inventory item.
+                auto *extra = new RE::ExtraDataList();
+                extra->Add(new RE::ExtraTextDisplayData(ReceiptName(i, contract->id).c_str()));
+                player->AddObjectToContainer(receipt, extra, 1, nullptr);
+            }
+        }
+        if (debugLogging && (carried[bulletin].first || carried[posting].first || count != wanted ||
+                             (wanted && !matches)))
+            SKSE::log::info("Papers {}: retired {} bulletins and {} postings; receipts {} -> {}",
+                            boards[i].market, carried[bulletin].first, carried[posting].first,
+                            count, wanted);
+        if (auto *board = BoardRef(i)) {
+            auto posted = board->GetInventoryCounts([=](auto &form) {
+                return &form == bulletin || &form == posting || &form == receipt;
+            });
+            SetCount(board, bulletin, posted[bulletin], plan.bulletinOnBoard);
+            SetCount(board, posting, posted[posting], plan.orderOnBoard);
+            // The old contract form is now the accepted receipt, never a posting.
+            SetCount(board, receipt, posted[receipt], 0);
+        }
+    }
+    papersDirty = false;
+    receiptGrantPending = false;
+    if (auto menu = ui->GetMenu<RE::ContainerMenu>())
+        if (auto *list = menu->GetRuntimeData().itemList)
+            list->Update();
+    if (auto menu = ui->GetMenu<RE::InventoryMenu>())
+        if (auto *list = menu->GetRuntimeData().itemList)
+            list->Update();
+}
+void QueuePaperCleanup() {
+    std::lock_guard lock(mutex);
+    papersDirty = true;
+    if (paperCleanupQueued)
+        return;
+    paperCleanupQueued = true;
+    auto gen = generation.load();
+    SKSE::GetTaskInterface()->AddTask([gen] {
+        std::lock_guard lock(mutex);
+        if (generation != gen)
+            return;
+        paperCleanupQueued = false;
+        if (active)
+            ReconcilePapers();
+    });
+}
+void ShowBoard(unsigned region, std::uint64_t displayedID);
+std::optional<std::pair<unsigned, Paper>> SelectedPosting(RE::ContainerMenu *menu) {
+    auto *list = menu ? menu->GetRuntimeData().itemList : nullptr;
+    auto *item = list ? list->GetSelectedItem() : nullptr;
+    auto paper = item && item->data.objDesc ? Identify(item->data.objDesc->object) : std::nullopt;
+    if (!paper || paper->second == Paper::receipt)
+        return std::nullopt;
+    auto target = RE::TESObjectREFR::LookupByHandle(RE::ContainerMenu::GetTargetRefHandle());
+    if (!target || target.get() != BoardRef(paper->first))
+        return std::nullopt;
+    return paper;
+}
+bool ReadSelectedPosting(RE::ContainerMenu *menu) {
+    if (!active || !installed)
+        return false;
+    auto paper = SelectedPosting(menu);
+    if (!paper)
+        return false;
+    std::lock_guard lock(mutex);
+    // Prevent double-clicks from scheduling overlapping book/menu sessions.
+    if (reading)
+        return true;
+    auto *contract = Current(paper->first);
+    Reading requested{paper->first,      paper->second,  contract ? contract->id : 0,
+                      generation.load(), ++readSequence, false};
+    reading = requested;
+    SKSE::GetTaskInterface()->AddTask([requested] {
+        std::lock_guard lock(mutex);
+        if (!active || generation != requested.generation || !reading ||
+            reading->sequence != requested.sequence)
+            return;
+        auto *ui = RE::UI::GetSingleton();
+        auto *current = Current(requested.region);
+        auto target = RE::TESObjectREFR::LookupByHandle(RE::ContainerMenu::GetTargetRefHandle());
+        if (!target || target.get() != BoardRef(requested.region) || !Nearby(requested.region) ||
+            !ui || !ui->IsMenuOpen(RE::ContainerMenu::MENU_NAME) ||
+            ui->IsMenuOpen(RE::BookMenu::MENU_NAME) ||
+            (requested.paper == Paper::posting &&
+             (!current || current->id != requested.contract))) {
+            reading.reset();
+            return;
+        }
+        if (auto *book = Note(requested.region, requested.paper)) {
+            // No reference or inventory extra list is passed: BookMenu offers
+            // reading only, and neither posting is transferred to the player.
+            RE::BookMenu::OpenMenuFromBaseForm(book);
+            if (debugLogging)
+                SKSE::log::info("Read board posting: {}, contract {}",
+                                boards[requested.region].market, requested.contract);
+        } else
+            reading.reset();
+    });
+    return true;
+}
+void Transfer(const RE::FxDelegateArgs &args) {
+    if (args.GetArgCount() >= 2 && args[1].IsBool() && args[1].GetBool() &&
+        ReadSelectedPosting(static_cast<RE::ContainerMenu *>(args.GetHandler())))
+        return;
+    if (transferOriginal)
+        transferOriginal(args);
+}
+void Equip(const RE::FxDelegateArgs &args) {
+    if (ReadSelectedPosting(static_cast<RE::ContainerMenu *>(args.GetHandler())))
+        return;
+    if (equipOriginal)
+        equipOriginal(args);
+}
+void DisabledSelect(const RE::FxDelegateArgs &args) {
+    if (!ReadSelectedPosting(static_cast<RE::ContainerMenu *>(args.GetHandler())) &&
+        disabledOriginal)
+        disabledOriginal(args);
+}
+void TakeAll(const RE::FxDelegateArgs &args) {
+    // Preserve native Take All for ordinary Missives and other addons. Some
+    // menu replacements bypass BOOK's Can't Take flag, so the event sink and
+    // this deferred cleanup also return any transferred postings to the board.
+    bool board = active && installed && AtBoardContainer();
+    if (takeAllOriginal)
+        takeAllOriginal(args);
+    if (board)
+        QueuePaperCleanup();
+}
+class ContainerProcessor final : public RE::FxDelegateHandler::CallbackProcessor {
+    RE::FxDelegateHandler::CallbackProcessor *downstream_;
+
+  public:
+    explicit ContainerProcessor(RE::FxDelegateHandler::CallbackProcessor *p) : downstream_(p) {}
+    void Process(const RE::GString &name, RE::FxDelegateHandler::CallbackFn *method) override {
+        auto pass = [&](const char *key, auto &original, auto replacement) {
+            if (std::strcmp(name.c_str(), key) != 0)
+                return false;
+            original = method;
+            downstream_->Process(name, replacement);
+            return true;
+        };
+        if (!pass("ItemTransfer", transferOriginal, Transfer) &&
+            !pass("EquipItem", equipOriginal, Equip) &&
+            !pass("TakeAllItems", takeAllOriginal, TakeAll) &&
+            !pass("DisabledItemSelect", disabledOriginal, DisabledSelect))
+            downstream_->Process(name, method);
+    }
+};
+void ContainerAccept(RE::ContainerMenu *menu, RE::FxDelegateHandler::CallbackProcessor *p) {
+    ContainerProcessor proxy(p);
+    containerAcceptOriginal(menu, &proxy);
+}
+class ReadPostingAction final : public RE::GFxFunctionHandler {
+    RE::GFxValue original_;
+
+  public:
+    explicit ReadPostingAction(RE::GFxValue original) : original_(std::move(original)) {}
+    void Call(Params &p) override {
+        auto menu = RE::UI::GetSingleton()->GetMenu<RE::ContainerMenu>();
+        // Can't Take can disable a row before SkyUI dispatches any native
+        // callback. Read our postings before that check, including equip mode.
+        if (ReadSelectedPosting(menu.get())) {
+            p.thisPtr->SetMember("_equipHand", RE::GFxValue());
+            return;
+        }
+        std::vector<RE::GFxValue> args{*p.thisPtr};
+        for (unsigned i = 0; i < p.argCount; ++i)
+            args.push_back(p.args[i]);
+        RE::GFxValue ignored;
+        original_.Invoke("call", p.retVal ? p.retVal : &ignored, args.data(),
+                         static_cast<std::uint32_t>(args.size()));
+    }
+};
+class ReadButton final : public RE::GFxFunctionHandler {
+    RE::GFxValue original_;
+
+  public:
+    explicit ReadButton(RE::GFxValue original) : original_(std::move(original)) {}
+    void Call(Params &p) override {
+        std::vector<RE::GFxValue> args{*p.thisPtr};
+        for (unsigned i = 0; i < p.argCount; ++i)
+            args.push_back(p.args[i]);
+        RE::GFxValue ignored;
+        original_.Invoke("call", p.retVal ? p.retVal : &ignored, args.data(),
+                         static_cast<std::uint32_t>(args.size()));
+        auto menu = RE::UI::GetSingleton()->GetMenu<RE::ContainerMenu>();
+        if (!active || !p.argCount || !p.args[0].IsBool() || !p.args[0].GetBool() ||
+            !SelectedPosting(menu.get()))
+            return;
+        // Reuse the menu's own translated Read button and current input map.
+        // Other items keep the original controls, including ordinary Missives.
+        RE::GFxValue panel, card, info, type, button;
+        if (!p.thisPtr->GetMember("navPanel", &panel) || !p.thisPtr->GetMember("itemCard", &card) ||
+            !card.GetMember("itemInfo", &info) || !info.GetMember("type", &type))
+            return;
+        RE::GFxValue parameters[]{type, RE::GFxValue(false)};
+        if (p.thisPtr->Invoke("getEquipButtonData", &button, parameters, 2) && button.IsObject()) {
+            panel.Invoke("clearButtons", nullptr);
+            panel.Invoke("addButton", nullptr, &button, 1);
+            RE::GFxValue refresh(true);
+            panel.Invoke("updateButtons", nullptr, &refresh, 1);
+        }
+    }
+};
+void ContainerAdvance(RE::ContainerMenu *menu, float interval, std::uint32_t time) {
+    containerAdvanceOriginal(menu, interval, time);
+    if (!active || !installed)
+        return;
+    auto &root = menu->GetRuntimeData().root;
+    RE::GFxValue marker, config, original, transfer;
+    if (root.GetMember("MarcoPoloReadButton", &marker) || !AtBoardContainer() ||
+        !root.GetMember("_config", &config) || !config.IsObject() ||
+        !root.GetMember("updateBottomBar", &original) || !original.IsObject() ||
+        !root.GetMember("startItemTransfer", &transfer) || !transfer.IsObject())
+        return;
+    auto handler = RE::make_gptr<ReadButton>(original);
+    RE::GFxValue replacement;
+    menu->uiMovie->CreateFunction(&replacement, handler.get());
+    root.SetMember("updateBottomBar", replacement);
+    auto action = RE::make_gptr<ReadPostingAction>(transfer);
+    menu->uiMovie->CreateFunction(&replacement, action.get());
+    root.SetMember("startItemTransfer", replacement);
+    root.SetMember("MarcoPoloReadButton", RE::GFxValue(true));
+    if (SelectedPosting(menu)) {
+        RE::GFxValue selected(true);
+        root.Invoke("updateBottomBar", nullptr, &selected, 1);
+    }
 }
 class Response final : public RE::IMessageBoxCallback {
     std::uint64_t id_, gen_;
@@ -145,57 +496,124 @@ class Response final : public RE::IMessageBoxCallback {
             });
     }
 };
-class ReadEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent> {
+class ReadEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
+                         public RE::BSTEventSink<RE::TESContainerChangedEvent> {
   public:
     RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent *e,
                                           RE::BSTEventSource<RE::MenuOpenCloseEvent> *) override {
-        if (!e || e->menuName != RE::BookMenu::MENU_NAME)
+        if (!e || !active || !installed ||
+            (e->menuName != RE::BookMenu::MENU_NAME &&
+             e->menuName != RE::ContainerMenu::MENU_NAME &&
+             e->menuName != RE::InventoryMenu::MENU_NAME))
             return RE::BSEventNotifyControl::kContinue;
-        if (e->opening) {
-            pendingBoard = -1;
-            if (active) {
-                auto *book = RE::BookMenu::GetTargetForm();
-                for (unsigned i = 0; i < boards.size(); ++i)
-                    if (book && book == Note(i, true)) {
-                        pendingBoard = static_cast<int>(i);
-                        pendingGeneration = generation.load();
-                        break;
-                    }
+        std::lock_guard lock(mutex);
+        if (e->menuName == RE::BookMenu::MENU_NAME) {
+            if (e->opening) {
+                if (reading && reading->generation == generation &&
+                    RE::BookMenu::GetTargetForm() == Note(reading->region, reading->paper))
+                    reading->opened = true;
+                else
+                    reading.reset();
+            } else {
+                auto finished = reading;
+                reading.reset();
+                if (finished && finished->opened && finished->paper == Paper::posting)
+                    SKSE::GetTaskInterface()->AddTask([finished = *finished] {
+                        std::lock_guard lock(mutex);
+                        if (active && generation == finished.generation)
+                            ShowBoard(finished.region, finished.contract);
+                    });
+                if (papersDirty)
+                    QueuePaperCleanup();
             }
-        } else if (pendingBoard >= 0) {
-            int region = pendingBoard;
-            auto gen = pendingGeneration;
-            pendingBoard = -1;
-            SKSE::GetTaskInterface()->AddTask([region, gen] {
-                if (active && generation == gen)
-                    ShowBoard(region);
-            });
+        } else if (e->opening && papersDirty) {
+            QueuePaperCleanup();
+        } else if (!e->opening && e->menuName == RE::ContainerMenu::MENU_NAME && reading &&
+                   !reading->opened) {
+            reading.reset();
         }
+        return RE::BSEventNotifyControl::kContinue;
+    }
+    RE::BSEventNotifyControl
+    ProcessEvent(const RE::TESContainerChangedEvent *e,
+                 RE::BSTEventSource<RE::TESContainerChangedEvent> *) override {
+        if (e && active && installed && !internal && e->itemCount > 0 &&
+            (e->oldContainer == 0x14 || e->newContainer == 0x14) &&
+            Identify(RE::TESForm::LookupByID(e->baseObj)))
+            QueuePaperCleanup();
         return RE::BSEventNotifyControl::kContinue;
     }
 };
 ReadEvents readEvents;
+void ShowBoard(unsigned region, std::uint64_t displayedID) {
+    if (!installed || !active || region >= boards.size() || !Nearby(region))
+        return;
+    auto *c = Current(region);
+    if (!c || c->id != displayedID)
+        return;
+    bool accepted = c->status == ContractStatus::accepted;
+    if (accepted)
+        ReconcilePapers(true); // The issuing board can replace a lost receipt.
+    RE::BSString text(Terms(*c).c_str());
+    RE::BSTArray<RE::BSString> buttons;
+    buttons.push_back(accepted ? "Deliver" : "Accept");
+    if (accepted)
+        buttons.push_back("Cancel contract");
+    buttons.push_back("Close");
+    RE::BSTSmartPointer<RE::IMessageBoxCallback> callback(new Response(c->id, accepted));
+    RE::MessageBoxMenu::Create(text, callback, 0, 0, 10, buttons);
+}
 } // namespace
 bool InstallMissives() {
-    if (!Note(0, false) || !BoardRef(0))
-        return false;
+    for (unsigned i = 0; i < boards.size(); ++i)
+        if (!Note(i, Paper::bulletin) || !Note(i, Paper::posting) || !Note(i, Paper::receipt) ||
+            !BoardRef(i)) {
+            SKSE::log::info("Missives addon unavailable; 0.1.6 requires the matching Missives ESP");
+            return false;
+        }
+    for (unsigned i = 0; i < boards.size(); ++i)
+        for (auto kind : {Paper::bulletin, Paper::posting, Paper::receipt})
+            descriptions.emplace(static_cast<RE::TESDescription *>(Note(i, kind)),
+                                 std::pair{i, kind});
     auto init = MH_Initialize();
     if (init != MH_OK && init != MH_ERROR_ALREADY_INITIALIZED)
         return false;
     REL::Relocation<std::uintptr_t> target{RELOCATION_ID(14399, 14552)};
+    REL::Relocation<std::uintptr_t> openTarget{RELOCATION_ID(50122, 51053)};
     if (MH_CreateHook(reinterpret_cast<void *>(target.address()),
                       reinterpret_cast<void *>(Description),
-                      reinterpret_cast<void **>(&descriptionOriginal)) != MH_OK ||
-        MH_EnableHook(reinterpret_cast<void *>(target.address())) != MH_OK) {
+                      reinterpret_cast<void **>(&descriptionOriginal)) != MH_OK) {
         SKSE::log::error("Missives text hook failed; addon disabled");
         return false;
     }
+    if (MH_CreateHook(reinterpret_cast<void *>(openTarget.address()),
+                      reinterpret_cast<void *>(OpenBook),
+                      reinterpret_cast<void **>(&openBookOriginal)) != MH_OK ||
+        MH_EnableHook(reinterpret_cast<void *>(target.address())) != MH_OK ||
+        MH_EnableHook(reinterpret_cast<void *>(openTarget.address())) != MH_OK) {
+        MH_DisableHook(reinterpret_cast<void *>(target.address()));
+        MH_RemoveHook(reinterpret_cast<void *>(target.address()));
+        MH_RemoveHook(reinterpret_cast<void *>(openTarget.address()));
+        SKSE::log::error("Missives book hook failed; addon disabled");
+        return false;
+    }
+    REL::Relocation<std::uintptr_t> table{RE::VTABLE_ContainerMenu[0]};
+    containerAcceptOriginal = table.write_vfunc(hooks::ContainerAcceptSlot, ContainerAccept);
+    containerAdvanceOriginal = table.write_vfunc(hooks::ContainerAdvanceSlot, ContainerAdvance);
     RE::UI::GetSingleton()->AddEventSink<RE::MenuOpenCloseEvent>(&readEvents);
+    RE::ScriptEventSourceHolder::GetSingleton()->AddEventSink<RE::TESContainerChangedEvent>(
+        &readEvents);
     installed = true;
     SKSE::log::info("Missives notices and supply contracts enabled");
     return true;
 }
-void UpdateBoards() {
+void ResetMissives() {
+    reading.reset();
+    paperCleanupQueued = false;
+    papersDirty = true;
+    receiptGrantPending = false;
+}
+void UpdateBoards(bool issueReceipts) {
     if (!installed || !active)
         return;
     for (unsigned i = 0; i < boards.size(); ++i) {
@@ -225,35 +643,8 @@ void UpdateBoards() {
                     break;
             }
         }
-        for (bool job : {false, true})
-            if (auto *book = Note(i, job)) {
-                auto items = board->GetInventoryCounts([book](auto &f) { return &f == book; });
-                int count = items[book];
-                bool wanted = !job || Current(i);
-                if (wanted && count == 0)
-                    board->AddObjectToContainer(book, nullptr, 1, nullptr);
-                if (count > (wanted ? 1 : 0))
-                    board->RemoveItem(book, count - (wanted ? 1 : 0),
-                                      RE::ITEM_REMOVE_REASON::kRemove, nullptr, nullptr);
-            }
     }
-}
-void ShowBoard(int region) {
-    std::lock_guard lock(mutex);
-    if (!installed || !active || region < 0 || region >= static_cast<int>(boards.size()))
-        return;
-    auto *c = Current(static_cast<unsigned>(region));
-    if (!c)
-        return;
-    bool accepted = c->status == ContractStatus::accepted;
-    RE::BSString text(Terms(*c).c_str());
-    RE::BSTArray<RE::BSString> buttons;
-    buttons.push_back(accepted ? "Deliver" : "Accept");
-    if (accepted)
-        buttons.push_back("Cancel contract");
-    buttons.push_back("Close");
-    RE::BSTSmartPointer<RE::IMessageBoxCallback> callback(new Response(c->id, accepted));
-    RE::MessageBoxMenu::Create(text, callback, 0, 0, 10, buttons);
+    ReconcilePapers(issueReceipts);
 }
 void ContractAction(std::uint64_t id, int action) {
     std::lock_guard lock(mutex);
@@ -270,6 +661,16 @@ void ContractAction(std::uint64_t id, int action) {
     if (!found)
         return;
     Contract c = *found;
+    unsigned region = 0;
+    while (region < boards.size() && c.market != boards[region].market)
+        ++region;
+    if (region == boards.size() ||
+        !BoardActionAllowed(Current(region), id, action, Nearby(region))) {
+        // Expiry can happen while a notice or confirmation is open in an
+        // unpaused menu. Retire its receipt without acting on a newer order.
+        ReconcilePapers();
+        return;
+    }
     if (action == 0) {
         if (economy->Accept(id))
             RE::SendHUDMessage::ShowHUDMessage("Marco Polo: supply contract accepted.");
@@ -277,13 +678,6 @@ void ContractAction(std::uint64_t id, int action) {
         if (economy->Cancel(id))
             RE::SendHUDMessage::ShowHUDMessage("Marco Polo: supply contract cancelled.");
     } else if (action == 1) {
-        unsigned region = 0;
-        while (region < boards.size() && c.market != boards[region].market)
-            ++region;
-        if (region == boards.size() || !Nearby(region)) {
-            RE::SendHUDMessage::ShowHUDMessage("Deliver at the issuing hold's Missives board.");
-            return;
-        }
         if (c.status != ContractStatus::accepted || economy->Get().day > c.deadline)
             return;
         auto *f = Resolve(c.item);
@@ -320,7 +714,7 @@ void ContractAction(std::uint64_t id, int action) {
         RE::SendHUDMessage::ShowHUDMessage(
             std::format("Marco Polo: order delivered. {} gold paid.", reward).c_str());
     }
-    UpdateBoards();
+    UpdateBoards(action == 0);
     Publish();
 }
 } // namespace marco::runtime

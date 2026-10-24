@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.1.5 makes regional merchanting viable and broadens runtime loading.** It narrows the barter spread, establishes regional export/import specialties and tracks vanilla/DLC alcohol plus supported mod keywords. Selected long routes return at least twice the purchase outlay in controlled simulation tests with starting Speech, finite merchant cash and travel time. Actual offers depend on merchants, stock, bonuses and elapsed time. See [the game test checklist](docs/TESTING.md).
+**0.1.6 keeps Missives postings on the board and cleans up completed orders.** Read reports in place; accepting an order gives you one carried contract paper. Delivery, cancellation or expiry removes it. Existing duplicate papers are cleaned up while accepted terms are preserved. Install the updated core and Missives addon together. See [the game test checklist](docs/TESTING.md).
 
 ## Install
 
@@ -11,7 +11,7 @@ Built for **Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x**, using one DLL and alandtse 
 
 Install `Marco-Polo-<version>-<commit>.zip` with MO2 or Vortex. The core has **no ESP and no Papyrus scripts**.
 
-- **Optional Missives addon:** install `-missives.zip` and enable `Marco Polo - Missives.esp` after `Missives.esp`. This ESL-flagged plugin contains 18 new note records. It adds market bulletins and supply contracts to the nine capital boards, without dialogue, quests or scripts.
+- **Optional Missives addon:** install `-missives.zip` and enable `Marco Polo - Missives.esp` after `Missives.esp`. This ESL-flagged plugin contains 27 new note records. It adds market bulletins and supply contracts to the nine capital boards, without dialogue, quests or scripts.
 - **Optional SKSE Menu Framework 3:** open **Marco Polo → Market ledger** for stock, prices and diagnostic export. Contract postings and actions are available through Missives notes only. Risa can provide access to SKSE Menu Framework; there is no separate Risa page.
 
 Use a separate test save/profile. Keep the `.skse` co-save alongside its matching Skyrim save. Existing games initialize at the current game day, without simulating the character's entire past.
@@ -36,9 +36,9 @@ Regional production and NPC consumption are explicit sources and sinks. This rel
 
 ## Notices and contracts
 
-With Missives and the optional addon installed, market bulletins describe current conditions and shortages can produce supply orders for an **exact item**, quantity, fixed reward and deadline. Read and close a contract note to accept, deliver or cancel it. Delivery requires the complete order near the issuing board. It removes the goods, supplies the hold and pays once. Treasury funds are reserved at posting and released on cancellation or expiry. Each hold issues at most one new order per game day. Without the Missives integration, no contracts are posted or offered through the ledger.
+With Missives and the optional addon installed, market bulletins describe current conditions and shortages can produce supply orders for an **exact item**, quantity, fixed reward and deadline. Select a posting to read it on the board. Reports and order postings stay there; reading alone does not accept a job. Close an order posting to choose **Accept**, or **Deliver / Cancel contract** for an accepted order. Delivery requires the complete order at its issuing board. It removes the goods, supplies the hold and pays once. Treasury funds are reserved at posting and released on cancellation or expiry. Each hold issues at most one new order per game day. Without the Missives integration, no contracts are posted or offered through the ledger.
 
-Copies show the latest posting. Only Marco Polo notes are added or removed; Missives scripts and quest lists are untouched. Notes and Announcements and board replacers still need coexistence testing. New/custom boards and Solstheim boards need an adapter.
+Accepting an order issues one carried paper with its order number and fixed terms. Reading that paper while traveling gives no contract actions. Delivery, cancellation and expiry remove carried papers for that order. The issuing board can replace a lost paper. Stored or dropped papers are tied to their original order and read as closed after it ends; obsolete papers are removed when picked up. Loading also restores a missing active paper and cleans up old stacks. Only Marco Polo papers are added or removed; other Missives jobs remain untouched. Notes and Announcements and board replacers still need coexistence testing. New/custom boards and Solstheim boards need an adapter.
 
 ## Settings and diagnostics
 
@@ -56,7 +56,7 @@ Restart Skyrim after edits. Saved market/commodity definitions must remain compa
 
 The co-save stores stocks, merchants, shipments, contracts, time and RNG state. Loading a save restores its economy; switching characters clears the previous session. `MarcoPolo.log` is beside the SKSE logs. With `debugLogging` enabled, the optional ledger can export `MarcoPolo-state.json` there.
 
-Version 0.1.5 retains schema 2 and reads both schema-1 and schema-2 economies. No new game is needed. The barter spread changes immediately; saved regional prices remain intact and approach the new regional values as days pass. Allow roughly two in-game weeks for the new trading pattern to develop. Loading schema 1 initializes only the household-goods stock introduced in 0.1.4. Pre-0.1.4 DLLs cannot read schema 2.
+Version 0.1.6 retains schema 2 and reads both schema-1 and schema-2 economies. No new game is needed. Existing contracts and their terms survive the paper migration. When upgrading from before 0.1.5, the narrower barter spread changes immediately; saved regional prices approach the new regional values as days pass. Allow roughly two in-game weeks for that trading pattern to develop. Loading schema 1 initializes only the household-goods stock introduced in 0.1.4. Pre-0.1.4 DLLs cannot read schema 2.
 
 ## Build
 
