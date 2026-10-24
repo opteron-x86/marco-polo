@@ -5,6 +5,8 @@ An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets pr
 
 **0.1.6 keeps Missives postings on the board and cleans up completed orders.** Read reports in place; accepting an order gives you one carried contract paper. Delivery, cancellation or expiry removes it. Existing duplicate papers are cleaned up while accepted terms are preserved. Install the updated core and Missives addon together. See [the game test checklist](docs/TESTING.md).
 
+This update also synchronizes the merchant's displayed gold with the balance used to settle trades, including later menu refreshes that previously could show more money than was available.
+
 ## Install
 
 Built for **Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x**, using one DLL and alandtse CommonLibSSE-NG. Install the matching **SKSE and Address Library** for your executable, plus **SkyUI** with a compatible barter menu. There is no single-version whitelist. Previous Marco Polo game checks used 1.6.1170; broader loading and relocation audits are described in [the engine audit](docs/ENGINE-AUDIT.md).

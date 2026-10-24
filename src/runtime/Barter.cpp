@@ -71,13 +71,18 @@ void Gold(RE::TESObjectREFR *ref, Money delta) {
         ref->RemoveItem(gold, static_cast<int>(-delta), RE::ITEM_REMOVE_REASON::kRemove, nullptr,
                         nullptr);
 }
-void RefreshGold(RE::BarterMenu *menu, const Context &context) {
-    auto *gold = RE::TESForm::LookupByID<RE::TESBoundObject>(0xF);
+void SetGoldState(RE::BarterMenu *menu, int playerGold, int merchantGold) {
     auto &data = menu->GetRuntimeData();
-    data.playerGold = Count(RE::PlayerCharacter::GetSingleton(), gold);
-    data.merchantGold = Count(context.chest, gold);
+    data.playerGold = playerGold;
+    data.merchantGold = merchantGold;
     data.root.SetMember("_playerGold", RE::GFxValue(data.playerGold));
     data.root.SetMember("_vendorGold", RE::GFxValue(data.merchantGold));
+}
+void RefreshGold(RE::BarterMenu *menu, const Context &context) {
+    auto *gold = RE::TESForm::LookupByID<RE::TESBoundObject>(0xF);
+    SetGoldState(menu, Count(RE::PlayerCharacter::GetSingleton(), gold),
+                 Count(context.chest, gold));
+    auto &data = menu->GetRuntimeData();
     RE::GFxValue bar;
     if (data.root.GetMember("bottomBar", &bar)) {
         RE::GFxValue values[]{RE::GFxValue(data.playerGold), RE::GFxValue(data.merchantGold)};
@@ -131,24 +136,37 @@ void Select(const RE::FxDelegateArgs &args) {
     int chestBefore = Count(c.chest, object);
     Money playerGold = Count(player, gold), vendorGold = Count(c.chest, gold);
     if (debugLogging) {
-        RE::GFxValue listValue;
+        RE::GFxValue listValue, displayedGold;
         if (selected)
             selected->obj.GetMember("infoValue", &listValue);
+        menu->GetRuntimeData().root.GetMember("_vendorGold", &displayedGold);
         SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player "
                         "gold={}, vendor gold={}, offered={}, chest={}",
                         buy ? "BUY" : "SELL", n, Key(item->object), item->object->GetName(),
                         q.total, args[1].IsNumber() ? args[1].GetNumber() : -1,
                         listValue.IsNumber() ? listValue.GetNumber() : -1, playerGold, vendorGold,
                         offered, chestBefore);
+        SKSE::log::info("Merchant funds: chest={}, native menu={}, UI={}", vendorGold,
+                        menu->GetRuntimeData().merchantGold,
+                        displayedGold.IsNumber() ? displayedGold.GetNumber() : -1);
     }
+    // Native UI refreshes can use the temporary sale inventory's cached gold.
+    // Keep the engine guard and visible balances on the coins we actually settle.
+    SetGoldState(menu, static_cast<int>(playerGold), static_cast<int>(vendorGold));
     // A valid sale row can include objects outside the hidden merchant chest.
     // Check that row's available count; let Skyrim transfer from its sources.
     if (offered < n || q.total > (buy ? playerGold : vendorGold) || q.total > 100000000 ||
         playerGold + q.total > 1000000000 || vendorGold + q.total > 1000000000) {
         SKSE::log::warn("Transaction rejected: quantity={}, offered={}, total={}, payer gold={}", n,
                         offered, q.total, buy ? playerGold : vendorGold);
-        RE::SendHUDMessage::ShowHUDMessage(
-            "Marco Polo: insufficient stock or gold for this quantity.");
+        RefreshGold(menu, c);
+        if (!buy && q.total > vendorGold)
+            RE::SendHUDMessage::ShowHUDMessage(std::format("{} has {} gold; this sale is worth {}.",
+                                                           c.actor->GetName(), vendorGold, q.total)
+                                                   .c_str());
+        else
+            RE::SendHUDMessage::ShowHUDMessage(
+                "There is not enough stock or gold for this quantity.");
         return;
     }
     std::string key = Key(object), good = Classify(object);
@@ -244,7 +262,21 @@ class QuantityHandler final : public RE::GFxFunctionHandler {
         if (active && Ready(menu.get()) && p.argCount) {
             std::lock_guard lock(mutex);
             RE::GFxValue amount;
-            if (method_ == "UpdateItemCardInfo") {
+            if (method_ == "UpdatePlayerInfo" && p.argCount >= 2) {
+                if (auto c = Vendor()) {
+                    auto *gold = RE::TESForm::LookupByID<RE::TESBoundObject>(0xF);
+                    int playerGold = Count(RE::PlayerCharacter::GetSingleton(), gold);
+                    int vendorGold = Count(c.chest, gold);
+                    if (debugLogging && p.args[1].IsNumber() && p.args[1].GetNumber() != vendorGold)
+                        SKSE::log::info("Corrected merchant balance refresh: cached={}, chest={}",
+                                        p.args[1].GetNumber(), vendorGold);
+                    SetGoldState(menu.get(), playerGold, vendorGold);
+                    // These arguments are numbers, so replace the copied call
+                    // arguments, preserving the merchant name and player stats.
+                    args[1] = RE::GFxValue(playerGold);
+                    args[2] = RE::GFxValue(vendorGold);
+                }
+            } else if (method_ == "UpdateItemCardInfo") {
                 bool buy = menu->IsViewingVendorItems();
                 auto q = CurrentQuote(menu.get(), 1, buy);
                 RE::GFxValue mult;
@@ -325,25 +357,26 @@ bool WrapQuantity(RE::BarterMenu *menu) {
         !std::isfinite(buyMult.GetNumber()) || buyMult.GetNumber() <= 0 ||
         !std::isfinite(sellMult.GetNumber()) || sellMult.GetNumber() <= 0)
         return false;
-    constexpr const char *methods[]{"UpdateItemCardInfo", "onQuantitySliderChange",
-                                    "onQuantityMenuSelect", "doTransaction"};
-    RE::GFxValue originals[4], fn;
+    constexpr const char *methods[]{"UpdatePlayerInfo", "UpdateItemCardInfo",
+                                    "onQuantitySliderChange", "onQuantityMenuSelect",
+                                    "doTransaction"};
+    RE::GFxValue originals[std::size(methods)], fn;
     auto *items = menu->GetRuntimeData().itemList;
     if (!items || !items->root.GetMember("addDataProcessor", &fn) || !fn.IsObject())
         return false;
-    for (unsigned i = 0; i < 4; ++i)
+    for (unsigned i = 0; i < std::size(methods); ++i)
         if (!root.GetMember(methods[i], &originals[i]) || !originals[i].IsObject())
             return false;
     SyncMerchant(Vendor(), true);
-    for (unsigned i = 0; i < 4; ++i) {
+    for (unsigned i = 0; i < std::size(methods); ++i) {
         RE::GFxValue replacement;
-        RE::GPtr<QuantityHandler> handler(new QuantityHandler(originals[i], methods[i]));
+        auto handler = RE::make_gptr<QuantityHandler>(originals[i], methods[i]);
         menu->uiMovie->CreateFunction(&replacement, handler.get());
         root.SetMember(methods[i], replacement);
     }
     RE::GFxValue processor, process;
     menu->uiMovie->CreateObject(&processor);
-    RE::GPtr<ListPrices> handler(new ListPrices());
+    auto handler = RE::make_gptr<ListPrices>();
     menu->uiMovie->CreateFunction(&process, handler.get());
     processor.SetMember("processList", process);
     if (!items->root.Invoke("addDataProcessor", nullptr, &processor, 1))
@@ -368,6 +401,8 @@ void AdvanceMovie(RE::BarterMenu *menu, float interval, std::uint32_t time) {
         return;
     if (WrapQuantity(menu)) {
         SKSE::log::info("SkyUI quote integration attached");
+        if (auto c = Vendor())
+            RefreshGold(menu, c);
         if (menu->GetRuntimeData().itemList)
             menu->GetRuntimeData().itemList->Update();
     } else if (attachAttempts == maxAttachAttempts) {

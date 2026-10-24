@@ -8,4 +8,6 @@ Update the core and Missives addon together after exiting Skyrim. The addon now 
 
 No new game is needed. The economy co-save remains schema 2, with schema-1 migration retained. Regional trading balance is unchanged from 0.1.5. One DLL supports desktop SE 1.5.97 and AE 1.6.x / 1.7.x using alandtse CommonLibSSE-NG, matching SKSE and Address Library, without a runtime whitelist.
 
+Merchant gold refreshes now use the same physical balance as transaction settlement. This prevents the menu from advertising money that the sale check cannot spend. A rejected sale reports the merchant's available gold and the sale total. No additional gold is created, and a sale is still refused when the merchant cannot pay in full.
+
 Automated checks cover paper migration, accepted terms, exact-once delivery, cancellation, expiry, save/reload, receipt identity and stale confirmation rejection. Runtime audits check the new ContainerMenu slots and paired BookMenu relocation IDs. In-game validation of the new reading controls, Take All, receipt text and coexistence with other board mods remains pending; see docs/TESTING.md.
