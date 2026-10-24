@@ -25,7 +25,25 @@
     "Skyrim.esm|06F993": "timber",
     "Skyrim.esm|04B0BA": "grain",
     "Skyrim.esm|065C9B": "meat",
-    "Skyrim.esm|034C5E": "drink"
+    "Skyrim.esm|034C5E": "drink",
+    "Skyrim.esm|098623": "housewares",
+    "Skyrim.esm|098624": "housewares",
+    "Skyrim.esm|098625": "housewares",
+    "Skyrim.esm|098626": "housewares",
+    "Skyrim.esm|098627": "housewares",
+    "Skyrim.esm|0E42DF": "housewares",
+    "Skyrim.esm|0E42E0": "housewares",
+    "Skyrim.esm|0E42E1": "housewares",
+    "Skyrim.esm|034CD6": "housewares",
+    "Skyrim.esm|033760": "housewares",
+    "hearthfireextended.esp|1D3EBE": "housewares",
+    "hearthfireextended.esp|1D3EC0": "housewares",
+    "hearthfireextended.esp|1D3EC1": "housewares",
+    "hearthfireextended.esp|1D3EC2": "housewares",
+    "hearthfireextended.esp|1D3EC3": "housewares",
+    "hearthfireextended.esp|1D3EC4": "housewares",
+    "hearthfireextended.esp|1D3EC5": "housewares",
+    "hearthfireextended.esp|1D3EC6": "housewares"
   },
   "keywords": {
     "VendorItemFood": "food",
@@ -38,7 +56,8 @@
     "VendorItemAnimalPart": "leather",
     "VendorItemBook": "books",
     "VendorItemScroll": "books",
-    "VendorItemSoulGem": "soul_gems"
+    "VendorItemSoulGem": "soul_gems",
+    "VendorItemClutter": "housewares"
   },
   "types": {
     "Weapon": "weapons",

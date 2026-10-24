@@ -1,9 +1,6 @@
 #include "Runtime.h"
 #include "SKSEMenuFramework.h"
 #include <algorithm>
-#include <cfloat>
-#include <cstdarg>
-#include <format>
 
 namespace marco::runtime {
 namespace {
@@ -49,39 +46,6 @@ void __stdcall Render() {
         UI::EndTable();
     }
     UI::Separator();
-    UI::TextUnformatted("Supply contracts");
-    for (auto &j : view.economy.at("contracts")) {
-        int state = j.at("status").get<int>();
-        if (state > 1)
-            continue;
-        auto id = j.at("id").get<std::uint64_t>();
-        std::string label = std::format(
-            "{}: {} × {} — {} septims, due {}",
-            view.economy.at("marketNames").at(j.at("market").get<std::string>()).get<std::string>(),
-            j.at("quantity").get<int>(), j.at("itemName").get<std::string>(),
-            j.at("reward").get<Money>(), j.at("due").get<std::string>());
-        UI::TextWrapped("%s", label.c_str());
-        auto button =
-            std::format("{}##{}", state == 0 ? "Accept" : "Deliver at issuing hold's board", id);
-        if (UI::Button(button.c_str())) {
-            auto gen = generation.load();
-            SKSE::GetTaskInterface()->AddTask([id, state, gen] {
-                if (active && generation == gen)
-                    ContractAction(id, state == 0 ? 0 : 1);
-            });
-        }
-        if (state == 1) {
-            UI::SameLine();
-            if (UI::Button(std::format("Cancel##{}", id).c_str())) {
-                auto gen = generation.load();
-                SKSE::GetTaskInterface()->AddTask([id, gen] {
-                    if (active && generation == gen)
-                        ContractAction(id, 2);
-                });
-            }
-        }
-    }
-    UI::Separator();
     if (debugLogging && UI::Button("Export diagnostic state"))
         SKSE::GetTaskInterface()->AddTask(ExportState);
 }
@@ -93,7 +57,7 @@ bool RegisterMenu() {
     for (const char *name :
          {"AddSectionItem", "igTextUnformatted", "igTextV", "igTextWrappedV", "igCombo_Str_arr",
           "igBeginTable", "igTableSetupColumn", "igTableHeadersRow", "igTableNextRow",
-          "igTableSetColumnIndex", "igEndTable", "igSeparator", "igButton", "igSameLine"})
+          "igTableSetColumnIndex", "igEndTable", "igSeparator", "igButton"})
         if (!GetProcAddress(module, name))
             return false;
     SKSEMenuFramework::SetSection("Marco Polo");

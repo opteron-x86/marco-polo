@@ -4,4 +4,6 @@ Requires the matching Marco Polo core and Missives. Enable `Marco Polo - Missive
 
 Read market reports for current conditions. A shortage can produce a supply contract with an exact requested item, count, fixed payment and deadline. Read and close the contract note for actions. Deliver the complete order near its issuing board. No NPC dialogue is needed. Reports and copies display the latest posting.
 
+Contract postings and actions are available only through this integration. The optional SKSE Menu Framework ledger displays markets without contract listings or buttons.
+
 The DLL adds/removes only its own notes from the original board references. No Missives scripts or quest lists are replaced. Compatibility with additional notice mods and board replacements is part of the initial game-test checklist. Custom/new boards and Solstheim boards are not supported by this first adapter.

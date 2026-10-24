@@ -1,4 +1,5 @@
 #include "core/Economy.h"
+#include <algorithm>
 #include <cmath>
 #include <fstream>
 #include <iostream>
@@ -142,6 +143,85 @@ int main(int argc, char **argv) {
         CHECK(e.Get().merchants.at("shop").items.at("display").quantity == 0);
         CHECK(e.Get().merchants.at("shop").items.at("mixed").quantity == 0);
         e.Validate();
+        // Upgrade a real pre-housewares configuration without resetting the
+        // saved simulation, merchant inventory, shipments or accepted orders.
+        auto previousConfig = config;
+        std::erase_if(previousConfig.commodities,
+                      [](const auto &good) { return good.id == "housewares"; });
+        for (auto &market : previousConfig.markets) {
+            market.demand.erase("housewares");
+            market.output.erase("housewares");
+        }
+        Economy previous(previousConfig);
+        previous.NewGame(20, 123);
+        previous.RegisterMerchant(shop);
+        previous.Advance(27);
+        previous.Edit().markets.at("winterhold").goods.at("food").quantity = 0;
+        auto preservedContract = previous.Offer("winterhold", "food", 30);
+        CHECK(preservedContract && previous.Accept(preservedContract));
+        auto oldSave = previous.Save();
+        oldSave["schema"] = 1;
+        other.Load(oldSave);
+        CHECK(other.Get().schema == SaveSchema);
+        auto migrated = other.Save();
+        auto established = migrated;
+        established["schema"] = 1;
+        for (auto &[market, data] : established["markets"].items())
+            data["goods"].erase("housewares");
+        CHECK(established == oldSave);
+        for (auto &market : config.markets) {
+            auto &stock = other.Get().markets.at(market.id).goods.at("housewares");
+            CHECK(stock.quantity == std::max(5.0, market.demand.at("housewares") * config.targetDays));
+            CHECK(stock.price == 1);
+        }
+        Merchant housewares{"housewares-shop", "whiterun", 1000, {}, 27, 27};
+        housewares.items["plate"] = {"plate", "housewares", 10, 10, 1, 5, false};
+        other.RegisterMerchant(housewares);
+        auto householdQuote = other.Price("whiterun", "housewares", 5, 4, true);
+        other.Trade("housewares-shop", "plate", 4, true, householdQuote.total);
+        CHECK(other.Get().markets.at("whiterun").goods.at("housewares").price > 1);
+        auto afterHouseholdTrade = other.Save();
+        e.Load(afterHouseholdTrade);
+        CHECK(e.Save() == afterHouseholdTrade);
+        e.Load(e.Save());
+        CHECK(e.Save() == afterHouseholdTrade); // Never seed the new stock twice.
+        e.Advance(28);
+        other.Advance(28);
+        CHECK(e.Save() == other.Save());
+        before = e.Save();
+        // A new save cannot silently regain missing goods, and migration cannot
+        // conceal damage to established commodities or inconsistent old data.
+        bad = before;
+        bad["markets"]["whiterun"]["goods"].erase("housewares");
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        bad = oldSave;
+        bad["markets"]["whiterun"]["goods"].erase("iron");
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        bad = oldSave;
+        bad["markets"]["whiterun"]["goods"]["housewares"] =
+            migrated["markets"]["whiterun"]["goods"]["housewares"];
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        bad = oldSave;
+        bad["merchants"]["shop"]["items"]["display"]["commodity"] = "housewares";
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        bad = oldSave;
+        bad["markets"]["whiterun"]["goods"]["iron"]["quantity"] = -1;
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        // Custom old configurations can already contain household goods; their
+        // existing stock survives the schema upgrade as well.
+        auto existingHousewares = afterHouseholdTrade;
+        existingHousewares["schema"] = 1;
+        other.Load(existingHousewares);
+        CHECK(other.Save() == afterHouseholdTrade);
+        previous.Load(oldSave); // Custom definitions need not adopt the new good.
+        auto customSave = previous.Save();
+        customSave["schema"] = 1;
+        CHECK(customSave == oldSave);
         // Contract reservations, stable terms, exact-once settlement, refunds.
         e.NewGame(0, 9);
         e.Edit().markets.at("winterhold").goods.at("food").quantity = 0;

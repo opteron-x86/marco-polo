@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.1.3 is experimental and needs in-game testing.** It allows purchases from shop displays as well as merchant chests, and includes the engine-hook and price-display corrections from 0.1.2. Replace the older DLL before further testing. Automated tests exercise the model, save data and release tooling. They cannot verify Skyrim's menus, merchant resets or interactions with an installed mod list. See [the game test checklist](docs/TESTING.md).
+**0.1.4 is experimental and needs in-game testing.** It adds household goods to the economy and keeps supply contracts in the optional Missives integration. Existing economy saves gain the new commodity without resetting established markets or merchants. Automated tests exercise the model, save data and release tooling. They cannot verify Skyrim's menus, merchant resets or interactions with an installed mod list. See [the game test checklist](docs/TESTING.md).
 
 ## Install
 
@@ -12,13 +12,13 @@ Requires **Skyrim SE Steam 1.6.1170**, its matching SKSE and Address Library, an
 Install `Marco-Polo-<version>-<commit>.zip` with MO2 or Vortex. The core has **no ESP and no Papyrus scripts**.
 
 - **Optional Missives addon:** install `-missives.zip` and enable `Marco Polo - Missives.esp` after `Missives.esp`. This ESL-flagged plugin contains 18 new note records. It adds market bulletins and supply contracts to the nine capital boards, without dialogue, quests or scripts.
-- **Optional SKSE Menu Framework 3:** open **Marco Polo → Market ledger** for stock, prices, contracts and diagnostic export. Risa can provide access to SKSE Menu Framework; there is no separate Risa page.
+- **Optional SKSE Menu Framework 3:** open **Marco Polo → Market ledger** for stock, prices and diagnostic export. Contract postings and actions are available through Missives notes only. Risa can provide access to SKSE Menu Framework; there is no separate Risa page.
 
 Use a separate test save/profile. Keep the `.skse` co-save alongside its matching Skyrim save. Existing games initialize at the current game day, without simulating the character's entire past.
 
 ## The economy
 
-Ten markets cover the nine holds and Solstheim. They track 24 commodities, finite warehouse stock, production, consumption, spoilage and steel processing. Regional specialties, seasons and Civil War demand affect supply and prices. Twenty-six directed routes move finite shipments with travel time, capacity and saved loss outcomes.
+Ten markets cover the nine holds and Solstheim. They track 25 commodities, finite warehouse stock, production, consumption, spoilage and steel processing. Regional specialties, seasons and Civil War demand affect supply and prices. Twenty-six directed routes move finite shipments with travel time, capacity and saved loss outcomes.
 
 Prices move gradually within configured bounds. Trades also follow a supply curve: bulk quotes use the same curve and per-unit rounding as individual trades. The item's original value, Speech and barter multipliers remain inputs. The list, card and quantity total share the quote calculation; actual inventory movement must occur before gold rounding is reconciled and a transaction is recorded.
 
@@ -26,11 +26,13 @@ Merchants register on first contact. Background customers buy ordinary stock, an
 
 Goods displayed around a shop remain available through Skyrim's barter menu. These purchases affect regional supply and prices, but Marco Polo does not move, duplicate or replenish the display objects.
 
+Household goods include plates, bowls, cutlery and other items tagged `VendorItemClutter`, including those added by mods. Explicit mappings cover untagged vanilla silverware, linen wraps, charcoal and Hearthfire Extended rugs. Each item's value still contributes to its offer. Unknown miscellaneous items remain outside the economy unless classified; gold, lockpicks and quest items retain their exclusions or protections.
+
 Regional production and NPC consumption are explicit sources and sinks. This release does not simulate physical caravans, individual NPC households, service prices, training or house purchases.
 
 ## Notices and contracts
 
-Market bulletins describe current conditions. Shortages can produce supply orders for an **exact item**, quantity, fixed reward and deadline. Read and close a contract note to accept, deliver or cancel it. Delivery requires the complete order near the issuing board. It removes the goods, supplies the hold and pays once. Treasury funds are reserved at posting and released on cancellation or expiry. Each hold issues at most one new order per game day.
+With Missives and the optional addon installed, market bulletins describe current conditions and shortages can produce supply orders for an **exact item**, quantity, fixed reward and deadline. Read and close a contract note to accept, deliver or cancel it. Delivery requires the complete order near the issuing board. It removes the goods, supplies the hold and pays once. Treasury funds are reserved at posting and released on cancellation or expiry. Each hold issues at most one new order per game day. Without the Missives integration, no contracts are posted or offered through the ledger.
 
 Copies show the latest posting. Only Marco Polo notes are added or removed; Missives scripts and quest lists are untouched. Notes and Announcements and board replacers still need coexistence testing. New/custom boards and Solstheim boards need an adapter.
 
@@ -47,6 +49,8 @@ Files live under `SKSE/Plugins/MarcoPolo/`:
 Restart Skyrim after edits. Saved market/commodity definitions must remain compatible. Invalid definitions and unsupported save schemas are logged and disabled. `manageInventory: false` leaves replenishment to the game for price-only compatibility testing. Mods that replace barter transactions or merchant restocking need compatibility testing. Unknown barter UIs retain game prices and produce a notification; inventory simulation can still run.
 
 The co-save stores stocks, merchants, shipments, contracts, time and RNG state. Loading a save restores its economy; switching characters clears the previous session. `MarcoPolo.log` is beside the SKSE logs. With `debugLogging` enabled, the optional ledger can export `MarcoPolo-state.json` there.
+
+Version 0.1.4 reads schema-1 saves and initializes only the new household-goods stock at the saved day. New saves use schema 2; earlier DLLs cannot read them. Retain the original save/co-save pair when testing an upgrade.
 
 ## Build
 

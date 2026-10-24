@@ -409,8 +409,6 @@ void Publish() {
             v.economy["marketNames"][market.id] = market.name;
         for (auto &good : economy->Definitions().commodities)
             v.economy["commodityNames"][good.id] = good.name;
-        for (auto &contract : v.economy["contracts"])
-            contract["due"] = DateForDay(contract.at("deadline").get<double>());
         if (!v.market.empty())
             v.reports = economy->Reports(v.market);
     }

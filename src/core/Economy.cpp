@@ -484,7 +484,7 @@ std::vector<Bulletin> Economy::Reports(const std::string &m) const {
     return out;
 }
 void Economy::Validate() const {
-    Require(state_.schema == 1 && Finite(state_.day) && state_.day >= 0 && state_.rng != 0 &&
+    Require(state_.schema == SaveSchema && Finite(state_.day) && state_.day >= 0 && state_.rng != 0 &&
                 state_.nextID > 0,
             "Invalid save header");
     Require(state_.markets.size() == config_.markets.size() && state_.merchants.size() <= 10000 &&

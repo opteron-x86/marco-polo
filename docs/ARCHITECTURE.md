@@ -2,6 +2,8 @@
 
 `src/core` is portable C++ with no game dependency. `Economy` owns the complete save-specific state; JSON encoding is versioned and validated before replacing live state. Fixed daily ticks and a serialized xorshift state make catch-up independent of batch size. Terminal contract history is bounded. Unsupported schemas fail rather than reset a running economy.
 
+Schema 2 adds household goods. Loading schema 1 initializes the new commodity at the saved day when it is absent from every market and present in the current definitions. Established goods, prices, merchants, shipments, contracts, time and RNG state are preserved. Existing household stock in custom configurations is retained. Missing established goods, partially missing household stock and invalid values still reject the load without replacing live state. New saves cannot be loaded by pre-0.1.4 DLLs.
+
 ```mermaid
 flowchart LR
   Config[JSON definitions] --> Core[Economy model]
@@ -24,6 +26,6 @@ The price function integrates stock change at unit midpoints, rounds each unit a
 
 The native integration targets 1.6.1170 and uses pinned CommonLib definitions. `BarterMenu::Accept` redirects the `ItemSelect` callback. SkyUI method wrappers and a list data processor provide native quotes. Stock/gold are verified around the original callback; fractional unit-price rounding is reconciled only after observing the complete transfer. A detour on `TESObjectREFR::ResetInventory` protects registered merchant chests from vanilla replenishment. All these boundaries need in-game validation.
 
-Missives uses only owned BOOK records and existing board references. A narrowly filtered description detour renders those notes from current state. Closing a contract note presents native buttons. Contracts persist exact requested forms and names with fixed terms, reserve funds when posted, and settle only once. No additional quest engine or Papyrus loop is involved.
+Missives uses only owned BOOK records and existing board references. A narrowly filtered description detour renders those notes from current state. Closing a contract note presents native buttons. Contracts persist exact requested forms and names with fixed terms, reserve funds when posted, and settle only once. The Missives adapter is the only runtime source of new offers and contract actions; the Menu Framework ledger displays market information only. No additional quest engine or Papyrus loop is involved.
 
 First-release limits: no per-mine simulation, service-price adapters, NPC household budgets, physical caravans, custom-board discovery, VR or alternate executable support. Commodity classification is broad and configurable; production and demand coefficients are starting balance choices. Plugin interoperability and economic balance are part of the game-test phase.

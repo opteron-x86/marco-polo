@@ -224,6 +224,15 @@
       "shelfLife": 0,
       "seasonal": false,
       "military": false
+    },
+    {
+      "id": "housewares",
+      "name": "Household goods",
+      "referenceValue": 12,
+      "elasticity": 0.55,
+      "shelfLife": 0,
+      "seasonal": false,
+      "military": false
     }
   ],
   "markets": [
@@ -257,7 +266,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 51.0,
@@ -283,7 +293,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 15.0
       }
     },
     {
@@ -316,7 +327,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 12.0,
@@ -342,7 +354,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 13.2
       }
     },
     {
@@ -375,7 +388,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 32.4,
@@ -401,7 +415,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 16.2
       }
     },
     {
@@ -434,7 +449,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 32.4,
@@ -460,7 +476,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 15.6
+        "books": 15.6,
+        "housewares": 14.4
       }
     },
     {
@@ -493,7 +510,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 15.0,
@@ -519,7 +537,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 13.2
       }
     },
     {
@@ -552,7 +571,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 32.4,
@@ -578,7 +598,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 10.2
       }
     },
     {
@@ -611,7 +632,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 32.4,
@@ -637,7 +659,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 8.4
       }
     },
     {
@@ -670,7 +693,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 15.0,
@@ -696,7 +720,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 7.8
       }
     },
     {
@@ -729,7 +754,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 10.5,
@@ -755,7 +781,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 7.2,
-        "books": 21.6
+        "books": 21.6,
+        "housewares": 4.8
       }
     },
     {
@@ -788,7 +815,8 @@
         "armor": 2,
         "gems": 2,
         "soul_gems": 4,
-        "books": 12
+        "books": 12,
+        "housewares": 12
       },
       "output": {
         "grain": 10.5,
@@ -814,7 +842,8 @@
         "armor": 2.16,
         "gems": 2.16,
         "soul_gems": 4.32,
-        "books": 12.96
+        "books": 12.96,
+        "housewares": 6.6
       }
     }
   ],

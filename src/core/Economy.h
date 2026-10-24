@@ -8,6 +8,7 @@
 namespace marco {
 using Money = std::int64_t;
 using json = nlohmann::json;
+inline constexpr int SaveSchema = 2;
 struct Commodity {
     std::string id, name;
     double referenceValue{10}, elasticity{0.5}, shelfLife{0};
@@ -85,7 +86,7 @@ struct Bulletin {
     double issued{}, multiplier{};
 };
 struct State {
-    int schema{1};
+    int schema{SaveSchema};
     double day{}, epoch{};
     std::uint64_t rng{1}, nextID{1}, revision{};
     std::map<std::string, Market> markets;

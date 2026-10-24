@@ -1,4 +1,5 @@
 #include "Economy.h"
+#include <algorithm>
 #include <stdexcept>
 namespace marco {
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Stock, quantity, price, produced, consumed, imported, exported,
@@ -31,7 +32,8 @@ json Encode(const State &s) {
     return json(s);
 }
 State Decode(const json &j) {
-    if (j.at("schema").get<int>() != 1)
+    auto schema = j.at("schema").get<int>();
+    if (schema != 1 && schema != SaveSchema)
         throw std::runtime_error("Unsupported Marco Polo save schema");
     return j.get<State>();
 }
@@ -41,6 +43,36 @@ json Economy::Save() const {
 }
 void Economy::Load(const json &j) {
     State incoming = Decode(j);
+    if (incoming.schema == 1) {
+        // 0.1.4 introduces household goods. Seed only this new market stock;
+        // preserve existing prices, merchants, contracts, time and RNG state.
+        // Missing established goods or partially missing household goods still
+        // indicate incompatible data and must not silently become a new market.
+        if (std::any_of(config_.commodities.begin(), config_.commodities.end(),
+                        [](const auto &good) { return good.id == "housewares"; })) {
+            std::size_t missing = 0;
+            for (auto &spec : config_.markets)
+                missing += !incoming.markets.at(spec.id).goods.contains("housewares");
+            if (missing) {
+                if (missing != config_.markets.size())
+                    throw std::runtime_error("Incomplete legacy household goods market");
+                for (auto &[id, merchant] : incoming.merchants)
+                    for (auto &[form, item] : merchant.items)
+                        if (item.commodity == "housewares")
+                            throw std::runtime_error("Legacy goods missing for tracked item");
+                for (auto &shipment : incoming.shipments)
+                    if (shipment.commodity == "housewares")
+                        throw std::runtime_error("Legacy goods missing for shipment");
+                for (auto &contract : incoming.contracts)
+                    if (contract.commodity == "housewares")
+                        throw std::runtime_error("Legacy goods missing for contract");
+                for (auto &spec : config_.markets)
+                    incoming.markets.at(spec.id).goods.emplace(
+                        "housewares", Stock{.quantity = Target(spec.id, "housewares")});
+            }
+        }
+        incoming.schema = SaveSchema;
+    }
     auto old = std::move(state_);
     state_ = std::move(incoming);
     try {
