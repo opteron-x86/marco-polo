@@ -1,10 +1,10 @@
-# Game testing for 0.1.1
+# Game testing for 0.1.2
 
 Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, exports and the runtime gate. **These do not substitute for the checks below.**
 
 Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
 
-When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.1 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup.
+When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.2 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
 
 1. **Startup:** confirm `MarcoPolo.log` names 1.6.1170, loads configuration and installs barter integration. Load an existing save and open a merchant. Ensure no crash or unsupported-menu notification. Repeat with your actual UI replacer.
 2. **Quotes:** record player and merchant gold. Buy and sell one ordinary ingot, then a stack of 20. Check list/card values, the selected quantity total and exact gold changes. Move the slider both directions; cancel it. Cancelling must not alter stocks or cash. Repeat near an affordability limit, after a Speech increase, with relevant perks and enchanted/tempered items.

@@ -15,6 +15,7 @@ unsigned attachAttempts{};
 RE::FxDelegateHandler::CallbackFn *selectOriginal{};
 using ResetFn = void (*)(RE::TESObjectREFR *, bool);
 ResetFn resetOriginal{};
+ResetFn resetVirtualOriginal{};
 struct Guard {
     bool was = internal;
     Guard() {
@@ -292,7 +293,18 @@ class ListPrices final : public RE::GFxFunctionHandler {
 bool WrapQuantity(RE::BarterMenu *menu) {
     if (Ready(menu))
         return true;
+    // Never publish economy prices without the corresponding settlement hook.
+    if (!selectOriginal)
+        return false;
     auto &root = menu->GetRuntimeData().root;
+    // SkyUI installs BarterDataSetter in its asynchronous setConfig callback.
+    // Attaching earlier lets that later processor overwrite our list quotes
+    // with vanilla prices while the item card/transaction uses economy prices.
+    RE::GFxValue config, buyMult, sellMult;
+    if (!root.GetMember("_config", &config) || !config.IsObject() ||
+        !root.GetMember("_buyMult", &buyMult) || !buyMult.IsNumber() ||
+        !root.GetMember("_sellMult", &sellMult) || !sellMult.IsNumber())
+        return false;
     constexpr const char *methods[]{"UpdateItemCardInfo", "onQuantitySliderChange",
                                     "onQuantityMenuSelect", "doTransaction"};
     RE::GFxValue originals[4], fn;
@@ -324,23 +336,34 @@ void AdvanceMovie(RE::BarterMenu *menu, float interval, std::uint32_t time) {
     if (!active || Ready(menu))
         return;
     std::lock_guard lock(mutex);
-    if (attachAttempts++ >= 30)
+    constexpr unsigned maxAttachAttempts = 300;
+    if (attachAttempts++ >= maxAttachAttempts)
         return;
     if (WrapQuantity(menu)) {
         SKSE::log::info("SkyUI quote integration attached");
         if (menu->GetRuntimeData().itemList)
             menu->GetRuntimeData().itemList->Update();
-    } else if (attachAttempts == 30) {
+    } else if (attachAttempts == maxAttachAttempts) {
         SKSE::log::warn("Unsupported barter menu; prices left to the game");
         RE::SendHUDMessage::ShowHUDMessage(
             "Marco Polo needs a compatible SkyUI barter menu for prices.");
     }
 }
-void ResetInventory(RE::TESObjectREFR *ref, bool leveled) {
+bool SuppressReset(RE::TESObjectREFR *ref) {
+    if (!active || !manageInventory)
+        return false;
     std::lock_guard lock(mutex);
-    if (active && manageInventory && economy && economy->Get().merchants.contains(Key(ref)))
+    return active && economy && economy->Get().merchants.contains(Key(ref));
+}
+void ResetInventory(RE::TESObjectREFR *ref, bool leveled) {
+    if (SuppressReset(ref))
         return;
+    // Do not hold the economy lock through engine work or another mod's callbacks.
     resetOriginal(ref, leveled);
+}
+void ResetInventoryVirtual(RE::TESObjectREFR *ref, bool leveled) {
+    if (!SuppressReset(ref))
+        resetVirtualOriginal(ref, leveled);
 }
 class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
                      public RE::BSTEventSink<RE::TESContainerChangedEvent> {
@@ -415,22 +438,30 @@ bool InstallBarter() {
     if (init != MH_OK && init != MH_ERROR_ALREADY_INITIALIZED)
         return false;
     REL::Relocation<std::uintptr_t> refTable{RE::VTABLE_TESObjectREFR[0]};
-    // CommonLib's two RelocateVirtual indices are SE/AE and VR, respectively.
-    // ResetInventory is 0x8A on SE/AE; 0x8B is GetFireNode. Never detour a
-    // function based solely on a slot comment: verify the independent AE ID.
-    auto *reset = reinterpret_cast<void **>(refTable.address())[hooks::ResetInventorySlot];
-    REL::Relocation<std::uintptr_t> expectedReset{REL::ID(hooks::ResetInventoryAE)};
-    if (reinterpret_cast<std::uintptr_t>(reset) != expectedReset.address()) {
-        enabled = false;
-        SKSE::log::error("ResetInventory target mismatch; economy disabled, no barter hooks installed");
-        return false;
-    }
-    if (MH_CreateHook(reset, reinterpret_cast<void *>(ResetInventory),
-                      reinterpret_cast<void **>(&resetOriginal)) != MH_OK ||
-        MH_EnableHook(reset) != MH_OK) {
-        enabled = false;
-        SKSE::log::error("Merchant reset hook failed; economy disabled");
-        return false;
+    if (manageInventory) {
+        // Detour the independently verified engine ID, never whatever code a
+        // vtable slot currently points at. CID installs a virtual override here.
+        REL::Relocation<std::uintptr_t> resetAddress{REL::ID(hooks::ResetInventoryAE)};
+        auto *reset = reinterpret_cast<void *>(resetAddress.address());
+        if (MH_CreateHook(reset, reinterpret_cast<void *>(ResetInventory),
+                          reinterpret_cast<void **>(&resetOriginal)) != MH_OK ||
+            MH_EnableHook(reset) != MH_OK) {
+            enabled = false;
+            SKSE::log::error("Merchant reset hook failed; economy disabled");
+            return false;
+        }
+        auto current = reinterpret_cast<ResetFn *>(refTable.address())[hooks::ResetInventorySlot];
+        if (reinterpret_cast<std::uintptr_t>(current) != resetAddress.address()) {
+            // Preserve the entire existing virtual chain. For managed shops,
+            // suppress both the reset and any distributor's post-reset reroll.
+            resetVirtualOriginal = reinterpret_cast<ResetFn>(
+                refTable.write_vfunc(hooks::ResetInventorySlot, ResetInventoryVirtual));
+            SKSE::log::info("ResetInventory: engine ID {}, existing virtual hook chained ({:x})",
+                            hooks::ResetInventoryAE, reinterpret_cast<std::uintptr_t>(current));
+        } else {
+            SKSE::log::info("ResetInventory: engine ID {}, original virtual entry",
+                            hooks::ResetInventoryAE);
+        }
     }
     REL::Relocation<std::uintptr_t> table{RE::VTABLE_BarterMenu[0]};
     acceptOriginal = table.write_vfunc(hooks::BarterAcceptSlot, Accept);

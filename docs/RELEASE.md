@@ -1,8 +1,8 @@
-Marco Polo — A Skyrim Economy Mod, 0.1.1.
+Marco Polo — A Skyrim Economy Mod, 0.1.2.
 
-Critical correction to 0.1.0: the merchant inventory reset detour used the VR vtable slot on SE/AE, intercepting GetFireNode instead. The corrected hook checks the intended ResetInventory address before installation. CI now verifies the slots against the pinned CommonLib dispatch; all hook addresses were also audited against a local 1.6.1170 executable. Replace the old DLL and restart Skyrim completely.
+Critical correction to 0.1.0: the merchant inventory reset detour used the VR vtable slot on SE/AE, intercepting GetFireNode instead. The corrected detour targets the verified engine ResetInventory address directly. Existing virtual overrides, including Container Item Distributor's reset callback, are chained separately. The 0.1.1 diagnostic build disabled the economy when it encountered that override. CI verifies the slots against the pinned CommonLib dispatch; hook addresses were also audited against a local 1.6.1170 executable. Replace the old DLL and restart Skyrim completely.
 
-Logs now survive restarts and include save/load and barter diagnostics. The reported list-price versus gold-deduction mismatch is still under investigation. Existing save data uses the same schema; no save conversion or cleaning is required by this update.
+Price formatting now attaches after SkyUI has loaded its configuration and registered its vanilla barter formatter. Attaching too early let the vanilla formatter overwrite economy prices in the item list. Exact list/card/gold agreement still needs an in-game retest. Logs survive restarts and include save/load and barter diagnostics. Disabling the economy in settings now skips native hook installation. Existing save data uses the same schema; no save conversion or cleaning is required by this update.
 
 Requires Skyrim SE Steam 1.6.1170, matching SKSE/Address Library and a compatible SkyUI barter menu. Install the main ZIP. The Missives ZIP is optional and requires Missives; symbols and source are for development.
 

@@ -9,8 +9,8 @@ void Message(SKSE::MessagingInterface::Message *m) {
     switch (m->type) {
     case SKSE::MessagingInterface::kDataLoaded:
         if (Initialize()) {
-            InstallBarter();
-            InstallMissives();
+            if (enabled && InstallBarter())
+                InstallMissives();
             RegisterMenu();
         }
         break;
