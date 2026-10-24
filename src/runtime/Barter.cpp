@@ -1,4 +1,5 @@
 #include "Runtime.h"
+#include "HookTargets.h"
 #include <MinHook.h>
 #include <algorithm>
 #include <cmath>
@@ -82,6 +83,9 @@ void RefreshGold(RE::BarterMenu *menu, const Context &context) {
     }
 }
 void Select(const RE::FxDelegateArgs &args) {
+    if (debugLogging)
+        SKSE::log::info("ItemSelect: active={}, attached={}, arguments={}", active.load(),
+                        Ready(static_cast<RE::BarterMenu *>(args.GetHandler())), args.GetArgCount());
     if (!active || !Ready(static_cast<RE::BarterMenu *>(args.GetHandler())) ||
         args.GetArgCount() < 3 || !selectOriginal) {
         if (selectOriginal)
@@ -93,6 +97,9 @@ void Select(const RE::FxDelegateArgs &args) {
     auto c = Vendor();
     auto *item = Selected(menu);
     if (!c || !item || !args[0].IsNumber() || !args[2].IsBool()) {
+        if (debugLogging)
+            SKSE::log::warn("Unquoted ItemSelect: vendor={}, selected={}, number={}, bool={}",
+                            static_cast<bool>(c), item != nullptr, args[0].IsNumber(), args[2].IsBool());
         selectOriginal(args);
         return;
     }
@@ -103,6 +110,8 @@ void Select(const RE::FxDelegateArgs &args) {
     bool buy = args[2].GetBool();
     auto q = CurrentQuote(menu, n, buy);
     if (!q.quantity) {
+        if (debugLogging)
+            SKSE::log::info("Unpriced item: {} ({})", Key(item->object), item->object->GetName());
         selectOriginal(args);
         return;
     }
@@ -111,6 +120,16 @@ void Select(const RE::FxDelegateArgs &args) {
     auto *object = item->object;
     int owned = Count(buy ? c.chest : player, object);
     Money playerGold = Count(player, gold), vendorGold = Count(c.chest, gold);
+    if (debugLogging) {
+        RE::GFxValue listValue;
+        auto *selected = menu->GetRuntimeData().itemList->GetSelectedItem();
+        if (selected)
+            selected->obj.GetMember("infoValue", &listValue);
+        SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player gold={}, vendor gold={}",
+                        buy ? "BUY" : "SELL", n, Key(item->object), item->object->GetName(), q.total,
+                        args[1].IsNumber() ? args[1].GetNumber() : -1,
+                        listValue.IsNumber() ? listValue.GetNumber() : -1, playerGold, vendorGold);
+    }
     if (owned < n || q.total > (buy ? playerGold : vendorGold) || q.total > 100000000 ||
         playerGold + q.total > 1000000000 || vendorGold + q.total > 1000000000) {
         RE::SendHUDMessage::ShowHUDMessage(
@@ -131,6 +150,9 @@ void Select(const RE::FxDelegateArgs &args) {
         Guard guard;
         selectOriginal(forwarded);
         int transferred = Count(player, object) - before;
+        if (debugLogging)
+            SKSE::log::info("Engine transaction returned: items={}, player gold delta={}, vendor gold delta={}",
+                            transferred, Count(player, gold) - playerGold, Count(c.chest, gold) - vendorGold);
         if (transferred != (buy ? n : -n)) {
             SKSE::log::warn("Transaction declined or partial: expected {}, observed {}",
                             buy ? n : -n, transferred);
@@ -177,6 +199,8 @@ class Processor final : public RE::FxDelegateHandler::CallbackProcessor {
         if (std::strcmp(name.c_str(), "ItemSelect") == 0) {
             selectOriginal = method;
             downstream_->Process(name, Select);
+            if (debugLogging)
+                SKSE::log::info("ItemSelect callback intercepted");
         } else
             downstream_->Process(name, method);
     }
@@ -292,6 +316,7 @@ bool WrapQuantity(RE::BarterMenu *menu) {
     if (!items->root.Invoke("addDataProcessor", nullptr, &processor, 1))
         return false;
     root.SetMember("MarcoPoloQuantity", RE::GFxValue(true));
+    SKSE::log::info("SkyUI quotes attached; ItemSelect callback {}", selectOriginal ? "captured" : "MISSING");
     return true;
 }
 void AdvanceMovie(RE::BarterMenu *menu, float interval, std::uint32_t time) {
@@ -390,7 +415,16 @@ bool InstallBarter() {
     if (init != MH_OK && init != MH_ERROR_ALREADY_INITIALIZED)
         return false;
     REL::Relocation<std::uintptr_t> refTable{RE::VTABLE_TESObjectREFR[0]};
-    auto *reset = reinterpret_cast<void **>(refTable.address())[0x8B];
+    // CommonLib's two RelocateVirtual indices are SE/AE and VR, respectively.
+    // ResetInventory is 0x8A on SE/AE; 0x8B is GetFireNode. Never detour a
+    // function based solely on a slot comment: verify the independent AE ID.
+    auto *reset = reinterpret_cast<void **>(refTable.address())[hooks::ResetInventorySlot];
+    REL::Relocation<std::uintptr_t> expectedReset{REL::ID(hooks::ResetInventoryAE)};
+    if (reinterpret_cast<std::uintptr_t>(reset) != expectedReset.address()) {
+        enabled = false;
+        SKSE::log::error("ResetInventory target mismatch; economy disabled, no barter hooks installed");
+        return false;
+    }
     if (MH_CreateHook(reset, reinterpret_cast<void *>(ResetInventory),
                       reinterpret_cast<void **>(&resetOriginal)) != MH_OK ||
         MH_EnableHook(reset) != MH_OK) {
@@ -399,8 +433,8 @@ bool InstallBarter() {
         return false;
     }
     REL::Relocation<std::uintptr_t> table{RE::VTABLE_BarterMenu[0]};
-    acceptOriginal = table.write_vfunc(1, Accept);
-    advanceOriginal = table.write_vfunc(5, AdvanceMovie);
+    acceptOriginal = table.write_vfunc(hooks::BarterAcceptSlot, Accept);
+    advanceOriginal = table.write_vfunc(hooks::BarterAdvanceSlot, AdvanceMovie);
     RE::UI::GetSingleton()->AddEventSink<RE::MenuOpenCloseEvent>(&events);
     RE::ScriptEventSourceHolder::GetSingleton()->AddEventSink<RE::TESContainerChangedEvent>(
         &events);

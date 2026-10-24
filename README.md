@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.1.0 is experimental and needs in-game testing.** Automated tests exercise the model, save data and release tooling. They cannot verify Skyrim's menus, merchant resets or interactions with an installed mod list. See [the game test checklist](docs/TESTING.md).
+**0.1.1 is experimental and needs in-game testing.** It corrects a dangerous engine hook in 0.1.0; replace the older DLL before further testing. Automated tests exercise the model, save data and release tooling. They cannot verify Skyrim's menus, merchant resets or interactions with an installed mod list. See [the game test checklist](docs/TESTING.md).
 
 ## Install
 

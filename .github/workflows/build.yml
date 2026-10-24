@@ -66,6 +66,8 @@ jobs:
         run: ./.deps/vcpkg/bootstrap-vcpkg.bat -disableMetrics
       - name: Configure
         run: cmake --preset windows-release
+      - name: Audit engine hook slots
+        run: python tools/audit-runtime.py --commonlib build/windows-release/_deps/commonlibsse-src
       - name: Build
         run: cmake --build --preset windows-release
       - name: Test Windows build

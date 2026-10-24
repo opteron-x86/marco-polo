@@ -1,5 +1,5 @@
 #include "Runtime.h"
-#include <spdlog/sinks/basic_file_sink.h>
+#include <spdlog/sinks/rotating_file_sink.h>
 
 namespace {
 void Message(SKSE::MessagingInterface::Message *m) {
@@ -49,7 +49,9 @@ extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface 
         if (!p)
             return false;
         *p /= "MarcoPolo.log";
-        auto sink = std::make_shared<spdlog::sinks::basic_file_sink_mt>(p->string(), true);
+        // Retain the previous session: restarting to enable diagnostics must not
+        // destroy the transaction/save evidence that prompted the restart.
+        auto sink = std::make_shared<spdlog::sinks::rotating_file_sink_mt>(p->string(), 2 * 1024 * 1024, 3);
         auto logger = std::make_shared<spdlog::logger>("global", sink);
         logger->set_level(spdlog::level::info);
         logger->flush_on(spdlog::level::info);

@@ -392,9 +392,11 @@ void Save(SKSE::SerializationInterface *s) {
         return;
     try {
         auto data = economy->Save().dump();
-        if (s->OpenRecord(0x45434F4E, 1) &&
+        if (!s->OpenRecord(0x45434F4E, 1) ||
             !s->WriteRecordData(data.data(), static_cast<std::uint32_t>(data.size())))
             SKSE::log::error("Could not write economy co-save");
+        else if (debugLogging)
+            SKSE::log::info("Saved economy: day {}, {} bytes", economy->Get().day, data.size());
     } catch (const std::exception &ex) {
         SKSE::log::error("Save: {}", ex.what());
     }
@@ -415,6 +417,8 @@ void Load(SKSE::SerializationInterface *s) {
                 throw std::runtime_error("Truncated economy save");
             economy->Load(json::parse(data));
             loaded = true;
+            SKSE::log::info("Loaded economy: day {}, {} merchants, {} bytes", economy->Get().day,
+                            economy->Get().merchants.size(), length);
         } catch (const std::exception &ex) {
             loadFailed = true;
             active = false;
