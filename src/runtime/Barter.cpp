@@ -119,20 +119,30 @@ void Select(const RE::FxDelegateArgs &args) {
     auto *player = RE::PlayerCharacter::GetSingleton();
     auto *gold = RE::TESForm::LookupByID<RE::TESBoundObject>(0xF);
     auto *object = item->object;
-    int owned = Count(buy ? c.chest : player, object);
+    auto *selected = menu->GetRuntimeData().itemList->GetSelectedItem();
+    RE::GFxValue rowCount;
+    int offered = selected && selected->obj.GetMember("count", &rowCount) &&
+                          rowCount.IsNumber() && std::isfinite(rowCount.GetNumber())
+                      ? static_cast<int>(std::clamp(rowCount.GetNumber(), 0.0, 100000.0))
+                      : 0;
+    int chestBefore = Count(c.chest, object);
     Money playerGold = Count(player, gold), vendorGold = Count(c.chest, gold);
     if (debugLogging) {
         RE::GFxValue listValue;
-        auto *selected = menu->GetRuntimeData().itemList->GetSelectedItem();
         if (selected)
             selected->obj.GetMember("infoValue", &listValue);
-        SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player gold={}, vendor gold={}",
+        SKSE::log::info("Quote: {} {} x {} ({}), total={}, UI unit={}, list unit={}, player gold={}, vendor gold={}, offered={}, chest={}",
                         buy ? "BUY" : "SELL", n, Key(item->object), item->object->GetName(), q.total,
                         args[1].IsNumber() ? args[1].GetNumber() : -1,
-                        listValue.IsNumber() ? listValue.GetNumber() : -1, playerGold, vendorGold);
+                        listValue.IsNumber() ? listValue.GetNumber() : -1, playerGold, vendorGold,
+                        offered, chestBefore);
     }
-    if (owned < n || q.total > (buy ? playerGold : vendorGold) || q.total > 100000000 ||
+    // A valid sale row can include objects outside the hidden merchant chest.
+    // Check that row's available count; let Skyrim transfer from its sources.
+    if (offered < n || q.total > (buy ? playerGold : vendorGold) || q.total > 100000000 ||
         playerGold + q.total > 1000000000 || vendorGold + q.total > 1000000000) {
+        SKSE::log::warn("Transaction rejected: quantity={}, offered={}, total={}, payer gold={}",
+                        n, offered, q.total, buy ? playerGold : vendorGold);
         RE::SendHUDMessage::ShowHUDMessage(
             "Marco Polo: insufficient stock or gold for this quantity.");
         return;
@@ -140,7 +150,7 @@ void Select(const RE::FxDelegateArgs &args) {
     std::string key = Key(object), good = Classify(object);
     int before = Count(player, object);
     if (!economy->Get().merchants.contains(c.merchant))
-        SyncMerchant(c);
+        SyncMerchant(c, true);
     auto &m = economy->Edit().merchants.at(c.merchant);
     if (!m.items.contains(key))
         m.items[key] = {
@@ -168,10 +178,11 @@ void Select(const RE::FxDelegateArgs &args) {
         Gold(c.chest, expectedVendor - Count(c.chest, gold));
     }
     auto &tracked = economy->Edit().merchants.at(c.merchant).items.at(key);
+    int fromExternal = buy ? n - std::clamp(chestBefore - Count(c.chest, object), 0, n) : 0;
     bool protect = tracked.protectedItem;
     tracked.protectedItem = false;
     try {
-        economy->Trade(c.merchant, key, n, buy, q.total);
+        economy->Trade(c.merchant, key, n, buy, q.total, fromExternal);
     } catch (const std::exception &ex) {
         SKSE::log::error("Transaction accounting: {}", ex.what());
     }
@@ -180,8 +191,9 @@ void Select(const RE::FxDelegateArgs &args) {
     RefreshGold(menu, c);
     Publish();
     if (debugLogging)
-        SKSE::log::info("{} {} x {}: {} gold, market {}", buy ? "BUY" : "SELL", n, key, q.total,
-                        c.market);
+        SKSE::log::info("{} {} x {}: {} gold, market {}, external={}, player gold delta={}, vendor gold delta={}",
+                        buy ? "BUY" : "SELL", n, key, q.total, c.market, fromExternal,
+                        Count(player, gold) - playerGold, Count(c.chest, gold) - vendorGold);
     auto gen = generation.load();
     SKSE::GetTaskInterface()->AddTask([gen] {
         if (!active || generation != gen)
@@ -314,6 +326,7 @@ bool WrapQuantity(RE::BarterMenu *menu) {
     for (unsigned i = 0; i < 4; ++i)
         if (!root.GetMember(methods[i], &originals[i]) || !originals[i].IsObject())
             return false;
+    SyncMerchant(Vendor(), true);
     for (unsigned i = 0; i < 4; ++i) {
         RE::GFxValue replacement;
         RE::GPtr<QuantityHandler> handler(new QuantityHandler(originals[i], methods[i]));
@@ -385,7 +398,7 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
                     return RE::BSEventNotifyControl::kContinue;
                 }
                 RestoreMerchant(c);
-                SyncMerchant(c);
+                SyncMerchant(c, true);
                 auto menu = RE::UI::GetSingleton()->GetMenu<RE::BarterMenu>();
                 if (menu) {
                     WrapQuantity(menu.get());

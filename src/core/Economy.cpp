@@ -147,7 +147,7 @@ double Economy::Total(const std::string &m, const std::string &c) const {
         if (v.market == m)
             for (auto &[form, item] : v.items)
                 if (item.commodity == c)
-                    n += item.quantity * item.units;
+                    n += (item.quantity + item.externalQuantity) * item.units;
     return n;
 }
 double Economy::Multiplier(const std::string &m, const std::string &c, double delta) const {
@@ -189,7 +189,8 @@ void Economy::RegisterMerchant(Merchant m) {
     Require(!m.id.empty() && m.cash >= 0 && m.cash <= 1000000000, "Invalid merchant");
     for (auto &[f, i] : m.items) {
         config_.Good(i.commodity);
-        Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 && i.target >= 0 &&
+        Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 &&
+                    i.externalQuantity >= 0 && i.externalQuantity <= 100000 && i.target >= 0 &&
                     i.target <= 100000 && Finite(i.units) && i.units > 0 && Finite(i.value) &&
                     i.value >= 0,
                 "Invalid inventory");
@@ -202,9 +203,11 @@ void Economy::RegisterMerchant(Merchant m) {
     bool existing = old != state_.merchants.end();
     if (existing)
         for (auto &[key, item] : old->second.items)
-            changes[{old->second.market, item.commodity}] -= item.quantity * item.units;
+            changes[{old->second.market, item.commodity}] -=
+                (item.quantity + item.externalQuantity) * item.units;
     for (auto &[key, item] : m.items)
-        changes[{m.market, item.commodity}] += item.quantity * item.units;
+        changes[{m.market, item.commodity}] +=
+            (item.quantity + item.externalQuantity) * item.units;
     for (auto &[pair, delta] : changes)
         before[pair] = Total(pair.first, pair.second);
     state_.merchants[m.id] = std::move(m);
@@ -222,17 +225,22 @@ void Economy::RegisterMerchant(Merchant m) {
     }
     ++state_.revision;
 }
-void Economy::Trade(const std::string &mid, const std::string &form, int n, bool buy, Money gold) {
+void Economy::Trade(const std::string &mid, const std::string &form, int n, bool buy, Money gold,
+                    int fromExternal) {
     Require(n > 0 && n <= 100000 && gold >= 0, "Invalid transaction");
+    Require(fromExternal >= 0 && fromExternal <= n && (buy || fromExternal == 0),
+            "Invalid external stock transfer");
     auto &m = state_.merchants.at(mid);
     auto &item = m.items.at(form);
     Require(!item.protectedItem, "Protected item");
-    Require(!buy || item.quantity >= n, "Insufficient merchant stock");
+    Require(!buy || (item.quantity >= n - fromExternal &&
+                    item.externalQuantity >= fromExternal), "Insufficient merchant stock");
     Require(buy || m.cash >= gold, "Insufficient merchant gold");
     Require(buy ? gold <= 1000000000 - m.cash : item.quantity <= 100000 - n,
             "Transaction exceeds ledger limits");
     double before = Total(m.market, item.commodity);
-    item.quantity += buy ? -n : n;
+    item.quantity += buy ? -(n - fromExternal) : n;
+    item.externalQuantity -= fromExternal;
     m.cash += buy ? gold : -gold;
     auto &stock = state_.markets.at(m.market).goods.at(item.commodity);
     (buy ? stock.exported : stock.imported) += n * item.units;
@@ -504,7 +512,8 @@ void Economy::Validate() const {
                 "Invalid merchant save");
         for (auto &[f, i] : m.items) {
             config_.Good(i.commodity);
-            Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 && i.target >= 0 &&
+            Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 &&
+                        i.externalQuantity >= 0 && i.externalQuantity <= 100000 && i.target >= 0 &&
                         i.target <= 100000 && Finite(i.units) && i.units > 0 && Finite(i.value) &&
                         i.value >= 0,
                     "Invalid item save");

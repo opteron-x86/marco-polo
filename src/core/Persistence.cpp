@@ -6,8 +6,22 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Stock, quantity, price, produced, consumed, i
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Market, goods, treasury, war, disruption)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Shipment, id, route, from, to, commodity, quantity, arrives,
                                    loss)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Item, form, commodity, quantity, target, units, value,
-                                   protectedItem)
+void to_json(json &j, const Item &i) {
+    j = {{"form", i.form}, {"commodity", i.commodity}, {"quantity", i.quantity},
+         {"target", i.target}, {"units", i.units}, {"value", i.value},
+         {"protectedItem", i.protectedItem}, {"externalQuantity", i.externalQuantity}};
+}
+void from_json(const json &j, Item &i) {
+    j.at("form").get_to(i.form);
+    j.at("commodity").get_to(i.commodity);
+    j.at("quantity").get_to(i.quantity);
+    j.at("target").get_to(i.target);
+    j.at("units").get_to(i.units);
+    j.at("value").get_to(i.value);
+    j.at("protectedItem").get_to(i.protectedItem);
+    // Schema-1 saves from 0.1.0–0.1.2 tracked only the chest.
+    i.externalQuantity = j.value("externalQuantity", 0);
+}
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Merchant, id, market, cash, items, lastVisit, lastRestock)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Contract, id, market, commodity, quantity, reward, issued,
                                    deadline, status, item, itemName)

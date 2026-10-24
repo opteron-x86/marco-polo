@@ -196,7 +196,7 @@ bool PlainItem(const RE::InventoryEntryData *entry) {
                 }
     return true;
 }
-void SyncMerchant(const Context &c) {
+void SyncMerchant(const Context &c, bool observeExternal) {
     if (!c || c.merchant.empty() || !economy)
         return;
     InternalScope guard;
@@ -220,13 +220,48 @@ void SyncMerchant(const Context &c) {
         bool protect = !PlainItem(entry.get());
         auto old = m.items.find(key);
         int target = old == m.items.end() ? std::clamp(count, 0, 1000) : old->second.target;
+        int external = old == m.items.end() ? 0 : old->second.externalQuantity;
         m.items[key] = {key,    good, count,
                         target, 1.0,  static_cast<double>(std::max(1, RawValue(entry.get()))),
-                        protect};
+                        protect, external};
     }
     for (auto &[key, item] : m.items)
         if (!seen.contains(key))
             item.quantity = 0;
+    if (observeExternal) {
+        for (auto &[key, item] : m.items)
+            item.externalQuantity = 0;
+        // Skyrim's sale inventory also contains shop displays and goods in
+        // other containers. Its temporary extra lists identify each source
+        // with ExtraOriginalReference; the native purchase callback uses the
+        // same handles to remove the actual object. Never write to this cache.
+        auto *offers = RE::TESDataHandler::GetSingleton()->GetMerchantInventory();
+        if (offers && offers->entryList)
+            for (auto *entry : *offers->entryList) {
+                if (!entry || !entry->object || !entry->extraLists)
+                    continue;
+                auto key = Key(entry->object), good = Classify(entry->object);
+                if (key.empty() || good.empty())
+                    continue;
+                int external = 0;
+                for (auto *list : *entry->extraLists) {
+                    if (!list)
+                        continue;
+                    auto *original = list->GetByType<RE::ExtraOriginalReference>();
+                    auto source = original ? original->reference.get()
+                                           : RE::NiPointer<RE::TESObjectREFR>{};
+                    if (source && source.get() != c.chest)
+                        external += std::clamp(list->GetCount(), 0, 100000 - external);
+                }
+                if (!external)
+                    continue;
+                auto [it, inserted] = m.items.try_emplace(
+                    key, Item{key, good, 0, 0, 1.0,
+                              static_cast<double>(std::max(1, RawValue(entry))), true});
+                it->second.externalQuantity =
+                    std::min(100000, it->second.externalQuantity + external);
+            }
+    }
     economy->RegisterMerchant(std::move(m));
 }
 void RestoreMerchant(const Context &c) {

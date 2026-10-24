@@ -58,6 +58,9 @@ struct Item {
     int quantity{}, target{};
     double units{1}, value{1};
     bool protectedItem{};
+    // Goods offered from shop displays or other sources outside the managed chest.
+    // Observed and traded, but never replenished or removed by the simulation.
+    int externalQuantity{};
 };
 struct Merchant {
     std::string id, market;
@@ -106,7 +109,7 @@ class Economy {
     Quote Price(const std::string &market, const std::string &commodity, double unitValue,
                 int count, bool buying, double units = 1) const;
     void Trade(const std::string &merchant, const std::string &form, int count, bool buying,
-               Money actualGold);
+               Money actualGold, int fromExternal = 0);
     void RegisterMerchant(Merchant merchant);
     void SetConditions(const std::string &market, double war, double disruption);
     std::vector<Bulletin> Reports(const std::string &market) const;

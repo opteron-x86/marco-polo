@@ -1,12 +1,14 @@
-# Game testing for 0.1.2
+# Game testing for 0.1.3
 
 Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, exports and the runtime gate. **These do not substitute for the checks below.**
 
 The 2026-10-24 game session with 0.1.2 (`93be481f`) confirmed corrected single-item quotes, exact stack settlement and a successful fresh-save load after a full restart. The first load attempt crashed and the second succeeded. Save/load stability therefore remains unresolved; see [the engine audit](ENGINE-AUDIT.md) for the evidence and profile limitations. Container Item Distributor compatibility has not yet passed an in-game test.
 
+The original Markarth saves have not been retested with 0.1.2; the successful reload was on the new character. A subsequent 0.1.2 test found blocked books, clothes and mixed-source stacks. Version 0.1.3 corrects the chest-only stock check and accounts for shop-display purchases. Prioritize buying these goods from Belethor, buying a mixed stack until its final item, checking exact gold, and saving/reloading afterward. The physical display must disappear only when Skyrim sells it, and it must not be duplicated into the merchant chest on later visits.
+
 Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
 
-When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.2 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
+When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.3 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
 
 1. **Startup:** confirm `MarcoPolo.log` names 1.6.1170, loads configuration and installs barter integration. Load an existing save and open a merchant. Ensure no crash or unsupported-menu notification. Repeat with your actual UI replacer.
 2. **Quotes:** record player and merchant gold. Buy and sell one ordinary ingot, then a stack of 20. Check list/card values, the selected quantity total and exact gold changes. Move the slider both directions; cancel it. Cancelling must not alter stocks or cash. Repeat near an affordability limit, after a Speech increase, with relevant perks and enchanted/tempered items.

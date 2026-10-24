@@ -97,6 +97,51 @@ int main(int argc, char **argv) {
         auto invalidConfig = config;
         invalidConfig.commodities.front().shelfLife = .5;
         rejects([&] { Economy invalid(invalidConfig); });
+        // Shop displays are purchasable even with an empty managed chest. A
+        // mixed stack must remain purchasable after its chest portion is gone.
+        e.NewGame(0, 17);
+        Merchant shop{"shop", "whiterun", 1000, {}, 0, 0};
+        shop.items["display"] = {"display", "iron", 0, 0, 1, 12, false, 4};
+        shop.items["mixed"] = {"mixed", "iron", 2, 0, 1, 12, false, 3};
+        e.RegisterMerchant(shop);
+        auto displayQuote = e.Price("whiterun", "iron", 12, 2, true);
+        auto displayBefore = e.Get().markets.at("whiterun").goods.at("iron");
+        e.Trade("shop", "display", 2, true, displayQuote.total, 2);
+        CHECK(e.Get().merchants.at("shop").items.at("display").quantity == 0);
+        CHECK(e.Get().merchants.at("shop").items.at("display").externalQuantity == 2);
+        CHECK(e.Get().merchants.at("shop").cash == 1000 + displayQuote.total);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported == displayBefore.exported + 2);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").price > displayBefore.price);
+        e.Trade("shop", "mixed", 4, true, 48, 2);
+        CHECK(e.Get().merchants.at("shop").items.at("mixed").quantity == 0);
+        CHECK(e.Get().merchants.at("shop").items.at("mixed").externalQuantity == 1);
+        e.Trade("shop", "mixed", 1, true, 12, 1);
+        auto exhausted = e.Save();
+        rejects([&] { e.Trade("shop", "mixed", 1, true, 12, 1); });
+        rejects([&] { e.Trade("shop", "display", 1, false, 12, 1); });
+        CHECK(e.Save() == exhausted);
+        auto displayAfter = e.Get().markets.at("whiterun").goods.at("iron");
+        e.RegisterMerchant(e.Get().merchants.at("shop"));
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported == displayAfter.exported);
+        other.Load(e.Save());
+        CHECK(other.Save() == e.Save());
+        // Existing schema-1 saves have no display-stock field. Only this new
+        // field is optional; malformed or negative stock must still roll back.
+        auto legacy = e.Save();
+        for (auto &[key, item] : legacy["merchants"]["shop"]["items"].items())
+            item.erase("externalQuantity");
+        other.Load(legacy);
+        CHECK(other.Get().merchants.at("shop").items.at("display").externalQuantity == 0);
+        bad = e.Save();
+        bad["merchants"]["shop"]["items"]["display"]["externalQuantity"] = -1;
+        before = e.Save();
+        rejects([&] { e.Load(bad); });
+        CHECK(e.Save() == before);
+        e.Advance(7);
+        CHECK(e.Get().merchants.at("shop").items.at("display").externalQuantity == 2);
+        CHECK(e.Get().merchants.at("shop").items.at("display").quantity == 0);
+        CHECK(e.Get().merchants.at("shop").items.at("mixed").quantity == 0);
+        e.Validate();
         // Contract reservations, stable terms, exact-once settlement, refunds.
         e.NewGame(0, 9);
         e.Edit().markets.at("winterhold").goods.at("food").quantity = 0;

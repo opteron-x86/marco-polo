@@ -40,7 +40,7 @@ std::string Classify(RE::TESForm *);
 std::string Region(RE::TESObjectREFR *);
 std::string DateForDay(double day);
 Context Vendor();
-void SyncMerchant(const Context &);
+void SyncMerchant(const Context &, bool observeExternal = false);
 void RestoreMerchant(const Context &);
 Snapshot View();
 void Publish();

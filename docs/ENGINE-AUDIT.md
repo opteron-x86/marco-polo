@@ -25,6 +25,8 @@ The 0.1.2 game test used Oathvein, the Missives addon and the user's existing mo
 
 The first restart/load of that fresh save restored the economy record, then crashed while a RaceMenu equipment-dye task traversed a Whiterun guard's skeleton. The user confirmed that a second restart loaded the same save successfully; subsequent trades were logged. A preceding crash occurred during actor inventory reset and leveled-item generation. These failures remain unresolved. Their call stacks identify where invalid memory was used, not which component caused it. A live read-only check of 0.1.2 confirmed the ResetInventory jump enters Marco Polo and GetFireNode retains its original implementation. Successful co-save restoration alone is not a successful game-load test, and the successful retry is not a stability guarantee.
 
+Subsequent 0.1.2 logs showed repeated book and clothing quotes with sufficient gold but no call to the original transaction handler. The chest-only stock check was rejecting these purchases. The native purchase helper at AE ID 13771 reads `TESDataHandler::merchantInventory` and follows `ExtraOriginalReference` handles, supporting both container stock and placed shop objects. Version 0.1.3 checks the selected sale row's count and tracks external stock separately. It does not mutate the temporary merchant inventory or replace the engine's item-transfer logic. Regression tests cover empty chests with display stock, mixed stacks after the chest is exhausted, exact-once accounting, unchanged displays during restocking, and loading older saves without the new stock field.
+
 Run the CommonLib check in CI after configuring the Windows build:
 
 ```sh
