@@ -19,6 +19,12 @@ Oathvein's installed barter SWF was inspected locally. SkyUI loads `_config` asy
 
 Six preserved save pairs from the reported session were checked locally. Main-save decompression, section boundaries and change-record decompression passed. ReSaver read all six without its broken-save or string-table-corruption flags. SKSE plugin/record boundaries and Marco Polo JSON parsing also passed. Originals were not edited. These checks do not establish that Skyrim can load every record successfully.
 
+The user confirmed that a pre-installation save loads with Marco Polo's DLL absent, while the affected test save did not. A crash captured with the DLL absent still contained the invalid form pointer `0xD821` during inventory initialization. That rules out an executing Marco Polo hook in that particular crash, but does not establish how the bad state originated.
+
+The 0.1.2 game test used Oathvein, the Missives addon and the user's existing mod profile, with Container Item Distributor and the two main Narrative Loot entries disabled by the user. Single-item purchases and sales showed matching list prices, item-card quotes and gold transfers. A 15-iron purchase quoted 493 gold; the following transaction's starting balances confirmed exactly 493 gold transferred after native integer rounding was reconciled. A saved day-3 economy containing one merchant and 51,824 JSON bytes passed core validation and an exact persistence round-trip.
+
+The first restart/load of that fresh save restored the economy record, then crashed while a RaceMenu equipment-dye task traversed a Whiterun guard's skeleton. The user confirmed that a second restart loaded the same save successfully; subsequent trades were logged. A preceding crash occurred during actor inventory reset and leveled-item generation. These failures remain unresolved. Their call stacks identify where invalid memory was used, not which component caused it. A live read-only check of 0.1.2 confirmed the ResetInventory jump enters Marco Polo and GetFireNode retains its original implementation. Successful co-save restoration alone is not a successful game-load test, and the successful retry is not a stability guarantee.
+
 Run the CommonLib check in CI after configuring the Windows build:
 
 ```sh

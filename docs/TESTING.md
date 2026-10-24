@@ -2,6 +2,8 @@
 
 Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, exports and the runtime gate. **These do not substitute for the checks below.**
 
+The 2026-10-24 game session with 0.1.2 (`93be481f`) confirmed corrected single-item quotes, exact stack settlement and a successful fresh-save load after a full restart. The first load attempt crashed and the second succeeded. Save/load stability therefore remains unresolved; see [the engine audit](ENGINE-AUDIT.md) for the evidence and profile limitations. Container Item Distributor compatibility has not yet passed an in-game test.
+
 Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
 
 When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.2 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
