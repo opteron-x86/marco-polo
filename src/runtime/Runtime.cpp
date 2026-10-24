@@ -63,12 +63,14 @@ std::string Classify(RE::TESForm *f) {
     std::string answer, key = Key(f);
     if (classification.at("forms").contains(key))
         answer = classification["forms"][key];
-    else if (auto *keywords = f->As<RE::BGSKeywordForm>())
+    else if (auto *keywords = f->As<RE::BGSKeywordForm>()) {
+        std::size_t specificity = 0;
         for (auto &[kw, good] : classification.at("keywords").items())
-            if (keywords->HasKeywordString(kw)) {
+            if (kw.size() > specificity && keywords->HasKeywordString(kw)) {
                 answer = good;
-                break;
+                specificity = kw.size();
             }
+    }
     if (answer.empty()) {
         const char *type = "";
         switch (f->GetFormType()) {
@@ -325,8 +327,10 @@ void Reset() {
 }
 void Start() {
     std::lock_guard lock(mutex);
-    if (!economy || loadFailed)
+    if (!economy || loadFailed) {
+        Publish();
         return;
+    }
     if (!loaded)
         economy->NewGame(Now(), static_cast<std::uint64_t>(
                                     std::chrono::steady_clock::now().time_since_epoch().count()));

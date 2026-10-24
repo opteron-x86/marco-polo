@@ -60,7 +60,8 @@ def main():
     meta={'version':version(),'commit':commit,'dirty':dirty,'dll_sha256':sha(dll),
           'workflow_run':os.getenv('GITHUB_RUN_ID'),'runtime':'Skyrim Steam 1.6.1170',
           'commonlib_commit':'12d61f3c39f7d4ba1b1ab543df2bca0e613dc747',
-          'in_game_validation':'pending','test_report':'Windows CTest in the linked build workflow'}
+          'in_game_validation':'pending',
+          'test_report':'Linux sanitizer tests and Windows CTest in linked CI run' if os.getenv('GITHUB_ACTIONS') else 'Local build; consult the local test logs'}
     (args.output/'build-info.json').write_text(json.dumps(meta,indent=2)+'\n')
     (args.output/'release-notes.md').write_text((ROOT/'docs/RELEASE.md').read_text())
     (args.output/'SHA256SUMS.txt').write_text(''.join(f'{sha(p)}  {p.name}\n' for p in sorted(args.output.iterdir()) if p.is_file()))

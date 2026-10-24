@@ -25,7 +25,7 @@ def build():
             fields = [('EDID', string(f'MarcoPoloNote{local:03X}')), ('OBND', bytes(12)),
                       ('FULL', string(f'{hold}: ' + ('Supply contract' if job else 'Market bulletin'))),
                       ('MODL', string('Clutter\\Books\\Note01.nif')),
-                      ('DESC', string('Marco Polo is not running. This notice is unavailable.')),
+                      ('DESC', string('This posting has been withdrawn.')),
                       ('YNAM', struct.pack('<I', 0xC7A54)),
                       ('DATA', bytes.fromhex('00ff0000ffffffff0000000000000000')),
                       ('INAM', struct.pack('<I', 0x97788)), ('CNAM', b'\0')]

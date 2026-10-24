@@ -75,6 +75,25 @@ int main(int argc, char **argv) {
             CHECK(returned <= paid);
             e.Trade("smith", "iron", n, false, returned);
         }
+        // Reading a settled transaction again must not count its supply twice.
+        auto ledgerBefore = e.Get().markets.at("whiterun").goods.at("iron");
+        e.RegisterMerchant(e.Get().merchants.at("smith"));
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").imported == ledgerBefore.imported);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported == ledgerBefore.exported);
+        // Theft and travelling stock are recorded in the affected regional ledgers.
+        auto observed = e.Get().merchants.at("smith");
+        observed.items.at("iron").quantity -= 10;
+        e.RegisterMerchant(observed);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported ==
+              ledgerBefore.exported + 10);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").price > ledgerBefore.price);
+        observed.market = "rift";
+        e.RegisterMerchant(observed);
+        CHECK(e.Get().markets.at("whiterun").goods.at("iron").exported ==
+              ledgerBefore.exported + 100);
+        CHECK(e.Get().markets.at("rift").goods.at("iron").imported == 90);
+        e.Advance(30);
+        e.Validate();
         auto invalidConfig = config;
         invalidConfig.commodities.front().shelfLife = .5;
         rejects([&] { Economy invalid(invalidConfig); });

@@ -68,6 +68,19 @@ void Gold(RE::TESObjectREFR *ref, Money delta) {
         ref->RemoveItem(gold, static_cast<int>(-delta), RE::ITEM_REMOVE_REASON::kRemove, nullptr,
                         nullptr);
 }
+void RefreshGold(RE::BarterMenu *menu, const Context &context) {
+    auto *gold = RE::TESForm::LookupByID<RE::TESBoundObject>(0xF);
+    auto &data = menu->GetRuntimeData();
+    data.playerGold = Count(RE::PlayerCharacter::GetSingleton(), gold);
+    data.merchantGold = Count(context.chest, gold);
+    data.root.SetMember("_playerGold", RE::GFxValue(data.playerGold));
+    data.root.SetMember("_vendorGold", RE::GFxValue(data.merchantGold));
+    RE::GFxValue bar;
+    if (data.root.GetMember("bottomBar", &bar)) {
+        RE::GFxValue values[]{RE::GFxValue(data.playerGold), RE::GFxValue(data.merchantGold)};
+        bar.Invoke("updateBarterPriceInfo", nullptr, values, 2);
+    }
+}
 void Select(const RE::FxDelegateArgs &args) {
     if (!active || !Ready(static_cast<RE::BarterMenu *>(args.GetHandler())) ||
         args.GetArgCount() < 3 || !selectOriginal) {
@@ -141,6 +154,7 @@ void Select(const RE::FxDelegateArgs &args) {
     }
     tracked.protectedItem = protect;
     SyncMerchant(c);
+    RefreshGold(menu, c);
     Publish();
     if (debugLogging)
         SKSE::log::info("{} {} x {}: {} gold, market {}", buy ? "BUY" : "SELL", n, key, q.total,
@@ -327,6 +341,7 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
                 auto menu = RE::UI::GetSingleton()->GetMenu<RE::BarterMenu>();
                 if (menu) {
                     WrapQuantity(menu.get());
+                    RefreshGold(menu.get(), c);
                     if (menu->GetRuntimeData().itemList)
                         menu->GetRuntimeData().itemList->Update();
                 }
@@ -343,18 +358,24 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
         std::lock_guard lock(mutex);
         for (auto [id, sign] : {std::pair{e->oldContainer, -1}, std::pair{e->newContainer, 1}}) {
             auto *ref = RE::TESForm::LookupByID<RE::TESObjectREFR>(id);
-            auto it = economy->Edit().merchants.find(Key(ref));
-            if (it == economy->Edit().merchants.end())
+            auto it = economy->Get().merchants.find(Key(ref));
+            if (it == economy->Get().merchants.end())
                 continue;
+            Merchant updated = it->second;
             if (e->baseObj == 0xF) {
-                it->second.cash =
-                    std::max<Money>(0, it->second.cash + sign * static_cast<Money>(e->itemCount));
+                updated.cash = std::clamp<Money>(
+                    updated.cash + sign * static_cast<Money>(e->itemCount), 0, 1000000000);
+                economy->RegisterMerchant(std::move(updated));
                 continue;
             }
             auto key = Key(RE::TESForm::LookupByID(e->baseObj));
-            auto item = it->second.items.find(key);
-            if (item != it->second.items.end())
-                item->second.quantity = std::max(0, item->second.quantity + sign * e->itemCount);
+            auto item = updated.items.find(key);
+            if (item != updated.items.end()) {
+                item->second.quantity = static_cast<int>(std::clamp<std::int64_t>(
+                    item->second.quantity + sign * static_cast<std::int64_t>(e->itemCount), 0,
+                    100000));
+                economy->RegisterMerchant(std::move(updated));
+            }
         }
         return RE::BSEventNotifyControl::kContinue;
     }

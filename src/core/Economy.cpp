@@ -186,18 +186,40 @@ Quote Economy::Price(const std::string &m, const std::string &c, double value, i
 }
 void Economy::RegisterMerchant(Merchant m) {
     config_.Market(m.market);
-    Require(!m.id.empty() && m.cash >= 0, "Invalid merchant");
+    Require(!m.id.empty() && m.cash >= 0 && m.cash <= 1000000000, "Invalid merchant");
     for (auto &[f, i] : m.items) {
         config_.Good(i.commodity);
-        Require(f == i.form && i.quantity >= 0 && i.target >= 0 && Finite(i.units) && i.units > 0 &&
-                    Finite(i.value) && i.value >= 0,
+        Require(f == i.form && i.quantity >= 0 && i.quantity <= 100000 && i.target >= 0 &&
+                    i.target <= 100000 && Finite(i.units) && i.units > 0 && Finite(i.value) &&
+                    i.value >= 0,
                 "Invalid inventory");
     }
-    // First observation adopts existing retail stock; it is recorded as an outside source.
-    if (!state_.merchants.contains(m.id))
-        for (auto &[f, i] : m.items)
-            state_.markets.at(m.market).goods.at(i.commodity).imported += i.quantity * i.units;
+    // Reconciliation includes outside changes and travelling merchants, without
+    // counting a confirmed Trade again when its inventory is subsequently read.
+    using Pair = std::pair<std::string, std::string>;
+    std::map<Pair, double> changes, before;
+    auto old = state_.merchants.find(m.id);
+    bool existing = old != state_.merchants.end();
+    if (existing)
+        for (auto &[key, item] : old->second.items)
+            changes[{old->second.market, item.commodity}] -= item.quantity * item.units;
+    for (auto &[key, item] : m.items)
+        changes[{m.market, item.commodity}] += item.quantity * item.units;
+    for (auto &[pair, delta] : changes)
+        before[pair] = Total(pair.first, pair.second);
     state_.merchants[m.id] = std::move(m);
+    for (auto &[pair, delta] : changes) {
+        auto &[market, commodity] = pair;
+        auto &stock = state_.markets.at(market).goods.at(commodity);
+        (delta >= 0 ? stock.imported : stock.exported) += std::abs(delta);
+        if (existing && delta != 0) {
+            double buffer = Target(market, commodity) * 0.25;
+            stock.price = std::clamp(stock.price * std::pow((before.at(pair) + buffer) /
+                                                                (Total(market, commodity) + buffer),
+                                                            config_.Good(commodity).elasticity),
+                                     config_.minMultiplier, config_.maxMultiplier);
+        }
+    }
     ++state_.revision;
 }
 void Economy::Trade(const std::string &mid, const std::string &form, int n, bool buy, Money gold) {
