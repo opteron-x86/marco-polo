@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.2.1 corrects the optional innkeeper dialogue and adds availability diagnostics.** The 0.2 series introduces remembered markets and trade rumors: learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. See [the release notes](docs/RELEASE.md) and [game test checklist](docs/TESTING.md) for the correction's pending in-game validation.
+**0.2.2 adds vanilla voiced replies before innkeeper trade rumors.** The 0.2 series introduces remembered markets and trade rumors: learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. See [the release notes](docs/RELEASE.md) and [game test checklist](docs/TESTING.md) for voice selection and timing checks.
 
 ## Install
 
@@ -13,7 +13,7 @@ Install `Marco-Polo-<version>-<commit>.zip` with MO2 or Vortex. The core has **n
 
 **Optional SKSE Menu Framework 3:** open **Marco Polo → Trade Status** for remembered rates, report dates, sources, recent rumors and possible trade routes. Risa can provide access to SKSE Menu Framework; there is no separate Risa page. Live warehouse stocks and current prices for every hold are available only on **Live markets (debug)** when `debugLogging` is enabled.
 
-**Optional innkeeper dialogue:** install the matching `Marco-Polo-<version>-<commit>-rumors.zip` and enable **MarcoPolo - Trade Rumors.esp**. Ask an innkeeper **Any news of trade?** and dismiss the unvoiced popup with OK. Reports appear in Trade Status. This addon contains an ESL-flagged ESP, a startup SEQ and two small Papyrus scripts; its only master is Skyrim.esm. It does not require Missives or a voice/silence mod. The popup works without Menu Framework; reviewing the tracker requires Menu Framework.
+**Optional innkeeper dialogue:** install the matching `Marco-Polo-<version>-<commit>-rumors.zip` and enable **MarcoPolo - Trade Rumors.esp**. Ask an innkeeper **Any news of trade?** Their short vanilla reply finishes before the news popup opens; dismiss it with OK. Reports appear in Trade Status. Replies match the speaker's voice type, with **Of course.** as the default. Custom voices without the vanilla recording retain its subtitle. This addon contains an ESL-flagged ESP, a startup SEQ and two small Papyrus scripts; its only master is Skyrim.esm. It does not require Missives or a voice/silence mod. The popup works without Menu Framework; reviewing the tracker requires Menu Framework.
 
 Use a separate test save/profile. Keep the `.skse` co-save alongside its matching Skyrim save. Existing games initialize at the current game day, without simulating the character's entire past.
 

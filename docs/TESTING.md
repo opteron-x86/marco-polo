@@ -1,12 +1,27 @@
-# Game testing for 0.2.1
+# Game testing for 0.2.2
 
-First check the dialogue correction: upgrade both the core and Trade Rumors addon,
-restart Skyrim completely, load the current 0.2.0 save and talk to an innkeeper
-such as Hulda. **Any news of trade?** should appear and open a news popup when
-selected. This patch retains all form IDs and requires no new game or quest reset.
-If it is still missing, leave `debugLogging` enabled: each opened conversation
-records a `Trade-rumor dialogue:` line with speaker, eligibility, global, quest,
-conditions and record linkage. An absent addon is reported separately at load.
+First check the voiced replies: upgrade both the core and Trade Rumors addon,
+restart Skyrim completely and load the current 0.2.x save. No new game or quest
+reset is required; existing form IDs and save formats are retained.
+
+- Ask Elda **Any news of trade?** She should say **Of course.** in her own voice,
+  then the news popup should open once. The old placeholder must not appear.
+- Ask Hulda or Keerava: expect **Sure.** Ask Wilhelm or Hadring: expect
+  **Let's see here...** Delphine should use **Certainly.** when acting as an
+  innkeeper. If Nils is running Candlehearth Hall, he should offer to share what
+  he knows. These choices use voice type, not NPC identity.
+- Let each response finish, and try skipping a response on a separate request.
+  The popup should follow the ended response, never cover the beginning of the
+  line or open twice. Dismissing it must leave normal dialogue working.
+- A mod-added innkeeper with a standard voice should get the matching reply.
+  A custom voice lacking the vanilla recording should retain the default subtitle
+  and still reach the popup; no silence mod is required. Verify this fallback in
+  game before claiming support for a particular custom voice.
+
+With `debugLogging` enabled, each opened conversation records a
+`Trade-rumor dialogue:` line with eligibility, quest and linkage checks. A valid
+speaker should have one matching INFO; the log includes its shared response ID.
+An absent addon is reported separately at load.
 
 The 0.2 series adds remembered markets and optional innkeeper rumors. Prices, merchant
 funding, inventories and service costs retain their previous behavior. The core
@@ -31,8 +46,8 @@ restart Skyrim after installing the DLL.
    unvisited markets should say **Unknown**. Opening or switching the menu must
    not reveal or refresh other holds. Crossing a wilderness hold border alone
    must not reveal its market.
-2. Ask Hulda **Any news of trade?** The conversation should open an unvoiced OK
-   popup. After dismissing it, **Recent trade rumors** should show its reports.
+2. Ask Hulda **Any news of trade?** Her voiced acknowledgement should finish,
+   then the OK popup should open. After dismissing it, **Recent trade rumors** should show its reports.
    On the economy's first day, local news is expected: no distant historical
    prices exist yet. The popup must work without Fuz Ro D-oh or Menu Framework;
    the tracker itself requires Menu Framework.

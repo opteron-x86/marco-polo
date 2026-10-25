@@ -44,20 +44,34 @@ void LogRumorDialogue() {
     auto *quest = data->LookupForm<RE::TESQuest>(0x800, RumorPlugin);
     auto *branch = data->LookupForm<RE::BGSDialogueBranch>(0x801, RumorPlugin);
     auto *topic = data->LookupForm<RE::TESTopic>(0x802, RumorPlugin);
-    auto *info = data->LookupForm<RE::TESTopicInfo>(0x803, RumorPlugin);
     auto *global = data->LookupForm<RE::TESGlobal>(0x804, RumorPlugin);
-    bool linked = quest && branch && topic && info && branch->quest == quest &&
+    bool linked = quest && branch && topic && branch->quest == quest &&
                   branch->startingTopic == topic && topic->ownerQuest == quest &&
-                  topic->ownerBranch == branch && info->parentTopic == topic;
-    bool listed =
-        topic && topic->topicInfos && topic->numTopicInfos == 1 && topic->topicInfos[0] == info;
+                  topic->ownerBranch == branch;
+    auto count = topic ? topic->numTopicInfos : 0;
+    unsigned matching{}, linkedInfos{};
+    RE::FormID selected{}, response{};
+    if (topic && topic->topicInfos && count <= 64)
+        for (unsigned i = 0; i < count; ++i) {
+            auto *info = topic->topicInfos[i];
+            if (!info)
+                continue;
+            linkedInfos += info->parentTopic == topic;
+            if (info->objConditions.IsTrue(actor, player)) {
+                ++matching;
+                if (!selected) {
+                    selected = info->GetFormID();
+                    response = info->dataInfo ? info->dataInfo->GetFormID() : 0;
+                }
+            }
+        }
     SKSE::log::info("Trade-rumor dialogue: {} ({:08X}), innkeeper {}, active {}, global {}, "
-                    "quest running {}, quest enabled {}, INFO conditions {}, links {}, "
-                    "INFO listed {}, INFO count {}",
+                    "quest running {}, quest enabled {}, links {}, linked INFOs {}/{}, "
+                    "matching INFOs {}, first match {:08X}, shared response {:08X}",
                     actor->GetName(), actor->GetFormID(), Innkeeper(actor), active.load(),
                     global ? global->value : -1.0f, quest && quest->IsRunning(),
-                    quest && quest->IsEnabled(), info && info->objConditions.IsTrue(actor, player),
-                    linked, listed, topic ? topic->numTopicInfos : 0);
+                    quest && quest->IsEnabled(), linked, linkedInfos, count, matching, selected,
+                    response);
 }
 class DialogueEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent> {
     RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent *event,

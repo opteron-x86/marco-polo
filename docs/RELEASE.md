@@ -1,48 +1,28 @@
-# Marco Polo 0.2.1 — Innkeeper dialogue correction
+# Marco Polo 0.2.2 — Voiced innkeeper replies
 
-The 0.2.0 Trade Rumors addon loaded and its quest started in the reported save,
-but the innkeeper option did not appear. This build replaces its empty response
-with a short unvoiced line and writes the dialogue groups in canonical order.
-Form IDs, conditions, quest identity, scripts and saved information stay the
-same. The correction needs an in-game dialogue check; the exact cause has not
-yet been established.
+Innkeepers now give a short vanilla voiced reply before opening the trade-rumor
+popup. This replaces the unvoiced placeholder and moves the popup from the
+response's Begin fragment to its End fragment.
 
-With debug logging enabled, opening dialogue now records the speaker, innkeeper
-eligibility, availability global, quest state, INFO conditions and record links.
-These checks only report state; they do not restart quests or alter conditions.
+Replies match the speaker's voice type: MaleNord and MaleYoungEager use
+**Let's see here...**, MaleOldKindly offers to share what he knows, FemaleNord
+and FemaleArgonian use **Sure.**, and Delphine uses **Certainly.** Other voices
+use **Of course.** Custom voices without the matching recording retain the
+shared subtitle. The addon references the game's own responses and lip-sync;
+no voice assets or source quest actions are copied.
 
-Papyrus source files now retain LF line endings on Windows checkouts. This fixes
-the 0.2.0 CI packaging failure caused by source hashes changing during checkout;
-the source/bytecode manifest remains enforced.
+The existing quest, topic, availability global and default INFO retain their
+form IDs. Six new INFOs provide the voice-specific choices. Economy and market
+information save formats are unchanged. Debug dialogue logs now report the
+matching INFO and shared response across all seven choices.
 
-## Remembered markets and trade rumors
+Install the matching core and `-rumors.zip`, keep **MarcoPolo - Trade Rumors.esp**
+enabled, then fully restart Skyrim and load the current save. Test Elda's default
+reply and Hulda's or Keerava's specific reply, including whether the popup waits
+until the speech ends. Existing 0.2.x saves require no quest reset or new game.
 
-Trade Status replaces the normal live market ledger. Visiting a town or inn,
-opening barter and completing trades record local commodity rates. Distant
-markets retain their last known values, with dates, sources and stale-report
-labels. Unknown markets remain unknown. Possible trade routes compare only the
-reports the player has gathered.
-
-The optional Trade Rumors addon adds an unvoiced **Any news of trade?** option to
-innkeepers. Its popup records a few market reports in the tracker. Distant news
-comes from actual saved market history and is delayed by trade-route travel time;
-early in a new economy, innkeepers discuss local conditions. Each hold shares
-one saved daily batch. Asking again or reloading does not reroll the reports.
-
-Remembered reports and bounded news history have their own co-save record.
-Existing trading saves retain their economies and begin gathering information
-through play. Trading prices, supply behavior, merchant gold and service costs
-are unchanged. The former live ledger remains available as **Live markets
-(debug)** with debug logging enabled.
-
-Install the main archive, plus the matching `-rumors.zip` for innkeeper dialogue.
-Enable `MarcoPolo - Trade Rumors.esp`; it is ESL flagged and has only Skyrim.esm as
-a master. The core remains DLL-only. SKSE Menu Framework 3 supplies Trade Status;
-the rumor popup also works without that framework. No Missives dependency,
-inventory notes, voiced dialogue or silence-mod dependency is introduced.
-
-Targets desktop SE 1.5.97 and AE 1.6.x / 1.7.x through alandtse CommonLibSSE-NG.
-Automated tests cover information isolation, dated news, save restoration,
-anti-reroll behavior, bounded history, unchanged simulation results and dialogue
-record structure. In-game dialogue, menu behavior and save/reload validation
-remain pending; compilation and simulation tests do not establish game stability.
+Record and script checks verify exclusive voice selection, availability gates,
+shared responses, stable existing IDs and End-only callbacks. The previous
+0.2.1 topic and popup were confirmed in game; the new voice playback and timing
+still need in-game confirmation. Targets desktop SE 1.5.97 and AE 1.6.x / 1.7.x
+through alandtse CommonLibSSE-NG, with no new native hooks or runtime restrictions.

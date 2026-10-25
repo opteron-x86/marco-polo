@@ -5,17 +5,23 @@ core and enable `MarcoPolo - Trade Rumors.esp`. The plugin is ESL flagged, uses
 only Skyrim.esm as a master, and adds its own dialogue records without overriding
 NPCs or existing conversations. No voice or silence mod is required.
 
-Ask an innkeeper **Any news of trade?** A short unvoiced popup reports a few
-market conditions. Click OK, then open **Marco Polo → Trade Status** in SKSE Menu
+Ask an innkeeper **Any news of trade?** A short vanilla voiced reply finishes,
+then a popup reports a few market conditions. Click OK, then open **Marco Polo → Trade Status** in SKSE Menu
 Framework 3 to review the reports. Rumors also work without Menu Framework,
 although the persistent tracker is then unavailable.
+
+MaleNord and MaleYoungEager use **Let's see here...**; MaleOldKindly offers to
+share what he knows; FemaleNord and FemaleArgonian use **Sure.**; Delphine uses
+**Certainly.** Other voices use **Of course.** These responses reference the
+game's own recordings and lip-sync. Custom voices without a matching recording
+retain the shared subtitle. The previous unvoiced placeholder is removed.
 
 News travels between connected holds using the economy's saved daily history.
 Innkeepers in the same hold share one batch each game day; repeated requests
 repeat that batch. Before distant news has had time to arrive, they discuss
 local prices. Reports remain dated and do not guarantee a future offer.
 
-Two small Papyrus scripts dispatch the selected topic to the core DLL. All
+Two small Papyrus scripts dispatch the topic's End fragment to the core DLL. All
 market history, remembered prices and rumor selection live in the DLL's co-save.
 The addon creates no inventory items, journal objectives or distributed objects.
 

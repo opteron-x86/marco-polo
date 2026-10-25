@@ -1,12 +1,20 @@
 # Skyrim desktop runtime and engine audit
 
-Version 0.2.0 adds report history, a Menu Framework page and an optional native Papyrus callback for innkeeper rumors. It introduces no new detours. The popup uses pinned CommonLib's `MessageBoxMenu::Create` dispatch: SE ID 51421, earlier AE ID 52270 and post-1.6.1130/1.7.x ID 442726. The audit checks that call's availability alongside the existing trading hooks in supplied address tables. Innkeeper faction membership and location traversal use CommonLib APIs, with game access queued onto the game thread. The dialogue ESP uses form version 44 and light-plugin IDs 0x800–0x804.
+Version 0.2.0 adds report history, a Menu Framework page and an optional native Papyrus callback for innkeeper rumors. It introduces no new detours. The popup uses pinned CommonLib's `MessageBoxMenu::Create` dispatch: SE ID 51421, earlier AE ID 52270 and post-1.6.1130/1.7.x ID 442726. The audit checks that call's availability alongside the existing trading hooks in supplied address tables. Innkeeper faction membership and location traversal use CommonLib APIs, with game access queued onto the game thread. The dialogue ESP uses form version 44 and light-plugin IDs 0x800–0x804, extended through 0x80A in 0.2.2.
 
 Version 0.2.1 adds a debug-only dialogue-open event sink. Its queued task checks
 the current speaker through `MenuTopicManager` (SE/AE IDs 514959/401099) and the
 INFO conditions through `TESCondition::IsTrue` (29074/29888). The address-table
 audit includes both calls. Quest and record-link checks use CommonLib members;
 there are no new hooks, runtime whitelist entries or quest-state mutations.
+
+Version 0.2.2 changes the INFO callback from Begin to End and shares vanilla
+response data for voiced acknowledgements. The six added INFOs select by Skyrim's
+GetIsVoiceType condition; the original INFO is the mutually exclusive default.
+The diagnostic now checks all seven INFOs and logs the matching shared response.
+It introduces no additional native calls or serialization changes. The user
+confirmed that 0.2.1's topic and popup work with Elda; the new speech ordering
+and additional voice routes still require in-game testing.
 
 Version 0.1.8 removed the entire Missives integration, including its description/book detours, ContainerMenu hooks, QuickLoot callbacks, note records and contract system. Those integrations remain absent.
 

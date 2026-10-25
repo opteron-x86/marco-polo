@@ -10,6 +10,17 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'addons/rumors'
 PLUGIN = 'MarcoPolo - Trade Rumors.esp'
 QUEST, BRANCH, TOPIC, INFO, ENABLED = [0x01000800 + i for i in range(5)]
+# Addon INFO, vanilla voice type name/ID, vanilla response INFO. IDs 800-804
+# retain their identities for existing saves. Only response data is shared:
+# source scripts, links, conditions and quest actions are never copied.
+VOICED_RESPONSES = (
+    (0x01000805, 'MaleNord',             0x013AE6, 0x1041A4), # Let's see here....
+    (0x01000806, 'MaleYoungEager',       0x013AD1, 0x03DF63), # Let's see here...
+    (0x01000807, 'MaleOldKindly',        0x013AD6, 0x0E3A37), # I can certainly share a bit of what I know.
+    (0x01000808, 'FemaleNord',           0x013AE7, 0x0D8DAD), # Sure.
+    (0x01000809, 'FemaleArgonian',       0x013AEF, 0x0C34A5), # Sure.
+    (0x0100080A, 'FemaleUniqueDelphine',  0x014432, 0x098E53), # Certainly.
+)
 
 def u32(n): return struct.pack('<I', n)
 def text(s):
@@ -28,23 +39,34 @@ def condition(function, param, value=1, or_next=False):
 
 def generate():
     name = 'MarcoPolo_RumorTopic'
-    # INFO VMAD v5/object-format 2: one propertyless script, OnBegin fragment.
-    # Start the popup when the topic is selected, independent of audio playback.
+    # INFO VMAD v5/object-format 2: one propertyless script, OnEnd fragment.
+    # The native popup runs after the shared spoken response, not over it.
     vmad = struct.pack('<HHH', 5, 2, 1) + text(name) + b'\0' + struct.pack('<H', 0)
-    vmad += b'\x02\x01' + text(name) + b'\x01' + text(name) + text('Fragment_0')
-    info = record('INFO', INFO, [
-        ('EDID', ztext('MarcoPoloTradeRumorResponse')), ('VMAD', vmad),
-        ('ENAM', struct.pack('<HH', 0x801, 0)), # Goodbye, No LIP file.
-        ('CNAM', b'\0'),
-        ('TRDT', bytes(12) + b'\x01' + bytes(11)),
-        # A real response keeps this a normal selectable dialogue INFO. The
-        # OnBegin fragment supplies the news in a popup without voice assets.
-        ('NAM1', ztext("Here's what I've heard.")), ('NAM2', ztext('')), ('NAM3', ztext('')),
+    vmad += b'\x02\x02' + text(name) + b'\x01' + text(name) + text('Fragment_0')
+    gates = [
         ('CTDA', condition(74, ENABLED)),
         ('CTDA', condition(71, 0x5091B, or_next=True)), # JobInnkeeperFaction
         ('CTDA', condition(71, 0x9CC97)),             # JobRentRoomFaction
         ('CTDA', condition(46, 0, 0)),               # GetDead
-    ])
+    ]
+    infos = []
+    previous = 0
+    def response(form, editor, source, voices):
+        nonlocal previous
+        infos.append(record('INFO', form, [
+            ('EDID', ztext(editor)), ('VMAD', vmad),
+            ('ENAM', struct.pack('<HH', 0x201, 0)), # Goodbye, Force Subtitle; use shared LIP.
+            ('PNAM', u32(previous)), ('CNAM', b'\0'), ('DNAM', u32(source)),
+            *gates, *voices,
+        ]))
+        previous = form
+    for form, voice_name, voice, source in VOICED_RESPONSES:
+        response(form, 'MarcoPoloTradeRumor' + voice_name, source,
+                 [('CTDA', condition(426, voice))]) # GetIsVoiceType
+    # Mutually exclusive fallback: every other voice gets the generic response.
+    # Custom voices without this vanilla recording retain its localized subtitle.
+    response(INFO, 'MarcoPoloTradeRumorResponse', 0xDBA22, # Of course.
+             [('CTDA', condition(426, voice, 0)) for _, _, voice, _ in VOICED_RESPONSES])
     content = group(b'GLOB', [record('GLOB', ENABLED, [
         ('EDID', ztext('MarcoPoloTradeRumorsEnabled')), ('FNAM', b's'),
         ('FLTV', struct.pack('<f', 0))])])
@@ -52,8 +74,8 @@ def generate():
     content += group(b'DIAL', [record('DIAL', TOPIC, [
         ('EDID', ztext('MarcoPoloTradeRumorsTopic')), ('FULL', ztext('Any news of trade?')),
         ('PNAM', struct.pack('<f', 50)), ('BNAM', u32(BRANCH)), ('QNAM', u32(QUEST)),
-        ('DATA', bytes(4)), ('SNAM', b'CUST'), ('TIFC', u32(1))]),
-        group(u32(TOPIC), [info], 7)])
+        ('DATA', bytes(4)), ('SNAM', b'CUST'), ('TIFC', u32(len(infos)))]),
+        group(u32(TOPIC), infos, 7)])
     content += group(b'QUST', [record('QUST', QUEST, [
         ('EDID', ztext('MarcoPoloTradeRumors')), ('FULL', ztext('Trade rumors')),
         ('DNAM', struct.pack('<HBBII', 1, 30, 65, 0, 0)), ('NEXT', b'')])])
@@ -61,7 +83,7 @@ def generate():
         ('EDID', ztext('MarcoPoloTradeRumorsBranch')), ('QNAM', u32(QUEST)),
         ('TNAM', u32(0)), ('DNAM', u32(1)), ('SNAM', u32(TOPIC))])])
     header = record('TES4', 0, [
-        ('HEDR', struct.pack('<fII', 1.7, 10, 0x805)), # Five records + five groups.
+        ('HEDR', struct.pack('<fII', 1.7, 4 + len(infos) + 5, 0x80B)), # Records + groups.
         ('CNAM', ztext('opteron-x86')),
         ('SNAM', ztext('Optional innkeeper trade news for Marco Polo.')),
         ('MAST', ztext('Skyrim.esm')), ('DATA', bytes(8))], 0x200)
