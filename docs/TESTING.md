@@ -1,4 +1,47 @@
-# Game testing for 0.2.2
+# Game testing for 0.3.0
+
+## Trade Ledger
+
+Install the updated core and restart Skyrim; the Trade Rumors addon is unchanged.
+Load your existing test save and allow two seconds of unpaused play.
+
+1. Press **F8** during normal play. The ledger should pause the game, show a
+   cursor and use the same fonts as your installed UI. Compare both the title
+   and row text. Test with the current font replacement, then vanilla fonts if
+   available. No font files or font configuration should be overwritten.
+2. Use Markets, Routes and Rumors. Click the hold name to choose a hold, use
+   the page arrows or mouse wheel, and hover a row for its source and date.
+   Unvisited goods remain Unknown. No player-facing price percentages should
+   appear; an old report stays old when you browse it.
+3. Drag the title and resize with the bottom-right grip. Lock the window,
+   confirm it cannot move or resize, then unlock it. Close with **Esc**, **F8**
+   or X. Movement, camera, dialogue and inventory controls should work normally.
+4. Reopen several times, then restart Skyrim. Position, scale, lock and route
+   bookmarks should persist. Try a different screen resolution and confirm
+   the window stays on screen. Preferences are created at
+   `SKSE/Plugins/MarcoPolo/ledger.json` (possibly in MO2's Overwrite).
+5. Bookmark a route, switch characters and reopen. Only that character's known
+   opportunities should appear. Opening the ledger must not create or refresh
+   information. Save to a new slot after closing it, quit, and reload; the
+   remembered markets should remain intact.
+6. Check F8 while dialogue, barter, inventory, loading or the console is open:
+   it should leave that menu alone. The ledger must not appear at the main menu.
+   With a controller, shoulders switch tabs, left/right changes holds or pages,
+   up/down changes pages, and B closes the ledger after opening it with F8.
+
+The keyboard shortcut can be changed through `hotkey` in `ledger.json` using
+an SKSE keyboard scan code; 66 is F8 and 0 disables it. Restart after editing.
+Delete only that preferences file to restore the default position and size.
+
+Repeat the open/close and save/reload checks on SE 1.5.97 and AE 1.6.x / 1.7.x.
+The native build and local AVM1 test player cannot verify Skyrim's font library
+or input restoration. Log lines `Trade ledger registered` and `Trade ledger ready`
+identify successful registration and movie initialization.
+
+## Innkeeper replies
+
+The existing addon has [known voice issues](RUMOR-VOICES.md); those are not
+changed by this ledger build.
 
 First check the voiced replies: upgrade both the core and Trade Rumors addon,
 restart Skyrim completely and load the current 0.2.x save. No new game or quest
@@ -25,7 +68,7 @@ An absent addon is reported separately at load.
 
 The 0.2 series adds remembered markets and optional innkeeper rumors. Prices, merchant
 funding, inventories and service costs retain their previous behavior. The core
-remains DLL-only; the new dialogue addon contains an ESL-flagged ESP and two small
+contains the DLL and ledger movie; the new dialogue addon contains an ESL-flagged ESP and two small
 Papyrus scripts. There is no board integration or paper management.
 
 Automated tests cover unchanged deterministic simulation, trading conservation,
@@ -36,13 +79,12 @@ Windows compilation and address-table audits do not execute Skyrim.
 
 ## Remembered markets and rumors
 
-Install both matching archives, enable `MarcoPolo - Trade Rumors.esp`, and use
-SKSE Menu Framework 3 for the tracker. Existing 0.1.8 economy saves can initialize
+Install both matching archives, enable `MarcoPolo - Trade Rumors.esp`, and press F8 for the tracker (SKSE Menu Framework remains an alternative). Existing 0.1.8 economy saves can initialize
 an empty information history; a fresh test character is also suitable. Fully
 restart Skyrim after installing the DLL.
 
 1. Enter Whiterun or the Bannered Mare. Allow about two seconds of unpaused play,
-   then open **Marco Polo → Trade Status**. Whiterun should have current reports;
+   then open **F8 → Markets**. Whiterun should have current reports;
    unvisited markets should say **Unknown**. Opening or switching the menu must
    not reveal or refresh other holds. Crossing a wilderness hold border alone
    must not reveal its market.
@@ -50,15 +92,15 @@ restart Skyrim after installing the DLL.
    then the OK popup should open. After dismissing it, **Recent trade rumors** should show its reports.
    On the economy's first day, local news is expected: no distant historical
    prices exist yet. The popup must work without Fuz Ro D-oh or Menu Framework;
-   the tracker itself requires Menu Framework.
+   the F8 tracker also works without Menu Framework.
 3. Let five or six game days pass, allowing a few seconds of unpaused play after
    waiting. Ask again. Connected distant holds should now have a few approximate
-   commodity ranges, dated earlier than the day you heard them. Other commodities
+   commodity reports, dated earlier than the day you heard them. Other commodities
    in those holds should remain unknown. Asking again that day or asking another
    innkeeper in the same hold must repeat the batch and preserve its dates.
 4. Record a report from one hold, travel to another, and let several days pass.
    The first hold's report should retain its value and date. At seven days old it
-   should say **stale**. A return visit or barter refreshes that hold's reports.
+   should be marked **old** in the ledger. A return visit or barter refreshes that hold's reports.
    Older rumors must not overwrite fresher firsthand observations. Price-gap
    suggestions must use only remembered reports and show their ages.
 5. Buy or sell an item. The local commodity report should reflect the resulting

@@ -354,6 +354,7 @@ bool Initialize() {
 void Reset() {
     active = false;
     ++generation;
+    ResetLedger();
     std::lock_guard lock(mutex);
     loaded = false;
     loadFailed = false;

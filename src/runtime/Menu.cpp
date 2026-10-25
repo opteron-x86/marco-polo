@@ -15,8 +15,7 @@ std::string Age(double day, double now) {
                                   age >= 7 ? " (stale)" : "");
 }
 std::string Rate(const TradeReport &r) {
-    return r.rumor ? std::format("{:.0f}-{:.0f}%", r.low * 100, r.high * 100)
-                   : std::format("{:.0f}%", r.low * 100);
+    return std::string(DescribePrice(r).text);
 }
 bool Header(const Snapshot &view, const char *title) {
     UI::TextUnformatted(title);
@@ -47,7 +46,7 @@ std::string ChooseMarket(const Snapshot &view, int &selection) {
 }
 void __stdcall Render() {
     auto view = View();
-    if (!Header(view, "Marco Polo - Trade Status"))
+    if (!Header(view, "Skyrim True Economy and Merchantry - Trade Status"))
         return;
     UI::Text("Reports from %u of %u markets", static_cast<unsigned>(view.known.size()),
              static_cast<unsigned>(view.marketNames.size()));
@@ -115,7 +114,7 @@ void __stdcall Render() {
 }
 void __stdcall DebugRender() {
     auto view = View();
-    if (!Header(view, "Marco Polo - Live markets (debug)") || view.economy.is_null())
+    if (!Header(view, "Skyrim True Economy and Merchantry - Live markets (debug)") || view.economy.is_null())
         return;
     auto market = ChooseMarket(view, debugSelected);
     if (market.empty())
@@ -151,7 +150,7 @@ bool RegisterMenu() {
           "igTableSetColumnIndex", "igEndTable", "igSeparator", "igButton"})
         if (!GetProcAddress(module, name))
             return false;
-    SKSEMenuFramework::SetSection("Marco Polo");
+    SKSEMenuFramework::SetSection("Skyrim True Economy and Merchantry");
     SKSEMenuFramework::AddSectionItem("Trade Status", Render);
     if (debugLogging)
         SKSEMenuFramework::AddSectionItem("Live markets (debug)", DebugRender);

@@ -12,6 +12,7 @@ void Message(SKSE::MessagingInterface::Message *m) {
             if (enabled)
                 InstallBarter();
             RegisterMenu();
+            RegisterLedger();
         }
         break;
     case SKSE::MessagingInterface::kPreLoadGame:

@@ -1,6 +1,7 @@
 #pragma once
 #include "core/Economy.h"
 #include "core/Knowledge.h"
+#include "core/Ledger.h"
 #include <RE/Skyrim.h>
 #include <SKSE/SKSE.h>
 #include <atomic>
@@ -9,16 +10,9 @@
 
 namespace marco::runtime {
 inline constexpr char DataPath[] = "Data/SKSE/Plugins/MarcoPolo/";
-struct Snapshot {
+struct Snapshot : MarketReports {
     bool ready{};
-    std::string status, market;
-    double day{};
-    std::string date;
-    std::map<std::string, std::string> marketNames, commodityNames;
-    std::map<double, std::string> dates;
-    std::map<std::string, std::map<std::string, TradeReport>> known;
-    std::vector<PriceGap> opportunities;
-    std::vector<TradeReport> rumors;
+    std::string status;
     json economy;
 };
 struct Context {
@@ -54,6 +48,8 @@ Snapshot View();
 void Publish();
 bool InstallBarter();
 bool RegisterMenu();
+void RegisterLedger();
+void ResetLedger();
 int RawValue(const RE::InventoryEntryData *);
 bool PlainItem(const RE::InventoryEntryData *);
 void ExportState();

@@ -4,6 +4,8 @@ A Skyrim economy mod with changing regional prices, merchant inventories, and pr
 
 Market reports remember the conditions you last encountered. Travel to refresh them, or ask innkeepers for news through the optional Trade Rumors addon.
 
+Press **F8** to open the Trade Ledger. Drag its title to move it, drag the corner to resize it, or lock it in place. It uses your game's fonts, including font replacements.
+
 ## Requirements
 
 - Skyrim SE 1.5.97 or AE 1.6.x / 1.7.x
@@ -16,7 +18,7 @@ Install the core archive with Mod Organizer 2 or Vortex.
 
 Optional additions:
 
-- **SKSE Menu Framework 3:** view remembered markets and possible routes under **Marco Polo → Trade Status**.
+- **SKSE Menu Framework 3:** an alternative tracker and, with debug logging enabled, live market diagnostics.
 - **Trade Rumors addon:** install the matching addon archive and enable `MarcoPolo - Trade Rumors.esp` to ask innkeepers **Any news of trade?** Some voiced replies have [known issues](docs/RUMOR-VOICES.md).
 
 Settings are in `SKSE/Plugins/MarcoPolo/`. Restart Skyrim after changing them.

@@ -1,28 +1,25 @@
-# Marco Polo 0.2.2 — Voiced innkeeper replies
+# Skyrim True Economy and Merchantry 0.3.0
 
-Innkeepers now give a short vanilla voiced reply before opening the trade-rumor
-popup. This replaces the unvoiced placeholder and moves the popup from the
-response's Begin fragment to its End fragment.
+**F8** opens a compact Trade Ledger with Markets, Routes and Rumors tabs. Drag
+the title to move it, drag the bottom-right corner to resize it, and use the
+padlock to keep it in place. Position, size and bookmarks persist between sessions.
 
-Replies match the speaker's voice type: MaleNord and MaleYoungEager use
-**Let's see here...**, MaleOldKindly offers to share what he knows, FemaleNord
-and FemaleArgonian use **Sure.**, and Delphine uses **Certainly.** Other voices
-use **Of course.** Custom voices without the matching recording retain the
-shared subtitle. The addon references the game's own responses and lip-sync;
-no voice assets or source quest actions are copied.
+The ledger uses Skyrim's active menu fonts, including font replacements. It
+requires neither SKSE Menu Framework nor Prisma. Prices use descriptions such
+as **Cheap**, **Fair** and **Expensive**; uncertain rumors stay **Uncertain**.
+Report ages remain visible, with sources and dates available on hover. Routes
+compare remembered reports and can be bookmarked.
 
-The existing quest, topic, availability global and default INFO retain their
-form IDs. Six new INFOs provide the voice-specific choices. Economy and market
-information save formats are unchanged. Debug dialogue logs now report the
-matching INFO and shared response across all seven choices.
+SKSE Menu Framework remains an optional alternative tracker. Its normal view
+also uses price descriptions; the debug page retains exact percentages. The
+section now uses the public mod name.
 
-Install the matching core and `-rumors.zip`, keep **MarcoPolo - Trade Rumors.esp**
-enabled, then fully restart Skyrim and load the current save. Test Elda's default
-reply and Hulda's or Keerava's specific reply, including whether the popup waits
-until the speech ends. Existing 0.2.x saves require no quest reset or new game.
+Install the core archive and restart Skyrim. The existing Trade Rumors addon
+is unchanged; its [known voice issues](RUMOR-VOICES.md) remain. No new game is
+required. Economy simulation, barter, plugin forms and co-save formats are
+unchanged. Window preferences live in a separate `SKSE/Plugins/MarcoPolo/ledger.json`.
 
-Record and script checks verify exclusive voice selection, availability gates,
-shared responses, stable existing IDs and End-only callbacks. The previous
-0.2.1 topic and popup were confirmed in game; the new voice playback and timing
-still need in-game confirmation. Targets desktop SE 1.5.97 and AE 1.6.x / 1.7.x
-through alandtse CommonLibSSE-NG, with no new native hooks or runtime restrictions.
+Automated checks cover qualitative price ranges, report ages, information
+isolation, preference validation, simulation and persistence. The menu movie is
+rebuilt and verified in CI. Native font rendering, focus restoration and menu
+interaction still need in-game confirmation across supported runtimes.
