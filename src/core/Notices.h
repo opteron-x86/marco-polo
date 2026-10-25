@@ -1,6 +1,7 @@
 #pragma once
 #include "Economy.h"
 #include <charconv>
+#include <span>
 
 namespace marco {
 inline std::string OrderPaperName(std::string_view title, std::uint64_t id) {
@@ -17,6 +18,21 @@ inline std::uint64_t OrderPaperID(std::string_view title, std::string_view name)
                    name == OrderPaperName(title, id)
                ? id
                : 0;
+}
+// A menu may omit BookMenu's extra-list argument. Resolve a physical stack
+// only if every copy is tagged with the same order number. An untagged or
+// mixed stack must never inherit the hold's currently accepted order.
+inline std::uint64_t OrderPaperStackID(int count,
+                                       std::span<const std::pair<std::uint64_t, int>> instances) {
+    if (count <= 0 || instances.empty())
+        return 0;
+    auto id = instances.front().first;
+    for (auto [number, copies] : instances) {
+        if (!id || number != id || copies <= 0 || copies > count)
+            return 0;
+        count -= copies;
+    }
+    return count == 0 ? id : 0;
 }
 // Board postings and carried receipts are separate forms. Only an accepted
 // order earns a receipt; old postings never become a new order in the pack.

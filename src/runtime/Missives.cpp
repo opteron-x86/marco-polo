@@ -1,5 +1,9 @@
 #include "HookTargets.h"
+#include "NoticeUI.h"
 #include "Runtime.h"
+#include <windows.h>
+
+#include "QuickLootAPI.h"
 #include "core/Notices.h"
 #include <MinHook.h>
 #include <algorithm>
@@ -126,6 +130,61 @@ std::uint64_t ReceiptID(unsigned region, const RE::ExtraDataList *extra) {
         return 0;
     return OrderPaperID(Note(region, Paper::receipt)->GetName(), display->displayName.c_str());
 }
+std::uint64_t ReceiptStackID(unsigned region, const RE::InventoryEntryData *entry, int count) {
+    std::vector<std::pair<std::uint64_t, int>> copies;
+    if (entry && entry->extraLists)
+        for (auto *extra : *entry->extraLists)
+            if (extra)
+                copies.emplace_back(ReceiptID(region, extra), extra->GetCount());
+    return OrderPaperStackID(count, copies);
+}
+RE::ItemList::Item *SelectedItem(RE::ItemList *list) {
+    // CommonLib's GetSelectedItem calls root.GetMember internally.
+    return list && list->root.IsObject() ? list->GetSelectedItem() : nullptr;
+}
+struct PaperIdentity {
+    std::uint64_t id{};
+    const char *source{"unresolved"};
+};
+PaperIdentity ResolveReceipt(unsigned region, const RE::ExtraDataList *extra,
+                             RE::TESObjectREFR *reference, RE::TESObjectBOOK *book) {
+    // An explicit physical instance wins, even when untagged or obsolete.
+    // Never replace its identity with the current order or another paper.
+    if (extra)
+        return {ReceiptID(region, extra), "book extra"};
+    if (reference)
+        return {ReceiptID(region, &reference->extraList), "world reference"};
+    auto *ui = RE::UI::GetSingleton();
+    if (!ui)
+        return {};
+    RE::ItemList::Item *selected{};
+    bool inventory = false;
+    if (auto menu = ui->GetMenu<RE::InventoryMenu>();
+        menu && ui->IsMenuOpen(RE::InventoryMenu::MENU_NAME)) {
+        selected = SelectedItem(menu->GetRuntimeData().itemList);
+        inventory = true;
+    } else if (auto menu = ui->GetMenu<RE::ContainerMenu>();
+               menu && ui->IsMenuOpen(RE::ContainerMenu::MENU_NAME)) {
+        selected = SelectedItem(menu->GetRuntimeData().itemList);
+    }
+    auto *entry = selected ? selected->data.objDesc : nullptr;
+    if (!entry || entry->object != book)
+        return {};
+    if (entry->extraLists)
+        for (auto *instance : *entry->extraLists)
+            if (instance)
+                return {ReceiptStackID(region, entry, entry->countDelta), "selected stack"};
+    // Some menu lists contain base-form-only entries. A single carried copy
+    // can resolve that omission, but never guess between copies or owners.
+    auto *player = RE::PlayerCharacter::GetSingleton();
+    if (inventory && player) {
+        auto carried = player->GetInventory([book](auto &form) { return &form == book; });
+        auto found = carried.find(book);
+        if (found != carried.end() && found->second.first == 1)
+            return {ReceiptStackID(region, found->second.second.get(), 1), "single carried copy"};
+    }
+    return {};
+}
 std::string Text(unsigned region, Paper paper) {
     if (paper != Paper::bulletin) {
         if (auto *c = Current(region); c && paper == Paper::posting)
@@ -189,16 +248,16 @@ void OpenBook(const RE::BSString &description, const RE::ExtraDataList *extra,
     // Bind the physical receipt to its order number, including copies dropped
     // or stored elsewhere. A later order in the same hold cannot rewrite it.
     std::string text = "This order is closed.";
-    std::uint64_t id{};
+    auto identity = ResolveReceipt(paper->first, extra, reference, book);
     {
         std::lock_guard lock(mutex);
-        id = ReceiptID(paper->first, extra ? extra : reference ? &reference->extraList : nullptr);
-        if (auto *c = economy->FindContract(id);
+        if (auto *c = economy->FindContract(identity.id);
             c && c->market == boards[paper->first].market && c->status == ContractStatus::accepted)
             text = Terms(*c);
     }
     if (debugLogging)
-        SKSE::log::info("Read accepted-order paper: {}, order {}", boards[paper->first].market, id);
+        SKSE::log::info("Read accepted-order paper: {}, order {}, source {}",
+                        boards[paper->first].market, identity.id, identity.source);
     RE::BSString rendered(("<font face=\"$HandwrittenFont\">" + Escape(text) + "</font>").c_str());
     openBookOriginal(rendered, extra, reference, book, position, rotation, scale, defaultPosition);
 }
@@ -299,7 +358,7 @@ void QueuePaperCleanup() {
 void ShowBoard(unsigned region, std::uint64_t displayedID);
 std::optional<std::pair<unsigned, Paper>> SelectedPosting(RE::ContainerMenu *menu) {
     auto *list = menu ? menu->GetRuntimeData().itemList : nullptr;
-    auto *item = list ? list->GetSelectedItem() : nullptr;
+    auto *item = SelectedItem(list);
     auto paper = item && item->data.objDesc ? Identify(item->data.objDesc->object) : std::nullopt;
     if (!paper || paper->second == Paper::receipt)
         return std::nullopt;
@@ -408,7 +467,10 @@ class ReadPostingAction final : public RE::GFxFunctionHandler {
   public:
     explicit ReadPostingAction(RE::GFxValue original) : original_(std::move(original)) {}
     void Call(Params &p) override {
-        auto menu = RE::UI::GetSingleton()->GetMenu<RE::ContainerMenu>();
+        if (!p.thisPtr || !p.thisPtr->IsObject() || (p.argCount && !p.args))
+            return;
+        auto *ui = RE::UI::GetSingleton();
+        auto menu = ui ? ui->GetMenu<RE::ContainerMenu>() : nullptr;
         // Can't Take can disable a row before SkyUI dispatches any native
         // callback. Read our postings before that check, including equip mode.
         if (ReadSelectedPosting(menu.get())) {
@@ -429,38 +491,29 @@ class ReadButton final : public RE::GFxFunctionHandler {
   public:
     explicit ReadButton(RE::GFxValue original) : original_(std::move(original)) {}
     void Call(Params &p) override {
+        if (!p.thisPtr || !p.thisPtr->IsObject() || (p.argCount && !p.args))
+            return;
         std::vector<RE::GFxValue> args{*p.thisPtr};
         for (unsigned i = 0; i < p.argCount; ++i)
             args.push_back(p.args[i]);
         RE::GFxValue ignored;
         original_.Invoke("call", p.retVal ? p.retVal : &ignored, args.data(),
                          static_cast<std::uint32_t>(args.size()));
-        auto menu = RE::UI::GetSingleton()->GetMenu<RE::ContainerMenu>();
-        if (!active || !p.argCount || !p.args[0].IsBool() || !p.args[0].GetBool() ||
+        auto *ui = RE::UI::GetSingleton();
+        auto menu = ui ? ui->GetMenu<RE::ContainerMenu>() : nullptr;
+        if (!active || !installed || !p.argCount || !p.args[0].IsBool() || !p.args[0].GetBool() ||
             !SelectedPosting(menu.get()))
             return;
-        // Reuse the menu's own translated Read button and current input map.
-        // Other items keep the original controls, including ordinary Missives.
-        RE::GFxValue panel, card, info, type, button;
-        if (!p.thisPtr->GetMember("navPanel", &panel) || !p.thisPtr->GetMember("itemCard", &card) ||
-            !card.GetMember("itemInfo", &info) || !info.GetMember("type", &type))
-            return;
-        RE::GFxValue parameters[]{type, RE::GFxValue(false)};
-        if (p.thisPtr->Invoke("getEquipButtonData", &button, parameters, 2) && button.IsObject()) {
-            panel.Invoke("clearButtons", nullptr);
-            panel.Invoke("addButton", nullptr, &button, 1);
-            RE::GFxValue refresh(true);
-            panel.Invoke("updateButtons", nullptr, &refresh, 1);
-        }
+        ShowPostingReadButton(p.thisPtr);
     }
 };
 void ContainerAdvance(RE::ContainerMenu *menu, float interval, std::uint32_t time) {
     containerAdvanceOriginal(menu, interval, time);
-    if (!active || !installed)
+    if (!active || !installed || !menu || !menu->uiMovie)
         return;
     auto &root = menu->GetRuntimeData().root;
     RE::GFxValue marker, config, original, transfer;
-    if (root.GetMember("MarcoPoloReadButton", &marker) || !AtBoardContainer() ||
+    if (!root.IsObject() || root.GetMember("MarcoPoloReadButton", &marker) || !AtBoardContainer() ||
         !root.GetMember("_config", &config) || !config.IsObject() ||
         !root.GetMember("updateBottomBar", &original) || !original.IsObject() ||
         !root.GetMember("startItemTransfer", &transfer) || !transfer.IsObject())
@@ -563,12 +616,45 @@ void ShowBoard(unsigned region, std::uint64_t displayedID) {
     RE::BSTSmartPointer<RE::IMessageBoxCallback> callback(new Response(c->id, accepted));
     RE::MessageBoxMenu::Create(text, callback, 0, 0, 10, buttons);
 }
+bool IsPosting(RE::InventoryEntryData *entry) {
+    auto paper = entry ? Identify(entry->object) : std::nullopt;
+    return paper && paper->second != Paper::receipt;
+}
+void FilterQuickLoot(QuickLoot::API::ModifyInventoryEvent *event) {
+    if (!event || !installed || !active)
+        return;
+    for (auto it = event->inventory.begin(); it != event->inventory.end();) {
+        if (IsPosting(it->entry)) {
+            // The API transfers ownership of these copied inventory entries.
+            // Deleting one frees its list nodes, not the engine's extra data.
+            delete it->entry;
+            it = event->inventory.erase(it);
+        } else
+            ++it;
+    }
+}
+void StopQuickLootPosting(QuickLoot::API::TakingItemEvent *event) {
+    if (event && installed && active && event->stack && IsPosting(event->stack->entry))
+        event->result = QuickLoot::API::HandleResult::kStop;
+}
+void RegisterQuickLoot() {
+    using namespace QuickLoot::API;
+    // API 2.0 is sufficient; no DLL dependency or Skyrim-version condition.
+    if (!QuickLootAPI::Init("MarcoPolo", ApiVersion::kV20)) {
+        SKSE::log::info("QuickLoot IE API unavailable; Missives deferred pickup cleanup retained");
+        return;
+    }
+    QuickLootAPI::RegisterModifyInventoryHandler(FilterQuickLoot);
+    QuickLootAPI::RegisterTakingItemHandler(StopQuickLootPosting);
+    SKSE::log::info("QuickLoot IE: Marco Polo board postings excluded from loot and Take All");
+}
 } // namespace
 bool InstallMissives() {
     for (unsigned i = 0; i < boards.size(); ++i)
         if (!Note(i, Paper::bulletin) || !Note(i, Paper::posting) || !Note(i, Paper::receipt) ||
             !BoardRef(i)) {
-            SKSE::log::info("Missives addon unavailable; 0.1.6 requires the matching Missives ESP");
+            SKSE::log::info(
+                "Missives addon unavailable; requires the 27-record Missives ESP (0.1.6+)");
             return false;
         }
     for (unsigned i = 0; i < boards.size(); ++i)
@@ -604,6 +690,7 @@ bool InstallMissives() {
     RE::ScriptEventSourceHolder::GetSingleton()->AddEventSink<RE::TESContainerChangedEvent>(
         &readEvents);
     installed = true;
+    RegisterQuickLoot();
     SKSE::log::info("Missives notices and supply contracts enabled");
     return true;
 }

@@ -1,8 +1,19 @@
-# Game testing for 0.1.6
+# Game testing for 0.1.7
 
 Automated tests verify deterministic batching/save restoration, invalid-save rollback, inventory conservation, quantity pricing, round-trip pricing, contract escrow/expiry and five simulated years. The Windows build and PE audit check compilation, cross-runtime metadata and both legacy/modern exports. **These do not substitute for the checks below.**
 
-## Missives paper lifecycle in 0.1.6
+## Missives crash and QuickLoot regression in 0.1.7
+
+Continue the existing save after a full restart. This update keeps the 0.1.6 ESP and save format.
+
+1. Aim at the Falkreath Missives board with QuickLoot IE enabled. Marco Polo's report and contract posting should be absent from QuickLoot, including Take All. Ordinary Missives and other mods' notes should still appear normally. Open the regular board inventory: both Marco Polo postings should be there.
+2. Select the contract notice immediately after opening the board, switch rapidly between its report and other notes, read and close each, then reopen the board. There should be no crash or carried posting. Check mouse/keyboard and controller where available, including the installed menu replacer and unpaused menus.
+3. Read the existing accepted paper from your inventory. It should show that order's goods, quantity, payment and deadline, rather than "This order is closed." Its log entry should show a nonzero order number and identity source. Repeat after saving to a new slot and restarting.
+4. Complete or cancel that order at its issuing board. The carried paper should disappear. Stored copies must still refer to the old order and read as closed after it ends, even if another order exists. Repeat the normal lifecycle checks below.
+
+The startup log should contain `QuickLoot IE: Marco Polo board postings excluded from loot and Take All`. Without a compatible QuickLoot API, it should report the unavailable optional API and retain deferred cleanup. Automated UI tests reproduce the null item-card state, but do not execute Skyrim or its SWF.
+
+## Missives paper lifecycle
 
 Install both the core and updated Missives ESP after exiting Skyrim. Continue the existing character; no new game is required. Native UI behavior still needs this game pass, including the installed menu replacer.
 
@@ -15,7 +26,7 @@ Install both the core and updated Missives ESP after exiting Skyrim. Continue th
 7. Drop or store an accepted paper, read it, and revisit its board to get a replacement. End the order, then inspect the stored copy: it should read as closed, even if a later order exists. Picking it up should remove it. Repeated reads/loads must not accumulate carried duplicates.
 8. Check Notes and Announcements, Tessera Missives and ordinary Missives jobs on the same board. Check a normal storage container afterward: its reading, transfer and Take All controls must work normally. The SKSE ledger must still have no contract listing/actions.
 
-Debug logs include `Read board posting`, `Read accepted-order paper` and paper reconciliation messages. An accepted paper displaying “This order is closed” while its job is active is a failure; record its name and send the log.
+Debug logs include `Read board posting`, `Read accepted-order paper` (with the identity source) and paper reconciliation messages. An accepted paper displaying “This order is closed” while its job is active is a failure; record its name and send the log.
 
 ## Trading and broader regression checks
 
@@ -39,7 +50,7 @@ The user confirmed that 0.1.3 permits the previously blocked purchases. A repeat
 
 Use a separate save and retain both its `.ess` and `.skse` files. Enable `debugLogging` in `settings.json` before starting Skyrim. Start with the core, matching SKSE/Address Library and SkyUI; then add optional integrations and other economy mods one at a time.
 
-When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.6 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
+When updating from 0.1.0, exit Skyrim completely before replacing the DLL: that build intercepted the wrong engine function. First try loading the affected save without overwriting it. Logs should name version 0.1.7 and report `Loaded economy`. A failed in-game load is not proof of damaged save bytes; preserve both files before attempting any cleaning. Logs now rotate instead of being erased at startup. With Container Item Distributor installed, expect `existing virtual hook chained`, then successful barter attachment after opening a shop.
 
 1. **Startup:** confirm `MarcoPolo.log` names the actual Skyrim runtime, loads configuration and installs barter integration. Load an existing save and open a merchant. Ensure no crash or unsupported-menu notification. Repeat with your actual UI replacer.
 2. **Quotes:** record player and merchant gold. Buy and sell one ordinary ingot, then a stack of 20. Check list/card values, the selected quantity total and exact gold changes. Move the slider both directions; cancel it. Cancelling must not alter stocks or cash. Repeat near an affordability limit, after a Speech increase, with relevant perks and enchanted/tempered items.

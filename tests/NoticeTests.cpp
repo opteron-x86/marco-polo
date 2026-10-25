@@ -1,4 +1,6 @@
 #include "core/Notices.h"
+#include <array>
+#include <climits>
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
@@ -93,9 +95,30 @@ void Lifecycle(const Config &config, int ending) {
     e.Load(save);
     CHECK(e.Save() == save);
 }
+void ReceiptStacks() {
+    using Instance = std::pair<std::uint64_t, int>;
+    CHECK(OrderPaperStackID(1, {}) == 0);
+    const std::array single{Instance{75, 1}};
+    CHECK(OrderPaperStackID(1, single) == 75);
+    CHECK(OrderPaperStackID(0, single) == 0);
+    CHECK(OrderPaperStackID(-1, single) == 0);
+    CHECK(OrderPaperStackID(2, single) == 0); // An extra untagged copy is ambiguous.
+    const std::array duplicate{Instance{75, 1}, Instance{75, 1}};
+    CHECK(OrderPaperStackID(2, duplicate) == 75);
+    CHECK(OrderPaperStackID(1, duplicate) == 0);
+    const std::array mixed{Instance{75, 1}, Instance{76, 1}};
+    CHECK(OrderPaperStackID(2, mixed) == 0); // Never turn an old order into a new one.
+    const std::array untagged{Instance{0, 1}, Instance{75, 1}};
+    CHECK(OrderPaperStackID(2, untagged) == 0);
+    const std::array badCount{Instance{75, -1}};
+    CHECK(OrderPaperStackID(1, badCount) == 0);
+    const std::array largeCount{Instance{75, INT_MAX}, Instance{75, 1}};
+    CHECK(OrderPaperStackID(INT_MAX, largeCount) == 0); // No summation overflow.
+}
 int main(int argc, char **argv) {
     try {
         CHECK(argc == 2);
+        ReceiptStacks();
         constexpr std::string_view title = "The Reach: Accepted supply order";
         for (auto id : {std::uint64_t{1}, std::uint64_t{12345678901234}, UINT64_MAX})
             CHECK(OrderPaperID(title, OrderPaperName(title, id)) == id);
