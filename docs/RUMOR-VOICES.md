@@ -1,5 +1,16 @@
 # Trade-rumor responses
 
+## Runtime findings, 25 October 2026
+
+The generic **Of course.** response and rumor callback worked for Elda,
+Corpulus, Kleppr and Orgnar in the current test. Keerava and Delphine selected
+their intended addon INFO, but its `dataInfo` pointer was null and no rumor
+callback followed. Their voice-specific response links need correction.
+The other specific variants still need an in-game check; valid plugin records
+and matching FUZ files alone did not establish that these links work.
+
+## Intended response selection
+
 The dialogue generator references these Skyrim.esm records. The English strings,
 voice types and FUZ recordings were inspected in the installed vanilla master
 and voice archive. No recordings are redistributed. DNAM shares response data
