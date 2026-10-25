@@ -2,7 +2,7 @@
 
 Every push/PR runs portable sanitizer tests. Windows builds start only after those pass, use pinned vcpkg and alandtse CommonLib, run the same core tests on Windows, audit the PE metadata, then assemble archives. Artifacts contain:
 
-- Main mod, optional Missives addon, PDB symbols and source ZIPs.
+- Main mod, PDB symbols and source ZIPs.
 - `build-info.json` with source commit, dirty state, runtime target and DLL SHA-256.
 - Release notes and `SHA256SUMS.txt`.
 
@@ -17,6 +17,5 @@ Nexus uploads use the official [Nexus Mods upload action](https://github.com/Nex
 | `NEXUSMODS_API_KEY` | Secret | Upload credential. |
 | `NEXUSMODS_MOD_ID` | Variable | Existing Skyrim SE mod page. |
 | `NEXUSMODS_FILE_ID` | Variable | Existing core file entry to version. |
-| `NEXUSMODS_MISSIVES_FILE_ID` | Optional variable | Addon file entry to version. |
 
-Run **Upload tested release to Nexus** from `master`, selecting a published standard tag. It verifies the tag's commit, successful tagged CI run, complete asset checksums and exact DLL. Prereleases are rejected. It uploads those existing archives, updates the mod version/changelog and archives the prior file versions. It does not create a Nexus page or discover/upload credentials. If the optional addon file ID is absent, that upload is skipped.
+Run **Upload tested release to Nexus** from `master`, selecting a published standard tag. It verifies the tag's commit, successful tagged CI run, complete asset checksums and exact DLL. Prereleases are rejected. It uploads those existing archives, updates the mod version/changelog and archives the prior file versions. It does not create a Nexus page or discover/upload credentials.

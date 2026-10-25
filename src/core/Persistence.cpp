@@ -8,9 +8,14 @@ NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Market, goods, treasury, war, disruption)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Shipment, id, route, from, to, commodity, quantity, arrives,
                                    loss)
 void to_json(json &j, const Item &i) {
-    j = {{"form", i.form}, {"commodity", i.commodity}, {"quantity", i.quantity},
-         {"target", i.target}, {"units", i.units}, {"value", i.value},
-         {"protectedItem", i.protectedItem}, {"externalQuantity", i.externalQuantity}};
+    j = {{"form", i.form},
+         {"commodity", i.commodity},
+         {"quantity", i.quantity},
+         {"target", i.target},
+         {"units", i.units},
+         {"value", i.value},
+         {"protectedItem", i.protectedItem},
+         {"externalQuantity", i.externalQuantity}};
 }
 void from_json(const json &j, Item &i) {
     j.at("form").get_to(i.form);
@@ -24,16 +29,14 @@ void from_json(const json &j, Item &i) {
     i.externalQuantity = j.value("externalQuantity", 0);
 }
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Merchant, id, market, cash, items, lastVisit, lastRestock)
-NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Contract, id, market, commodity, quantity, reward, issued,
-                                   deadline, status, item, itemName)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(State, schema, day, epoch, rng, nextID, revision, markets,
-                                   merchants, shipments, contracts)
+                                   merchants, shipments)
 json Encode(const State &s) {
     return json(s);
 }
 State Decode(const json &j) {
     auto schema = j.at("schema").get<int>();
-    if (schema != 1 && schema != SaveSchema)
+    if (schema != 1 && schema != 2 && schema != SaveSchema)
         throw std::runtime_error("Unsupported Marco Polo save schema");
     return j.get<State>();
 }
@@ -45,7 +48,7 @@ void Economy::Load(const json &j) {
     State incoming = Decode(j);
     if (incoming.schema == 1) {
         // 0.1.4 introduces household goods. Seed only this new market stock;
-        // preserve existing prices, merchants, contracts, time and RNG state.
+        // preserve existing prices, merchants, time and RNG state.
         // Missing established goods or partially missing household goods still
         // indicate incompatible data and must not silently become a new market.
         if (std::any_of(config_.commodities.begin(), config_.commodities.end(),
@@ -63,16 +66,15 @@ void Economy::Load(const json &j) {
                 for (auto &shipment : incoming.shipments)
                     if (shipment.commodity == "housewares")
                         throw std::runtime_error("Legacy goods missing for shipment");
-                for (auto &contract : incoming.contracts)
-                    if (contract.commodity == "housewares")
-                        throw std::runtime_error("Legacy goods missing for contract");
                 for (auto &spec : config_.markets)
                     incoming.markets.at(spec.id).goods.emplace(
                         "housewares", Stock{.quantity = Target(spec.id, "housewares")});
             }
         }
-        incoming.schema = SaveSchema;
     }
+    // Schema 3 contains market/trading state only. Obsolete schema-1/2 fields
+    // are ignored by Decode; no paper or contract data reaches the runtime.
+    incoming.schema = SaveSchema;
     auto old = std::move(state_);
     state_ = std::move(incoming);
     try {

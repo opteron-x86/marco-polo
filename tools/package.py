@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Assemble separately installable core and Missives archives with provenance."""
+"""Assemble the mod, symbols and source archives with provenance."""
 import argparse
 import json
 import os
@@ -23,7 +23,6 @@ def main():
     if args.output.exists() and any(args.output.iterdir()):
         parser.error('Use an empty output directory')
     subprocess.run([sys.executable,str(ROOT/'tools/audit-dll.py'),str(dll)],check=True)
-    subprocess.run([sys.executable,str(ROOT/'tools/build-addon.py')],check=True)
     commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     dirty = bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
     prefix = f'Marco-Polo-{version()}-{commit[:8]}' + ('-dirty' if dirty else '')
@@ -45,7 +44,6 @@ def main():
             parser.error(f'Missing dependency license: {notice}')
         files[f'licenses/{name}.txt']=notice
     write('',files)
-    write('-missives',{'Marco Polo - Missives.esp':ROOT/'addons/missives/Marco Polo - Missives.esp','README-Missives.md':ROOT/'addons/missives/README.md','LICENSE':ROOT/'LICENSE'})
     write('-symbols',{'MarcoPolo.pdb':pdb})
     tracked=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     source={p:ROOT/p for p in tracked if p and (ROOT/p).is_file()}

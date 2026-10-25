@@ -306,17 +306,11 @@ void Economy::Tick() {
         } else
             ++it;
     }
-    for (auto &c : state_.contracts)
-        if ((c.status == ContractStatus::offered || c.status == ContractStatus::accepted) &&
-            state_.day > c.deadline) {
-            state_.markets.at(c.market).treasury += c.reward;
-            c.status = ContractStatus::expired;
-        }
     double winter =
         (1 + std::cos(2 * 3.141592653589793 * std::fmod(state_.day + 227, 365.0) / 365.0)) / 2;
     for (auto &def : config_.markets) {
         auto &m = state_.markets.at(def.id);
-        // Explicit outside taxation/business income; finite treasury prevents runaway contracts.
+        // Explicit outside taxation/business income, capped at the regional budget.
         m.treasury =
             std::min(config_.treasury, m.treasury + std::max<Money>(1, config_.treasury / 100));
         for (auto &good : config_.commodities) {
@@ -422,84 +416,10 @@ void Economy::Tick() {
             s.price +=
                 std::clamp(target - s.price, -config_.dailyAdjustment, config_.dailyAdjustment);
         }
-    // Keep terminal contract history bounded, but never discard an active reservation.
-    if (state_.contracts.size() > 512)
-        std::erase_if(state_.contracts, [&](const auto &c) {
-            return c.status != ContractStatus::accepted && c.status != ContractStatus::offered &&
-                   c.deadline < state_.day - 60;
-        });
     ++state_.revision;
 }
-double Economy::Reserved(const std::string &m, const std::string &c) const {
-    double n = 0;
-    for (auto &job : state_.contracts)
-        if (job.market == m && job.commodity == c &&
-            (job.status == ContractStatus::offered || job.status == ContractStatus::accepted))
-            n += job.quantity;
-    return n;
-}
-std::uint64_t Economy::Offer(const std::string &m, const std::string &c, int maximum,
-                             std::string item, std::string itemName, double unitValue) {
-    Require(maximum > 0 && maximum <= 1000, "Invalid contract quantity");
-    auto &market = state_.markets.at(m);
-    auto &good = config_.Good(c);
-    double missing = Target(m, c) * 0.75 - Total(m, c) - Reserved(m, c);
-    int n = static_cast<int>(std::min<double>(maximum, std::floor(std::max(0.0, missing))));
-    if (n < 5 || state_.contracts.size() >= 2048)
-        return 0;
-    Require(Finite(unitValue) && unitValue >= 0 && unitValue <= 1000000, "Invalid contract value");
-    Money reward = static_cast<Money>(std::ceil(
-        n * (unitValue > 0 ? unitValue : good.referenceValue) * market.goods.at(c).price * 1.2));
-    if (reward > market.treasury)
-        return 0;
-    market.treasury -= reward;
-    auto id = state_.nextID++;
-    state_.contracts.push_back({id, m, c, n, reward, state_.day, state_.day + 14,
-                                ContractStatus::offered, std::move(item), std::move(itemName)});
-    ++state_.revision;
-    return id;
-}
-const Contract *Economy::FindContract(std::uint64_t id) const {
-    for (auto &c : state_.contracts)
-        if (c.id == id)
-            return &c;
-    return nullptr;
-}
-bool Economy::Accept(std::uint64_t id) {
-    for (auto &c : state_.contracts)
-        if (c.id == id && c.status == ContractStatus::offered && state_.day <= c.deadline) {
-            c.status = ContractStatus::accepted;
-            ++state_.revision;
-            return true;
-        }
-    return false;
-}
-bool Economy::Cancel(std::uint64_t id) {
-    for (auto &c : state_.contracts)
-        if (c.id == id &&
-            (c.status == ContractStatus::accepted || c.status == ContractStatus::offered)) {
-            state_.markets.at(c.market).treasury += c.reward;
-            c.status = ContractStatus::cancelled;
-            ++state_.revision;
-            return true;
-        }
-    return false;
-}
-Money Economy::Deliver(std::uint64_t id, int available) {
-    for (auto &c : state_.contracts)
-        if (c.id == id && c.status == ContractStatus::accepted && state_.day <= c.deadline &&
-            available >= c.quantity) {
-            auto &s = state_.markets.at(c.market).goods.at(c.commodity);
-            s.quantity += c.quantity;
-            s.imported += c.quantity;
-            c.status = ContractStatus::fulfilled;
-            ++state_.revision;
-            return c.reward;
-        }
-    return 0;
-}
-std::vector<Bulletin> Economy::Reports(const std::string &m) const {
-    std::vector<Bulletin> out;
+std::vector<MarketReport> Economy::Reports(const std::string &m) const {
+    std::vector<MarketReport> out;
     auto &market = state_.markets.at(m);
     for (auto &c : config_.commodities) {
         auto &s = market.goods.at(c.id);
@@ -519,7 +439,7 @@ void Economy::Validate() const {
                 state_.rng != 0 && state_.nextID > 0,
             "Invalid save header");
     Require(state_.markets.size() == config_.markets.size() && state_.merchants.size() <= 10000 &&
-                state_.shipments.size() <= 100000 && state_.contracts.size() <= 2048,
+                state_.shipments.size() <= 100000,
             "Invalid save dimensions");
     for (auto &spec : config_.markets) {
         auto &m = state_.markets.at(spec.id);
@@ -559,15 +479,6 @@ void Economy::Validate() const {
                     s.quantity >= 0 && Finite(s.arrives) && s.arrives >= state_.day &&
                     Finite(s.loss) && s.loss >= 0 && s.loss <= 1,
                 "Invalid shipment save");
-    }
-    for (auto &c : state_.contracts) {
-        config_.Market(c.market);
-        config_.Good(c.commodity);
-        Require(c.id > 0 && c.id < state_.nextID && ids.insert(c.id).second && c.quantity > 0 &&
-                    c.quantity <= 1000 && c.reward >= 0 && c.reward <= 1000000000 &&
-                    Finite(c.issued) && Finite(c.deadline) && c.deadline >= c.issued &&
-                    static_cast<int>(c.status) >= 0 && static_cast<int>(c.status) <= 4,
-                "Invalid contract save");
     }
 }
 } // namespace marco

@@ -146,7 +146,7 @@ int main(int argc, char **argv) {
         CHECK(e.Get().merchants.at("shop").items.at("mixed").quantity == 0);
         e.Validate();
         // Upgrade a real pre-housewares configuration without resetting the
-        // saved simulation, merchant inventory, shipments or accepted orders.
+        // saved simulation, merchant inventory or shipments.
         auto previousConfig = config;
         std::erase_if(previousConfig.commodities,
                       [](const auto &good) { return good.id == "housewares"; });
@@ -160,8 +160,6 @@ int main(int argc, char **argv) {
         previous.RegisterMerchant(shop);
         previous.Advance(27);
         previous.Edit().markets.at("winterhold").goods.at("food").quantity = 0;
-        auto preservedContract = previous.Offer("winterhold", "food", 30);
-        CHECK(preservedContract && previous.Accept(preservedContract));
         auto oldSave = previous.Save();
         oldSave["schema"] = 1;
         other.Load(oldSave);
@@ -226,36 +224,14 @@ int main(int argc, char **argv) {
         auto customSave = previous.Save();
         customSave["schema"] = 1;
         CHECK(customSave == oldSave);
-        // Contract reservations, stable terms, exact-once settlement, refunds.
-        e.NewGame(0, 9);
-        e.Edit().markets.at("winterhold").goods.at("food").quantity = 0;
-        auto balance = e.Get().markets.at("winterhold").treasury;
-        auto id = e.Offer("winterhold", "food", 40, "test.esm|001234", "Bread", 8);
-        CHECK(id > 0);
-        auto contract = *e.FindContract(id);
-        CHECK(e.Get().markets.at("winterhold").treasury == balance - contract.reward);
-        other.Load(e.Save());
-        CHECK(other.FindContract(id)->item == "test.esm|001234");
-        CHECK(other.FindContract(id)->itemName == "Bread");
-        CHECK(e.Accept(id));
-        CHECK(!e.Accept(id));
-        CHECK(e.Deliver(id, 39) == 0);
-        CHECK(e.Deliver(id, 40) == contract.reward);
-        CHECK(e.Deliver(id, 40) == 0);
-        CHECK(!e.Cancel(id));
-        id = e.Offer("winterhold", "food", 30);
-        CHECK(id);
-        auto reward = e.FindContract(id)->reward;
-        balance = e.Get().markets.at("winterhold").treasury;
-        CHECK(e.Cancel(id));
-        CHECK(e.Get().markets.at("winterhold").treasury == balance + reward);
-        CHECK(!e.Cancel(id));
-        id = e.Offer("winterhold", "food", 30);
-        CHECK(id);
-        CHECK(e.Accept(id));
-        e.Advance(15);
-        CHECK(e.FindContract(id)->status == ContractStatus::expired);
-        CHECK(e.Deliver(id, 30) == 0);
+        // Schema-2 market/trading data survives removal of the old job system.
+        auto tradingOnly = e.Save();
+        auto schema2 = tradingOnly;
+        schema2["schema"] = 2;
+        schema2["contracts"] = json::array({{{"id", 75}, {"status", 1}}});
+        other.Load(schema2);
+        CHECK(other.Save() == tradingOnly);
+        CHECK(!other.Save().contains("contracts"));
         // Sources/sinks/transit conserve aggregate inventory through trade and spoilage.
         e.NewGame(0, 33);
         double initial = 0;
@@ -280,11 +256,10 @@ int main(int argc, char **argv) {
         e.Validate();
         e.NewGame(5, 77);
         CHECK(e.Get().merchants.empty());
-        CHECK(e.Get().contracts.empty());
         CHECK(e.Get().shipments.empty());
         CHECK(e.Get().day == 5);
         std::cout << "PASS: deterministic simulation, persistence rejection, quantity pricing, "
-                     "conservation, contracts, five-year stress, session reset\n";
+                     "conservation, five-year stress, session reset\n";
     } catch (const std::exception &ex) {
         std::cerr << ex.what() << '\n';
         return 1;

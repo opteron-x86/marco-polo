@@ -37,10 +37,8 @@ class AddressFormats(unittest.TestCase):
 
     def test_family_specific_reset_id(self):
         hooks = audit.targets()
-        se = {ident: 0x1000 for ident in [hooks['ResetInventorySE'], 14399, 235511, 267991, 519283,
-                                        268222, 519421, 50122]}
-        ae = {ident: 0x2000 for ident in [hooks['ResetInventoryAE'], 14552, 190259, 214926, 405823,
-                                        215061, 405962, 51053]}
+        se = {ident: 0x1000 for ident in [hooks['ResetInventorySE'], 235511, 267991, 519283]}
+        ae = {ident: 0x2000 for ident in [hooks['ResetInventoryAE'], 190259, 214926, 405823]}
         audit.check_table(se, False, hooks)
         audit.check_table(ae, True, hooks)
         with self.assertRaises(ValueError):

@@ -221,8 +221,8 @@ void SyncMerchant(const Context &c, bool observeExternal) {
         auto old = m.items.find(key);
         int target = old == m.items.end() ? std::clamp(count, 0, 1000) : old->second.target;
         int external = old == m.items.end() ? 0 : old->second.externalQuantity;
-        m.items[key] = {key,    good, count,
-                        target, 1.0,  static_cast<double>(std::max(1, RawValue(entry.get()))),
+        m.items[key] = {key,     good,    count,
+                        target,  1.0,     static_cast<double>(std::max(1, RawValue(entry.get()))),
                         protect, external};
     }
     for (auto &[key, item] : m.items)
@@ -248,8 +248,8 @@ void SyncMerchant(const Context &c, bool observeExternal) {
                     if (!list)
                         continue;
                     auto *original = list->GetByType<RE::ExtraOriginalReference>();
-                    auto source = original ? original->reference.get()
-                                           : RE::NiPointer<RE::TESObjectREFR>{};
+                    auto source =
+                        original ? original->reference.get() : RE::NiPointer<RE::TESObjectREFR>{};
                     if (source && source.get() != c.chest)
                         external += std::clamp(list->GetCount(), 0, 100000 - external);
                 }
@@ -353,7 +353,6 @@ void Reset() {
     std::lock_guard lock(mutex);
     loaded = false;
     loadFailed = false;
-    ResetMissives();
     if (economy)
         economy->NewGame(0, 1);
     {
@@ -372,7 +371,6 @@ void Start() {
                                     std::chrono::steady_clock::now().time_since_epoch().count()));
     loaded = true;
     active = enabled;
-    UpdateBoards(true);
     Publish();
 }
 void Tick() {
@@ -390,7 +388,6 @@ void Tick() {
                                war * (m.id == "eastmarch" || m.id == "haafingar" ? .3 : .1));
     unsigned steps = economy->Advance(Now(), 8);
     if (steps) {
-        UpdateBoards();
         if (debugLogging)
             SKSE::log::info("Economy day {}, {} steps, {} shipments", economy->Get().day, steps,
                             economy->Get().shipments.size());

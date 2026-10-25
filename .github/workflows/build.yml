@@ -24,7 +24,7 @@ jobs:
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: python3 tools/release.py --tag "$RELEASE_TAG"
-      - name: Check addon and release tooling
+      - name: Check release tooling
         run: python3 -m unittest discover -s tests -p '*_test.py' -v
       - name: Install compiler
         run: |

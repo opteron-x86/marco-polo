@@ -12,7 +12,7 @@ struct Snapshot {
     bool ready{};
     std::string status, market;
     json economy;
-    std::vector<Bulletin> reports;
+    std::vector<MarketReport> reports;
 };
 struct Context {
     RE::Actor *actor{};
@@ -46,10 +46,6 @@ Snapshot View();
 void Publish();
 bool InstallBarter();
 bool RegisterMenu();
-bool InstallMissives();
-void UpdateBoards(bool issueReceipts = false);
-void ResetMissives();
-void ContractAction(std::uint64_t id, int action);
 int RawValue(const RE::InventoryEntryData *);
 bool PlainItem(const RE::InventoryEntryData *);
 void ExportState();

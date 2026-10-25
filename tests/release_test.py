@@ -3,7 +3,6 @@ import hashlib
 import importlib.util
 import json
 from pathlib import Path
-import struct
 import sys
 import tempfile
 import unittest
@@ -30,7 +29,6 @@ class ReleaseTests(unittest.TestCase):
                 with zipfile.ZipFile(d/(prefix+suffix+'.zip'),'w') as z:
                     for name,body in files.items():z.writestr(name,body)
             archive('',{'SKSE/Plugins/MarcoPolo.dll':dll,**{f'SKSE/Plugins/MarcoPolo/{n}.json':'{}' for n in ('settings','classification','economy')}})
-            archive('-missives',{'Marco Polo - Missives.esp':b'TES4fixture'})
             archive('-symbols',{'MarcoPolo.pdb':b'fixture'})
             archive('-source',{n:b'fixture' for n in ('CMakeLists.txt','src/runtime/Plugin.cpp','src/core/Economy.cpp','LICENSE')})
             meta={'version':'0.1.0','commit':commit,'dirty':False,'dll_sha256':hashlib.sha256(dll).hexdigest()}
@@ -53,36 +51,5 @@ class ReleaseTests(unittest.TestCase):
         for key,value in (('head_sha','b'*40),('conclusion','failure'),('event','pull_request'),('status','in_progress'),('path','other.yml')):
             with self.assertRaises(ValueError):prepare.validate('v0.1.0',release,meta,commit,{**run,key:value})
         with self.assertRaises(ValueError):prepare.validate('v0.1.0-alpha.1',release,meta,commit,run)
-
-class AddonTests(unittest.TestCase):
-    def test_only_new_light_book_records(self):
-        blob=module('build-addon').build()
-        self.assertEqual(blob,(ROOT/'addons/missives/Marco Polo - Missives.esp').read_bytes())
-        self.assertEqual(blob[:4],b'TES4');self.assertEqual(struct.unpack_from('<I',blob,8)[0],0x200)
-        offset=24+struct.unpack_from('<I',blob,4)[0]
-        self.assertEqual(blob[offset:offset+4],b'GRUP');self.assertEqual(blob[offset+8:offset+12],b'BOOK')
-        self.assertEqual(offset+struct.unpack_from('<I',blob,offset+4)[0],len(blob))
-        offset+=24;forms=[];book_data={}
-        while offset<len(blob):
-            self.assertEqual(blob[offset:offset+4],b'BOOK');size=struct.unpack_from('<I',blob,offset+4)[0]
-            forms.append(struct.unpack_from('<I',blob,offset+12)[0]);end=offset+24+size;offset+=24
-            fields=[]
-            while offset<end:
-                field=blob[offset:offset+4];fields.append(field);n=struct.unpack_from('<H',blob,offset+4)[0]
-                if field==b'DATA':book_data[forms[-1]]=blob[offset+6:offset+6+n]
-                offset+=6+n
-            self.assertEqual(offset,end);self.assertNotIn(b'VMAD',fields)
-            self.assertTrue({b'EDID',b'FULL',b'DESC',b'DATA',b'INAM'}.issubset(fields))
-        self.assertEqual(sorted(forms),list(range(0x03000800,0x0300081B)))
-        self.assertEqual(len(forms),len(set(forms)))
-        excluded=json.loads((ROOT/'package/SKSE/Plugins/MarcoPolo/classification.json').read_text())['excluded']
-        for form in forms:
-            self.assertIn(f'Marco Polo - Missives.esp|{form & 0xffffff:06X}',excluded)
-        for form,data in book_data.items():
-            # Preserve old IDs: odd forms below 812 are the portable receipts.
-            receipt=form<0x03000812 and form%2==1
-            self.assertEqual(bool(data[0]&2),not receipt)
-            self.assertEqual(data[1],0xff)
-            self.assertEqual(struct.unpack_from('<If',data,8),(0,0.0))
 
 if __name__=='__main__':unittest.main()

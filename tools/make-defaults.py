@@ -72,5 +72,4 @@ housewares={'Skyrim.esm':[0x98623,0x98624,0x98625,0x98626,0x98627,0xE42DF,0xE42E
             'hearthfireextended.esp':[0x1D3EBE,*range(0x1D3EC0,0x1D3EC7)]}
 for plugin,ids in housewares.items():
     rules['forms'].update({f'{plugin}|{local:06X}':'housewares' for local in ids})
-rules['excluded'] += [f'Marco Polo - Missives.esp|{0x800+i:06X}' for i in range(27)]
 (root/'classification.json').write_text(json.dumps(rules,indent=2)+'\n')

@@ -8,7 +8,7 @@
 namespace marco {
 using Money = std::int64_t;
 using json = nlohmann::json;
-inline constexpr int SaveSchema = 2;
+inline constexpr int SaveSchema = 3;
 struct Commodity {
     std::string id, name;
     double referenceValue{10}, elasticity{0.5}, shelfLife{0};
@@ -74,19 +74,7 @@ struct Merchant {
     std::map<std::string, Item> items;
     double lastVisit{}, lastRestock{};
 };
-enum class ContractStatus { offered, accepted, fulfilled, expired, cancelled };
-struct Contract {
-    std::uint64_t id{};
-    std::string market, commodity;
-    int quantity{};
-    Money reward{};
-    double issued{}, deadline{};
-    ContractStatus status{ContractStatus::offered};
-    // The adapter freezes the exact requested item, so cheap substitutes cannot
-    // satisfy a more valuable commodity contract after a configuration change.
-    std::string item, itemName;
-};
-struct Bulletin {
+struct MarketReport {
     std::string market, commodity, condition, text;
     double issued{}, multiplier{};
 };
@@ -97,7 +85,6 @@ struct State {
     std::map<std::string, Market> markets;
     std::map<std::string, Merchant> merchants;
     std::vector<Shipment> shipments;
-    std::vector<Contract> contracts;
 };
 struct Quote {
     Money total{};
@@ -118,13 +105,7 @@ class Economy {
                Money actualGold, int fromExternal = 0);
     void RegisterMerchant(Merchant merchant);
     void SetConditions(const std::string &market, double war, double disruption);
-    std::vector<Bulletin> Reports(const std::string &market) const;
-    std::uint64_t Offer(const std::string &market, const std::string &commodity, int maximum = 50,
-                        std::string item = {}, std::string itemName = {}, double unitValue = 0);
-    bool Accept(std::uint64_t id);
-    bool Cancel(std::uint64_t id);
-    Money Deliver(std::uint64_t id, int available);
-    const Contract *FindContract(std::uint64_t id) const;
+    std::vector<MarketReport> Reports(const std::string &market) const;
     json Save() const;
     void Load(const json &);
     void Validate() const;
@@ -145,7 +126,6 @@ class Economy {
     double Random();
     double Target(const std::string &, const std::string &) const;
     double Total(const std::string &, const std::string &) const;
-    double Reserved(const std::string &, const std::string &) const;
 };
 json Encode(const State &);
 State Decode(const json &);

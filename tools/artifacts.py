@@ -21,7 +21,7 @@ def verify(directory, expected_version, commit):
     if not re.fullmatch(r'[0-9a-f]{40}', commit):
         raise ValueError('Full source commit required')
     prefix = f'Marco-Polo-{expected_version}-{commit[:8]}'
-    expected = {prefix+s+'.zip' for s in ('', '-missives', '-symbols', '-source')}
+    expected = {prefix+s+'.zip' for s in ('', '-symbols', '-source')}
     expected |= {'build-info.json', 'release-notes.md'}
     sums = {}
     for line in (directory / 'SHA256SUMS.txt').read_text().splitlines():
@@ -50,9 +50,6 @@ def verify(directory, expected_version, commit):
             raise ValueError('DLL differs from build metadata')
         for name in ('economy', 'classification', 'settings'):
             json.loads(archive.read(f'SKSE/Plugins/MarcoPolo/{name}.json'))
-    with zipfile.ZipFile(directory / (prefix+'-missives.zip')) as archive:
-        if archive.read('Marco Polo - Missives.esp')[:4] != b'TES4':
-            raise ValueError('Missives plugin missing')
     with zipfile.ZipFile(directory / (prefix+'-symbols.zip')) as archive:
         if archive.namelist() != ['MarcoPolo.pdb']:
             raise ValueError('Unexpected symbols archive')
