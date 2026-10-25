@@ -1,11 +1,11 @@
-# Game testing for 0.3.0
+# Game testing for 0.3.1
 
 ## Trade Ledger
 
 Install the updated core and restart Skyrim; the Trade Rumors addon is unchanged.
 Load your existing test save and allow two seconds of unpaused play.
 
-1. Press **F8** during normal play. The ledger should pause the game, show a
+1. Press **Right Shift + =** during normal play. The ledger should pause the game, show a
    cursor and use the same fonts as your installed UI. Compare both the title
    and row text. Test with the current font replacement, then vanilla fonts if
    available. No font files or font configuration should be overwritten.
@@ -14,7 +14,7 @@ Load your existing test save and allow two seconds of unpaused play.
    Unvisited goods remain Unknown. No player-facing price percentages should
    appear; an old report stays old when you browse it.
 3. Drag the title and resize with the bottom-right grip. Lock the window,
-   confirm it cannot move or resize, then unlock it. Close with **Esc**, **F8**
+   confirm it cannot move or resize, then unlock it. Close with **Esc**, **Right Shift + =**
    or X. Movement, camera, dialogue and inventory controls should work normally.
 4. Reopen several times, then restart Skyrim. Position, scale, lock and route
    bookmarks should persist. Try a different screen resolution and confirm
@@ -24,13 +24,17 @@ Load your existing test save and allow two seconds of unpaused play.
    opportunities should appear. Opening the ledger must not create or refresh
    information. Save to a new slot after closing it, quit, and reload; the
    remembered markets should remain intact.
-6. Check F8 while dialogue, barter, inventory, loading or the console is open:
-   it should leave that menu alone. The ledger must not appear at the main menu.
+6. Check Right Shift + = while dialogue, barter, inventory, loading or the console is open:
+   it should leave that menu alone. Equals by itself and Left Shift + Equals
+   must not open the ledger. The ledger must not appear at the main menu.
    With a controller, shoulders switch tabs, left/right changes holds or pages,
-   up/down changes pages, and B closes the ledger after opening it with F8.
+   up/down changes pages, and B closes the ledger after opening it with Right Shift + =.
 
-The keyboard shortcut can be changed through `hotkey` in `ledger.json` using
-an SKSE keyboard scan code; 66 is F8 and 0 disables it. Restart after editing.
+The keyboard shortcut uses `hotkey` and `hotkeyModifier` in `ledger.json`.
+The defaults are 13 (Equals) and 54 (Right Shift), using SKSE keyboard scan codes.
+Set `hotkey` to 0 to disable the shortcut, or `hotkeyModifier` to 0 for a single
+key. Restart after editing. The old F8 default migrates automatically; custom
+single-key bindings retain their behavior.
 Delete only that preferences file to restore the default position and size.
 
 Repeat the open/close and save/reload checks on SE 1.5.97 and AE 1.6.x / 1.7.x.
@@ -79,12 +83,12 @@ Windows compilation and address-table audits do not execute Skyrim.
 
 ## Remembered markets and rumors
 
-Install both matching archives, enable `MarcoPolo - Trade Rumors.esp`, and press F8 for the tracker (SKSE Menu Framework remains an alternative). Existing 0.1.8 economy saves can initialize
+Install both matching archives, enable `MarcoPolo - Trade Rumors.esp`, and press Right Shift + = for the tracker (SKSE Menu Framework remains an alternative). Existing 0.1.8 economy saves can initialize
 an empty information history; a fresh test character is also suitable. Fully
 restart Skyrim after installing the DLL.
 
 1. Enter Whiterun or the Bannered Mare. Allow about two seconds of unpaused play,
-   then open **F8 → Markets**. Whiterun should have current reports;
+   then open **Right Shift + = → Markets**. Whiterun should have current reports;
    unvisited markets should say **Unknown**. Opening or switching the menu must
    not reveal or refresh other holds. Crossing a wilderness hold border alone
    must not reveal its market.
@@ -92,7 +96,7 @@ restart Skyrim after installing the DLL.
    then the OK popup should open. After dismissing it, **Recent trade rumors** should show its reports.
    On the economy's first day, local news is expected: no distant historical
    prices exist yet. The popup must work without Fuz Ro D-oh or Menu Framework;
-   the F8 tracker also works without Menu Framework.
+   the ledger also works without Menu Framework.
 3. Let five or six game days pass, allowing a few seconds of unpaused play after
    waiting. Ask again. Connected distant holds should now have a few approximate
    commodity reports, dated earlier than the day you heard them. Other commodities

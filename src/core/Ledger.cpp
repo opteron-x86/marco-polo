@@ -34,8 +34,21 @@ LedgerPreferences LedgerPreferences::Parse(const json &j) {
     p.scale = number("scale", p.scale, .65, 1.75);
     if (j.contains("hotkey") && j["hotkey"].is_number_integer()) {
         auto code = j["hotkey"].get<double>();
-        if (code >= 0 && code <= 255)
+        if (code >= 0 && code <= 255) {
             p.hotkey = static_cast<unsigned>(code);
+            if (!j.contains("hotkeyModifier")) {
+                // Upgrade the old F8 default while retaining custom single-key bindings.
+                if (p.hotkey == 0x42)
+                    p.hotkey = 0x0D;
+                else
+                    p.hotkeyModifier = 0;
+            }
+        }
+    }
+    if (j.contains("hotkeyModifier") && j["hotkeyModifier"].is_number_integer()) {
+        auto code = j["hotkeyModifier"].get<double>();
+        if (code >= 0 && code <= 255)
+            p.hotkeyModifier = static_cast<unsigned>(code);
     }
     if (j.contains("locked") && j["locked"].is_boolean())
         p.locked = j["locked"].get<bool>();
@@ -52,8 +65,9 @@ LedgerPreferences LedgerPreferences::Parse(const json &j) {
     return p;
 }
 json LedgerPreferences::Save() const {
-    return {{"schema", 1},      {"x", x},           {"y", y},      {"scale", scale},
-            {"hotkey", hotkey}, {"locked", locked}, {"pins", pins}};
+    return {{"schema", 1},      {"x", x},           {"y", y},
+            {"scale", scale},   {"hotkey", hotkey}, {"hotkeyModifier", hotkeyModifier},
+            {"locked", locked}, {"pins", pins}};
 }
 json LedgerPayload(const MarketReports &v, const LedgerPreferences &p) {
     auto name = [](const auto &names, const std::string &id) {

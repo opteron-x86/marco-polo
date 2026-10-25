@@ -4,7 +4,7 @@ A Skyrim economy mod with changing regional prices, merchant inventories, and pr
 
 Market reports remember the conditions you last encountered. Travel to refresh them, or ask innkeepers for news through the optional Trade Rumors addon.
 
-Press **F8** to open the Trade Ledger. Drag its title to move it, drag the corner to resize it, or lock it in place. It uses your game's fonts, including font replacements.
+Press **Right Shift + =** to open the Trade Ledger. Drag its title to move it, drag the corner to resize it, or lock it in place. It uses your game's fonts, including font replacements.
 
 ## Requirements
 

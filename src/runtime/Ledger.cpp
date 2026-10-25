@@ -10,7 +10,7 @@ constexpr char MoviePath[] = "MarcoPolo/TradeLedger";
 std::mutex preferencesMutex, commandsMutex;
 LedgerPreferences preferences;
 std::vector<std::string> commands;
-std::atomic_uint hotkey{0x42};
+std::atomic_uint hotkey{0x0D}, hotkeyModifier{0x36};
 std::atomic_bool open{}, togglePending{};
 
 void Close() {
@@ -51,6 +51,7 @@ void LoadPreferences() {
         SKSE::log::warn("Ledger preferences: {}; using defaults", e.what());
     }
     hotkey = preferences.hotkey;
+    hotkeyModifier = preferences.hotkeyModifier;
 }
 RE::GFxValue ToFlash(RE::GFxMovie &movie, const json &j) {
     RE::GFxValue value;
@@ -251,8 +252,19 @@ class Input final : public RE::BSTEventSink<RE::InputEvent *> {
                 continue;
             auto key = button->GetIDCode();
             if (button->GetDevice() == RE::INPUT_DEVICE::kKeyboard) {
-                if (hotkey != 0 && key == hotkey)
-                    Toggle();
+                if (hotkey != 0 && key == hotkey) {
+                    auto modifier = hotkeyModifier.load();
+                    auto manager = RE::BSInputDeviceManager::GetSingleton();
+                    auto keyboard = manager ? manager->GetKeyboard() : nullptr;
+                    bool held = false;
+                    if (keyboard) {
+                        // Current device state avoids latching a modifier across focus changes.
+                        const auto &keys = keyboard->GetRuntimeData().curState;
+                        held = modifier < std::size(keys) && (keys[modifier] & 0x80) != 0;
+                    }
+                    if (modifier == 0 || held)
+                        Toggle();
+                }
             } else if (open && button->GetDevice() == RE::INPUT_DEVICE::kGamepad) {
                 switch (key) {
                 case 0x0001:
@@ -296,7 +308,8 @@ void RegisterLedger() {
     ui->Register(MenuName, []() -> RE::IMenu * { return new LedgerMenu; });
     static Input sink;
     input->AddEventSink(&sink);
-    SKSE::log::info("Trade ledger registered; keyboard shortcut {}", hotkey.load());
+    SKSE::log::info("Trade ledger registered; keyboard shortcut {}, modifier {}", hotkey.load(),
+                    hotkeyModifier.load());
 }
 void ResetLedger() {
     togglePending = false;

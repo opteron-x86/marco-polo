@@ -13,7 +13,8 @@ PriceDescription DescribePrice(const TradeReport &report);
 // UI preferences are a separate file, never part of a character's economy save.
 struct LedgerPreferences {
     double x{.67}, y{.12}, scale{1.0};
-    unsigned hotkey{0x42}; // DirectInput F8; zero disables the keyboard shortcut.
+    unsigned hotkey{0x0D};         // DirectInput Equals; zero disables the shortcut.
+    unsigned hotkeyModifier{0x36}; // Right Shift; zero means no modifier.
     bool locked{};
     std::set<std::string> pins;
     static LedgerPreferences Parse(const json &);

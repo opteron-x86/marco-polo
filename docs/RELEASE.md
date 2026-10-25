@@ -1,6 +1,6 @@
-# Skyrim True Economy and Merchantry 0.3.0
+# Skyrim True Economy and Merchantry 0.3.1
 
-**F8** opens a compact Trade Ledger with Markets, Routes and Rumors tabs. Drag
+**Right Shift + =** opens a compact Trade Ledger with Markets, Routes and Rumors tabs. Drag
 the title to move it, drag the bottom-right corner to resize it, and use the
 padlock to keep it in place. Position, size and bookmarks persist between sessions.
 

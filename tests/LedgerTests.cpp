@@ -55,8 +55,18 @@ int main() {
                                       {"locked", "yes"},
                                       {"hotkey", std::numeric_limits<std::uint64_t>::max()},
                                       {"pins", {22, "", "valid", std::string(200, 'a')}}});
-        CHECK(invalid.x == .67 && invalid.scale == 1 && !invalid.locked && invalid.hotkey == 0x42);
+        CHECK(invalid.x == .67 && invalid.scale == 1 && !invalid.locked && invalid.hotkey == 0x0D);
         CHECK(invalid.pins == std::set<std::string>{"valid"});
+        auto oldDefault =
+            LedgerPreferences::Parse({{"hotkey", 0x42}, {"x", .25}, {"locked", true}});
+        CHECK(oldDefault.hotkey == 0x0D && oldDefault.hotkeyModifier == 0x36);
+        CHECK(oldDefault.x == .25 && oldDefault.locked);
+        auto custom = LedgerPreferences::Parse({{"hotkey", 0x43}});
+        CHECK(custom.hotkey == 0x43 && custom.hotkeyModifier == 0);
+        auto chord = LedgerPreferences::Parse({{"hotkey", 0x0D}, {"hotkeyModifier", 0x36}});
+        CHECK(LedgerPreferences::Parse(chord.Save()).Save() == chord.Save());
+        auto badModifier = LedgerPreferences::Parse({{"hotkeyModifier", 256}});
+        CHECK(badModifier.hotkeyModifier == 0x36);
         bool rejected = false;
         try {
             LedgerPreferences::Parse({{"schema", 7}});
