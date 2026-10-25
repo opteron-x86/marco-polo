@@ -1,4 +1,4 @@
-# Game testing for 0.3.1
+# Game testing for 0.3.2
 
 ## Trade Ledger
 
@@ -41,6 +41,9 @@ Repeat the open/close and save/reload checks on SE 1.5.97 and AE 1.6.x / 1.7.x.
 The native build and local AVM1 test player cannot verify Skyrim's font library
 or input restoration. Log lines `Trade ledger registered` and `Trade ledger ready`
 identify successful registration and movie initialization.
+If the menu fails to open, the `Trade ledger file` line reports whether Skyrim
+can find `Interface/MarcoPoloTradeLedger.swf`; the following error identifies
+file lookup, movie creation or the UI callback as the failing stage.
 
 ## Innkeeper replies
 

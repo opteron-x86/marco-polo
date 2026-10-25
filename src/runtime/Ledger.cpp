@@ -6,7 +6,8 @@
 namespace marco::runtime {
 namespace {
 constexpr std::string_view MenuName = "MarcoPoloTradeLedger";
-constexpr char MoviePath[] = "MarcoPolo/TradeLedger";
+constexpr char MoviePath[] = "MarcoPoloTradeLedger";
+constexpr char MovieFile[] = "Interface/MarcoPoloTradeLedger.swf";
 std::mutex preferencesMutex, commandsMutex;
 LedgerPreferences preferences;
 std::vector<std::string> commands;
@@ -138,10 +139,23 @@ class LedgerMenu final : public RE::IMenu {
         try {
             auto view = View();
             auto manager = RE::BSScaleformManager::GetSingleton();
-            if (!active || !view.ready || !manager ||
-                !manager->LoadMovie(this, uiMovie, MoviePath,
-                                    RE::GFxMovieView::ScaleModeType::kNoScale))
-                throw std::runtime_error("Cannot load Interface/MarcoPolo/TradeLedger.swf");
+            if (!active || !view.ready)
+                throw std::runtime_error("Market reports are not ready");
+            if (!manager || !manager->loader)
+                throw std::runtime_error("Skyrim's Scaleform loader is unavailable");
+            std::error_code fileError;
+            bool looseFile =
+                std::filesystem::exists(std::filesystem::path("Data") / MovieFile, fileError);
+            bool resourceFile = RE::BSScaleformManager::FileExists(MovieFile);
+            SKSE::log::info("Trade ledger file {}: resource={}, loose={}, file status={}",
+                            MovieFile, resourceFile, looseFile, fileError.value());
+            if (!resourceFile)
+                throw std::runtime_error(std::format("Skyrim cannot find {}", MovieFile));
+            if (!manager->LoadMovie(this, uiMovie, MoviePath,
+                                    RE::GFxMovieView::ScaleModeType::kNoScale) ||
+                !uiMovie)
+                throw std::runtime_error(
+                    std::format("Scaleform could not create a movie from {}", MovieFile));
             // The standard loader supplies the active FontLib/fontconfig, including font mods.
             uiMovie->SetMouseCursorCount(1);
             auto bridge = RE::make_gptr<Bridge>(gen_);

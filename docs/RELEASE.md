@@ -1,4 +1,8 @@
-# Skyrim True Economy and Merchantry 0.3.1
+# Skyrim True Economy and Merchantry 0.3.2
+
+Moves the ledger movie directly into `Interface` for Skyrim's native menu
+loader. If loading still fails, the log now distinguishes a missing game
+resource from a Scaleform initialization failure. In-game verification is pending.
 
 **Right Shift + =** opens a compact Trade Ledger with Markets, Routes and Rumors tabs. Drag
 the title to move it, drag the bottom-right corner to resize it, and use the

@@ -14,7 +14,7 @@ import zlib
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / 'interface/TradeLedger.as'
-OUTPUT = ROOT / 'package/Interface/MarcoPolo/TradeLedger.swf'
+OUTPUT = ROOT / 'package/Interface/MarcoPoloTradeLedger.swf'
 MANIFEST = ROOT / 'interface/build.json'
 URL = 'https://archive.debian.org/debian/pool/main/m/mtasc/mtasc_1.14-3+b3_amd64.deb'
 SHA256 = '0e02157747ddd11570972db3a881c18ec123ba19d1cd04635c160d713d4e7e26'
