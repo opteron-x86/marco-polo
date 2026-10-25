@@ -149,14 +149,16 @@ class LedgerMenu final : public RE::IMenu {
             bool resourceFile = RE::BSScaleformManager::FileExists(MovieFile);
             SKSE::log::info("Trade ledger file {}: resource={}, loose={}, file status={}",
                             MovieFile, resourceFile, looseFile, fileError.value());
-            if (!resourceFile)
-                throw std::runtime_error(std::format("Skyrim cannot find {}", MovieFile));
-            if (!manager->LoadMovie(this, uiMovie, MoviePath,
-                                    RE::GFxMovieView::ScaleModeType::kNoScale) ||
-                !uiMovie)
-                throw std::runtime_error(
-                    std::format("Scaleform could not create a movie from {}", MovieFile));
-            // The standard loader supplies the active FontLib/fontconfig, including font mods.
+            const bool loaded = resourceFile &&
+                manager->LoadMovie(this, uiMovie, MoviePath,
+                                   RE::GFxMovieView::ScaleModeType::kNoScale) && uiMovie;
+            if (!loaded) {
+                if (!looseFile)
+                    throw std::runtime_error(std::format(
+                        "Cannot load {}; no loose file is available for fallback", MovieFile));
+                LoadLooseMovie(*manager->loader);
+            }
+            // Both paths use Skyrim's loader and its active FontLib/fontconfig.
             uiMovie->SetMouseCursorCount(1);
             auto bridge = RE::make_gptr<Bridge>(gen_);
             RE::GFxValue callback;
@@ -217,6 +219,49 @@ class LedgerMenu final : public RE::IMenu {
     }
 
   private:
+    void LoadLooseMovie(RE::GFxLoader &loader) {
+        // LoadMovie rejects names absent from the resource index before opening them.
+        // The Scaleform file opener can open and register an uncached loose file itself.
+        // Keep the game's loader (and font states); bypass only that preliminary lookup.
+        SKSE::log::info("Trade ledger: loading {} directly through Skyrim's Scaleform loader",
+                        MovieFile);
+        using Load = RE::GFxLoader::LoadConstants;
+        const REX::EnumSet flags{Load::kLoadKeepBindData, Load::kLoadWaitFrame1};
+        RE::GPtr<RE::GFxMovieDef> definition(loader.CreateMovie(MovieFile, *flags));
+        if (!definition)
+            throw std::runtime_error(std::format("Scaleform CreateMovie failed for {}", MovieFile));
+        definition->Release(); // Adopt the returned reference; GPtr added its own.
+        uiMovie.reset(definition->CreateInstance());
+        if (!uiMovie)
+            throw std::runtime_error("Scaleform CreateInstance failed for the trade ledger");
+        uiMovie->Release();
+
+        // Same view setup as CommonLib's LoadMovie_Impl, with a full-window safe area.
+        // The ledger clamps its movable panel to the stage with its own edge margin.
+        auto state = RE::BSGraphics::State::GetSingleton();
+        if (!state)
+            throw std::runtime_error("Skyrim's display state is unavailable");
+        const auto [width, height] = state->frameBufferViewport;
+        if (width == 0 || height == 0 || width > INT32_MAX || height > INT32_MAX)
+            throw std::runtime_error("Skyrim's framebuffer viewport is invalid");
+        uiMovie->SetViewScaleMode(RE::GFxMovieView::ScaleModeType::kNoScale);
+        uiMovie->SetViewAlignment(RE::GFxMovieView::AlignType::kTopLeft);
+        uiMovie->SetBackgroundAlpha(0.0F);
+        RE::GViewport viewport;
+        viewport.bufferWidth = viewport.width = static_cast<std::int32_t>(width);
+        viewport.bufferHeight = viewport.height = static_cast<std::int32_t>(height);
+        uiMovie->SetViewport(viewport);
+        uiMovie->SetSafeRect(uiMovie->GetVisibleFrameRect());
+        fxDelegate = RE::make_gptr<RE::FxDelegate>();
+        fxDelegate->RegisterHandler(this);
+        uiMovie->SetState(RE::GFxState::StateType::kExternalInterface, fxDelegate.get());
+        uiMovie->Advance(0.0F);
+        if (uiMovie->IsAvailable("_root.InitExtensions"))
+            uiMovie->Invoke("_root.InitExtensions", nullptr, nullptr, 0);
+        RefreshPlatform();
+        SKSE::log::info("Trade ledger: direct movie load succeeded, viewport {}x{}", width, height);
+    }
+
     std::uint64_t gen_;
     bool failed_{true}, closing_{};
 };
