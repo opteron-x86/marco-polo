@@ -4,6 +4,8 @@ An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets pr
 
 The public name is **Skyrim True Economy and Merchantry**. The repository, DLL, data paths, Papyrus names and save identifiers retain `marco-polo` / `MarcoPolo`. The installed 0.2.2 menu still uses the former display name, Marco Polo; the standalone menu is being designed under the new name.
 
+The standalone menu design uses a compact, movable ledger with remembered price descriptions: very cheap, cheap, fair, expensive and very expensive. Market, route and rumor views use these descriptions; exact percentages remain available in the SKSE Menu Framework debug panel. A rumor spanning different price conditions can remain uncertain. Shortage and surplus labels would require remembered supply information; the current reports store prices, so those labels are not inferred from price alone.
+
 **0.2.2 adds vanilla voiced replies before innkeeper trade rumors.** The 0.2 series introduces remembered markets and trade rumors: learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. See [the release notes](docs/RELEASE.md) and [game test checklist](docs/TESTING.md) for voice selection and timing checks.
 
 The latest runtime test found broken voice-specific response links for Keerava and Delphine. The generic reply worked for the tested speakers. See [the voice test findings](docs/RUMOR-VOICES.md) before treating every reply variant as verified.

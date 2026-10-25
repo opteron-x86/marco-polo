@@ -51,7 +51,7 @@
 #stem-compact .st-news li:last-child{border-bottom:0;padding-bottom:6px}
 #stem-compact .st-newshead{display:flex;align-items:center;justify-content:space-between;gap:12px}
 #stem-compact .st-newshead button{text-align:left;font-weight:500;font-size:calc(var(--type) - 1px)}
-#stem-compact .st-newshead span{white-space:nowrap;font-variant-numeric:tabular-nums;font-size:calc(var(--type) - 1px)}
+#stem-compact .st-newshead span{white-space:nowrap;font-size:calc(var(--type) - 1px)}
 #stem-compact .st-newssource{margin-top:5px;font-size:calc(var(--type) - 2px);color:var(--muted)}
 #stem-compact .st-reopen{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);padding:9px 16px;border:1px solid light-dark(#d1bb82,#c9b17a);background:light-dark(#2b302a,#1d2420);color:light-dark(#f1eddf,#e7e6dc);font:400 14px/1.4 Inter,Arial,sans-serif;z-index:2;white-space:nowrap}
 #stem-compact .st-reopen[hidden]{display:none}
@@ -83,18 +83,27 @@ const holds={
 };
 const routes=[{good:0,from:'rift',to:'pale'},{good:2,from:'whiterun',to:'eastmarch'},{good:1,from:'reach',to:'haafingar'}];
 const news=[{hold:'pale',good:0,rate:[180,200],source:'Jonna · news 2d old'},{hold:'pale',good:3,rate:[140,160],source:'Jonna · news 2d old'},{hold:'falkreath',good:3,rate:[60,80],source:'Orgnar · news 5d old'}];
-const delta=n=>n===100?'0%':(n<100?'−':'+')+Math.abs(n-100)+'%';
-const rate=v=>v==null?'—':Array.isArray(v)?(delta(v[0]).slice(0,-1)+'–'+(v[0]>=100&&v[1]>=100?String(v[1]-100):delta(v[1]).slice(0,-1))+'%'):delta(v);
-const shade=v=>v==null?'st-none':(Array.isArray(v)?(v[0]+v[1])/2:v)<90?'st-lower':(Array.isArray(v)?(v[0]+v[1])/2:v)>120?'st-higher':'';
+// Qualitative price reports only. Supply labels require remembered supply data.
+// Keep the range private; a rumor spanning cheap/fair/expensive stays uncertain.
+const labels=['Very cheap','Cheap','Fair','Expensive','Very expensive'];
+const band=n=>n<65?0:n<85?1:n<=120?2:n<160?3:4;
+function priceState(v){
+ if(v==null)return {label:'Unknown',tone:'st-none'};
+ const [lo,hi]=Array.isArray(v)?v:[v,v],a=band(lo),b=band(hi);
+ const index=a===b?a:b<=1?1:a>=3?3:-1;
+ return {label:index<0?'Uncertain':labels[index],tone:index<0?'st-none':index<2?'st-lower':index>2?'st-higher':''};
+}
+const rate=v=>priceState(v).label;
+const shade=v=>priceState(v).tone;
 const defaults={compact:{tab:'markets',hold:'rift',x:.58,y:.13,locked:false,closed:false,pins:[],width:404,text:14},strip:{tab:'routes',hold:'rift',x:.39,y:.48,locked:false,closed:false,pins:[],width:600,text:14}};
 const copy=o=>JSON.parse(JSON.stringify(o));
 const saved=window.openai?.widgetState?.privateContent;
 function sanitize(v,k){const s={...copy(defaults[k]),...(v||{})};if(!['markets','routes','rumors'].includes(s.tab))s.tab=defaults[k].tab;if(!holds[s.hold])s.hold='rift';for(const [key,min,max] of [['x',0,1],['y',0,1],['width',320,700],['text',13,16]]){if(!Number.isFinite(s[key]))s[key]=defaults[k][key];s[key]=Math.min(max,Math.max(min,s[key]));}s.pins=Array.isArray(s.pins)?[...new Set(s.pins.filter(n=>Number.isInteger(n)&&n>=0&&n<routes.length))]:[];s.locked=!!s.locked;s.closed=!!s.closed;return s;}
 const state={compact:sanitize(saved?.compact,'compact'),strip:sanitize(saved?.strip,'strip')};
 function save(k){if(!window.openai?.setWidgetState)return;window.openai.setWidgetState({modelContent:{design:k==='compact'?'Compact Ledger':'Trade Strip',view:state[k].tab,hold:holds[state[k].hold].name,position:{x:state[k].x,y:state[k].y},locked:state[k].locked},privateContent:copy(state)}).catch(()=>{});}
-function market(s){const m=holds[s.hold];return `<div class="st-marketbar"><select class="cursor-interaction" data-action="hold" aria-label="Hold">${Object.entries(holds).map(([k,h])=>`<option value="${k}" ${k===s.hold?'selected':''}>${h.name}</option>`).join('')}</select><span class="st-age ${m.kind==='stale'?'st-old':''}" data-tooltip="${m.source}">${m.age}</span></div><table class="st-grid" aria-label="Remembered regional rates relative to usual"><thead><tr><th>Goods</th><th class="st-num">vs. usual</th></tr></thead><tbody>${goods.map((g,i)=>`<tr><td><span class="st-good">${icon(g[1])}${g[0]}</span></td><td class="st-num ${shade(m.rates[i])}" data-tooltip="${m.rates[i]==null?'No report':m.source}">${rate(m.rates[i])}</td></tr>`).join('')}</tbody></table>`;}
+function market(s){const m=holds[s.hold];return `<div class="st-marketbar"><select class="cursor-interaction" data-action="hold" aria-label="Hold">${Object.entries(holds).map(([k,h])=>`<option value="${k}" ${k===s.hold?'selected':''}>${h.name}</option>`).join('')}</select><span class="st-age ${m.kind==='stale'?'st-old':''}" data-tooltip="${m.source}">${m.age}</span></div><table class="st-grid" aria-label="Remembered market prices"><thead><tr><th>Goods</th><th class="st-num">Prices</th></tr></thead><tbody>${goods.map((g,i)=>`<tr><td><span class="st-good">${icon(g[1])}${g[0]}</span></td><td class="st-num ${shade(m.rates[i])}" data-tooltip="${m.rates[i]==null?'No report':m.source}">${rate(m.rates[i])}</td></tr>`).join('')}</tbody></table>`;}
 function routeCell(key,v){const m=holds[key];return `<td><div class="st-rateline"><span>${m.short}</span><span class="${shade(v)}">${rate(v)}</span></div><div class="st-routeage ${m.kind==='stale'?'st-old':''}" data-tooltip="${m.source}">${m.age}</div></td>`;}
-function routeView(s){return `<table class="st-grid st-routes" aria-label="Routes from remembered market reports"><thead><tr><th>Goods</th><th>From <span class="st-unit">· vs. usual</span></th><th>To <span class="st-unit">· vs. usual</span></th><th aria-label="Bookmark"></th></tr></thead><tbody>${routes.map((r,i)=>`<tr><td><div class="st-routegood">${goods[r.good][0]}</div></td>${routeCell(r.from,holds[r.from].rates[r.good])}${routeCell(r.to,holds[r.to].rates[r.good])}<td><button class="st-pin cursor-interaction" data-action="pin" data-value="${i}" aria-pressed="${s.pins.includes(i)}" aria-label="${s.pins.includes(i)?'Forget':'Remember'} ${goods[r.good][0].toLowerCase()} route" data-tooltip="${s.pins.includes(i)?'Forget':'Remember'} route">${icon(s.pins.includes(i)?'bookmark-check':'bookmark')}</button></td></tr>`).join('')}</tbody></table>`;}
+function routeView(s){return `<table class="st-grid st-routes" aria-label="Routes from remembered market reports"><thead><tr><th>Goods</th><th>From</th><th>To</th><th aria-label="Bookmark"></th></tr></thead><tbody>${routes.map((r,i)=>`<tr><td><div class="st-routegood">${goods[r.good][0]}</div></td>${routeCell(r.from,holds[r.from].rates[r.good])}${routeCell(r.to,holds[r.to].rates[r.good])}<td><button class="st-pin cursor-interaction" data-action="pin" data-value="${i}" aria-pressed="${s.pins.includes(i)}" aria-label="${s.pins.includes(i)?'Forget':'Remember'} ${goods[r.good][0].toLowerCase()} route" data-tooltip="${s.pins.includes(i)?'Forget':'Remember'} route">${icon(s.pins.includes(i)?'bookmark-check':'bookmark')}</button></td></tr>`).join('')}</tbody></table>`;}
 function rumorView(){return `<ul class="st-news" aria-label="Latest rumors">${news.map(n=>`<li><div class="st-newshead"><button class="cursor-interaction" data-action="report" data-value="${n.hold}">${holds[n.hold].name} · ${goods[n.good][0]}</button><span class="${shade(n.rate)}">${rate(n.rate)}</span></div><div class="st-newssource">${n.source}</div></li>`).join('')}</ul>`;}
 function scene(k){return root.querySelector(`[data-design="${k}"]`);}
 function position(k){const s=state[k],stage=scene(k),win=stage.querySelector('.st-window');if(!stage.clientWidth||s.closed)return;const minimum=stage.clientWidth<=560?620:560;const required=Math.max(minimum,win.offsetHeight+32);if(stage.style.minHeight!==required+'px')stage.style.minHeight=required+'px';const w=stage.clientWidth,h=stage.clientHeight;const left=Math.max(16,Math.min(s.x*w,w-win.offsetWidth-16)),top=Math.max(16,Math.min(s.y*h,h-win.offsetHeight-16));win.style.left=left+'px';win.style.top=top+'px';}
