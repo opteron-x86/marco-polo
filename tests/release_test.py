@@ -52,4 +52,29 @@ class ReleaseTests(unittest.TestCase):
             with self.assertRaises(ValueError):prepare.validate('v0.1.0',release,meta,commit,{**run,key:value})
         with self.assertRaises(ValueError):prepare.validate('v0.1.0-alpha.1',release,meta,commit,run)
 
+    def test_rumor_release_completeness(self):
+        with tempfile.TemporaryDirectory() as directory:
+            d=Path(directory);commit='b'*40;prefix='Marco-Polo-0.2.0-bbbbbbbb';dll=b'fixture DLL'
+            def archive(suffix,files):
+                with zipfile.ZipFile(d/(prefix+suffix+'.zip'),'w') as z:
+                    for name,body in files.items():z.writestr(name,body)
+            archive('',{'SKSE/Plugins/MarcoPolo.dll':dll,**{f'SKSE/Plugins/MarcoPolo/{n}.json':'{}' for n in ('settings','classification','economy')}})
+            archive('-symbols',{'MarcoPolo.pdb':b'fixture'})
+            archive('-source',{n:b'fixture' for n in ('CMakeLists.txt','src/runtime/Plugin.cpp','src/core/Economy.cpp','LICENSE')})
+            addon=ROOT/'addons/rumors'
+            files={p.relative_to(addon).as_posix():p.read_bytes() for p in addon.rglob('*') if p.is_file()}
+            files['LICENSE']=(ROOT/'LICENSE').read_bytes()
+            archive('-rumors',files)
+            meta={'version':'0.2.0','commit':commit,'dirty':False,'dll_sha256':hashlib.sha256(dll).hexdigest(),'optional_addons':['rumors']}
+            (d/'build-info.json').write_text(json.dumps(meta));(d/'release-notes.md').write_text('Fixture')
+            def sums():
+                (d/'SHA256SUMS.txt').write_text(''.join(f'{hashlib.sha256(p.read_bytes()).hexdigest()}  {p.name}\n' for p in sorted(d.iterdir()) if p.name!='SHA256SUMS.txt'))
+            sums();verify(d,'0.2.0',commit)
+            files['Scripts/MarcoPolo_RumorTopic.pex']=b'changed bytecode'
+            archive('-rumors',files);sums()
+            with self.assertRaises(ValueError):verify(d,'0.2.0',commit)
+            del files['SEQ/MarcoPolo - Trade Rumors.seq']
+            archive('-rumors',files);sums()
+            with self.assertRaises(ValueError):verify(d,'0.2.0',commit)
+
 if __name__=='__main__':unittest.main()

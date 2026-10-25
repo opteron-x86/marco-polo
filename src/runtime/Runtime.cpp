@@ -9,6 +9,7 @@
 namespace marco::runtime {
 std::recursive_mutex mutex;
 std::unique_ptr<Economy> economy;
+Knowledge knowledge;
 std::atomic_bool active{false};
 std::atomic_uint64_t generation{0};
 bool enabled = true, manageInventory = true, debugLogging = false;
@@ -20,6 +21,7 @@ std::mutex viewMutex;
 Snapshot snapshot;
 std::jthread ticker;
 bool loaded = false, loadFailed = false;
+json pendingKnowledge;
 std::string status = "Starting Marco Polo";
 double Now() {
     auto *c = RE::Calendar::GetSingleton();
@@ -301,6 +303,7 @@ void RestoreMerchant(const Context &c) {
 }
 bool Initialize() {
     std::lock_guard lock(mutex);
+    SetRumorsEnabled(false);
     try {
         std::ifstream f(std::string(DataPath) + "economy.json");
         economy = std::make_unique<Economy>(Config::Parse(json::parse(f)));
@@ -353,6 +356,9 @@ void Reset() {
     std::lock_guard lock(mutex);
     loaded = false;
     loadFailed = false;
+    knowledge.Reset();
+    pendingKnowledge = nullptr;
+    ResetInformation();
     if (economy)
         economy->NewGame(0, 1);
     {
@@ -363,22 +369,40 @@ void Reset() {
 void Start() {
     std::lock_guard lock(mutex);
     if (!economy || loadFailed) {
+        SetRumorsEnabled(false);
         Publish();
         return;
     }
     if (!loaded)
         economy->NewGame(Now(), static_cast<std::uint64_t>(
                                     std::chrono::steady_clock::now().time_since_epoch().count()));
+    if (!pendingKnowledge.is_null()) {
+        try {
+            knowledge.Load(pendingKnowledge, economy->Definitions(), Now());
+            SKSE::log::info("Restored remembered markets: {} holds", knowledge.Reports().size());
+        } catch (const std::exception &ex) {
+            // Information is optional and isolated: malformed reports must not
+            // disable trading or replace the economy saved in the ECON record.
+            knowledge.Reset();
+            SKSE::log::error("Market information discarded: {}", ex.what());
+        }
+        pendingKnowledge = nullptr;
+    }
+    knowledge.Capture(*economy);
     loaded = true;
     active = enabled;
+    SetRumorsEnabled(active);
     Publish();
+}
+unsigned AdvanceEconomy(double now, unsigned budget) {
+    return knowledge.Advance(*economy, now, budget);
 }
 void Tick() {
     std::lock_guard lock(mutex);
     if (!economy || !active)
         return;
     auto *ui = RE::UI::GetSingleton();
-    if (!ui || ui->GameIsPaused())
+    if (!ui || ui->GameIsPaused() || ui->IsMenuOpen(RE::LoadingMenu::MENU_NAME))
         return;
     // CWObj has stages 1 and 255. It is not a continuous progress counter.
     auto *civil = RE::TESForm::LookupByID<RE::TESQuest>(0x29940);
@@ -386,13 +410,14 @@ void Tick() {
     for (auto &m : economy->Definitions().markets)
         economy->SetConditions(m.id, war,
                                war * (m.id == "eastmarch" || m.id == "haafingar" ? .3 : .1));
-    unsigned steps = economy->Advance(Now(), 8);
+    unsigned steps = AdvanceEconomy(Now(), 8);
     if (steps) {
         if (debugLogging)
             SKSE::log::info("Economy day {}, {} steps, {} shipments", economy->Get().day, steps,
                             economy->Get().shipments.size());
     }
-    if (steps)
+    bool observed = economy->Get().day + 1 > Now() && ObserveSettlement();
+    if (steps || observed)
         Publish();
 }
 void Publish() {
@@ -401,14 +426,28 @@ void Publish() {
     v.status = status;
     if (v.ready) {
         v.market = Region(RE::PlayerCharacter::GetSingleton());
-        v.economy = economy->Save();
-        v.economy["date"] = DateForDay(economy->Get().day);
+        v.day = Now();
+        v.date = DateForDay(v.day);
+        v.known = knowledge.Reports();
+        v.opportunities = knowledge.Opportunities();
+        v.rumors = knowledge.RecentRumors();
         for (auto &market : economy->Definitions().markets)
-            v.economy["marketNames"][market.id] = market.name;
+            v.marketNames[market.id] = market.name;
         for (auto &good : economy->Definitions().commodities)
-            v.economy["commodityNames"][good.id] = good.name;
-        if (!v.market.empty())
-            v.reports = economy->Reports(v.market);
+            v.commodityNames[good.id] = good.name;
+        auto dates = [&](const TradeReport &r) {
+            for (double day : {r.observed, r.learned})
+                if (!v.dates.contains(day))
+                    v.dates[day] = DateForDay(day);
+        };
+        for (auto &[market, goods] : v.known)
+            for (auto &[good, report] : goods)
+                dates(report);
+        for (auto &r : v.rumors)
+            dates(r);
+        // Only the explicitly enabled debug page receives live warehouses.
+        if (debugLogging)
+            v.economy = economy->Save();
     }
     std::lock_guard lock(viewMutex);
     snapshot = std::move(v);
@@ -428,6 +467,12 @@ void Save(SKSE::SerializationInterface *s) {
             SKSE::log::error("Could not write economy co-save");
         else if (debugLogging)
             SKSE::log::info("Saved economy: day {}, {} bytes", economy->Get().day, data.size());
+        auto news = knowledge.Save().dump();
+        if (!s->OpenRecord(0x4B4E4F57, 1) ||
+            !s->WriteRecordData(news.data(), static_cast<std::uint32_t>(news.size())))
+            SKSE::log::error("Could not write market information co-save");
+        else if (debugLogging)
+            SKSE::log::info("Saved remembered markets: {} bytes", news.size());
     } catch (const std::exception &ex) {
         SKSE::log::error("Save: {}", ex.what());
     }
@@ -438,6 +483,20 @@ void Load(SKSE::SerializationInterface *s) {
         return;
     std::uint32_t type, version, length;
     while (s->GetNextRecordInfo(type, version, length)) {
+        if (type == 0x4B4E4F57) {
+            try {
+                if (version != 1 || length > 4 * 1024 * 1024)
+                    throw std::runtime_error("Unsupported or oversized information save");
+                std::string data(length, '\0');
+                if (s->ReadRecordData(data.data(), length) != length)
+                    throw std::runtime_error("Truncated market information save");
+                pendingKnowledge = json::parse(data);
+            } catch (const std::exception &ex) {
+                pendingKnowledge = nullptr;
+                SKSE::log::error("Market information unavailable: {}", ex.what());
+            }
+            continue;
+        }
         if (type != 0x45434F4E)
             continue;
         try {
@@ -467,6 +526,10 @@ void ExportState() {
         *p /= "MarcoPolo-state.json";
         std::ofstream f(*p);
         f << economy->Save().dump(2);
+        auto news = *p;
+        news.replace_filename("MarcoPolo-information.json");
+        std::ofstream info(news);
+        info << knowledge.Save().dump(2);
         RE::SendHUDMessage::ShowHUDMessage(
             "Marco Polo: diagnostic state exported beside SKSE logs.");
     }

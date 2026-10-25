@@ -1,5 +1,6 @@
 #pragma once
 #include "core/Economy.h"
+#include "core/Knowledge.h"
 #include <RE/Skyrim.h>
 #include <SKSE/SKSE.h>
 #include <atomic>
@@ -11,8 +12,14 @@ inline constexpr char DataPath[] = "Data/SKSE/Plugins/MarcoPolo/";
 struct Snapshot {
     bool ready{};
     std::string status, market;
+    double day{};
+    std::string date;
+    std::map<std::string, std::string> marketNames, commodityNames;
+    std::map<double, std::string> dates;
+    std::map<std::string, std::map<std::string, TradeReport>> known;
+    std::vector<PriceGap> opportunities;
+    std::vector<TradeReport> rumors;
     json economy;
-    std::vector<MarketReport> reports;
 };
 struct Context {
     RE::Actor *actor{};
@@ -24,6 +31,7 @@ struct Context {
 };
 extern std::recursive_mutex mutex;
 extern std::unique_ptr<Economy> economy;
+extern Knowledge knowledge;
 extern std::atomic_bool active;
 extern std::atomic_uint64_t generation;
 extern bool enabled, manageInventory, debugLogging;
@@ -49,4 +57,10 @@ bool RegisterMenu();
 int RawValue(const RE::InventoryEntryData *);
 bool PlainItem(const RE::InventoryEntryData *);
 void ExportState();
+unsigned AdvanceEconomy(double now, unsigned budget);
+void ObserveMarket(const std::string &market, const std::string &source);
+bool ObserveSettlement();
+void ResetInformation();
+void SetRumorsEnabled(bool enabled);
+bool RegisterPapyrus(RE::BSScript::IVirtualMachine *);
 } // namespace marco::runtime

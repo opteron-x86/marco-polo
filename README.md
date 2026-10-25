@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.1.8 focuses on trading, regional prices and merchant inventory.** The Missives addon and contract system have been removed. The profitable trading adjustments and merchant-gold correction remain unchanged. See [the game test checklist](docs/TESTING.md).
+**0.2.0 adds remembered markets and innkeeper trade rumors.** Learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. Trading prices, merchant gold and service expenses are unchanged. See [the game test checklist](docs/TESTING.md).
 
 ## Install
 
@@ -11,7 +11,9 @@ Built for **Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x**, using one DLL and alandtse 
 
 Install `Marco-Polo-<version>-<commit>.zip` with MO2 or Vortex. The core has **no ESP and no Papyrus scripts**.
 
-**Optional SKSE Menu Framework 3:** open **Marco Polo → Market ledger** for stock, prices and diagnostic export. Risa can provide access to SKSE Menu Framework; there is no separate Risa page.
+**Optional SKSE Menu Framework 3:** open **Marco Polo → Trade Status** for remembered rates, report dates, sources, recent rumors and possible trade routes. Risa can provide access to SKSE Menu Framework; there is no separate Risa page. Live warehouse stocks and current prices for every hold are available only on **Live markets (debug)** when `debugLogging` is enabled.
+
+**Optional innkeeper dialogue:** install the matching `Marco-Polo-<version>-<commit>-rumors.zip` and enable **MarcoPolo - Trade Rumors.esp**. Ask an innkeeper **Any news of trade?** and dismiss the unvoiced popup with OK. Reports appear in Trade Status. This addon contains an ESL-flagged ESP, a startup SEQ and two small Papyrus scripts; its only master is Skyrim.esm. It does not require Missives or a voice/silence mod. The popup works without Menu Framework; reviewing the tracker requires Menu Framework.
 
 Use a separate test save/profile. Keep the `.skse` co-save alongside its matching Skyrim save. Existing games initialize at the current game day, without simulating the character's entire past.
 
@@ -33,6 +35,16 @@ Drink includes ale, mead, wine, brandy and alcoholic drinks from Hearthfire and 
 
 Regional production and NPC consumption are explicit sources and sinks. This release does not simulate physical caravans, individual NPC households, service prices, training or house purchases.
 
+## Learning about markets
+
+Markets begin unknown. Entering a location marked as a city, town or inn records that hold's regional rates. The report updates on a new settlement visit, on a new game day while there, when opening barter, and after confirmed trades. Crossing a wilderness hold boundary alone does not reveal its markets. These are commodity rates, not saved item-by-item merchant offers.
+
+Distant reports retain their recorded values. The tracker shows when the prices were observed and, for rumors, when and from whom you heard them. Reports at least seven calendar days old are marked stale but remain available. Rates use 100% as the regional reference; rumor ranges are approximate. Possible routes compare only known reports, including their age and uncertainty. They are leads, not guaranteed profits or current executable quotes.
+
+Innkeepers in a hold share a daily batch of up to three reports from connected holds. News is drawn from actual earlier market samples, delayed by the incoming trade route's travel time (at least one day). Repeated requests, changing innkeepers within a hold and save/reload repeat the same batch. Older rumors never overwrite fresher firsthand information. A new economy has no earlier history; until distant news arrives, innkeepers discuss local prices. No reports are invented for the character's past.
+
+The tracker retains the latest report for each commodity and each hold's latest rumor batch. There are no paper items or growing inventory stacks. Information gathering does not change prices, supply, merchant gold, the economy RNG or service costs.
+
 ## Settings and diagnostics
 
 Files live under `SKSE/Plugins/MarcoPolo/`:
@@ -47,9 +59,9 @@ Restart Skyrim after edits. Saved market/commodity definitions must remain compa
 
 `economy.json` policy fields `barterExponent` and `minimumBarterMargin` control the spread. Set them to `1` and `0` to retain the game's original multipliers. Market `priceFactors` default to `1` when omitted, so existing custom definitions remain valid. These settings affect classified goods; unclassified goods use the game's pricing.
 
-The co-save stores stocks, merchants, shipments, time and RNG state. Loading a save restores its economy; switching characters clears the previous session. `MarcoPolo.log` is beside the SKSE logs. With `debugLogging` enabled, the optional ledger can export `MarcoPolo-state.json` there.
+The co-save stores stocks, merchants, shipments, time and RNG state. A separate versioned record stores remembered reports, daily rumor batches and up to 32 days of market history. Loading a save restores both; switching characters clears the previous session. Missing or invalid information data starts a new information history without resetting the trading economy. `MarcoPolo.log` is beside the SKSE logs. With `debugLogging` enabled, the debug page exports `MarcoPolo-state.json` and `MarcoPolo-information.json` there.
 
-Version 0.1.8 writes schema 3, containing economy and trading state. Schema-1/2 market data can still be imported, but obsolete contract data is discarded. Earlier DLLs cannot read schema 3. Remove the old Marco Polo Missives addon when setting up a new game; it is no longer shipped or used. Upgrades from before 0.1.5 retain the immediate narrower barter spread, while existing regional prices converge over subsequent game days. Loading schema 1 initializes only the household-goods stock introduced in 0.1.4.
+Version 0.2.0 retains economy schema 3 from 0.1.8 and adds information schema 1 in its own co-save record. Existing economies begin with unknown markets and gather reports through play. Schema-1/2 market data can still be imported, but obsolete contract data is discarded. DLLs before 0.1.8 cannot read economy schema 3; 0.1.8 ignores the new information record. Remove the old Marco Polo Missives addon when setting up a new game; it is no longer shipped or used. Upgrades from before 0.1.5 retain the immediate narrower barter spread, while existing regional prices converge over subsequent game days. Loading schema 1 initializes only the household-goods stock introduced in 0.1.4.
 
 ## Build
 

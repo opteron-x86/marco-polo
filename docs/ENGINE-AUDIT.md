@@ -1,6 +1,8 @@
 # Skyrim desktop runtime and engine audit
 
-Version 0.1.8 removes the entire Missives integration, including its description/book detours, ContainerMenu hooks, QuickLoot callbacks, note records and contract system. Current runtime audits cover only merchant trading and inventory reset hooks.
+Version 0.2.0 adds report history, a Menu Framework page and an optional native Papyrus callback for innkeeper rumors. It introduces no new detours. The popup uses pinned CommonLib's `MessageBoxMenu::Create` dispatch: SE ID 51421, earlier AE ID 52270 and post-1.6.1130/1.7.x ID 442726. The audit now checks that call's availability alongside the existing trading hooks in supplied address tables. Innkeeper faction membership and location traversal use CommonLib APIs, with game access queued onto the game thread. The dialogue ESP uses form version 44 and light-plugin IDs 0x800–0x804.
+
+Version 0.1.8 removed the entire Missives integration, including its description/book detours, ContainerMenu hooks, QuickLoot callbacks, note records and contract system. Those integrations remain absent.
 
 A brief check of the fresh E395B0C6 character found both new main saves completely decompressible and both SKSE co-save containers well-formed. Each Marco Polo record parsed as schema 2, day 1, with zero merchants and zero contracts. The 22:47:11 crash on 2026-10-24 repeated SkyrimSE+0x1E0950 with the invalid ownership pointer 0xE885 during actor inventory reset. This same signature previously reproduced with Marco Polo's DLL absent. The preceding 22:35:38 and 22:42:44 crashes instead dereferenced null at SkyrimSE+0x4FDACF. None establishes the originating writer or proves the saves can load. Original files were backed up and not edited; investigation stops at the user's request.
 

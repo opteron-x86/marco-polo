@@ -212,6 +212,7 @@ void Select(const RE::FxDelegateArgs &args) {
     tracked.protectedItem = protect;
     SyncMerchant(c);
     RefreshGold(menu, c);
+    ObserveMarket(c.market, c.actor->GetName());
     Publish();
     if (debugLogging)
         SKSE::log::info("{} {} x {}: {} gold, market {}, external={}, player gold delta={}, vendor "
@@ -438,7 +439,7 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
             auto c = Vendor();
             if (c) {
                 double now = RE::Calendar::GetSingleton()->GetDaysPassed();
-                economy->Advance(now, 32);
+                AdvanceEconomy(now, 32);
                 if (economy->Get().day + 1 <= now) {
                     RE::UIMessageQueue::GetSingleton()->AddMessage(
                         RE::BarterMenu::MENU_NAME, RE::UI_MESSAGE_TYPE::kHide, nullptr);
@@ -448,6 +449,7 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
                 }
                 RestoreMerchant(c);
                 SyncMerchant(c, true);
+                ObserveMarket(c.market, c.actor->GetName());
                 auto menu = RE::UI::GetSingleton()->GetMenu<RE::BarterMenu>();
                 if (menu) {
                     WrapQuantity(menu.get());

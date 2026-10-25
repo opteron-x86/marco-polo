@@ -78,6 +78,9 @@ extern "C" __declspec(dllexport) bool SKSEPlugin_Load(const SKSE::LoadInterface 
         s->SetSaveCallback(marco::runtime::Save);
         s->SetLoadCallback(marco::runtime::Load);
         s->SetRevertCallback([](auto *) { marco::runtime::Reset(); });
+        auto *papyrus = SKSE::GetPapyrusInterface();
+        if (!papyrus || !papyrus->Register(marco::runtime::RegisterPapyrus))
+            return false;
         return SKSE::GetMessagingInterface()->RegisterListener(Message);
     } catch (const std::exception &e) {
         SKSE::log::error("Load failed: {}", e.what());

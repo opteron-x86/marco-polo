@@ -46,6 +46,12 @@ class AddressFormats(unittest.TestCase):
         with self.assertRaises(ValueError):
             audit.check_table(se, True, hooks)
 
+    def test_popup_id_renumbering(self):
+        for version, ident in [((1,5,97,0),51421), ((1,6,640,0),52270),
+                               ((1,6,1130,0),442726), ((1,7,104,0),442726)]:
+            self.assertEqual(audit.check_information({ident:0x1000},version)[0]['id'],ident)
+            with self.assertRaises(ValueError):audit.check_information({},version)
+
 
 if __name__ == '__main__':
     unittest.main()

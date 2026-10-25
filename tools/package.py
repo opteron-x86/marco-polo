@@ -23,6 +23,7 @@ def main():
     if args.output.exists() and any(args.output.iterdir()):
         parser.error('Use an empty output directory')
     subprocess.run([sys.executable,str(ROOT/'tools/audit-dll.py'),str(dll)],check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/build-rumors.py'),'--check'],check=True)
     commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     dirty = bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
     prefix = f'Marco-Polo-{version()}-{commit[:8]}' + ('-dirty' if dirty else '')
@@ -44,6 +45,10 @@ def main():
             parser.error(f'Missing dependency license: {notice}')
         files[f'licenses/{name}.txt']=notice
     write('',files)
+    rumor_root = ROOT/'addons/rumors'
+    rumor_files = {p.relative_to(rumor_root).as_posix():p for p in rumor_root.rglob('*') if p.is_file()}
+    rumor_files['LICENSE'] = ROOT/'LICENSE'
+    write('-rumors',rumor_files)
     write('-symbols',{'MarcoPolo.pdb':pdb})
     tracked=subprocess.check_output(['git','ls-files','-z'],cwd=ROOT).decode().split('\0')
     source={p:ROOT/p for p in tracked if p and (ROOT/p).is_file()}
@@ -59,6 +64,7 @@ def main():
           'workflow_run':os.getenv('GITHUB_RUN_ID'),'runtime':'Skyrim SE 1.5.97 and AE 1.6.x / 1.7.x',
           'commonlib_commit':'12d61f3c39f7d4ba1b1ab543df2bca0e613dc747',
           'in_game_validation':'pending',
+          'optional_addons':['rumors'],
           'test_report':'Linux sanitizer tests and Windows CTest in linked CI run' if os.getenv('GITHUB_ACTIONS') else 'Local build; consult the local test logs'}
     (args.output/'build-info.json').write_text(json.dumps(meta,indent=2)+'\n')
     (args.output/'release-notes.md').write_text((ROOT/'docs/RELEASE.md').read_text())

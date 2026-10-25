@@ -143,6 +143,15 @@ def csv_addresses(path, ae):
                 for row in csv.DictReader(stream)}
 
 
+def check_information(database, version):
+    # Match pinned CommonLib's MessageBoxMenu::Create dispatch. This is a call,
+    # not a new detour, and must work on both sides of AE's ID renumbering.
+    ident = 51421 if version < (1, 6, 0, 0) else 52270 if version < (1, 6, 1130, 0) else 442726
+    if not database.get(ident):
+        raise ValueError(f'Missing MessageBoxMenu::Create: ID {ident}')
+    return [{'site': 'Trade-rumor message box', 'id': ident, 'address': hex(database[ident])}]
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--commonlib', type=Path, required=True)
@@ -174,6 +183,7 @@ if __name__ == '__main__':
     records = []
     for path, version, database in tables:
         sites = check_table(database, version >= (1, 6, 0, 0), hook)
+        sites += check_information(database, version)
         records.append({'version': '.'.join(map(str, version)), 'table': path.name,
                         'sha256': hashlib.sha256(path.read_bytes()).hexdigest(), 'sites': sites})
     if records:

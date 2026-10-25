@@ -1,21 +1,77 @@
-# Game testing for 0.1.8
+# Game testing for 0.2.0
 
-The current build contains regional trading and inventory simulation, with an optional SKSE Menu Framework market ledger. It has no addon ESP, board integration, paper management or supply contracts.
+This build adds remembered markets and optional innkeeper rumors. Prices, merchant
+funding, inventories and service costs retain their previous behavior. The core
+remains DLL-only; the new dialogue addon contains an ESL-flagged ESP and two small
+Papyrus scripts. There is no board integration or paper management.
 
-Automated tests cover deterministic simulation, save restoration and migration, invalid-data rollback, stock conservation, exact stack pricing, route profits, finite cash, Speech ordering and five simulated years. Windows compilation and runtime audits verify the native adapter's build and relocation coverage. These checks do not execute Skyrim.
+Automated tests cover unchanged deterministic simulation, trading conservation,
+route profits, information isolation, history bounds, dated rumors, anti-reroll
+behavior, save restoration and invalid-data rollback. Binary checks validate the
+addon dialogue, conditions, callback, startup SEQ and compiled script manifest.
+Windows compilation and address-table audits do not execute Skyrim.
 
-## Focused game checks
+## Remembered markets and rumors
 
-Use a new test game with the core enabled and the old Marco Polo addon removed. Keep the matching SKSE and Address Library for your runtime. Enable debug logging to record transactions.
+Install both matching archives, enable `MarcoPolo - Trade Rumors.esp`, and use
+SKSE Menu Framework 3 for the tracker. Existing 0.1.8 economy saves can initialize
+an empty information history; a fresh test character is also suitable. Fully
+restart Skyrim after installing the DLL.
 
-1. Open a merchant and compare list, card and quantity prices. Buy and sell one item, then a stack. The actual gold change must equal the quoted total. Cancelling must leave goods and gold unchanged.
-2. Sell near the merchant's cash limit. The displayed gold and available funds in the log must agree. A sale should succeed when the merchant can cover its full price.
-3. Buy drinks in the Rift and sell in the Pale, weapons from Whiterun to Winterhold, or silver from the Reach to Haafingar. Record actual purchase and sale totals and travel costs. More supply should narrow later offers; buying and immediately reselling locally should lose money.
-4. Check household clutter, mod-added alcohol, books, clothing and mixed chest/display stock. Supported goods should respond to local supply, and all legitimate stock must remain purchasable.
-5. Wait several game days and revisit merchants. Ordinary stocks should respond to supply; unique, quest, enchanted and custom items should retain their protections.
-6. Save to a new slot, exit to desktop, relaunch and load. Confirm restoration in the log and in the market ledger. Preserve the save/co-save pair if loading fails; a parseable co-save alone does not establish a working game save.
-7. Check the optional market ledger, then repeat without it. Repeat startup, barter, restock and save/reload on supported SE 1.5.97, AE 1.6.x and AE 1.7.x runtimes.
+1. Enter Whiterun or the Bannered Mare. Allow about two seconds of unpaused play,
+   then open **Marco Polo → Trade Status**. Whiterun should have current reports;
+   unvisited markets should say **Unknown**. Opening or switching the menu must
+   not reveal or refresh other holds. Crossing a wilderness hold border alone
+   must not reveal its market.
+2. Ask Hulda **Any news of trade?** The conversation should open an unvoiced OK
+   popup. After dismissing it, **Recent trade rumors** should show its reports.
+   On the economy's first day, local news is expected: no distant historical
+   prices exist yet. The popup must work without Fuz Ro D-oh or Menu Framework;
+   the tracker itself requires Menu Framework.
+3. Let five or six game days pass, allowing a few seconds of unpaused play after
+   waiting. Ask again. Connected distant holds should now have a few approximate
+   commodity ranges, dated earlier than the day you heard them. Other commodities
+   in those holds should remain unknown. Asking again that day or asking another
+   innkeeper in the same hold must repeat the batch and preserve its dates.
+4. Record a report from one hold, travel to another, and let several days pass.
+   The first hold's report should retain its value and date. At seven days old it
+   should say **stale**. A return visit or barter refreshes that hold's reports.
+   Older rumors must not overwrite fresher firsthand observations. Price-gap
+   suggestions must use only remembered reports and show their ages.
+5. Buy or sell an item. The local commodity report should reflect the resulting
+   regional rate; actual item prices still include the merchant's offer. Confirm
+   list, card, quantity total and actual gold change remain consistent.
+6. Save to a new slot, quit to desktop, restart and reload. Remote reports, dates,
+   rumor sources and the daily batch should survive. Reloading then repeating the
+   same request must not generate different news. A local visit after loading may
+   refresh the current hold normally. Keep each ESS with its matching SKSE co-save.
+7. Switch to another character or start a fresh game: it must not inherit the
+   previous character's reports. Check a non-innkeeper: the topic should be absent.
+   Check another inn, including a replacement innkeeper or mod-added innkeeper in
+   the normal innkeeper/room-rental factions.
+8. With `debugLogging: true`, verify **Live markets (debug)** still exposes current
+   global prices and stocks and exports both diagnostic JSON files. The ordinary
+   Trade Status page must continue using remembered reports even with logging on.
+   Without debug logging, the live page should be absent.
 
-The user's previous tests confirmed profitable trading and the merchant-gold log correction. General save/load stability remains unresolved. The latest reported load crash repeats the invalid inventory-ownership pointer previously seen with Marco Polo absent; see [the engine audit](ENGINE-AUDIT.md). No further board testing is requested.
+Repeat dialogue, popup, barter and save/reload on SE 1.5.97, AE 1.6.x and AE 1.7.x
+with matching SKSE and Address Library. Normal quest dialogue must remain intact.
+The new plugin uses old-runtime-compatible light-plugin IDs and form version 44.
 
-Report the DLL version, Skyrim runtime, merchant, item, quantity, displayed price, actual gold change and reproduction steps. Include MarcoPolo.log and the crash report when available.
+## Trading regression checks
+
+- Buy/sell one item and a stack; actual gold must match the quote. Cancellation
+  must change neither items nor gold. Sell close to the displayed merchant funds.
+- Try drinks from the Rift to the Pale, weapons from Whiterun to Winterhold, and
+  silver from the Reach to Haafingar. Record actual costs and receipts. Immediate
+  local resale should lose money and supplying a market should narrow margins.
+- Check household clutter, mod-added drinks, books, clothing and mixed merchant
+  chest/display stock. All legitimate offered stock must remain purchasable.
+- Revisit after several days. Ordinary stock should respond to supply; protected
+  quest, enchanted and custom items must retain their protections.
+
+The previous save/load failures were not conclusively diagnosed; this build does
+not claim to repair them. Testing the new dialogue and information record remains
+necessary. Report the runtime, DLL version, NPC, menu action and reproduction
+steps, with MarcoPolo.log and any crash report. Debug exports are
+`MarcoPolo-state.json` and `MarcoPolo-information.json` beside the SKSE logs.

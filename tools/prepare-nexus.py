@@ -33,6 +33,8 @@ def main():
         delimiter='notes_'+uuid.uuid4().hex
         with open(output,'a') as out:
             out.write(f'version={args.tag[1:]}\nfilename={args.output/(prefix+".zip")}\nchangelog<<{delimiter}\n{(args.output/"release-notes.md").read_text()}\n{delimiter}\n')
+            if 'rumors' in meta.get('optional_addons',[]):
+                out.write(f'rumors_filename={args.output/(prefix+"-rumors.zip")}\n')
     print('Verified tagged commit, successful CI, package checksums and DLL')
 
 if __name__=='__main__':main()

@@ -21,7 +21,9 @@ def verify(directory, expected_version, commit):
     if not re.fullmatch(r'[0-9a-f]{40}', commit):
         raise ValueError('Full source commit required')
     prefix = f'Marco-Polo-{expected_version}-{commit[:8]}'
-    expected = {prefix+s+'.zip' for s in ('', '-symbols', '-source')}
+    with_rumors = tuple(map(int, expected_version.split('.'))) >= (0, 2, 0)
+    suffixes = ('', '-symbols', '-source', '-rumors') if with_rumors else ('', '-symbols', '-source')
+    expected = {prefix+s+'.zip' for s in suffixes}
     expected |= {'build-info.json', 'release-notes.md'}
     sums = {}
     for line in (directory / 'SHA256SUMS.txt').read_text().splitlines():
@@ -53,6 +55,22 @@ def verify(directory, expected_version, commit):
     with zipfile.ZipFile(directory / (prefix+'-symbols.zip')) as archive:
         if archive.namelist() != ['MarcoPolo.pdb']:
             raise ValueError('Unexpected symbols archive')
+    if with_rumors:
+        if meta.get('optional_addons') != ['rumors']:
+            raise ValueError('Rumor addon missing from build metadata')
+        with zipfile.ZipFile(directory / (prefix+'-rumors.zip')) as archive:
+            required = {'MarcoPolo - Trade Rumors.esp', 'SEQ/MarcoPolo - Trade Rumors.seq',
+                        'Scripts/MarcoPolo_Native.pex', 'Scripts/MarcoPolo_RumorTopic.pex',
+                        'Scripts/Source/MarcoPolo_Native.psc', 'Scripts/Source/MarcoPolo_RumorTopic.psc',
+                        'README.md', 'LICENSE', 'script-build.json'}
+            if set(archive.namelist()) != required:
+                raise ValueError('Rumor addon incomplete or contains unexpected files')
+            scripts = json.loads(archive.read('script-build.json'))['sha256']
+            if set(scripts) != {n for n in required if n.startswith('Scripts/')}:
+                raise ValueError('Rumor scripts manifest incomplete')
+            for name,digest in scripts.items():
+                if hashlib.sha256(archive.read(name)).hexdigest() != digest:
+                    raise ValueError('Rumor script differs from compiled-source manifest')
     with zipfile.ZipFile(directory / (prefix+'-source.zip')) as archive:
         if not {'CMakeLists.txt','src/runtime/Plugin.cpp','src/core/Economy.cpp','LICENSE'}.issubset(archive.namelist()):
             raise ValueError('Source archive incomplete')

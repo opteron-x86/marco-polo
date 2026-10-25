@@ -1,0 +1,9 @@
+{
+  "compiler": "Bethesda PapyrusCompiler",
+  "sha256": {
+    "Scripts/MarcoPolo_Native.pex": "86920e5db5b07cba641eb3177170ade1cc07dacb16ca4e4e5b17a57ede79a135",
+    "Scripts/MarcoPolo_RumorTopic.pex": "be7eb421ed12efe79639186d5afb51bcc25d079582361fd1fd154c7d92fb20bf",
+    "Scripts/Source/MarcoPolo_Native.psc": "8adbcfb7c0449726e38c87981dae1c9b10defc5a9872e179c0041a529edf5311",
+    "Scripts/Source/MarcoPolo_RumorTopic.psc": "9a7726bb11a5149e5e68257735af21a1c9abb9745f533e6c7078eb8784fc6e90"
+  }
+}

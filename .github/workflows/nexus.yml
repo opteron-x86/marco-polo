@@ -57,3 +57,19 @@ jobs:
           allow_mod_manager_download: 'true'
           update_mod_version: 'true'
           changelog: ${{ steps.release.outputs.changelog }}
+      - name: Upload optional trade rumors
+        if: vars.NEXUSMODS_RUMORS_FILE_ID != '' && steps.release.outputs.rumors_filename != ''
+        uses: Nexus-Mods/upload-action@98532f7670c27cbecc78fae03fa3e278147827e2
+        with:
+          api_key: ${{ secrets.NEXUSMODS_API_KEY }}
+          file_id: ${{ vars.NEXUSMODS_RUMORS_FILE_ID }}
+          mod_id: ${{ vars.NEXUSMODS_MOD_ID }}
+          filename: ${{ steps.release.outputs.rumors_filename }}
+          version: ${{ steps.release.outputs.version }}
+          display_name: Marco Polo - Trade Rumors
+          description: Optional unvoiced innkeeper dialogue for remembered market reports.
+          category: optional
+          archive_existing_version: 'true'
+          primary_mod_manager_download: 'false'
+          allow_mod_manager_download: 'true'
+          update_mod_version: 'false'
