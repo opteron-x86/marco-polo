@@ -1,6 +1,14 @@
-# Game testing for 0.2.0
+# Game testing for 0.2.1
 
-This build adds remembered markets and optional innkeeper rumors. Prices, merchant
+First check the dialogue correction: upgrade both the core and Trade Rumors addon,
+restart Skyrim completely, load the current 0.2.0 save and talk to an innkeeper
+such as Hulda. **Any news of trade?** should appear and open a news popup when
+selected. This patch retains all form IDs and requires no new game or quest reset.
+If it is still missing, leave `debugLogging` enabled: each opened conversation
+records a `Trade-rumor dialogue:` line with speaker, eligibility, global, quest,
+conditions and record linkage. An absent addon is reported separately at load.
+
+The 0.2 series adds remembered markets and optional innkeeper rumors. Prices, merchant
 funding, inventories and service costs retain their previous behavior. The core
 remains DLL-only; the new dialogue addon contains an ESL-flagged ESP and two small
 Papyrus scripts. There is no board integration or paper management.

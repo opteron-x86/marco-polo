@@ -28,6 +28,53 @@ bool Innkeeper(RE::Actor *actor) {
     auto *rooms = RE::TESForm::LookupByID<RE::TESFaction>(0x9CC97);
     return (job && actor->IsInFaction(job)) || (rooms && actor->IsInFaction(rooms));
 }
+void LogRumorDialogue() {
+    auto *ui = RE::UI::GetSingleton();
+    if (!ui || !ui->IsMenuOpen(RE::DialogueMenu::MENU_NAME))
+        return;
+    auto *manager = RE::MenuTopicManager::GetSingleton();
+    auto ref = manager ? manager->speaker.get() : RE::NiPointer<RE::TESObjectREFR>{};
+    auto *actor = ref ? ref->As<RE::Actor>() : nullptr;
+    auto *player = RE::PlayerCharacter::GetSingleton();
+    auto *data = RE::TESDataHandler::GetSingleton();
+    if (!actor || !player || !data) {
+        SKSE::log::info("Trade-rumor dialogue: speaker or game data not yet available");
+        return;
+    }
+    auto *quest = data->LookupForm<RE::TESQuest>(0x800, RumorPlugin);
+    auto *branch = data->LookupForm<RE::BGSDialogueBranch>(0x801, RumorPlugin);
+    auto *topic = data->LookupForm<RE::TESTopic>(0x802, RumorPlugin);
+    auto *info = data->LookupForm<RE::TESTopicInfo>(0x803, RumorPlugin);
+    auto *global = data->LookupForm<RE::TESGlobal>(0x804, RumorPlugin);
+    bool linked = quest && branch && topic && info && branch->quest == quest &&
+                  branch->startingTopic == topic && topic->ownerQuest == quest &&
+                  topic->ownerBranch == branch && info->parentTopic == topic;
+    bool listed =
+        topic && topic->topicInfos && topic->numTopicInfos == 1 && topic->topicInfos[0] == info;
+    SKSE::log::info("Trade-rumor dialogue: {} ({:08X}), innkeeper {}, active {}, global {}, "
+                    "quest running {}, quest enabled {}, INFO conditions {}, links {}, "
+                    "INFO listed {}, INFO count {}",
+                    actor->GetName(), actor->GetFormID(), Innkeeper(actor), active.load(),
+                    global ? global->value : -1.0f, quest && quest->IsRunning(),
+                    quest && quest->IsEnabled(), info && info->objConditions.IsTrue(actor, player),
+                    linked, listed, topic ? topic->numTopicInfos : 0);
+}
+class DialogueEvents final : public RE::BSTEventSink<RE::MenuOpenCloseEvent> {
+    RE::BSEventNotifyControl ProcessEvent(const RE::MenuOpenCloseEvent *event,
+                                          RE::BSTEventSource<RE::MenuOpenCloseEvent> *) override {
+        if (debugLogging && event && event->opening &&
+            event->menuName == RE::DialogueMenu::MENU_NAME) {
+            auto gen = generation.load();
+            // Run after menu-open dispatch, when the speaker handle is set.
+            SKSE::GetTaskInterface()->AddTask([gen] {
+                std::lock_guard lock(mutex);
+                if (debugLogging && generation == gen)
+                    LogRumorDialogue();
+            });
+        }
+        return RE::BSEventNotifyControl::kContinue;
+    }
+} dialogueEvents;
 void HearTradeRumors(RE::StaticFunctionTag *, RE::Actor *speaker) {
     // Papyrus may call on a VM worker. Only retain identity; all game access and
     // popup creation below run through SKSE's game-thread task queue.
@@ -96,10 +143,22 @@ void ResetInformation() {
     lastObservationDay = -1;
     lastRegion.clear();
 }
+void RegisterInformation() {
+    static bool registered{};
+    auto *ui = RE::UI::GetSingleton();
+    if (debugLogging && !registered && ui) {
+        ui->AddEventSink<RE::MenuOpenCloseEvent>(&dialogueEvents);
+        registered = true;
+    }
+}
 void SetRumorsEnabled(bool value) {
     auto *data = RE::TESDataHandler::GetSingleton();
-    if (auto *global = data ? data->LookupForm<RE::TESGlobal>(0x804, RumorPlugin) : nullptr)
+    auto *global = data ? data->LookupForm<RE::TESGlobal>(0x804, RumorPlugin) : nullptr;
+    if (global)
         global->value = value ? 1.0f : 0.0f;
+    if (debugLogging)
+        SKSE::log::info("Trade-rumor addon: availability record {}, enabled {}",
+                        global ? global->GetFormID() : 0, global && value);
 }
 void ObserveMarket(const std::string &market, const std::string &source) {
     double now = Now();

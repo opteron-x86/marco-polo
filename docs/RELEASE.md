@@ -1,4 +1,21 @@
-# Marco Polo 0.2.0 — Remembered markets and trade rumors
+# Marco Polo 0.2.1 — Innkeeper dialogue correction
+
+The 0.2.0 Trade Rumors addon loaded and its quest started in the reported save,
+but the innkeeper option did not appear. This build replaces its empty response
+with a short unvoiced line and writes the dialogue groups in canonical order.
+Form IDs, conditions, quest identity, scripts and saved information stay the
+same. The correction needs an in-game dialogue check; the exact cause has not
+yet been established.
+
+With debug logging enabled, opening dialogue now records the speaker, innkeeper
+eligibility, availability global, quest state, INFO conditions and record links.
+These checks only report state; they do not restart quests or alter conditions.
+
+Papyrus source files now retain LF line endings on Windows checkouts. This fixes
+the 0.2.0 CI packaging failure caused by source hashes changing during checkout;
+the source/bytecode manifest remains enforced.
+
+## Remembered markets and trade rumors
 
 Trade Status replaces the normal live market ledger. Visiting a town or inn,
 opening barter and completing trades record local commodity rates. Distant

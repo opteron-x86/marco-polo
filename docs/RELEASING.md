@@ -28,3 +28,6 @@ scripts with `tools/compile-rumors.py --help` and Bethesda's compiler/headers. P
 and debug timestamps and machine names are normalized. The compiler and Bethesda headers
 are not distributed. Automated binary tests verify the dialogue chain, conditions,
 fragment attachment, startup SEQ and expected compiled entry-point names.
+The repository attributes keep PSC source at LF on Windows as well as Linux;
+PEX, ESP and SEQ files are binary. Do not regenerate the script manifest to accept
+checkout line-ending changes.

@@ -37,7 +37,9 @@ def generate():
         ('ENAM', struct.pack('<HH', 0x801, 0)), # Goodbye, No LIP file.
         ('CNAM', b'\0'),
         ('TRDT', bytes(12) + b'\x01' + bytes(11)),
-        ('NAM1', ztext('')), ('NAM2', ztext('')), ('NAM3', ztext('')),
+        # A real response keeps this a normal selectable dialogue INFO. The
+        # OnBegin fragment supplies the news in a popup without voice assets.
+        ('NAM1', ztext("Here's what I've heard.")), ('NAM2', ztext('')), ('NAM3', ztext('')),
         ('CTDA', condition(74, ENABLED)),
         ('CTDA', condition(71, 0x5091B, or_next=True)), # JobInnkeeperFaction
         ('CTDA', condition(71, 0x9CC97)),             # JobRentRoomFaction
@@ -46,17 +48,18 @@ def generate():
     content = group(b'GLOB', [record('GLOB', ENABLED, [
         ('EDID', ztext('MarcoPoloTradeRumorsEnabled')), ('FNAM', b's'),
         ('FLTV', struct.pack('<f', 0))])])
+    # Use the same canonical top-level group order as CK/xEdit plugins.
+    content += group(b'DIAL', [record('DIAL', TOPIC, [
+        ('EDID', ztext('MarcoPoloTradeRumorsTopic')), ('FULL', ztext('Any news of trade?')),
+        ('PNAM', struct.pack('<f', 50)), ('BNAM', u32(BRANCH)), ('QNAM', u32(QUEST)),
+        ('DATA', bytes(4)), ('SNAM', b'CUST'), ('TIFC', u32(1))]),
+        group(u32(TOPIC), [info], 7)])
     content += group(b'QUST', [record('QUST', QUEST, [
         ('EDID', ztext('MarcoPoloTradeRumors')), ('FULL', ztext('Trade rumors')),
         ('DNAM', struct.pack('<HBBII', 1, 30, 65, 0, 0)), ('NEXT', b'')])])
     content += group(b'DLBR', [record('DLBR', BRANCH, [
         ('EDID', ztext('MarcoPoloTradeRumorsBranch')), ('QNAM', u32(QUEST)),
         ('TNAM', u32(0)), ('DNAM', u32(1)), ('SNAM', u32(TOPIC))])])
-    content += group(b'DIAL', [record('DIAL', TOPIC, [
-        ('EDID', ztext('MarcoPoloTradeRumorsTopic')), ('FULL', ztext('Any news of trade?')),
-        ('PNAM', struct.pack('<f', 50)), ('BNAM', u32(BRANCH)), ('QNAM', u32(QUEST)),
-        ('DATA', bytes(4)), ('SNAM', b'CUST'), ('TIFC', u32(1))]),
-        group(u32(TOPIC), [info], 7)])
     header = record('TES4', 0, [
         ('HEDR', struct.pack('<fII', 1.7, 10, 0x805)), # Five records + five groups.
         ('CNAM', ztext('opteron-x86')),

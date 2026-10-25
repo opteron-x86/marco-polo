@@ -49,7 +49,13 @@ class AddressFormats(unittest.TestCase):
     def test_popup_id_renumbering(self):
         for version, ident in [((1,5,97,0),51421), ((1,6,640,0),52270),
                                ((1,6,1130,0),442726), ((1,7,104,0),442726)]:
-            self.assertEqual(audit.check_information({ident:0x1000},version)[0]['id'],ident)
+            diagnostic_ids = (514959,29074) if version < (1,6,0,0) else (401099,29888)
+            database = {entry:0x1000 for entry in (ident, *diagnostic_ids)}
+            self.assertEqual(audit.check_information(database,version)[0]['id'],ident)
+            for missing in database:
+                with self.assertRaises(ValueError):
+                    audit.check_information({key:value for key,value in database.items()
+                                             if key != missing},version)
             with self.assertRaises(ValueError):audit.check_information({},version)
 
 

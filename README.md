@@ -3,7 +3,7 @@
 
 An SKSE economy inspired by the old DOS game **Marco Polo**. Regional markets produce, consume and exchange goods. Merchant prices and ordinary stock respond to the economy, and player trades feed back into it.
 
-**0.2.0 adds remembered markets and innkeeper trade rumors.** Learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. Trading prices, merchant gold and service expenses are unchanged. See [the game test checklist](docs/TESTING.md).
+**0.2.1 corrects the optional innkeeper dialogue and adds availability diagnostics.** The 0.2 series introduces remembered markets and trade rumors: learn local rates by visiting towns and trading, gather dated news at inns, and plan journeys using the reports you have collected. See [the release notes](docs/RELEASE.md) and [game test checklist](docs/TESTING.md) for the correction's pending in-game validation.
 
 ## Install
 

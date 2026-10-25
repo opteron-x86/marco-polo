@@ -149,7 +149,15 @@ def check_information(database, version):
     ident = 51421 if version < (1, 6, 0, 0) else 52270 if version < (1, 6, 1130, 0) else 442726
     if not database.get(ident):
         raise ValueError(f'Missing MessageBoxMenu::Create: ID {ident}')
-    return [{'site': 'Trade-rumor message box', 'id': ident, 'address': hex(database[ident])}]
+    result = [{'site': 'Trade-rumor message box', 'id': ident, 'address': hex(database[ident])}]
+    ae = version >= (1, 6, 0, 0)
+    for site, se_id, ae_id in [('Dialogue speaker lookup', 514959, 401099),
+                              ('Dialogue condition diagnostic', 29074, 29888)]:
+        ident = ae_id if ae else se_id
+        if not database.get(ident):
+            raise ValueError(f'Missing {site}: ID {ident}')
+        result.append({'site': site, 'id': ident, 'address': hex(database[ident])})
+    return result
 
 
 if __name__ == '__main__':

@@ -1,0 +1,5 @@
+# The compiled-script manifest hashes the exact source bytes on every builder.
+*.psc text eol=lf
+*.pex binary
+*.esp binary
+*.seq binary

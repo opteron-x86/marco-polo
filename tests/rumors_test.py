@@ -41,6 +41,8 @@ class RumorPlugin(unittest.TestCase):
         for path,data in outputs.items(): self.assertEqual(path.read_bytes(),data)
         blob = (rumors.OUT/rumors.PLUGIN).read_bytes()
         records,groups = read_plugin(blob)
+        self.assertEqual([struct.pack('<I',label) for label,kind in groups if kind == 0],
+                         [b'GLOB',b'DIAL',b'QUST',b'DLBR'])
         self.assertEqual(set(records), {0,0x01000800,0x01000801,0x01000802,0x01000803,0x01000804})
         self.assertEqual(records[0][1],0x200) # Old-runtime-compatible ESL range/header.
         self.assertEqual(struct.unpack_from('<H',blob,20)[0],44)
@@ -61,7 +63,8 @@ class RumorPlugin(unittest.TestCase):
         self.assertEqual(records[0x01000803][3],0x01000802)
         fields = records[0x01000803][2]; info = dict(fields)
         self.assertEqual(info[b'ENAM'],struct.pack('<HH',0x801,0))
-        self.assertEqual(info[b'NAM1'],b'\0')
+        self.assertTrue(info[b'NAM1'].endswith(b'\0'))
+        self.assertTrue(info[b'NAM1'][:-1].decode('utf-8').strip())
         # Enabled AND (innkeeper OR room-renter) AND alive.
         conditions = [v for k,v in fields if k==b'CTDA']
         self.assertTrue(all(len(v)==32 for v in conditions))

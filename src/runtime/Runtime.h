@@ -61,6 +61,7 @@ unsigned AdvanceEconomy(double now, unsigned budget);
 void ObserveMarket(const std::string &market, const std::string &source);
 bool ObserveSettlement();
 void ResetInformation();
+void RegisterInformation();
 void SetRumorsEnabled(bool enabled);
 bool RegisterPapyrus(RE::BSScript::IVirtualMachine *);
 } // namespace marco::runtime

@@ -322,6 +322,7 @@ bool Initialize() {
         enabled = settings.value("enabled", true);
         manageInventory = settings.value("manageInventory", true);
         debugLogging = settings.value("debugLogging", false);
+        RegisterInformation();
         for (auto &m : economy->Definitions().markets)
             if (auto *form = Resolve(m.location))
                 locations[form->GetFormID()] = m.id;
