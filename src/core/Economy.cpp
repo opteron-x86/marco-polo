@@ -70,6 +70,9 @@ void Config::Validate() const {
                     Finite(c.elasticity) && c.elasticity >= 0 && c.elasticity <= 2 &&
                     Finite(c.shelfLife) && (c.shelfLife == 0 || c.shelfLife >= 1),
                 "Invalid commodity");
+        Require(Finite(c.productionSwing) && c.productionSwing >= 0 && c.productionSwing <= 1 &&
+                    Finite(c.reserveDays) && c.reserveDays >= 0 && c.reserveDays <= 180,
+                "Invalid seasonal supply policy");
     }
     ids.clear();
     for (auto &m : markets) {
@@ -121,10 +124,12 @@ Config Config::Parse(const json &j) {
     c.treasury = p.value("treasury", Money{20000});
     c.barterExponent = p.value("barterExponent", 1.0);
     c.minimumBarterMargin = p.value("minimumBarterMargin", 0.0);
+    c.balancedSeasons = p.value("balancedSeasons", false);
     for (auto &v : j.at("commodities"))
         c.commodities.push_back({v.at("id"), v.at("name"), v.value("referenceValue", 10.0),
                                  v.value("elasticity", 0.5), v.value("shelfLife", 0.0),
-                                 v.value("seasonal", false), v.value("military", false)});
+                                 v.value("seasonal", false), v.value("military", false),
+                                 v.value("productionSwing", 1.0), v.value("reserveDays", 0.0)});
     for (auto &v : j.at("markets"))
         c.markets.push_back({v.at("id"), v.at("name"), v.value("location", std::string{}),
                              v.value("population", 1.0), v.value("winterSeverity", 0.3),
@@ -174,6 +179,19 @@ double Economy::Random() {
 }
 double Economy::Target(const std::string &m, const std::string &c) const {
     return std::max(5.0, Amount(config_.Market(m).demand, c) * config_.targetDays);
+}
+double Economy::WarehouseTarget(const std::string &m, const std::string &c) const {
+    const auto &good = config_.Good(c);
+    if (!config_.balancedSeasons || !good.seasonal || good.reserveDays == 0)
+        return Target(m, c);
+    const auto &market = config_.Market(m);
+    // Build reserves ahead of the coldest part of the year, then draw them down.
+    // Short-lived goods cannot use a durable commodity's storage horizon.
+    double days =
+        good.shelfLife > 0 ? std::min(good.reserveDays, good.shelfLife * .25) : good.reserveDays;
+    double phase = 2 * 3.141592653589793 * std::fmod(state_.day + 227, 365.0) / 365.0;
+    double preparation = (1 - std::sin(phase)) / 2;
+    return Target(m, c) + Amount(market.demand, c) * days * market.winterSeverity * preparation;
 }
 double Economy::Total(const std::string &m, const std::string &c) const {
     double n = state_.markets.at(m).goods.at(c).quantity;
@@ -379,10 +397,15 @@ void Economy::Tick() {
             std::min(config_.treasury, m.treasury + std::max<Money>(1, config_.treasury / 100));
         for (auto &good : config_.commodities) {
             auto &s = m.goods.at(good.id);
-            double output = Amount(def.output, good.id) * (1 - m.disruption * 0.7) *
-                            (good.seasonal ? 1 - winter * def.winterSeverity : 1);
+            double season = 1;
+            if (good.seasonal)
+                season = config_.balancedSeasons
+                             ? 1 + good.productionSwing * def.winterSeverity * (1 - 2 * winter)
+                             : 1 - winter * def.winterSeverity;
+            double output = Amount(def.output, good.id) * (1 - m.disruption * 0.7) * season;
             // Production responds to storage: stop accumulating inventory nobody can consume.
-            output *= std::clamp(2 - Total(def.id, good.id) / Target(def.id, good.id), 0.0, 1.5);
+            output *=
+                std::clamp(2 - Total(def.id, good.id) / WarehouseTarget(def.id, good.id), 0.0, 1.5);
             s.quantity += output;
             s.produced += output;
             double wanted = (Amount(def.demand, good.id) * (good.military ? 1 + m.war : 1) +

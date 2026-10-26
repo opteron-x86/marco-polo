@@ -8,7 +8,8 @@
     "merchantTurnover": 0.08,
     "treasury": 20000,
     "barterExponent": 0.2,
-    "minimumBarterMargin": 0.05
+    "minimumBarterMargin": 0.05,
+    "balancedSeasons": true
   },
   "commodities": [
     {
@@ -18,7 +19,9 @@
       "elasticity": 0.3,
       "shelfLife": 0,
       "seasonal": true,
-      "military": false
+      "military": false,
+      "productionSwing": 1,
+      "reserveDays": 120
     },
     {
       "id": "food",
@@ -27,7 +30,9 @@
       "elasticity": 0.3,
       "shelfLife": 80,
       "seasonal": true,
-      "military": false
+      "military": false,
+      "productionSwing": 0.4,
+      "reserveDays": 20
     },
     {
       "id": "meat",
@@ -36,7 +41,9 @@
       "elasticity": 0.3,
       "shelfLife": 80,
       "seasonal": true,
-      "military": false
+      "military": false,
+      "productionSwing": 0.35,
+      "reserveDays": 5
     },
     {
       "id": "drink",
@@ -54,7 +61,9 @@
       "elasticity": 0.55,
       "shelfLife": 0,
       "seasonal": true,
-      "military": false
+      "military": false,
+      "productionSwing": 0.5,
+      "reserveDays": 60
     },
     {
       "id": "leather",

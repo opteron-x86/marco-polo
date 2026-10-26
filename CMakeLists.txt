@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(MarcoPolo VERSION 0.7.0 LANGUAGES C CXX)
+project(MarcoPolo VERSION 0.8.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
@@ -32,6 +32,9 @@ add_test(NAME statistics COMMAND marco_statistics_tests ${CMAKE_CURRENT_SOURCE_D
 add_executable(marco_retail_tests tests/RetailTests.cpp)
 target_link_libraries(marco_retail_tests PRIVATE marco_core)
 add_test(NAME retail COMMAND marco_retail_tests)
+add_executable(marco_season_tests tests/SeasonTests.cpp)
+target_link_libraries(marco_season_tests PRIVATE marco_core)
+add_test(NAME seasons COMMAND marco_season_tests ${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo/economy.json)
 add_executable(marco_knowledge_tests tests/KnowledgeTests.cpp)
 target_link_libraries(marco_knowledge_tests PRIVATE marco_core)
 add_test(NAME knowledge COMMAND marco_knowledge_tests ${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo/economy.json)
@@ -46,6 +49,8 @@ add_executable(marco_merchant_sim tools/MerchantSimulate.cpp)
 target_link_libraries(marco_merchant_sim PRIVATE marco_core)
 add_executable(marco_campaign_sim tools/CampaignSimulate.cpp)
 target_link_libraries(marco_campaign_sim PRIVATE marco_core)
+add_executable(marco_season_sim tools/SeasonSimulate.cpp)
+target_link_libraries(marco_season_sim PRIVATE marco_core)
 add_test(NAME campaign_simulation COMMAND ${CMAKE_COMMAND}
   -DSIM=$<TARGET_FILE:marco_campaign_sim>
   -DDATA=${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo

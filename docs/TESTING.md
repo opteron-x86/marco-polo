@@ -1,4 +1,4 @@
-# Game testing for 0.7.0
+# Game testing for 0.8.0
 
 ## Installation and save checks
 
@@ -87,6 +87,23 @@ quest and response checks. An absent addon is reported separately at load.
   in particular. This does not promise a full restock or new item types.
 - Compare the merchant's displayed gold with the amount available for a sale
   after repeated visits. Funds should not reset to their original value each day.
+
+## Seasonal supply
+
+The [seasonal report](SEASONAL-SIMULATION.md) gives the automated comparisons.
+Existing markets keep their stock when updating; reserves need time to build.
+
+- Compare grain, provisions and timber across the productive and cold parts of
+  a game year. Prices should still vary, with better winter availability than
+  before. A market updated during winter may still face shortages immediately.
+- With debug logging enabled, save at intervals and compare warehouse quantities,
+  production, losses and incoming shipments in `MarcoPolo-state.json`. Durable
+  stocks should build before winter and draw down afterward. Food and meat should
+  carry smaller buffers. Keep the dates with each sample.
+- Check single-item and stack purchases after long waits. Allow daily catch-up
+  to finish, then confirm the displayed total agrees with the actual payment.
+- Save and reload during reserve buildup and during winter. Inventory, gold and
+  cargo must remain intact; reloading must not refill warehouses or reroll prices.
 
 ## Diagnostics
 

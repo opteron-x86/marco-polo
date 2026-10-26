@@ -1,5 +1,8 @@
 # Five-year campaign experiment — 0.7.0
 
+Historical results from 0.7.0, commit `7869a1a`. Version 0.8.0 changes seasonal
+supply and storage; see [the new comparison](SEASONAL-SIMULATION.md).
+
 The expanded simulation stays numerically stable through five game years, but
 the first runs exposed permanently empty shop categories. Version 0.7.0 fixes
 the consumption and restocking rules behind that problem. Seasonal shortages
@@ -212,6 +215,9 @@ latency. Save schema 4 and information schema 1 are unchanged. These checks do
 not establish that a particular Skyrim installation or save is fault-free.
 
 ## Reproduce the revised campaign
+
+Use source commit `7869a1a` to reproduce these 0.7.0 results. Current builds use
+the newer seasonal policy and produce different balances.
 
 ```sh
 cmake -S . -B build/campaign -G Ninja -DMARCO_BUILD_PLUGIN=OFF -DMARCO_SANITIZERS=OFF -DCMAKE_BUILD_TYPE=Release

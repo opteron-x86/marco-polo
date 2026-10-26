@@ -1,0 +1,5426 @@
+{
+  "before": {
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "years": 5,
+    "runs": 64,
+    "maximum_stock_accounting_error": 6.651475814578589e-09,
+    "maximum_sampled_save_bytes": 189928,
+    "scenarios": {
+      "peace": {
+        "years": [
+          {
+            "unmet_fraction": 0.1251492599772992,
+            "spoil_fraction": 0.034748917410510886,
+            "transit_loss_fraction": 0.007193117519439603,
+            "mean_stock": 111.02667145868006,
+            "mean_price": 1.6218257742989315,
+            "ceiling_fraction": 0.1669392123287609,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12602992429363435,
+            "spoil_fraction": 0.034147157579149844,
+            "transit_loss_fraction": 0.0073079560883967986,
+            "mean_stock": 109.48990625521552,
+            "mean_price": 1.6253810264812987,
+            "ceiling_fraction": 0.16851883561643105,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1260036785009574,
+            "spoil_fraction": 0.03415167285186046,
+            "transit_loss_fraction": 0.007051507184239626,
+            "mean_stock": 109.49679448006916,
+            "mean_price": 1.6253603536136434,
+            "ceiling_fraction": 0.16853595890409828,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1260094146693742,
+            "spoil_fraction": 0.034155857664955755,
+            "transit_loss_fraction": 0.006816228110675464,
+            "mean_stock": 109.50623486152486,
+            "mean_price": 1.6253242797812693,
+            "ceiling_fraction": 0.16851455479450445,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12602562940435036,
+            "spoil_fraction": 0.03415108306358788,
+            "transit_loss_fraction": 0.0071677229505426885,
+            "mean_stock": 109.5029537134474,
+            "mean_price": 1.6253298614242322,
+            "ceiling_fraction": 0.1684974315068341,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.5482033314252028,
+            "spoil_fraction": 0.05691119818055973,
+            "transit_loss_fraction": 0.0049063174182655146,
+            "mean_stock": 43.4838122293625,
+            "mean_price": 2.8677269366225,
+            "ceiling_fraction": 0.7527397260274373,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.5080047554871049,
+            "spoil_fraction": 1.0815810815944516e-18,
+            "transit_loss_fraction": 0.007199333454182577,
+            "mean_stock": 57.48700786848124,
+            "mean_price": 2.82375767436375,
+            "ceiling_fraction": 0.688184931507,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.4499790101184119,
+            "spoil_fraction": -4.32398249426433e-19,
+            "transit_loss_fraction": 0.0076112359792510145,
+            "mean_stock": 37.1765499669875,
+            "mean_price": 2.8831797217362496,
+            "ceiling_fraction": 0.7535958904110625,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.38587369614996814,
+            "spoil_fraction": -1.1960709099531022e-18,
+            "transit_loss_fraction": 0.007645437480219595,
+            "mean_stock": 47.35530062910625,
+            "mean_price": 2.7330214638075003,
+            "ceiling_fraction": 0.572945205479375,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.3412010454872987,
+            "spoil_fraction": 1.6000540273474016e-19,
+            "transit_loss_fraction": 0.007504314826708346,
+            "mean_stock": 73.361678828925,
+            "mean_price": 2.778127748436875,
+            "ceiling_fraction": 0.6306506849312501,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.3138797859001953,
+            "spoil_fraction": 0.05740453478225701,
+            "transit_loss_fraction": 0.006948140359858216,
+            "mean_stock": 59.8861652919125,
+            "mean_price": 2.811516756064375,
+            "ceiling_fraction": 0.6131849315069374,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.2615827406064183,
+            "spoil_fraction": 0.0682599304597881,
+            "transit_loss_fraction": 0.006784280170195261,
+            "mean_stock": 120.35459867243749,
+            "mean_price": 1.2744001064250003,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.25867783862583915,
+            "spoil_fraction": 0.02142926317404574,
+            "transit_loss_fraction": 0.01024651018882048,
+            "mean_stock": 39.28926145729999,
+            "mean_price": 2.3697746762350005,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.24305572523022467,
+            "spoil_fraction": -6.541699778136499e-19,
+            "transit_loss_fraction": 0.007531598689799657,
+            "mean_stock": 33.92160440966875,
+            "mean_price": 2.7548559537624997,
+            "ceiling_fraction": 0.581506849315,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.1655422242568262,
+            "spoil_fraction": 0.05377406660910794,
+            "transit_loss_fraction": 0.007259071621015188,
+            "mean_stock": 79.7353745857125,
+            "mean_price": 2.7537625848799996,
+            "ceiling_fraction": 0.5436643835618126,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.16141353352224042,
+            "spoil_fraction": -2.163459974093567e-18,
+            "transit_loss_fraction": 0.007130583032242957,
+            "mean_stock": 99.1762667032125,
+            "mean_price": 2.6848269771975,
+            "ceiling_fraction": 0.429109589040875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.15492696481928514,
+            "spoil_fraction": 0.056020821449245195,
+            "transit_loss_fraction": 0.007076267545498934,
+            "mean_stock": 129.04487106818752,
+            "mean_price": 0.9978899591601875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.14861642085228277,
+            "spoil_fraction": 1.5070539579582815e-18,
+            "transit_loss_fraction": 0.006837806697803103,
+            "mean_stock": 111.36848508825,
+            "mean_price": 2.6586838300675,
+            "ceiling_fraction": 0.4440068493147501,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.14325913077999364,
+            "spoil_fraction": -8.69469708503708e-19,
+            "transit_loss_fraction": 0.007737314875120295,
+            "mean_stock": 48.681770281275,
+            "mean_price": 2.385754734704375,
+            "ceiling_fraction": 0.3280821917809375,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.13362134787165236,
+            "spoil_fraction": -1.54943005320775e-20,
+            "transit_loss_fraction": 0.006962339887196827,
+            "mean_stock": 45.4017065970375,
+            "mean_price": 2.4391884731175,
+            "ceiling_fraction": 0.40222602739693747,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.12458325491929101,
+            "spoil_fraction": 0.03204320012009262,
+            "transit_loss_fraction": 0,
+            "mean_stock": 82.7853184149,
+            "mean_price": 1.30957102898,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.11982228252362537,
+            "spoil_fraction": 1.6929147243073383e-19,
+            "transit_loss_fraction": 0.007279640263125538,
+            "mean_stock": 101.97351319856249,
+            "mean_price": 1.268345295948125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.10384267393166491,
+            "spoil_fraction": 0.05817316545908656,
+            "transit_loss_fraction": 0.005939043598302446,
+            "mean_stock": 131.86843340537501,
+            "mean_price": 1.2343988342018748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.10280150542729571,
+            "spoil_fraction": 0.04052106497207362,
+            "transit_loss_fraction": 0.006506556057592833,
+            "mean_stock": 95.14499751641249,
+            "mean_price": 1.282228449715,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.0839976172668544,
+            "spoil_fraction": 0.046319021151061825,
+            "transit_loss_fraction": 0,
+            "mean_stock": 113.6044164879375,
+            "mean_price": 1.25874770706125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.08391287010223014,
+            "spoil_fraction": 0.051363056108754426,
+            "transit_loss_fraction": 0,
+            "mean_stock": 123.16171879400002,
+            "mean_price": 1.24979691231,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.07141066335117341,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 100.800114121625,
+            "mean_price": 1.2688402455368748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.057237184148273834,
+            "spoil_fraction": 0.060578867718233856,
+            "transit_loss_fraction": 0.007529709941786582,
+            "mean_stock": 143.5448965750625,
+            "mean_price": 1.220318951843125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.03621158158572835,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 45.84628337539374,
+            "mean_price": 1.19760442387125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.02191574407670238,
+            "spoil_fraction": 0.053057752460919504,
+            "transit_loss_fraction": 0,
+            "mean_stock": 155.28586789681248,
+            "mean_price": 0.8662150911540624,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.1232532003655936e-18,
+            "transit_loss_fraction": 0.007857190079214508,
+            "mean_stock": 68.30577822210624,
+            "mean_price": 1.14446335422875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.05152725167375198,
+            "transit_loss_fraction": 0.006871535266687512,
+            "mean_stock": 153.78593354431248,
+            "mean_price": 1.1367346455799998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.0827873409227341e-19,
+            "transit_loss_fraction": 0.006321777471713079,
+            "mean_stock": 187.94979808887496,
+            "mean_price": 1.0900112144218752,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07618227329515467,
+            "transit_loss_fraction": 0,
+            "mean_stock": 208.59308608799995,
+            "mean_price": 1.0703460197099999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 92.20643951894374,
+            "mean_price": 0.6258742482956251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.062246098945577234,
+            "transit_loss_fraction": 0.012311365828961453,
+            "mean_stock": 166.30985154625,
+            "mean_price": 1.1503838665518749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -9.413523856356328e-20,
+            "transit_loss_fraction": 0.00683287558523943,
+            "mean_stock": 76.48666746011249,
+            "mean_price": 2.0293888875281247,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.061571875616602934,
+            "transit_loss_fraction": 0.009367758643645651,
+            "mean_stock": 183.7063269634375,
+            "mean_price": 1.09664080765875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -6.39381626037529e-20,
+            "transit_loss_fraction": 0.007463180815908113,
+            "mean_stock": 183.02566883112502,
+            "mean_price": 1.0942400521837499,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07636196947976687,
+            "transit_loss_fraction": 0,
+            "mean_stock": 212.82092772087495,
+            "mean_price": 1.06459653657375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 79.69910013940626,
+            "mean_price": 0.6526365615629999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.04067917033885626,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07813108741383257,
+            "transit_loss_fraction": 0.009164865288288162,
+            "mean_stock": 210.7860506940625,
+            "mean_price": 1.0693921629375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 4.4950163411539e-19,
+            "transit_loss_fraction": 0.00792735983838302,
+            "mean_stock": 76.70250625645623,
+            "mean_price": 1.0989362687518753,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.38082557708287673,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.26330924322032534,
+            "full_fraction": 0.000856164383561875
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.23447275955171232,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.1822482206211644,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.16919367612667813,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.14423331960082192,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.1380928704470034,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.13224052307601028,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.13217993901289388,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.0841257070764726,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.08307535072063355,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.07110309487525684,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.06547344961851027,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.05330910489789384,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.03685537254715754,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.03564435079731163,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.027746858614332192,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.01824584322137671,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.01715319427544349,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.015172775370782534,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.013875597459128423,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.012057381578484587,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.01064459698363185,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.009219280772988014,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.0009393618442373286,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.0,
+            "full_fraction": 0.0
+          }
+        ]
+      },
+      "summer_disruption": {
+        "years": [
+          {
+            "unmet_fraction": 0.1251492599772992,
+            "spoil_fraction": 0.034748917410510886,
+            "transit_loss_fraction": 0.007193117519439603,
+            "mean_stock": 111.02667145868006,
+            "mean_price": 1.6218257742989315,
+            "ceiling_fraction": 0.1669392123287609,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12602992429363435,
+            "spoil_fraction": 0.034147157579149844,
+            "transit_loss_fraction": 0.0073079560883967986,
+            "mean_stock": 109.48990625521552,
+            "mean_price": 1.6253810264812987,
+            "ceiling_fraction": 0.16851883561643105,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1280114197173372,
+            "spoil_fraction": 0.03226159227955067,
+            "transit_loss_fraction": 0.008965809458745984,
+            "mean_stock": 101.80713469931919,
+            "mean_price": 1.64683464205124,
+            "ceiling_fraction": 0.18465753424657957,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12680064233258037,
+            "spoil_fraction": 0.034043797430521286,
+            "transit_loss_fraction": 0.006765308963847008,
+            "mean_stock": 108.87820379084249,
+            "mean_price": 1.6273249522289515,
+            "ceiling_fraction": 0.17151113013696404,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12598917957442057,
+            "spoil_fraction": 0.03415618059815284,
+            "transit_loss_fraction": 0.006838121434035439,
+            "mean_stock": 109.50611329636665,
+            "mean_price": 1.6253169829819591,
+            "ceiling_fraction": 0.16846318493149195,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.5477180781801692,
+            "spoil_fraction": 0.05714906581075514,
+            "transit_loss_fraction": 0.00806970755862966,
+            "mean_stock": 43.670801148675004,
+            "mean_price": 2.86711514276375,
+            "ceiling_fraction": 0.7506849315066874,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.5079762412287345,
+            "spoil_fraction": 4.799801767617895e-19,
+            "transit_loss_fraction": 0.007936435650603327,
+            "mean_stock": 57.355229420650005,
+            "mean_price": 2.8241078529962507,
+            "ceiling_fraction": 0.6890410958905625,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.4502400941002608,
+            "spoil_fraction": 3.0147889982717438e-19,
+            "transit_loss_fraction": 0.006330075989437055,
+            "mean_stock": 37.045140461231256,
+            "mean_price": 2.8835803995475002,
+            "ceiling_fraction": 0.7541095890410623,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.3855575718746179,
+            "spoil_fraction": -5.628431409637836e-19,
+            "transit_loss_fraction": 0.0057380980412460696,
+            "mean_stock": 47.4020380921875,
+            "mean_price": 2.73272950659375,
+            "ceiling_fraction": 0.5726027397260626,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.34119693041147825,
+            "spoil_fraction": 3.138757902040563e-19,
+            "transit_loss_fraction": 0.007354105415621739,
+            "mean_stock": 73.31440586153126,
+            "mean_price": 2.778266819,
+            "ceiling_fraction": 0.6311643835615001,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.3136870969463915,
+            "spoil_fraction": 0.057504876643228786,
+            "transit_loss_fraction": 0.005562978849630106,
+            "mean_stock": 59.98098952701874,
+            "mean_price": 2.8112798937175,
+            "ceiling_fraction": 0.6131849315069374,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.26147612724311076,
+            "spoil_fraction": 0.06827914884996078,
+            "transit_loss_fraction": 0.00886579751985017,
+            "mean_stock": 120.392599651125,
+            "mean_price": 1.2742918687825,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.258552122687846,
+            "spoil_fraction": 0.021513447428732662,
+            "transit_loss_fraction": 0.005259046108475759,
+            "mean_stock": 39.43335871455,
+            "mean_price": 2.3692992379868754,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.24285351139597167,
+            "spoil_fraction": -1.0214837497230663e-19,
+            "transit_loss_fraction": 0.008343964683497622,
+            "mean_stock": 33.92384139037501,
+            "mean_price": 2.75469291081,
+            "ceiling_fraction": 0.5816780821917499,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.16546073060712996,
+            "spoil_fraction": 0.05379180606763372,
+            "transit_loss_fraction": 0.007017670107023931,
+            "mean_stock": 79.759287705225,
+            "mean_price": 2.753691517495,
+            "ceiling_fraction": 0.5426369863016874,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.16133531814675284,
+            "spoil_fraction": -2.4783902990752233e-18,
+            "transit_loss_fraction": 0.006783943694714471,
+            "mean_stock": 99.1658063847,
+            "mean_price": 2.6848925484699997,
+            "ceiling_fraction": 0.4287671232875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.15493344960091737,
+            "spoil_fraction": 0.05604619409069157,
+            "transit_loss_fraction": 0.005402400324376711,
+            "mean_stock": 129.08080393193748,
+            "mean_price": 0.99785619066225,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.14857882747787676,
+            "spoil_fraction": -7.50457140832929e-19,
+            "transit_loss_fraction": 0.0064594936746159085,
+            "mean_stock": 111.38408221843753,
+            "mean_price": 2.658611060485625,
+            "ceiling_fraction": 0.4438356164380001,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.14341943789655076,
+            "spoil_fraction": 1.556884038574384e-18,
+            "transit_loss_fraction": 0.006682672413058577,
+            "mean_stock": 48.69931932898751,
+            "mean_price": 2.38546714448375,
+            "ceiling_fraction": 0.32808219178075,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.13365686940931698,
+            "spoil_fraction": -2.597627356605015e-19,
+            "transit_loss_fraction": 0.008733413165405357,
+            "mean_stock": 45.32603788845625,
+            "mean_price": 2.4400085083499996,
+            "ceiling_fraction": 0.4027397260271875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.12458325491929101,
+            "spoil_fraction": 0.03204320012009262,
+            "transit_loss_fraction": 0,
+            "mean_stock": 82.7853184149,
+            "mean_price": 1.30957102898,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.11962199391375294,
+            "spoil_fraction": 7.839932333428038e-20,
+            "transit_loss_fraction": 0.007200644928801069,
+            "mean_stock": 101.92018215806252,
+            "mean_price": 1.2684733646243749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.10383205591346256,
+            "spoil_fraction": 0.058169119103009384,
+            "transit_loss_fraction": 0.0036840759112831425,
+            "mean_stock": 131.863635088125,
+            "mean_price": 1.2343862842375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.10278194567943189,
+            "spoil_fraction": 0.04056752346627197,
+            "transit_loss_fraction": 0.006602853909151758,
+            "mean_stock": 95.20719044323124,
+            "mean_price": 1.282175975075625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.08399962125695393,
+            "spoil_fraction": 0.046231819976373656,
+            "transit_loss_fraction": 0,
+            "mean_stock": 113.43317639924999,
+            "mean_price": 1.258927664928125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.08391287010223014,
+            "spoil_fraction": 0.051363056108754426,
+            "transit_loss_fraction": 0,
+            "mean_stock": 123.16171879400002,
+            "mean_price": 1.24979691231,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.07141066117817596,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 100.8003597455,
+            "mean_price": 1.268839951854375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.05723591284291896,
+            "spoil_fraction": 0.06057586548084407,
+            "transit_loss_fraction": 0.006444256081986477,
+            "mean_stock": 143.54197951837503,
+            "mean_price": 1.220314826920625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0362117038935742,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 45.84265442561251,
+            "mean_price": 1.197619757946875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.021915759827656922,
+            "spoil_fraction": 0.05305440365293351,
+            "transit_loss_fraction": 0,
+            "mean_stock": 155.278746787625,
+            "mean_price": 0.8662204874179374,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 7.207904078781895e-19,
+            "transit_loss_fraction": 0.005975917221607688,
+            "mean_stock": 68.30442002515001,
+            "mean_price": 1.1444858291656252,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.05153855942606861,
+            "transit_loss_fraction": 0.005695073604769086,
+            "mean_stock": 153.8090852271875,
+            "mean_price": 1.1366990780956252,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 5.332811040543733e-20,
+            "transit_loss_fraction": 0.0052484127825860784,
+            "mean_stock": 187.96850532881248,
+            "mean_price": 1.08998864108375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07618227329515467,
+            "transit_loss_fraction": 0,
+            "mean_stock": 208.59308608799995,
+            "mean_price": 1.0703460197099999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 92.23749221896874,
+            "mean_price": 0.6258097144460624,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.06224693121442227,
+            "transit_loss_fraction": 0.006881390497760986,
+            "mean_stock": 166.31144614100003,
+            "mean_price": 1.1503816062062502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 4.979063787332841e-19,
+            "transit_loss_fraction": 0.007410803886170161,
+            "mean_stock": 76.49349753790625,
+            "mean_price": 2.029390230055,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.061508668786408774,
+            "transit_loss_fraction": 0.006086862004225461,
+            "mean_stock": 183.56251126218748,
+            "mean_price": 1.0967926744068748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.4988805386829019e-21,
+            "transit_loss_fraction": 0.009720162841358989,
+            "mean_stock": 183.1179108134375,
+            "mean_price": 1.0941415554881249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07636322628429115,
+            "transit_loss_fraction": 0,
+            "mean_stock": 212.82334297343746,
+            "mean_price": 1.064593739831875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 79.7394698097875,
+            "mean_price": 0.6525452689043749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.04067917033885626,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07814083536623881,
+            "transit_loss_fraction": 0.006633139323910621,
+            "mean_stock": 210.8039459851875,
+            "mean_price": 1.069374803943125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 8.82267278018973e-20,
+            "transit_loss_fraction": 0.007951692224358133,
+            "mean_stock": 76.7111149438375,
+            "mean_price": 1.098898007719375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.3809062283933219,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.26326735485690067,
+            "full_fraction": 0.0013698630137
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.2346432052215582,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.18233327346261985,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.16889060240422943,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.1442885534741952,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.13836331354892126,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.1322591717291267,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.13220501889085615,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.08417285134919521,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.08320300320135274,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.07108068410232878,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.06531416957104454,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.05332730592220891,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.03687673130972603,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.0356290848222774,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.027693916964708902,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.01842555984320719,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.01712024605436986,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.015178564673618153,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.013521279291101028,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.012026672911958906,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.010644289629534247,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.009309042063171234,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.0009384073689996576,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.0,
+            "full_fraction": 0.0
+          }
+        ],
+        "excess_unmet_percentage_points_by_year": [
+          0.0,
+          0.0,
+          0.20077412163798103,
+          0.07912276632061621,
+          -0.0036449829929785516
+        ]
+      },
+      "unrest": {
+        "years": [
+          {
+            "unmet_fraction": 0.12657588723752333,
+            "spoil_fraction": 0.03585020461951775,
+            "transit_loss_fraction": 0.036433902131248724,
+            "mean_stock": 107.47171534441217,
+            "mean_price": 1.6388880987527148,
+            "ceiling_fraction": 0.17532106164382005,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12737780371105123,
+            "spoil_fraction": 0.035268611942090564,
+            "transit_loss_fraction": 0.036368147915901594,
+            "mean_stock": 105.85909118351984,
+            "mean_price": 1.6426438054915828,
+            "ceiling_fraction": 0.177508561643828,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12734168257094136,
+            "spoil_fraction": 0.035267204178348124,
+            "transit_loss_fraction": 0.03579913732136743,
+            "mean_stock": 105.8708821818424,
+            "mean_price": 1.6425689936345997,
+            "ceiling_fraction": 0.1775856164383701,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1273648666868662,
+            "spoil_fraction": 0.035267304941379245,
+            "transit_loss_fraction": 0.0359057040305625,
+            "mean_stock": 105.87354309170317,
+            "mean_price": 1.642572500852775,
+            "ceiling_fraction": 0.17739297945206248,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1273687958493538,
+            "spoil_fraction": 0.03526016755304962,
+            "transit_loss_fraction": 0.03588413715886119,
+            "mean_stock": 105.86281858985095,
+            "mean_price": 1.642569597383257,
+            "ceiling_fraction": 0.17773544520547796,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.5190163485412249,
+            "spoil_fraction": 0.06390077375898899,
+            "transit_loss_fraction": 0.02170512549066143,
+            "mean_stock": 46.92444321675,
+            "mean_price": 2.8549587639906244,
+            "ceiling_fraction": 0.7405821917808749,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.5112224841345407,
+            "spoil_fraction": 9.708068136426485e-18,
+            "transit_loss_fraction": 0.03584556528542173,
+            "mean_stock": 53.01065005214374,
+            "mean_price": 2.8374365693118753,
+            "ceiling_fraction": 0.7042808219178125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.48388065483699505,
+            "spoil_fraction": -3.469904816572791e-19,
+            "transit_loss_fraction": 0.011619458553532365,
+            "mean_stock": 7.37732894635625,
+            "mean_price": 2.9948593844349993,
+            "ceiling_fraction": 0.8957191780823126,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.43603950141051817,
+            "spoil_fraction": -4.1137570093803194e-19,
+            "transit_loss_fraction": 0.027326483858465176,
+            "mean_stock": 33.45943327245,
+            "mean_price": 2.8250494040093757,
+            "ceiling_fraction": 0.678767123287875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.3417728237820079,
+            "spoil_fraction": -1.8833867661135666e-19,
+            "transit_loss_fraction": 0.014677254690965296,
+            "mean_stock": 67.19750083756875,
+            "mean_price": 2.7953100211118755,
+            "ceiling_fraction": 0.649657534246625,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.27539001673527796,
+            "spoil_fraction": 0.0618052294591481,
+            "transit_loss_fraction": 0.040489502796022876,
+            "mean_stock": 107.8752945779375,
+            "mean_price": 1.294090178915625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.27512912888996544,
+            "spoil_fraction": -9.049260505067816e-19,
+            "transit_loss_fraction": 0.011938991737787438,
+            "mean_stock": 24.996687391881252,
+            "mean_price": 2.8336646854799996,
+            "ceiling_fraction": 0.6715753424655626,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.2579710180050335,
+            "spoil_fraction": 0.0818163987799991,
+            "transit_loss_fraction": 0.038022115919473666,
+            "mean_stock": 79.23499160630627,
+            "mean_price": 2.7534200446649995,
+            "ceiling_fraction": 0.5386986301368125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.249023794426794,
+            "spoil_fraction": 0.0322301672587523,
+            "transit_loss_fraction": 0.03268670487096118,
+            "mean_stock": 51.778087266525,
+            "mean_price": 2.3256259828887496,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.19666114809700885,
+            "spoil_fraction": 3.323608425506084e-18,
+            "transit_loss_fraction": 0.03450115590635255,
+            "mean_stock": 42.30224376434374,
+            "mean_price": 2.45532804769375,
+            "ceiling_fraction": 0.3780821917806875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.19032653989599613,
+            "spoil_fraction": 2.2223553847716388e-18,
+            "transit_loss_fraction": 0.029462999874845273,
+            "mean_stock": 33.455462956362496,
+            "mean_price": 2.578032688061875,
+            "ceiling_fraction": 0.512157534246375,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.16742623641635468,
+            "spoil_fraction": -7.944846750244968e-18,
+            "transit_loss_fraction": 0.0401578900408155,
+            "mean_stock": 93.52198403763123,
+            "mean_price": 2.7000389288899997,
+            "ceiling_fraction": 0.43510273972612495,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.1662934816085474,
+            "spoil_fraction": 0.05175699139642404,
+            "transit_loss_fraction": 0.011342986616464207,
+            "mean_stock": 118.0964243630625,
+            "mean_price": 1.0107292978218752,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.14560442590570943,
+            "spoil_fraction": 5.0184787736859815e-18,
+            "transit_loss_fraction": 0.04446340773964766,
+            "mean_stock": 101.83493939325,
+            "mean_price": 2.6810909803499996,
+            "ceiling_fraction": 0.44315068493156246,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.1418761924148999,
+            "spoil_fraction": 0.05047425832839298,
+            "transit_loss_fraction": 0.04144036856680969,
+            "mean_stock": 107.88305361056251,
+            "mean_price": 1.2727157134637501,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.11709037941509692,
+            "spoil_fraction": 0.06732848615602947,
+            "transit_loss_fraction": 0.04479982046838642,
+            "mean_stock": 95.08203450144998,
+            "mean_price": 2.7039455515937507,
+            "ceiling_fraction": 0.4616438356165,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.11419081007958298,
+            "spoil_fraction": 1.3486797609728532e-18,
+            "transit_loss_fraction": 0.038526971871272346,
+            "mean_stock": 104.27238295149999,
+            "mean_price": 1.26358991773625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.09615210116110262,
+            "spoil_fraction": 0.037652751884940674,
+            "transit_loss_fraction": 0,
+            "mean_stock": 92.60880363690003,
+            "mean_price": 1.2869788865499996,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.09591271954529623,
+            "spoil_fraction": 0.04599015542039172,
+            "transit_loss_fraction": 0,
+            "mean_stock": 109.52153296006249,
+            "mean_price": 1.2686811885618752,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.0958656459219005,
+            "spoil_fraction": 0.0484613181325457,
+            "transit_loss_fraction": 0,
+            "mean_stock": 114.173461008,
+            "mean_price": 1.2643466916699997,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.09416552077355334,
+            "spoil_fraction": 0.056373486322768784,
+            "transit_loss_fraction": 0.025440221249728622,
+            "mean_stock": 123.3208285381875,
+            "mean_price": 1.2569500959631252,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.09269918520101672,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 91.88870571670002,
+            "mean_price": 1.28887506617,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.08693264936894962,
+            "spoil_fraction": 0.0485813493312645,
+            "transit_loss_fraction": 0.044902588972094044,
+            "mean_stock": 102.4124558045625,
+            "mean_price": 1.2651843921175001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.04546468291777905,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 43.607927538100014,
+            "mean_price": 1.2151690888900002,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.030355010974871255,
+            "spoil_fraction": 0.04818823441961951,
+            "transit_loss_fraction": 0,
+            "mean_stock": 140.437801473375,
+            "mean_price": 0.88061548723025,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.005324679094798945,
+            "spoil_fraction": 0.056926533047421866,
+            "transit_loss_fraction": 0.0411444625862774,
+            "mean_stock": 150.079445426375,
+            "mean_price": 1.182661136718125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -3.232247011030335e-18,
+            "transit_loss_fraction": 0.033787097391887344,
+            "mean_stock": 59.55071968833124,
+            "mean_price": 1.212803408270625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.06507302320023398,
+            "transit_loss_fraction": 0.032836650311892764,
+            "mean_stock": 179.736779741125,
+            "mean_price": 1.1002615334406252,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -8.641610788887486e-19,
+            "transit_loss_fraction": 0.030501601496303002,
+            "mean_stock": 192.7778634800625,
+            "mean_price": 1.08480211227125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07244264306936946,
+            "transit_loss_fraction": 0,
+            "mean_stock": 197.192665132,
+            "mean_price": 1.08344422617,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 91.0173320700125,
+            "mean_price": 0.6270533661990001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.9427180070345246e-17,
+            "transit_loss_fraction": 0.04365962934500378,
+            "mean_stock": 69.43194790035,
+            "mean_price": 2.102116572816875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0756274349851293,
+            "transit_loss_fraction": 0.041834967867768066,
+            "mean_stock": 206.03516298281252,
+            "mean_price": 1.0713229808143752,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.204377922730032e-20,
+            "transit_loss_fraction": 0.042592064611134454,
+            "mean_stock": 185.81633221806254,
+            "mean_price": 1.09113987165,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07327667816860677,
+            "transit_loss_fraction": 0,
+            "mean_stock": 202.67734868393748,
+            "mean_price": 1.07544490599,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 78.01317127454999,
+            "mean_price": 0.655985238693375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.042537828113027504,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07576266023387242,
+            "transit_loss_fraction": 0.04129784158842011,
+            "mean_stock": 202.14147993775,
+            "mean_price": 1.0798202929450003,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.951866934683944e-18,
+            "transit_loss_fraction": 0.037422784791056034,
+            "mean_stock": 73.7680356367,
+            "mean_price": 1.112225897996875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.6242723762268987,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.38599535477694485,
+            "full_fraction": 0.01061643835617125
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.31100476573545816,
+            "full_fraction": 0.0011986301369875
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.3068987739201224,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.2393487258885435,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.23503667520544722,
+            "full_fraction": 0.001712328767125
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.20129509376687338,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.18998023387582988,
+            "full_fraction": 0.000342465753425
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.13119616944968163,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.12839610140142835,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.12349108212257641,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.118179081541821,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.0776373012730701,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.05540264280827254,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.049172357767360834,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.03412465674300454,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.032826401274936676,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.030971579585785454,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.027075320622503653,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.02016128035010582,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.018257836962164768,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.017202876406741275,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.0167639708906331,
+            "full_fraction": 0.00205479452055
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.007455827873537162,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.0,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.0,
+            "full_fraction": 0.0
+          }
+        ]
+      },
+      "winter_disruption": {
+        "years": [
+          {
+            "unmet_fraction": 0.1251492599772992,
+            "spoil_fraction": 0.034748917410510886,
+            "transit_loss_fraction": 0.007193117519439603,
+            "mean_stock": 111.02667145868006,
+            "mean_price": 1.6218257742989315,
+            "ceiling_fraction": 0.1669392123287609,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12602992429363435,
+            "spoil_fraction": 0.034147157579149844,
+            "transit_loss_fraction": 0.0073079560883967986,
+            "mean_stock": 109.48990625521552,
+            "mean_price": 1.6253810264812987,
+            "ceiling_fraction": 0.16851883561643105,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.13387790099807018,
+            "spoil_fraction": 0.03443701644588609,
+            "transit_loss_fraction": 0.007325402149618219,
+            "mean_stock": 109.47010358867765,
+            "mean_price": 1.6254494248289244,
+            "ceiling_fraction": 0.16852739726025448,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.1260133600865394,
+            "spoil_fraction": 0.03415353591897159,
+            "transit_loss_fraction": 0.007218992977592971,
+            "mean_stock": 109.50101571080725,
+            "mean_price": 1.6253205627807468,
+            "ceiling_fraction": 0.1684503424657373,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.12601045354626073,
+            "spoil_fraction": 0.03415480435065538,
+            "transit_loss_fraction": 0.006844457279046309,
+            "mean_stock": 109.50400792548442,
+            "mean_price": 1.6253273673349729,
+            "ceiling_fraction": 0.1684803082191543,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.5481430389819749,
+            "spoil_fraction": 0.05691947849421603,
+            "transit_loss_fraction": 0.005538884529042564,
+            "mean_stock": 43.483063744456246,
+            "mean_price": 2.8677564873937498,
+            "ceiling_fraction": 0.7527397260272499,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.5081486880202769,
+            "spoil_fraction": 1.0798031172111615e-18,
+            "transit_loss_fraction": 0.009106118029043838,
+            "mean_stock": 57.26926837346875,
+            "mean_price": 2.82447909051875,
+            "ceiling_fraction": 0.6888698630138125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.45002889471917795,
+            "spoil_fraction": 1.5781058081728078e-19,
+            "transit_loss_fraction": 0.005795863627874947,
+            "mean_stock": 37.258732712575,
+            "mean_price": 2.88277238216375,
+            "ceiling_fraction": 0.7529109589041247,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.38560221847237497,
+            "spoil_fraction": -1.4072379916901889e-19,
+            "transit_loss_fraction": 0.006889841520929192,
+            "mean_stock": 47.430059983774996,
+            "mean_price": 2.7325433133843755,
+            "ceiling_fraction": 0.5719178082191875,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.34128631329006154,
+            "spoil_fraction": 1.2143629405452845e-19,
+            "transit_loss_fraction": 0.007306375280842072,
+            "mean_stock": 73.28287668299375,
+            "mean_price": 2.7784098220924998,
+            "ceiling_fraction": 0.6309931506847501,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.31372549348254275,
+            "spoil_fraction": 0.05741655252986288,
+            "transit_loss_fraction": 0.006410163840349831,
+            "mean_stock": 59.893127298450004,
+            "mean_price": 2.8115986559925,
+            "ceiling_fraction": 0.6131849315069374,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.26147443267459514,
+            "spoil_fraction": 0.06829337178955536,
+            "transit_loss_fraction": 0.00671947021636577,
+            "mean_stock": 120.41033408499999,
+            "mean_price": 1.2742659205106248,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.25860401073647576,
+            "spoil_fraction": 0.021490946419421446,
+            "transit_loss_fraction": 0.006256062027665216,
+            "mean_stock": 39.39401999150001,
+            "mean_price": 2.369477258315,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.24289442547468576,
+            "spoil_fraction": -2.929387424263118e-19,
+            "transit_loss_fraction": 0.008222313044417694,
+            "mean_stock": 33.94853678983125,
+            "mean_price": 2.754542598103125,
+            "ceiling_fraction": 0.5813356164382499,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.16548827127855792,
+            "spoil_fraction": 0.05375958847613965,
+            "transit_loss_fraction": 0.007497784166241525,
+            "mean_stock": 79.71255364303124,
+            "mean_price": 2.753835358473124,
+            "ceiling_fraction": 0.543493150685125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.16144851601085486,
+            "spoil_fraction": -3.25739058182799e-18,
+            "transit_loss_fraction": 0.007307042258748939,
+            "mean_stock": 99.09238262503123,
+            "mean_price": 2.6850635310456252,
+            "ceiling_fraction": 0.42910958904087504,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.15492163909343426,
+            "spoil_fraction": 0.05604222121148172,
+            "transit_loss_fraction": 0.004634330636675195,
+            "mean_stock": 129.080513988875,
+            "mean_price": 0.9978462338208126,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.14865676809976214,
+            "spoil_fraction": -1.3968203488817209e-19,
+            "transit_loss_fraction": 0.006970441723968151,
+            "mean_stock": 111.31922521281248,
+            "mean_price": 2.6588159428181246,
+            "ceiling_fraction": 0.4440068493147501,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.1432547639964109,
+            "spoil_fraction": 1.757795905414182e-18,
+            "transit_loss_fraction": 0.006029624961340179,
+            "mean_stock": 48.71745079505,
+            "mean_price": 2.38536247609875,
+            "ceiling_fraction": 0.32825342465749996,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.13359534987842003,
+            "spoil_fraction": -3.886296935775574e-19,
+            "transit_loss_fraction": 0.007718183376270904,
+            "mean_stock": 45.32110351353124,
+            "mean_price": 2.44005834700375,
+            "ceiling_fraction": 0.4023972602736249,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.12458325491929101,
+            "spoil_fraction": 0.03204320012009262,
+            "transit_loss_fraction": 0,
+            "mean_stock": 82.7853184149,
+            "mean_price": 1.30957102898,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.11968340921837528,
+            "spoil_fraction": 2.1714052239415377e-19,
+            "transit_loss_fraction": 0.006395420533146836,
+            "mean_stock": 101.87302127631249,
+            "mean_price": 1.2685288992362502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.10383655294339711,
+            "spoil_fraction": 0.05819594015655787,
+            "transit_loss_fraction": 0.0023567556118603626,
+            "mean_stock": 131.91033721968748,
+            "mean_price": 1.23431711391125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.10274037787862822,
+            "spoil_fraction": 0.04050724955624537,
+            "transit_loss_fraction": 0.006986810385527611,
+            "mean_stock": 95.12244149521875,
+            "mean_price": 1.28224553053625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.08399828825299538,
+            "spoil_fraction": 0.04629371530824076,
+            "transit_loss_fraction": 0,
+            "mean_stock": 113.5710104126875,
+            "mean_price": 1.258780785585,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.08391287010223014,
+            "spoil_fraction": 0.051363056108754426,
+            "transit_loss_fraction": 0,
+            "mean_stock": 123.16171879400002,
+            "mean_price": 1.24979691231,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.07141065867489493,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 100.8006426795625,
+            "mean_price": 1.268839613635625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.05723869251141889,
+            "spoil_fraction": 0.06057020630152238,
+            "transit_loss_fraction": 0.007744167138615818,
+            "mean_stock": 143.52972782324997,
+            "mean_price": 1.2203389132625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0362117498430522,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 45.84122469846875,
+            "mean_price": 1.1976252627225,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.021915709234844982,
+            "spoil_fraction": 0.053065121286597294,
+            "transit_loss_fraction": 0,
+            "mean_stock": 155.30259680225,
+            "mean_price": 0.8662041922929375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 8.911561506044786e-20,
+            "transit_loss_fraction": 0.006352621705969979,
+            "mean_stock": 68.31990119650624,
+            "mean_price": 1.1443885766475,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.05153590072400663,
+            "transit_loss_fraction": 0.004768990040817548,
+            "mean_stock": 153.8052373884375,
+            "mean_price": 1.136691219045625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 5.658910814857442e-20,
+            "transit_loss_fraction": 0.006906163578530172,
+            "mean_stock": 187.98470540575002,
+            "mean_price": 1.08997558434125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07618227329515467,
+            "transit_loss_fraction": 0,
+            "mean_stock": 208.59308608799995,
+            "mean_price": 1.0703460197099999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 92.23313370109375,
+            "mean_price": 0.625814723455875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.062246275581277884,
+            "transit_loss_fraction": 0.011152581872184458,
+            "mean_stock": 166.3103564530625,
+            "mean_price": 1.1503829655468751,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.5330943658062125e-18,
+            "transit_loss_fraction": 0.00707721665654005,
+            "mean_stock": 76.51970843563123,
+            "mean_price": 2.029151702911875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.061596897385213546,
+            "transit_loss_fraction": 0.007423200450250204,
+            "mean_stock": 183.7623202203125,
+            "mean_price": 1.096584052995625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.5855798441048193e-19,
+            "transit_loss_fraction": 0.006972829019022998,
+            "mean_stock": 183.07801451974998,
+            "mean_price": 1.094184314913125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07636322628429115,
+            "transit_loss_fraction": 0,
+            "mean_stock": 212.82334297343746,
+            "mean_price": 1.064593739831875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 79.72752299860625,
+            "mean_price": 0.6525721024097502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.04067917033885626,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.0,
+            "mean_price": 0.6585076468909998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07813166769139411,
+            "transit_loss_fraction": 0.007234254848141749,
+            "mean_stock": 210.78673665875,
+            "mean_price": 1.069392532065625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.5399471195985133e-19,
+            "transit_loss_fraction": 0.0076102269398812105,
+            "mean_stock": 76.70496192331878,
+            "mean_price": 1.0989261955349998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.3809439143405821,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.2631223995988528,
+            "full_fraction": 0.001541095890411875
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.23441305557554792,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.18220016091767124,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.16923604475054793,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.14421887241599318,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.1386757560981678,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.13228648257419523,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.13213089735392122,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.08423892676568492,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.08291571260616439,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.07106450361972602,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.06541253851155823,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.05326777577368152,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.03690347916445206,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.035555710040017126,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.027734511672397263,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.01812476816823802,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.01716881291755137,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.015168902658804795,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.013837729029118152,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.012039110977357876,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.010642645108215753,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.00936427541296233,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.0009397067296731163,
+            "full_fraction": 0.0
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.0,
+            "full_fraction": 0.0
+          }
+        ],
+        "excess_unmet_percentage_points_by_year": [
+          0.0,
+          0.0,
+          0.7874222497112782,
+          0.0003945417165196474,
+          -0.0015175858089633287
+        ]
+      }
+    }
+  },
+  "after": {
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "years": 5,
+    "runs": 64,
+    "maximum_stock_accounting_error": 7.101846222212771e-09,
+    "maximum_sampled_save_bytes": 194244,
+    "scenarios": {
+      "peace": {
+        "years": [
+          {
+            "unmet_fraction": 0.02055286092877484,
+            "spoil_fraction": 0.054974283464730586,
+            "transit_loss_fraction": 0.007178076003554653,
+            "mean_stock": 270.9078687546425,
+            "mean_price": 1.2992968824983022,
+            "ceiling_fraction": 0.044109589041096894,
+            "floor_fraction": 0.006151541095892188,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007994494719689715,
+            "spoil_fraction": 0.05761567967504919,
+            "transit_loss_fraction": 0.007262466537562926,
+            "mean_stock": 377.7454826781627,
+            "mean_price": 1.2107775563219647,
+            "ceiling_fraction": 0.0239811643835628,
+            "floor_fraction": 0.006404109589040625,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.008023068150052604,
+            "spoil_fraction": 0.0576057494208175,
+            "transit_loss_fraction": 0.007356354165484102,
+            "mean_stock": 377.36301925231726,
+            "mean_price": 1.211084745202972,
+            "ceiling_fraction": 0.02402825342465468,
+            "floor_fraction": 0.006386986301370313,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007838051276103486,
+            "spoil_fraction": 0.05763503947566912,
+            "transit_loss_fraction": 0.006890222622932321,
+            "mean_stock": 378.1055273938781,
+            "mean_price": 1.2104180693485165,
+            "ceiling_fraction": 0.023788527397257956,
+            "floor_fraction": 0.006215753424657813,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007885673751750089,
+            "spoil_fraction": 0.0576197643520419,
+            "transit_loss_fraction": 0.006984924621902612,
+            "mean_stock": 377.96133314082823,
+            "mean_price": 1.2106128255211295,
+            "ceiling_fraction": 0.023814212328767802,
+            "floor_fraction": 0.006279965753428124,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.11763776671829806,
+            "spoil_fraction": 0.25853388310468983,
+            "transit_loss_fraction": 0.005579287441864271,
+            "mean_stock": 292.83436414349995,
+            "mean_price": 2.3442199832174997,
+            "ceiling_fraction": 0.28955479452074995,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.053726299936039834,
+            "spoil_fraction": -1.6055458522071988e-18,
+            "transit_loss_fraction": 0.00759217515409683,
+            "mean_stock": 889.230314735375,
+            "mean_price": 1.931119192686875,
+            "ceiling_fraction": 0.1626712328765625,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.044359151251373796,
+            "spoil_fraction": 0.0930255452787157,
+            "transit_loss_fraction": 0.007284530359899669,
+            "mean_stock": 190.55569867224997,
+            "mean_price": 1.9564487301837499,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.0373131179051196,
+            "spoil_fraction": 6.8356822024076406e-18,
+            "transit_loss_fraction": 0.007511204342101507,
+            "mean_stock": 1390.1320432225,
+            "mean_price": 1.785891343584375,
+            "ceiling_fraction": 0.12791095890406254,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.014856743798986383,
+            "spoil_fraction": -4.8384681578933724e-18,
+            "transit_loss_fraction": 0.006328324411983585,
+            "mean_stock": 1003.0048927562499,
+            "mean_price": 1.8460762052149997,
+            "ceiling_fraction": 0.098458904109625,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.010557858541591525,
+            "spoil_fraction": 0.19508932206558807,
+            "transit_loss_fraction": 0.00749295127384868,
+            "mean_stock": 276.952649720375,
+            "mean_price": 2.3323205907949998,
+            "ceiling_fraction": 0.18835616438356248,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08149608567794779,
+            "transit_loss_fraction": 0.007593160024583405,
+            "mean_stock": 243.348963794625,
+            "mean_price": 1.04203926670625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.3512871406116854e-17,
+            "transit_loss_fraction": 0.00692510035648355,
+            "mean_stock": 1069.956010070625,
+            "mean_price": 1.7814307136425,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10457834677042638,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 287.8776623274375,
+            "mean_price": 0.999090605144625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.067893137303497e-19,
+            "transit_loss_fraction": 0.005895508656001077,
+            "mean_stock": 226.989100767125,
+            "mean_price": 0.766888872562375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07649661777548045,
+            "transit_loss_fraction": 0.007681839444745845,
+            "mean_stock": 239.08010127287497,
+            "mean_price": 1.043275854791875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -8.529447535016589e-19,
+            "transit_loss_fraction": 0.005213546833974478,
+            "mean_stock": 489.64980244574997,
+            "mean_price": 0.9234665897326877,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09476434246066517,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 266.08061845568744,
+            "mean_price": 1.0131230571762502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 199.93621194431248,
+            "mean_price": 0.4720040311686251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.25119863013712496,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -9.899820905688931e-19,
+            "transit_loss_fraction": 0.008680571808874738,
+            "mean_stock": 545.4790408859375,
+            "mean_price": 0.9096350232009375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.11032636831083906,
+            "transit_loss_fraction": 0.006297373413547978,
+            "mean_stock": 295.4944969579375,
+            "mean_price": 0.9907465972351874,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.123133566217349e-19,
+            "transit_loss_fraction": 0.00832814065561296,
+            "mean_stock": 240.97930351606254,
+            "mean_price": 1.36276049928375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0605082586944799,
+            "transit_loss_fraction": 0.006020267597439255,
+            "mean_stock": 189.030465344,
+            "mean_price": 1.0913746575225,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08846189159933049,
+            "transit_loss_fraction": 0,
+            "mean_stock": 297.743405235875,
+            "mean_price": 0.7312221087796875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 9.896831727718503e-20,
+            "transit_loss_fraction": 0.006615439018183964,
+            "mean_stock": 158.36130352999996,
+            "mean_price": 0.7748243627256249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.3656627103556036e-18,
+            "transit_loss_fraction": 0.006589352949753103,
+            "mean_stock": 819.2805256755623,
+            "mean_price": 0.8402384964323124,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0999229597621796,
+            "transit_loss_fraction": 0.004475028971238235,
+            "mean_stock": 308.5338645468125,
+            "mean_price": 0.7934936818183125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.110892998682022e-19,
+            "transit_loss_fraction": 0.007995858984465556,
+            "mean_stock": 335.4023080498125,
+            "mean_price": 1.2233400869850002,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.14639739911737548,
+            "transit_loss_fraction": 0.00674815826694487,
+            "mean_stock": 234.91428247475,
+            "mean_price": 2.3679859806843746,
+            "ceiling_fraction": 0.08561643835615,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.6979173062121624e-18,
+            "transit_loss_fraction": 0.006975846623057549,
+            "mean_stock": 621.837832045375,
+            "mean_price": 1.9585284218274999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09683816053350254,
+            "transit_loss_fraction": 0.00782861124743871,
+            "mean_stock": 271.6897705312501,
+            "mean_price": 1.00939285728625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 5.888981307228524e-19,
+            "transit_loss_fraction": 0.007251399677537615,
+            "mean_stock": 212.8792568469375,
+            "mean_price": 1.4227617075174999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08155161397808791,
+            "transit_loss_fraction": 0.007403821730670852,
+            "mean_stock": 250.75949405612502,
+            "mean_price": 1.031506241166875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.3888581018578621e-19,
+            "transit_loss_fraction": 0.007120973704303818,
+            "mean_stock": 399.8057273709375,
+            "mean_price": 0.95626714786775,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09424514861965057,
+            "transit_loss_fraction": 0.015594419012173472,
+            "mean_stock": 263.88742902193746,
+            "mean_price": 1.014594482125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -5.528997563753952e-20,
+            "transit_loss_fraction": 0.003727846086850292,
+            "mean_stock": 106.42424622768749,
+            "mean_price": 0.5968573272034999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09035056546665034,
+            "transit_loss_fraction": 0.01403666988281124,
+            "mean_stock": 283.1501571778125,
+            "mean_price": 1.0105107764556251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10166428905267581,
+            "transit_loss_fraction": 0.002759032884302732,
+            "mean_stock": 283.4109225206875,
+            "mean_price": 1.0021658520575,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 2.2117817419705705e-18,
+            "transit_loss_fraction": 0.0081793811211752,
+            "mean_stock": 274.598737966125,
+            "mean_price": 1.574069325133125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.035389185109851326,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.37969142574997,
+            "mean_price": 0.65824606875125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -4.515068763382013e-19,
+            "transit_loss_fraction": 0.00755219342593896,
+            "mean_stock": 231.7663319250625,
+            "mean_price": 0.63348571417575,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10573659444505591,
+            "transit_loss_fraction": 0.007330401874001996,
+            "mean_stock": 280.648916981875,
+            "mean_price": 1.001139792181875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.604281503461587e-19,
+            "transit_loss_fraction": 0.006123295818084616,
+            "mean_stock": 160.1153935575,
+            "mean_price": 0.8567911532680001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.12122719526118814,
+            "transit_loss_fraction": 0.007286197291590737,
+            "mean_stock": 318.4273411851874,
+            "mean_price": 0.977556265931,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.1171982903581246e-18,
+            "transit_loss_fraction": 0.007238560197980263,
+            "mean_stock": 487.82464624743756,
+            "mean_price": 1.39762335662125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.7510019503130138,
+            "full_fraction": 0.43424657534243744
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.650449393545719,
+            "full_fraction": 0.3452054794518751
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.5994041593924657,
+            "full_fraction": 0.23510273972593748
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.568778754605308,
+            "full_fraction": 0.24743150684925
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.5247219308505137,
+            "full_fraction": 0.3746575342465
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.5071878934071917,
+            "full_fraction": 0.36678082191774997
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.48560563070616436,
+            "full_fraction": 0.2931506849315625
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.4664498662541095,
+            "full_fraction": 0.3010273972601875
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.4208451561897261,
+            "full_fraction": 0.11969178082175
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.407489278520548,
+            "full_fraction": 0.15821917808224997
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.3856019156417808,
+            "full_fraction": 0.19280821917787497
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.3635974210755137,
+            "full_fraction": 0.029109589041125
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.3602839520176369,
+            "full_fraction": 0.1431506849314375
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.3319184725916095,
+            "full_fraction": 0.237328767123375
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.3309206494934931,
+            "full_fraction": 0.09965753424660627
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.3178478449179795,
+            "full_fraction": 0.21318493150687504
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.2530694419347089,
+            "full_fraction": 0.08390410958904373
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.2520534419722431,
+            "full_fraction": 0.08904109589039999
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.23161367403044522,
+            "full_fraction": 0.00787671232876875
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.21901092647823633,
+            "full_fraction": 0.09845890410960001
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.21395487280243156,
+            "full_fraction": 0.09006849315067499
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.19578818992203767,
+            "full_fraction": 0.0916095890410875
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.17317726885176368,
+            "full_fraction": 0.0741438356164125
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.16525299465924656,
+            "full_fraction": 0.0479452054794625
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.14788390825164385,
+            "full_fraction": 0.08647260273973124
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.13713552901857878,
+            "full_fraction": 0.06404109589038749
+          }
+        ]
+      },
+      "summer_disruption": {
+        "years": [
+          {
+            "unmet_fraction": 0.02055286092877484,
+            "spoil_fraction": 0.054974283464730586,
+            "transit_loss_fraction": 0.007178076003554653,
+            "mean_stock": 270.9078687546425,
+            "mean_price": 1.2992968824983022,
+            "ceiling_fraction": 0.044109589041096894,
+            "floor_fraction": 0.006151541095892188,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007994494719689715,
+            "spoil_fraction": 0.05761567967504919,
+            "transit_loss_fraction": 0.007262466537562926,
+            "mean_stock": 377.7454826781627,
+            "mean_price": 1.2107775563219647,
+            "ceiling_fraction": 0.0239811643835628,
+            "floor_fraction": 0.006404109589040625,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.008033447199551902,
+            "spoil_fraction": 0.055722715504762356,
+            "transit_loss_fraction": 0.008725942999653683,
+            "mean_stock": 359.7201330763579,
+            "mean_price": 1.2257599830433787,
+            "ceiling_fraction": 0.02402825342465468,
+            "floor_fraction": 0.0056292808219187505,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.008694776395492876,
+            "spoil_fraction": 0.057185968793531605,
+            "transit_loss_fraction": 0.007443757697772099,
+            "mean_stock": 365.69621587489405,
+            "mean_price": 1.21527438842518,
+            "ceiling_fraction": 0.024871575342466236,
+            "floor_fraction": 0.004910102739723438,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007900871960462741,
+            "spoil_fraction": 0.05764861679064762,
+            "transit_loss_fraction": 0.0069333288436000855,
+            "mean_stock": 378.0479994824765,
+            "mean_price": 1.2105204965096656,
+            "ceiling_fraction": 0.02382705479451811,
+            "floor_fraction": 0.0064383561643875,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.1176861993050794,
+            "spoil_fraction": 0.25880863760798,
+            "transit_loss_fraction": 0.00621175023701661,
+            "mean_stock": 293.134200735875,
+            "mean_price": 2.3440436908774998,
+            "ceiling_fraction": 0.2900684931508125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.05387427548542212,
+            "spoil_fraction": -2.0459731059828022e-18,
+            "transit_loss_fraction": 0.008608588329451298,
+            "mean_stock": 887.361644269,
+            "mean_price": 1.93142464412875,
+            "ceiling_fraction": 0.16318493150675,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.0445772974073535,
+            "spoil_fraction": 0.09321640405266947,
+            "transit_loss_fraction": 0.005960550098935824,
+            "mean_stock": 191.08350100225,
+            "mean_price": 1.95617630772625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.0376354764621285,
+            "spoil_fraction": 2.3955349118075243e-18,
+            "transit_loss_fraction": 0.008196819487555672,
+            "mean_stock": 1388.9838280568747,
+            "mean_price": 1.7872334639118752,
+            "ceiling_fraction": 0.12756849315062505,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.014806104763143368,
+            "spoil_fraction": -5.158374601931691e-18,
+            "transit_loss_fraction": 0.005524067830570215,
+            "mean_stock": 1004.5070760324376,
+            "mean_price": 1.8455923987231246,
+            "ceiling_fraction": 0.09863013698638752,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.010419173342261945,
+            "spoil_fraction": 0.19515465246096203,
+            "transit_loss_fraction": 0.006244515369919539,
+            "mean_stock": 277.074776539,
+            "mean_price": 2.3318612196412496,
+            "ceiling_fraction": 0.18801369863,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08157548104620511,
+            "transit_loss_fraction": 0.007695400115106353,
+            "mean_stock": 243.8421980458125,
+            "mean_price": 1.0416513166818748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.2253816649794723e-17,
+            "transit_loss_fraction": 0.0067975430684063184,
+            "mean_stock": 1067.661114035,
+            "mean_price": 1.783061152009375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.1044060657956699,
+            "transit_loss_fraction": 0.00636572953129351,
+            "mean_stock": 287.85111968443755,
+            "mean_price": 0.999102250980625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 2.738549236042403e-18,
+            "transit_loss_fraction": 0.0073002582776689985,
+            "mean_stock": 227.79800077525,
+            "mean_price": 0.7666285755543125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07648012038313719,
+            "transit_loss_fraction": 0.007004839424449669,
+            "mean_stock": 239.2910828975,
+            "mean_price": 1.043055837699375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.4823811225576037e-18,
+            "transit_loss_fraction": 0.006576614861619013,
+            "mean_stock": 489.43158321774996,
+            "mean_price": 0.9235095057921873,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09473867734583899,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 265.99345687075,
+            "mean_price": 1.0132220658118751,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 200.4263495655,
+            "mean_price": 0.47156128327456254,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.2575342465755,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 6.243804432193784e-19,
+            "transit_loss_fraction": 0.008097155449995336,
+            "mean_stock": 545.8450888370625,
+            "mean_price": 0.9095607811103127,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.11049384060741171,
+            "transit_loss_fraction": 0.008714692897657802,
+            "mean_stock": 295.7411634276875,
+            "mean_price": 0.9905376796918124,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.8865905417174328e-19,
+            "transit_loss_fraction": 0.004508097248144802,
+            "mean_stock": 241.3517308340625,
+            "mean_price": 1.361870910440625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.060398027468667764,
+            "transit_loss_fraction": 0.00641292620549852,
+            "mean_stock": 188.78225640006247,
+            "mean_price": 1.091559496273125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08826821170598691,
+            "transit_loss_fraction": 0,
+            "mean_stock": 297.3157081253125,
+            "mean_price": 0.7314606866196249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -5.410558208015779e-19,
+            "transit_loss_fraction": 0.005118334809970959,
+            "mean_stock": 157.9283710805,
+            "mean_price": 0.7750890107180001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.1867783504427416e-18,
+            "transit_loss_fraction": 0.006435765407645944,
+            "mean_stock": 821.8981369346251,
+            "mean_price": 0.83959803885875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10016740207789518,
+            "transit_loss_fraction": 0.006208704586716378,
+            "mean_stock": 308.99626371625,
+            "mean_price": 0.7930979954456251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.55641331847115e-18,
+            "transit_loss_fraction": 0.007105865478194616,
+            "mean_stock": 334.64865656787504,
+            "mean_price": 1.2242091523662502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.1472106885132772,
+            "transit_loss_fraction": 0.006601675565774565,
+            "mean_stock": 236.29316241268754,
+            "mean_price": 2.365144952029375,
+            "ceiling_fraction": 0.08561643835614999,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -3.3267697044934597e-19,
+            "transit_loss_fraction": 0.007028101274251286,
+            "mean_stock": 622.0752481858126,
+            "mean_price": 1.95856490949875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09669291866896287,
+            "transit_loss_fraction": 0.026405310943038256,
+            "mean_stock": 271.46610827775,
+            "mean_price": 1.0096132113706249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.347281447019408e-19,
+            "transit_loss_fraction": 0.006014392994319337,
+            "mean_stock": 212.562478415375,
+            "mean_price": 1.42336437132,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0815847528460033,
+            "transit_loss_fraction": 0.007633983402767577,
+            "mean_stock": 250.99657910418748,
+            "mean_price": 1.031354034864375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.0899413541696564e-18,
+            "transit_loss_fraction": 0.008676591860574477,
+            "mean_stock": 399.96486587906253,
+            "mean_price": 0.9561588833666876,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0944479630678648,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 264.2320884269375,
+            "mean_price": 1.0143068187718751,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.3245606890103214e-19,
+            "transit_loss_fraction": 0.008031856422473373,
+            "mean_stock": 106.1971206029375,
+            "mean_price": 0.5970438993308125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09073458221284422,
+            "transit_loss_fraction": 0.007909860616277475,
+            "mean_stock": 284.2484485289375,
+            "mean_price": 1.009706918206875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.1011461475417152,
+            "transit_loss_fraction": 0.0008054687238505555,
+            "mean_stock": 282.61826330693754,
+            "mean_price": 1.002891678351875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.3581153824698867e-19,
+            "transit_loss_fraction": 0.0065805618413479,
+            "mean_stock": 274.46347463375,
+            "mean_price": 1.5741623449681252,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.03539485399330079,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.40748927456252,
+            "mean_price": 0.6582267004249375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 2.617801708934248e-18,
+            "transit_loss_fraction": 0.006933816331805435,
+            "mean_stock": 231.3720388705625,
+            "mean_price": 0.6335525923071875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10608103506152874,
+            "transit_loss_fraction": 0.007893417497468054,
+            "mean_stock": 281.22570024543745,
+            "mean_price": 1.0006176130203126,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.2337209304562398e-18,
+            "transit_loss_fraction": 0.007537239502388192,
+            "mean_stock": 160.670420037625,
+            "mean_price": 0.855988277303,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.12119174854204937,
+            "transit_loss_fraction": 0.007581598345918387,
+            "mean_stock": 318.4483281366875,
+            "mean_price": 0.9774992590453749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.9061269761999103e-18,
+            "transit_loss_fraction": 0.006367396476827014,
+            "mean_stock": 487.7308573089374,
+            "mean_price": 1.3975159318693748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.751154453081507,
+            "full_fraction": 0.43407534246587504
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.6491910267633563,
+            "full_fraction": 0.344349315068375
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.5998156762436644,
+            "full_fraction": 0.23458904109599993
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.5647865519960616,
+            "full_fraction": 0.23869863013706247
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.5242603693556508,
+            "full_fraction": 0.37397260273968747
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.5066802539335618,
+            "full_fraction": 0.361815068493125
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.4850461266844178,
+            "full_fraction": 0.28955479452050004
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.46734647130770535,
+            "full_fraction": 0.3029109589040625
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.4191920249553082,
+            "full_fraction": 0.11746575342463753
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.4096933516821918,
+            "full_fraction": 0.1594178082191875
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.3849168018705479,
+            "full_fraction": 0.19434931506856248
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.364111042345548,
+            "full_fraction": 0.033904109589075
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.358461161647774,
+            "full_fraction": 0.14332191780818748
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.32997028886130136,
+            "full_fraction": 0.09606164383556874
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.32821522621284244,
+            "full_fraction": 0.23698630136987503
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.31664758379794516,
+            "full_fraction": 0.21301369863006256
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.2549560683314726,
+            "full_fraction": 0.08715753424656875
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.2526851479671575,
+            "full_fraction": 0.0912671232876625
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.23054749739215755,
+            "full_fraction": 0.00719178082191875
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.21925049033104457,
+            "full_fraction": 0.09657534246576252
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.2144658638941781,
+            "full_fraction": 0.0921232876711875
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.19578064032035963,
+            "full_fraction": 0.09092465753424375
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.17401708119652398,
+            "full_fraction": 0.072945205479425
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.16625367071606162,
+            "full_fraction": 0.052568493150681246
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.14584768848375,
+            "full_fraction": 0.08476027397260626
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.13415436770327055,
+            "full_fraction": 0.06198630136982501
+          }
+        ],
+        "excess_unmet_percentage_points_by_year": [
+          0.0,
+          0.0,
+          0.0010379049499298354,
+          0.08567251193893899,
+          0.0015198208712652317
+        ]
+      },
+      "unrest": {
+        "years": [
+          {
+            "unmet_fraction": 0.022911128004093784,
+            "spoil_fraction": 0.056564581246245284,
+            "transit_loss_fraction": 0.030659611658961576,
+            "mean_stock": 253.5581960900475,
+            "mean_price": 1.3261225966872758,
+            "ceiling_fraction": 0.04114726027397187,
+            "floor_fraction": 0.004019691780820313,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.009189916559423139,
+            "spoil_fraction": 0.059136449455997886,
+            "transit_loss_fraction": 0.03201309559530587,
+            "mean_stock": 348.7826482379488,
+            "mean_price": 1.2308541572229328,
+            "ceiling_fraction": 0.020706335616442816,
+            "floor_fraction": 0.0037071917808218753,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.009036575452341489,
+            "spoil_fraction": 0.059206282551514854,
+            "transit_loss_fraction": 0.031066002539519705,
+            "mean_stock": 349.9416349341376,
+            "mean_price": 1.2299970179331816,
+            "ceiling_fraction": 0.02057363013698906,
+            "floor_fraction": 0.003702910958903126,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.009111385466349264,
+            "spoil_fraction": 0.059189096857624086,
+            "transit_loss_fraction": 0.03166791312922002,
+            "mean_stock": 349.06351127514546,
+            "mean_price": 1.23059641342564,
+            "ceiling_fraction": 0.02069349315068188,
+            "floor_fraction": 0.003527397260273281,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.009018109090257242,
+            "spoil_fraction": 0.059180974888229695,
+            "transit_loss_fraction": 0.0313199801000468,
+            "mean_stock": 349.49148768269526,
+            "mean_price": 1.2303239816653353,
+            "ceiling_fraction": 0.02047089041095938,
+            "floor_fraction": 0.0038441780821937494,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.10061883384995585,
+            "spoil_fraction": 8.671634812694627e-19,
+            "transit_loss_fraction": 0.012759117614503775,
+            "mean_stock": 773.6752259824375,
+            "mean_price": 2.031869006289375,
+            "ceiling_fraction": 0.22654109589043753,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.08368126939014753,
+            "spoil_fraction": -3.728588906607732e-17,
+            "transit_loss_fraction": 0.03775621012859067,
+            "mean_stock": 1147.42546274,
+            "mean_price": 1.893714937554375,
+            "ceiling_fraction": 0.1813356164383125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.0702485550985611,
+            "spoil_fraction": 0.271306270929216,
+            "transit_loss_fraction": 0.021159137032035747,
+            "mean_stock": 305.2141905044375,
+            "mean_price": 2.3136738507281254,
+            "ceiling_fraction": 0.24674657534249997,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.048621704949794786,
+            "spoil_fraction": 2.3605607494149175e-17,
+            "transit_loss_fraction": 0.015690684351770675,
+            "mean_stock": 875.1487363223124,
+            "mean_price": 1.935366136750625,
+            "ceiling_fraction": 0.164212328767125,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.02489054563634474,
+            "spoil_fraction": 0.10817754568406755,
+            "transit_loss_fraction": 0.02731037025237831,
+            "mean_stock": 206.810020164375,
+            "mean_price": 1.903872280376875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09312829573105356,
+            "transit_loss_fraction": 0.031548987267805514,
+            "mean_stock": 255.83587834506255,
+            "mean_price": 1.0319949125175003,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.1078619670116648e-16,
+            "transit_loss_fraction": 0.03265313888452048,
+            "mean_stock": 943.7974383141251,
+            "mean_price": 1.85265571727625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09171527431560027,
+            "transit_loss_fraction": 0.04129182873283999,
+            "mean_stock": 250.22707175875004,
+            "mean_price": 1.032345045255,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.5751262399856596e-17,
+            "transit_loss_fraction": 0.03069217009717194,
+            "mean_stock": 187.88871330675,
+            "mean_price": 0.8347189164982501,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08820475739912105,
+            "transit_loss_fraction": 0.032409616851975784,
+            "mean_stock": 258.63433560868754,
+            "mean_price": 1.0269907621956251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.0848031616432048e-18,
+            "transit_loss_fraction": 0.033205283986971944,
+            "mean_stock": 471.66001572987506,
+            "mean_price": 0.925895390117,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0911998583569294,
+            "transit_loss_fraction": 0,
+            "mean_stock": 254.95271508199997,
+            "mean_price": 1.0228953909299998,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 185.368819482375,
+            "mean_price": 0.48782580715306245,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.15376712328774997,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 9.153313423074458e-18,
+            "transit_loss_fraction": 0.034714830528090664,
+            "mean_stock": 464.18263251868746,
+            "mean_price": 0.9641479844184375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.1043067697237911,
+            "transit_loss_fraction": 0.02119850195571907,
+            "mean_stock": 268.00776254299996,
+            "mean_price": 1.0136022065425,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -4.350237157648481e-18,
+            "transit_loss_fraction": 0.02555242413455358,
+            "mean_stock": 208.0378712101875,
+            "mean_price": 1.4592260145531255,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.06601960109227824,
+            "transit_loss_fraction": 0.015556634016970342,
+            "mean_stock": 209.223534663875,
+            "mean_price": 1.069426457440625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08681459335144488,
+            "transit_loss_fraction": 0,
+            "mean_stock": 289.9790314305625,
+            "mean_price": 0.7344039969543749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 5.663256612061127e-19,
+            "transit_loss_fraction": 0.016459855650998115,
+            "mean_stock": 151.4200613093125,
+            "mean_price": 0.8011280170654376,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.21613004494538143,
+            "transit_loss_fraction": 0.02686259322995755,
+            "mean_stock": 304.7598912810625,
+            "mean_price": 2.23149539675625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -5.553127752429072e-18,
+            "transit_loss_fraction": 0.02980839271341208,
+            "mean_stock": 689.7501904019999,
+            "mean_price": 0.8750828056051251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09605835991447889,
+            "transit_loss_fraction": 0.011005279925089359,
+            "mean_stock": 297.15670078262497,
+            "mean_price": 0.8000714126670625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 6.088382959891852e-18,
+            "transit_loss_fraction": 0.017165181940629968,
+            "mean_stock": 292.7984201796875,
+            "mean_price": 1.3042499001299999,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.17342505562138358,
+            "transit_loss_fraction": 0.0462094016064489,
+            "mean_stock": 269.10209036925,
+            "mean_price": 2.246423982313125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -3.0808672263023146e-18,
+            "transit_loss_fraction": 0.046625944800902354,
+            "mean_stock": 562.86076033725,
+            "mean_price": 2.0180769626381254,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09261772697315725,
+            "transit_loss_fraction": 0,
+            "mean_stock": 259.402962014,
+            "mean_price": 1.0201763088100004,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.8332587820522905e-19,
+            "transit_loss_fraction": 0.045477619924790186,
+            "mean_stock": 198.96229671581253,
+            "mean_price": 1.4685205345056251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09730463594082403,
+            "transit_loss_fraction": 0.03950126284884026,
+            "mean_stock": 275.92847830756244,
+            "mean_price": 1.0091503094906251,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.4205758900376897e-17,
+            "transit_loss_fraction": 0.04261230491007118,
+            "mean_stock": 364.7175396323125,
+            "mean_price": 0.9707367707296873,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09015160416934527,
+            "transit_loss_fraction": 0,
+            "mean_stock": 252.06816715187497,
+            "mean_price": 1.0250755995075,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -3.533975053352934e-19,
+            "transit_loss_fraction": 0.03948693207711054,
+            "mean_stock": 98.58522187818126,
+            "mean_price": 0.6104258432871874,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09805786144732849,
+            "transit_loss_fraction": 0.013083675176262306,
+            "mean_stock": 296.1151701290625,
+            "mean_price": 1.0014407064583748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09509224628732857,
+            "transit_loss_fraction": 0,
+            "mean_stock": 267.17008476,
+            "mean_price": 1.0169090943800003,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -4.331569398483019e-18,
+            "transit_loss_fraction": 0.01606157674507398,
+            "mean_stock": 250.5039794768125,
+            "mean_price": 1.64320294351625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.041542841313915016,
+            "transit_loss_fraction": 0,
+            "mean_stock": 201.43729546468748,
+            "mean_price": 0.6456444921298751,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 4.4381255816594575e-18,
+            "transit_loss_fraction": 0.04144412734162207,
+            "mean_stock": 224.46349296706248,
+            "mean_price": 0.6364932514070625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.1062703051574151,
+            "transit_loss_fraction": 0.03935230389252896,
+            "mean_stock": 276.828780425,
+            "mean_price": 1.00387419125125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.2987022263438748e-17,
+            "transit_loss_fraction": 0.038423280492112896,
+            "mean_stock": 150.99403632374998,
+            "mean_price": 0.8844265132413749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.11035397298035395,
+            "transit_loss_fraction": 0.036457147957442405,
+            "mean_stock": 295.6197744105,
+            "mean_price": 0.9967517354460623,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.770111961511768e-17,
+            "transit_loss_fraction": 0.021833125584368188,
+            "mean_stock": 442.94465728250003,
+            "mean_price": 1.46897768172625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.9293645210092,
+            "full_fraction": 0.689897260274
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.7750997541701962,
+            "full_fraction": 0.5143835616438124
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.7183408575079697,
+            "full_fraction": 0.3770547945205
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.7059845980142728,
+            "full_fraction": 0.4152397260274374
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.6387981884382228,
+            "full_fraction": 0.29606164383574995
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.5815104028860514,
+            "full_fraction": 0.185958904109625
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.568035817578549,
+            "full_fraction": 0.3964041095891875
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.521073880695054,
+            "full_fraction": 0.25445205479456257
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.5001648416452589,
+            "full_fraction": 0.35719178082181247
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.49751587269221137,
+            "full_fraction": 0.3273972602738125
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.4935799055306885,
+            "full_fraction": 0.35291095890400004
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.4839926588081562,
+            "full_fraction": 0.2402397260275
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.4369723867541844,
+            "full_fraction": 0.029794520547968124
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.4313426053783085,
+            "full_fraction": 0.32910958904106247
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.4177954774308316,
+            "full_fraction": 0.232191780822
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.3842831147735743,
+            "full_fraction": 0.06592465753423124
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.37753884471657856,
+            "full_fraction": 0.318321917808125
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.34691193012446137,
+            "full_fraction": 0.0455479452055
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.2749467044894437,
+            "full_fraction": 0.0383561643835875
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.2714726655413579,
+            "full_fraction": 0.042808219178106253
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.27035424431724037,
+            "full_fraction": 0.037842465753456254
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.2477390542197026,
+            "full_fraction": 0.070205479452025
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.2383377298831989,
+            "full_fraction": 0.039212328767156246
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.18916186746945785,
+            "full_fraction": 0.0696917808218875
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.1582347030942002,
+            "full_fraction": 0.11489726027375
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.12021536333016179,
+            "full_fraction": 0.05188356164382501
+          }
+        ]
+      },
+      "winter_disruption": {
+        "years": [
+          {
+            "unmet_fraction": 0.02055286092877484,
+            "spoil_fraction": 0.054974283464730586,
+            "transit_loss_fraction": 0.007178076003554653,
+            "mean_stock": 270.9078687546425,
+            "mean_price": 1.2992968824983022,
+            "ceiling_fraction": 0.044109589041096894,
+            "floor_fraction": 0.006151541095892188,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.007994494719689715,
+            "spoil_fraction": 0.05761567967504919,
+            "transit_loss_fraction": 0.007262466537562926,
+            "mean_stock": 377.7454826781627,
+            "mean_price": 1.2107775563219647,
+            "ceiling_fraction": 0.0239811643835628,
+            "floor_fraction": 0.006404109589040625,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.014188054111752169,
+            "spoil_fraction": 0.056327720829008644,
+            "transit_loss_fraction": 0.008818252480983255,
+            "mean_stock": 370.5255080081425,
+            "mean_price": 1.2269532292583096,
+            "ceiling_fraction": 0.028129280821915466,
+            "floor_fraction": 0.00648544520547969,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.00805726279681429,
+            "spoil_fraction": 0.05759419509886704,
+            "transit_loss_fraction": 0.007315628778464582,
+            "mean_stock": 377.6082868411047,
+            "mean_price": 1.2109877085175966,
+            "ceiling_fraction": 0.02416095890410889,
+            "floor_fraction": 0.006446917808220312,
+            "empty_fraction": 0.0
+          },
+          {
+            "unmet_fraction": 0.00802763089516112,
+            "spoil_fraction": 0.05763165761303544,
+            "transit_loss_fraction": 0.007246770827879144,
+            "mean_stock": 377.35969366564257,
+            "mean_price": 1.2109568488134128,
+            "ceiling_fraction": 0.023981164383559975,
+            "floor_fraction": 0.006352739726032813,
+            "empty_fraction": 0.0
+          }
+        ],
+        "final_year_goods": [
+          {
+            "market": "winterhold",
+            "good": "food",
+            "unmet_fraction": 0.11823121688619098,
+            "spoil_fraction": 0.2591512126641073,
+            "transit_loss_fraction": 0.006244362007409003,
+            "mean_stock": 293.67946174043755,
+            "mean_price": 2.34325777546875,
+            "ceiling_fraction": 0.29041095890425,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "grain",
+            "unmet_fraction": 0.05518725470299446,
+            "spoil_fraction": -3.565502697141421e-18,
+            "transit_loss_fraction": 0.009795292418098421,
+            "mean_stock": 885.5340909863123,
+            "mean_price": 1.9343217710712497,
+            "ceiling_fraction": 0.16489726027399998,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "food",
+            "unmet_fraction": 0.04446181028829699,
+            "spoil_fraction": 0.09316345231263554,
+            "transit_loss_fraction": 0.007008499712446012,
+            "mean_stock": 191.2048268428125,
+            "mean_price": 1.9558948287656248,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "grain",
+            "unmet_fraction": 0.039038184339632465,
+            "spoil_fraction": -3.1014354000106087e-18,
+            "transit_loss_fraction": 0.007268269670496079,
+            "mean_stock": 1382.8300256324999,
+            "mean_price": 1.7899501444575,
+            "ceiling_fraction": 0.12962328767118753,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "grain",
+            "unmet_fraction": 0.016133551448162753,
+            "spoil_fraction": 7.188624605913582e-18,
+            "transit_loss_fraction": 0.006785689393744268,
+            "mean_stock": 1000.5065668655624,
+            "mean_price": 1.8485023345875,
+            "ceiling_fraction": 0.09999999999995,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "food",
+            "unmet_fraction": 0.010532096169728167,
+            "spoil_fraction": 0.1949193963230457,
+            "transit_loss_fraction": 0.006773569300727237,
+            "mean_stock": 277.27890021306257,
+            "mean_price": 2.3320361166012504,
+            "ceiling_fraction": 0.1883561643834375,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08155111074008406,
+            "transit_loss_fraction": 0.00806089444479081,
+            "mean_stock": 243.61917137824994,
+            "mean_price": 1.041878184534375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.431772820416126e-18,
+            "transit_loss_fraction": 0.005729008998630839,
+            "mean_stock": 1066.0323847625,
+            "mean_price": 1.783566171193125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10424827128938746,
+            "transit_loss_fraction": 0.008037417247059453,
+            "mean_stock": 287.54195726312497,
+            "mean_price": 0.9993859960976249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "eastmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.1468469181348397e-20,
+            "transit_loss_fraction": 0.005974755085441864,
+            "mean_stock": 227.065913968625,
+            "mean_price": 0.7673031145925001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.07656820677589189,
+            "transit_loss_fraction": 0.0070530219725000376,
+            "mean_stock": 239.41298190137502,
+            "mean_price": 1.0429715587781248,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -7.696516175018643e-19,
+            "transit_loss_fraction": 0.007791508700516232,
+            "mean_stock": 486.922136821125,
+            "mean_price": 0.9243606298437499,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09483578865592945,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 266.10745595225,
+            "mean_price": 1.01311520385,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "falkreath",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0,
+            "transit_loss_fraction": 0,
+            "mean_stock": 199.84859357250002,
+            "mean_price": 0.47197194433,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.25410958904131253,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.3827080669761013e-19,
+            "transit_loss_fraction": 0.00949912756662451,
+            "mean_stock": 542.125906322375,
+            "mean_price": 0.9115866184350625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.11023790518893915,
+            "transit_loss_fraction": 0.0058658755089990525,
+            "mean_stock": 295.35350342981246,
+            "mean_price": 0.99084306210275,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "haafingar",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.880714829134124e-18,
+            "transit_loss_fraction": 0.005697047446390047,
+            "mean_stock": 240.618196416875,
+            "mean_price": 1.3630998521737498,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.06048393168110412,
+            "transit_loss_fraction": 0.0057459901802031765,
+            "mean_stock": 189.28099916306255,
+            "mean_price": 1.0912007967943749,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08868891580838137,
+            "transit_loss_fraction": 0,
+            "mean_stock": 298.2297826001249,
+            "mean_price": 0.7308630951205625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "hjaalmarch",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.3720807627096183e-19,
+            "transit_loss_fraction": 0.006299721200659903,
+            "mean_stock": 158.5774705054375,
+            "mean_price": 0.7738433109165626,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.2256300876845667e-18,
+            "transit_loss_fraction": 0.007418176422013579,
+            "mean_stock": 820.3066236921876,
+            "mean_price": 0.84005972631975,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10032454091682141,
+            "transit_loss_fraction": 0.004962480087847426,
+            "mean_stock": 309.37178866374995,
+            "mean_price": 0.7928459305768748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "pale",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -8.983374656091004e-19,
+            "transit_loss_fraction": 0.005119228701676419,
+            "mean_stock": 334.79119627868755,
+            "mean_price": 1.2242462026862502,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.14710004686943925,
+            "transit_loss_fraction": 0.0065908188183428345,
+            "mean_stock": 236.101924990125,
+            "mean_price": 2.365911693575625,
+            "ceiling_fraction": 0.085958904109575,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 3.561553590984272e-18,
+            "transit_loss_fraction": 0.007681921469808221,
+            "mean_stock": 619.2566344034999,
+            "mean_price": 1.96048412376375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.0970632708491322,
+            "transit_loss_fraction": 0.0,
+            "mean_stock": 271.9957285400625,
+            "mean_price": 1.0091110431168748,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "reach",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -2.1318466129105455e-18,
+            "transit_loss_fraction": 0.006734602406191827,
+            "mean_stock": 212.60923035331246,
+            "mean_price": 1.42337627485625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.08155908576970208,
+            "transit_loss_fraction": 0.005884976164122721,
+            "mean_stock": 250.79671636831247,
+            "mean_price": 1.0315211351031253,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.6910640152614915e-18,
+            "transit_loss_fraction": 0.008095283705936372,
+            "mean_stock": 398.448487990875,
+            "mean_price": 0.9569056616446249,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09403898384772975,
+            "transit_loss_fraction": 0.023636820328494745,
+            "mean_stock": 263.5450994190626,
+            "mean_price": 1.014899311176875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "rift",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.2721849422331556e-19,
+            "transit_loss_fraction": 0.009897230726795363,
+            "mean_stock": 106.58921260400001,
+            "mean_price": 0.5964205753171875,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.09039172311456974,
+            "transit_loss_fraction": 0.01017972089634713,
+            "mean_stock": 283.406933124,
+            "mean_price": 1.0102458555562501,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10063939125627862,
+            "transit_loss_fraction": 0.012253333446230724,
+            "mean_stock": 281.7083585969375,
+            "mean_price": 1.003838595914375,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "solstheim",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 1.2161267519187856e-18,
+            "transit_loss_fraction": 0.006845754349344132,
+            "mean_stock": 274.5895399579375,
+            "mean_price": 1.57416679875125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "food",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.03539461683797945,
+            "transit_loss_fraction": 0,
+            "mean_stock": 180.406345034875,
+            "mean_price": 0.6582283037970625,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "grain",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -4.507611559067593e-19,
+            "transit_loss_fraction": 0.007393010698909986,
+            "mean_stock": 231.00608329631254,
+            "mean_price": 0.6336935246974374,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.10611212433280372,
+            "transit_loss_fraction": 0.008114994164453205,
+            "mean_stock": 281.21685864675,
+            "mean_price": 1.000623394087,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "whiterun",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": -1.9032909738616343e-19,
+            "transit_loss_fraction": 0.007898656637116265,
+            "mean_stock": 160.2324082616875,
+            "mean_price": 0.8565495706773125,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "meat",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 0.12124864835548418,
+            "transit_loss_fraction": 0.006944756995306716,
+            "mean_stock": 318.5657560056251,
+            "mean_price": 0.97747629401425,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          },
+          {
+            "market": "winterhold",
+            "good": "timber",
+            "unmet_fraction": 0.0,
+            "spoil_fraction": 2.616350162678299e-18,
+            "transit_loss_fraction": 0.006636869681811355,
+            "mean_stock": 487.6724940595625,
+            "mean_price": 1.3977174271900001,
+            "ceiling_fraction": 0.0,
+            "floor_fraction": 0.0,
+            "empty_fraction": 0.0
+          }
+        ],
+        "roads": [
+          {
+            "route": "whiterun-pale",
+            "utilization": 0.7506356999659246,
+            "full_fraction": 0.43287671232881253
+          },
+          {
+            "route": "pale-winterhold",
+            "utilization": 0.6487250094839042,
+            "full_fraction": 0.34708904109593747
+          },
+          {
+            "route": "eastmarch-winterhold",
+            "utilization": 0.6008142043541096,
+            "full_fraction": 0.23647260273962498
+          },
+          {
+            "route": "rift-eastmarch",
+            "utilization": 0.5686441385880138,
+            "full_fraction": 0.24708904109593754
+          },
+          {
+            "route": "hjaalmarch-haafingar",
+            "utilization": 0.5244839545815068,
+            "full_fraction": 0.37345890410956256
+          },
+          {
+            "route": "pale-hjaalmarch",
+            "utilization": 0.5068095305590753,
+            "full_fraction": 0.36746575342456245
+          },
+          {
+            "route": "haafingar-hjaalmarch",
+            "utilization": 0.4857628002952055,
+            "full_fraction": 0.29589041095900004
+          },
+          {
+            "route": "hjaalmarch-pale",
+            "utilization": 0.4673779763866439,
+            "full_fraction": 0.3061643835616875
+          },
+          {
+            "route": "falkreath-reach",
+            "utilization": 0.4217844347070205,
+            "full_fraction": 0.12106164383543751
+          },
+          {
+            "route": "whiterun-falkreath",
+            "utilization": 0.40868428806986296,
+            "full_fraction": 0.159417808219125
+          },
+          {
+            "route": "eastmarch-solstheim",
+            "utilization": 0.3835195322145548,
+            "full_fraction": 0.18732876712325003
+          },
+          {
+            "route": "whiterun-eastmarch",
+            "utilization": 0.36335198110839045,
+            "full_fraction": 0.032876712328800003
+          },
+          {
+            "route": "whiterun-rift",
+            "utilization": 0.3585809576241438,
+            "full_fraction": 0.14606164383568754
+          },
+          {
+            "route": "winterhold-pale",
+            "utilization": 0.33056180591215756,
+            "full_fraction": 0.2357876712328125
+          },
+          {
+            "route": "haafingar-reach",
+            "utilization": 0.33038140096284246,
+            "full_fraction": 0.09982876712322501
+          },
+          {
+            "route": "reach-haafingar",
+            "utilization": 0.3184597115741438,
+            "full_fraction": 0.21489726027412503
+          },
+          {
+            "route": "winterhold-eastmarch",
+            "utilization": 0.2544160015204966,
+            "full_fraction": 0.08921232876710625
+          },
+          {
+            "route": "rift-whiterun",
+            "utilization": 0.2525164002799487,
+            "full_fraction": 0.09195205479455
+          },
+          {
+            "route": "whiterun-reach",
+            "utilization": 0.23306781725991435,
+            "full_fraction": 0.009075342465756874
+          },
+          {
+            "route": "pale-whiterun",
+            "utilization": 0.21931964272590757,
+            "full_fraction": 0.09931506849313125
+          },
+          {
+            "route": "falkreath-whiterun",
+            "utilization": 0.21427359062071918,
+            "full_fraction": 0.09178082191781249
+          },
+          {
+            "route": "eastmarch-whiterun",
+            "utilization": 0.19665268285145548,
+            "full_fraction": 0.09332191780821252
+          },
+          {
+            "route": "reach-whiterun",
+            "utilization": 0.17330178761241438,
+            "full_fraction": 0.07465753424655
+          },
+          {
+            "route": "solstheim-eastmarch",
+            "utilization": 0.1650779323838014,
+            "full_fraction": 0.04794520547945625
+          },
+          {
+            "route": "eastmarch-rift",
+            "utilization": 0.1494827607089212,
+            "full_fraction": 0.08886986301373125
+          },
+          {
+            "route": "reach-falkreath",
+            "utilization": 0.1374935406093493,
+            "full_fraction": 0.06506849315065
+          }
+        ],
+        "excess_unmet_percentage_points_by_year": [
+          0.0,
+          0.0,
+          0.6164985961699565,
+          0.021921152071080474,
+          0.014195714341103116
+        ]
+      }
+    }
+  }
+}

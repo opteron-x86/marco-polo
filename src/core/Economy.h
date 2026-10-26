@@ -14,6 +14,7 @@ struct Commodity {
     std::string id, name;
     double referenceValue{10}, elasticity{0.5}, shelfLife{0};
     bool seasonal{false}, military{false};
+    double productionSwing{1}, reserveDays{0};
 };
 struct MarketSpec {
     std::string id, name, location;
@@ -40,6 +41,7 @@ struct Config {
     double merchantTurnover{0.08};
     double barterExponent{1}, minimumBarterMargin{0};
     Money treasury{20000};
+    bool balancedSeasons{false};
     SecurityConfig security;
     void Validate() const;
     const Commodity &Good(const std::string &) const;
@@ -149,6 +151,7 @@ class Economy {
     void Dispatch(const TradeConditions &);
     double Random();
     double Target(const std::string &, const std::string &) const;
+    double WarehouseTarget(const std::string &, const std::string &) const;
     double Total(const std::string &, const std::string &) const;
 };
 json Encode(const State &);

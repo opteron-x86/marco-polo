@@ -38,7 +38,9 @@ def main():
     files['SKSE/Plugins/MarcoPolo.dll']=dll
     for name in ('README.md','LICENSE','EXCEPTIONS.md','THIRD_PARTY_NOTICES.md','docs/RELEASE.md','docs/TESTING.md',
                  'docs/ARCHITECTURE.md','docs/RELEASING.md','docs/RUMOR-VOICES.md','docs/SECURITY-SIMULATION.md','docs/TRANSPORT-SIMULATION.md',
-                 'docs/CAMPAIGN-SIMULATION.md','docs/results/campaign-0.7.0.json','docs/results/campaign-0.7.0.png'):
+                 'docs/CAMPAIGN-SIMULATION.md','docs/results/campaign-0.7.0.json','docs/results/campaign-0.7.0.png',
+                 'docs/SEASONAL-SIMULATION.md','docs/results/seasons-0.8.0.json','docs/results/seasons-0.8.0.png',
+                 'docs/results/season-campaign-0.8.0.json'):
         files[name]=ROOT/name
     files.update({p.relative_to(ROOT).as_posix():p for p in (ROOT/'licenses').iterdir() if p.is_file()})
     deps = args.dependencies or args.build/'vcpkg_installed/x64-windows-static-md'

@@ -35,10 +35,12 @@ void Economy::Dispatch(const TradeConditions &trade) {
     std::map<Key, MarketCargo> markets;
     for (const auto &[id, market] : state_.markets)
         for (const auto &[good, stock] : market.goods) {
-            double target = Target(id, good), total = Total(id, good);
+            double target = WarehouseTarget(id, good), total = Total(id, good);
             double need = std::max(0.0, target - total - incoming[{id, good}]);
+            // Seasonal procurement must not lock the exporter's planned buffer
+            // away from importers. Retain the ordinary local export reserve.
             markets[{id, good}] = {total, target, need,
-                                   budget(std::max(0.0, stock.quantity - target * .6)),
+                                   budget(std::max(0.0, stock.quantity - Target(id, good) * .6)),
                                    budget(need)};
         }
     // Stable order also fixes shipment IDs and loss rolls when a user reorders
