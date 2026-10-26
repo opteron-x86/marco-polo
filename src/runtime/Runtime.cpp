@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <chrono>
 #include <cmath>
+#include <filesystem>
 #include <format>
 #include <fstream>
 #include <thread>
@@ -17,15 +18,37 @@ thread_local bool internal = false;
 namespace {
 json classification, settings;
 std::map<RE::FormID, std::string> cached, locations;
-std::mutex viewMutex;
-Snapshot snapshot;
 std::jthread ticker;
 bool loaded = false, loadFailed = false;
 json pendingKnowledge;
-std::string status = "Starting Marco Polo";
 double Now() {
     auto *c = RE::Calendar::GetSingleton();
     return c ? c->GetDaysPassed() : 0;
+}
+void ExportDiagnostics(const std::string &data, const std::string &news) {
+    try {
+        auto directory = SKSE::log::log_directory();
+        if (!directory)
+            return;
+        auto write = [&](const char *name, const std::string &content) {
+            auto target = *directory / name, temp = target;
+            temp += ".tmp";
+            std::ofstream file(temp, std::ios::binary | std::ios::trunc);
+            file << content << '\n';
+            file.close();
+            if (!file)
+                throw std::runtime_error(std::format("Cannot write {}", name));
+            if (!MoveFileExW(temp.c_str(), target.c_str(),
+                             MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH))
+                throw std::runtime_error(
+                    std::format("Cannot replace {} ({})", name, GetLastError()));
+        };
+        write("MarcoPolo-state.json", data);
+        write("MarcoPolo-information.json", news);
+    } catch (const std::exception &ex) {
+        // Diagnostic files are optional and never determine whether a save succeeds.
+        SKSE::log::error("Diagnostic export: {}", ex.what());
+    }
 }
 struct InternalScope {
     bool old = internal;
@@ -126,36 +149,6 @@ std::string Region(RE::TESObjectREFR *ref) {
     if (auto *world = ref->GetWorldspace(); world && Key(world) == "Dragonborn.esm|000800")
         return "solstheim";
     return {};
-}
-std::string DateForDay(double target) {
-    auto *calendar = RE::Calendar::GetSingleton();
-    if (!calendar)
-        return {};
-    constexpr const char *months[]{"Morning Star", "Sun's Dawn", "First Seed",   "Rain's Hand",
-                                   "Second Seed",  "Midyear",    "Sun's Height", "Last Seed",
-                                   "Hearthfire",   "Frostfall",  "Sun's Dusk",   "Evening Star"};
-    int month = static_cast<int>(calendar->GetMonth() % 12),
-        year = static_cast<int>(calendar->GetYear());
-    int delta =
-        static_cast<int>(std::clamp(std::floor(target) - std::floor(Now()), -365000.0, 365000.0));
-    year += delta / 365;
-    delta %= 365;
-    int day = static_cast<int>(calendar->GetDay()) + delta;
-    while (day > RE::Calendar::DAYS_IN_MONTH[month]) {
-        day -= RE::Calendar::DAYS_IN_MONTH[month];
-        if (++month == 12) {
-            month = 0;
-            ++year;
-        }
-    }
-    while (day < 1) {
-        if (--month < 0) {
-            month = 11;
-            --year;
-        }
-        day += RE::Calendar::DAYS_IN_MONTH[month];
-    }
-    return std::format("{} {}, 4E {}", day, months[month], year);
 }
 Context Vendor() {
     Context c;
@@ -343,10 +336,8 @@ bool Initialize() {
                 }
             }
         });
-        status = "Economy ready";
         return true;
     } catch (const std::exception &ex) {
-        status = ex.what();
         SKSE::log::error("Configuration: {}", ex.what());
         return false;
     }
@@ -354,7 +345,6 @@ bool Initialize() {
 void Reset() {
     active = false;
     ++generation;
-    ResetLedger();
     std::lock_guard lock(mutex);
     loaded = false;
     loadFailed = false;
@@ -363,16 +353,11 @@ void Reset() {
     ResetInformation();
     if (economy)
         economy->NewGame(0, 1);
-    {
-        std::lock_guard v(viewMutex);
-        snapshot = {};
-    }
 }
 void Start() {
     std::lock_guard lock(mutex);
     if (!economy || loadFailed) {
         SetRumorsEnabled(false);
-        Publish();
         return;
     }
     if (!loaded)
@@ -394,7 +379,6 @@ void Start() {
     loaded = true;
     active = enabled;
     SetRumorsEnabled(active);
-    Publish();
 }
 unsigned AdvanceEconomy(double now, unsigned budget) {
     return knowledge.Advance(*economy, now, budget);
@@ -418,45 +402,8 @@ void Tick() {
             SKSE::log::info("Economy day {}, {} steps, {} shipments", economy->Get().day, steps,
                             economy->Get().shipments.size());
     }
-    bool observed = economy->Get().day + 1 > Now() && ObserveSettlement();
-    if (steps || observed)
-        Publish();
-}
-void Publish() {
-    Snapshot v;
-    v.ready = active && economy;
-    v.status = status;
-    if (v.ready) {
-        v.market = Region(RE::PlayerCharacter::GetSingleton());
-        v.day = Now();
-        v.date = DateForDay(v.day);
-        v.known = knowledge.Reports();
-        v.opportunities = knowledge.Opportunities();
-        v.rumors = knowledge.RecentRumors();
-        for (auto &market : economy->Definitions().markets)
-            v.marketNames[market.id] = market.name;
-        for (auto &good : economy->Definitions().commodities)
-            v.commodityNames[good.id] = good.name;
-        auto dates = [&](const TradeReport &r) {
-            for (double day : {r.observed, r.learned})
-                if (!v.dates.contains(day))
-                    v.dates[day] = DateForDay(day);
-        };
-        for (auto &[market, goods] : v.known)
-            for (auto &[good, report] : goods)
-                dates(report);
-        for (auto &r : v.rumors)
-            dates(r);
-        // Only the explicitly enabled debug page receives live warehouses.
-        if (debugLogging)
-            v.economy = economy->Save();
-    }
-    std::lock_guard lock(viewMutex);
-    snapshot = std::move(v);
-}
-Snapshot View() {
-    std::lock_guard lock(viewMutex);
-    return snapshot;
+    if (economy->Get().day + 1 > Now())
+        ObserveSettlement();
 }
 void Save(SKSE::SerializationInterface *s) {
     std::lock_guard lock(mutex);
@@ -475,6 +422,8 @@ void Save(SKSE::SerializationInterface *s) {
             SKSE::log::error("Could not write market information co-save");
         else if (debugLogging)
             SKSE::log::info("Saved remembered markets: {} bytes", news.size());
+        if (debugLogging)
+            ExportDiagnostics(data, news);
     } catch (const std::exception &ex) {
         SKSE::log::error("Save: {}", ex.what());
     }
@@ -514,26 +463,8 @@ void Load(SKSE::SerializationInterface *s) {
         } catch (const std::exception &ex) {
             loadFailed = true;
             active = false;
-            status = "Economy disabled: incompatible save data";
             SKSE::log::error("Load: {}", ex.what());
         }
-    }
-}
-void ExportState() {
-    std::lock_guard lock(mutex);
-    if (!economy)
-        return;
-    auto p = SKSE::log::log_directory();
-    if (p) {
-        *p /= "MarcoPolo-state.json";
-        std::ofstream f(*p);
-        f << economy->Save().dump(2);
-        auto news = *p;
-        news.replace_filename("MarcoPolo-information.json");
-        std::ofstream info(news);
-        info << knowledge.Save().dump(2);
-        RE::SendHUDMessage::ShowHUDMessage(
-            "Marco Polo: diagnostic state exported beside SKSE logs.");
     }
 }
 } // namespace marco::runtime

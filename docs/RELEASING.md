@@ -31,11 +31,3 @@ fragment attachment, startup SEQ and expected compiled entry-point names.
 The repository attributes keep PSC source at LF on Windows as well as Linux;
 PEX, ESP and SEQ files are binary. Do not regenerate the script manifest to accept
 checkout line-ending changes.
-
-The native ledger movie is built from `interface/TradeLedger.as` with
-`python3 tools/build-ledger.py` on x86-64 Linux. The script downloads a pinned,
-checksum-verified MTASC 1.14 compiler into the ignored build directory. It ships
-no fonts: Skyrim resolves `$EverywhereFont` and `$EverywhereMediumFont` through
-the active font configuration. Linux CI rebuilds the movie byte-for-byte;
-packaging verifies its source/artifact manifest on both platforms. Use
-`--verify` for a compiler-free check or `--check` for a fresh rebuild comparison.

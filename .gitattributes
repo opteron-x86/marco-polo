@@ -3,5 +3,3 @@
 *.pex binary
 *.esp binary
 *.seq binary
-*.as text eol=lf
-*.swf binary

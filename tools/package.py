@@ -24,7 +24,6 @@ def main():
         parser.error('Use an empty output directory')
     subprocess.run([sys.executable,str(ROOT/'tools/audit-dll.py'),str(dll)],check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build-rumors.py'),'--check'],check=True)
-    subprocess.run([sys.executable,str(ROOT/'tools/build-ledger.py'),'--verify'],check=True)
     commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     dirty = bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
     prefix = f'Marco-Polo-{version()}-{commit[:8]}' + ('-dirty' if dirty else '')

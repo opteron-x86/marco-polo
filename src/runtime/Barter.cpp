@@ -213,7 +213,6 @@ void Select(const RE::FxDelegateArgs &args) {
     SyncMerchant(c);
     RefreshGold(menu, c);
     ObserveMarket(c.market, c.actor->GetName());
-    Publish();
     if (debugLogging)
         SKSE::log::info("{} {} x {}: {} gold, market {}, external={}, player gold delta={}, vendor "
                         "gold delta={}",
@@ -457,7 +456,6 @@ class Events final : public RE::BSTEventSink<RE::MenuOpenCloseEvent>,
                     if (menu->GetRuntimeData().itemList)
                         menu->GetRuntimeData().itemList->Update();
                 }
-                Publish();
             }
         }
         return RE::BSEventNotifyControl::kContinue;

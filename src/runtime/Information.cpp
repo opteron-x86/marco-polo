@@ -136,7 +136,6 @@ void HearTradeRumors(RE::StaticFunctionTag *, RE::Actor *speaker) {
                         }
                         if (batch.reports.empty())
                             text += "Nothing new has reached me.";
-                        Publish();
                         if (debugLogging)
                             SKSE::log::info("Trade rumors: {} in {}, {} reports, batch day {}",
                                             source, market, batch.reports.size(), batch.heard);

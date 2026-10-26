@@ -1,6 +1,8 @@
 # Skyrim desktop runtime and engine audit
 
-Version 0.2.0 adds report history, a Menu Framework page and an optional native Papyrus callback for innkeeper rumors. It introduces no new detours. The popup uses pinned CommonLib's `MessageBoxMenu::Create` dispatch: SE ID 51421, earlier AE ID 52270 and post-1.6.1130/1.7.x ID 442726. The audit checks that call's availability alongside the existing trading hooks in supplied address tables. Innkeeper faction membership and location traversal use CommonLib APIs, with game access queued onto the game thread. The dialogue ESP uses form version 44 and light-plugin IDs 0x800–0x804, extended through 0x80A in 0.2.2.
+Version 0.4.0 removes both market menus and their input handling. Barter hooks, rumor dialogue and co-save formats are unchanged. Debug exports now run when saving with debug logging enabled.
+
+Version 0.2.0 adds report history and an optional native Papyrus callback for innkeeper rumors. It introduces no new detours. The popup uses pinned CommonLib's `MessageBoxMenu::Create` dispatch: SE ID 51421, earlier AE ID 52270 and post-1.6.1130/1.7.x ID 442726. The audit checks that call's availability alongside the existing trading hooks in supplied address tables. Innkeeper faction membership and location traversal use CommonLib APIs, with game access queued onto the game thread. The dialogue ESP uses form version 44 and light-plugin IDs 0x800–0x804, extended through 0x80A in 0.2.2.
 
 Version 0.2.1 adds a debug-only dialogue-open event sink. Its queued task checks
 the current speaker through `MenuTopicManager` (SE/AE IDs 514959/401099) and the

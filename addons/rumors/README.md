@@ -1,4 +1,4 @@
-# Marco Polo - Trade Rumors
+# Skyrim True Economy and Merchantry - Trade Rumors
 
 Optional innkeeper dialogue for Marco Polo 0.2.0 or newer. Install alongside the
 core and enable `MarcoPolo - Trade Rumors.esp`. The plugin is ESL flagged, uses
@@ -6,9 +6,7 @@ only Skyrim.esm as a master, and adds its own dialogue records without overridin
 NPCs or existing conversations. No voice or silence mod is required.
 
 Ask an innkeeper **Any news of trade?** A short vanilla voiced reply finishes,
-then a popup reports a few market conditions. Click OK, then open **Marco Polo → Trade Status** in SKSE Menu
-Framework 3 to review the reports. Rumors also work without Menu Framework,
-although the persistent tracker is then unavailable.
+then a popup reports a few market conditions. Click OK to return to the conversation.
 
 MaleNord and MaleYoungEager use **Let's see here...**; MaleOldKindly offers to
 share what he knows; FemaleNord and FemaleArgonian use **Sure.**; Delphine uses
