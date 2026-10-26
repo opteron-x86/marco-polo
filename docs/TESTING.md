@@ -1,4 +1,4 @@
-# Game testing for 0.5.0
+# Game testing for 0.6.0
 
 ## Installation and save checks
 
@@ -24,6 +24,12 @@ conclusively diagnosed; this build does not claim to repair them.
 See [the prototype report](SECURITY-SIMULATION.md) for supported sites, automated
 results, and the camp/fort comparison to perform in game. This feature does not
 add new dialogue topics or location-specific rumors yet.
+
+The [merchant experiment](TRANSPORT-SIMULATION.md) covers the current cargo
+allocator. Compare actual shop inventories and quotes after allowing several
+days for deliveries. Clearing a camp need not reduce every price: exporters can
+become dearer, and well-supplied markets may barely change. Existing shipments
+retain their original arrival dates and losses when updating from 0.5.0.
 
 ## Innkeeper conversations
 

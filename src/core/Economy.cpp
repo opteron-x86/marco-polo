@@ -428,41 +428,7 @@ void Economy::Tick() {
         }
         v.lastRestock = state_.day;
     }
-    for (auto &r : config_.routes) {
-        const auto security = trade.routes.contains(r.id) ? trade.routes.at(r.id) : RouteSecurity{};
-        double remaining = r.capacity *
-                           (1 - std::max(state_.markets.at(r.from).disruption,
-                                         state_.markets.at(r.to).disruption) *
-                                    0.75) *
-                           security.capacity;
-        for (auto &c : config_.commodities) {
-            auto &src = state_.markets.at(r.from).goods.at(c.id);
-            auto &dst = state_.markets.at(r.to).goods.at(c.id);
-            double pending = 0;
-            for (auto &s : state_.shipments)
-                if (s.to == r.to && s.commodity == c.id)
-                    pending += s.quantity * (1 - s.loss);
-            double need = std::max(0.0, Target(r.to, c.id) - Total(r.to, c.id) - pending);
-            double excess = std::max(0.0, src.quantity - Target(r.from, c.id) * 0.6);
-            if (dst.price < src.price * (1 + r.cost * security.cost) &&
-                Total(r.to, c.id) > Target(r.to, c.id) * 0.5)
-                continue;
-            double qty = std::min({remaining, need, excess});
-            if (qty < 0.1)
-                continue;
-            src.quantity -= qty;
-            src.exported += qty;
-            remaining -= qty;
-            double disruption =
-                std::max(state_.markets.at(r.from).disruption, state_.markets.at(r.to).disruption);
-            double risk = std::clamp(
-                r.risk * security.riskScale + disruption * .1 + security.extraRisk, 0.0, 1.0);
-            double loss = Random() < risk ? 0.15 + Random() * 0.35 : 0;
-            state_.shipments.push_back({state_.nextID++, r.id, r.from, r.to, c.id, qty,
-                                        state_.day + r.days * (1 + disruption) * security.delay,
-                                        loss});
-        }
-    }
+    Dispatch(trade);
     for (auto &def : config_.markets)
         for (auto &c : config_.commodities) {
             auto &s = state_.markets.at(def.id).goods.at(c.id);

@@ -1,7 +1,9 @@
 # Route-security prototype: simulation results
 
-Version 0.5.0. These are automated simulation results; the new runtime adapter
-has not been tested in Skyrim.
+Historical baseline from version 0.5.0, commit `9db0761`. These are automated
+simulation results; the runtime adapter has not been tested in Skyrim. Version
+0.6.0 replaces the cargo allocator and adds [merchant experiments](TRANSPORT-SIMULATION.md).
+The numbers below describe the older allocator, not current balance.
 
 ## Experiment
 
@@ -49,8 +51,8 @@ Adding a garrison raised its destination's mean food price **4.56%**. These isol
 the mechanisms; they are not forecasts for the full Skyrim configuration.
 
 Production and recipe rules were not changed. Normal feedback from stock levels
-can still alter output indirectly. Transport capacity is still allocated in the
-existing commodity order, which can favor earlier goods. No balance changes were
+can still alter output indirectly. In that version, cargo was allocated in
+commodity order, favoring earlier goods. No balance changes were
 made merely to amplify the experimental results.
 
 ## Coverage and limits
@@ -89,6 +91,9 @@ Across the full experiment the largest aggregate stock-accounting residual was
 Crypt clearing preserved the entire final economy exactly in every seed.
 
 ## Reproduce
+
+Use the source at commit `9db0761` to reproduce this historical baseline.
+Current builds use the new allocator and produce different results.
 
 ```sh
 cmake -S . -B build/security-simulation -G Ninja -DMARCO_BUILD_PLUGIN=OFF -DMARCO_SANITIZERS=OFF -DCMAKE_BUILD_TYPE=Release

@@ -128,6 +128,7 @@ class Economy {
     Config config_;
     State state_;
     void Tick();
+    void Dispatch(const TradeConditions &);
     double Random();
     double Target(const std::string &, const std::string &) const;
     double Total(const std::string &, const std::string &) const;
