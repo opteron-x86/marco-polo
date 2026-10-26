@@ -107,6 +107,7 @@ class TradeLedger {
         native("preferences", prefs);
     }
     function draw():Void {
+        hideTip();
         panel.clear();
         // Recreate children, but keep the root instance and its font library.
         for (var name:String in panel) {
@@ -168,7 +169,7 @@ class TradeLedger {
     function hover(mc:MovieClip, text:String):Void {
         var self:TradeLedger = this;
         mc.useHandCursor = false;
-        mc.onRollOver = function():Void { self.showTip(text); };
+        mc.onRollOver = function():Void { if (!self.choosing) self.showTip(text); };
         mc.onRollOut = function():Void { self.hideTip(); };
     }
     function markets():Void {
@@ -194,7 +195,13 @@ class TradeLedger {
     function chooser():Void {
         var c:MovieClip = clip(panel, "chooser", 12, 121);
         var rows:Number = Math.ceil(data.markets.length / 2);
-        rect(c, 0, 0, 436, rows * 36 + 12, 0x131A17, 100);
+        // A separate backing target blocks gaps without swallowing the hold buttons.
+        var backing:MovieClip = clip(c, "backing", 0, 0);
+        rect(backing, 0, 0, 436, rows * 36 + 12, 0x131A17, 100);
+        var self:TradeLedger = this;
+        backing.useHandCursor = false;
+        backing.onRollOver = function():Void { self.hideTip(); };
+        backing.onPress = function():Void {};
         for (var i:Number = 0; i < data.markets.length; ++i)
             button(c, "m" + i, data.markets[i].name, 6 + (i % 2) * 214, 6 + Math.floor(i / 2) * 36,
                    210, 32, "hold", i, hold == i, "");
@@ -265,7 +272,10 @@ class TradeLedger {
         tooltip._x = Math.max(8, Math.min(root._xmouse + 12, Stage.width - 378 * s - 8));
         tooltip._y = Math.max(8, Math.min(root._ymouse + 20, Stage.height - (f._height + 12) * s - 8));
     }
-    function hideTip():Void { if (tooltip != undefined) tooltip.removeMovieClip(); }
+    function hideTip():Void {
+        if (tooltip != undefined) tooltip.removeMovieClip();
+        tooltip = undefined;
+    }
     function onMouseUp():Void {
         if (dragging || resizing) {
             panel.stopDrag(); delete root.onEnterFrame;

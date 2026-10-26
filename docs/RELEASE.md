@@ -2,7 +2,10 @@
 
 Adds a direct Scaleform loading fallback when the installed ledger movie is
 missing from Skyrim's resource index. It uses the game's existing loader and
-font settings. The log identifies each loading stage; in-game verification is pending.
+font settings. Menu loading has been confirmed in game.
+
+The hold selector blocks tooltips from the goods beneath it, including the gaps
+between buttons. Changing views also clears any open tooltip.
 
 **Right Shift + =** opens a compact Trade Ledger with Markets, Routes and Rumors tabs. Drag
 the title to move it, drag the bottom-right corner to resize it, and use the
