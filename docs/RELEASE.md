@@ -1,18 +1,27 @@
-# Skyrim True Economy and Merchantry 0.4.0
+# Skyrim True Economy and Merchantry 0.5.0 — test build
 
-The Trade Ledger, its keyboard shortcut, and the SKSE Menu Framework pages have
-been removed. Market news remains available through innkeeper conversations in
-the optional Trade Rumors addon.
+Selected bandit and Forsworn locations now affect the capacity, delays and loss
+risk of associated trade routes. Clearing them removes their contribution on
+subsequent daily ticks. Military occupation of supported forts reduces transport
+risk and adds demand for food, grain, medicine, weapons and armor.
 
-Pricing, merchant inventories, simulation rules, and the saved economy and rumor
-history are unchanged. Existing saves use the same record formats. The addon’s
-plugin and scripts are unchanged, including its [known voice issues](RUMOR-VOICES.md).
+The pilot covers ten configured locations, including one draugr crypt that has
+no economic effect. Production rules are unchanged. See the
+[simulation results and test instructions](SECURITY-SIMULATION.md).
 
-Install the updated core with Skyrim closed. When merging into an older install,
-remove `Interface/MarcoPoloTradeLedger.swf`. The old
-`SKSE/Plugins/MarcoPolo/ledger.json` preferences are ignored and can be deleted.
-Other mods may still need SKSE Menu Framework.
+The DLL reads location state without changing quests, ownership, NPCs or world
+objects. Fort interpretation follows vanilla Civil War participation and owner
+data; it still needs in-game validation. Route assignments and strengths are
+configurable in `SKSE/Plugins/MarcoPolo/security.json`. Set `enabled` to `false`
+in that file to disable this feature, then restart Skyrim.
 
-For diagnostics, enable `debugLogging` in `settings.json` and restart Skyrim.
-Saving then writes `MarcoPolo-state.json` and `MarcoPolo-information.json` beside
-the SKSE logs. These files replace the menu’s export button.
+Economy save schema 4 adds site states and pending dated observations. Schemas
+1–3 migrate without replacing existing stocks, prices, merchants or shipments.
+Older DLLs cannot load schema 4, so use separate test saves when evaluating this
+build. Rumor history keeps its existing format. No new ESP or Papyrus script is
+required; the optional innkeeper dialogue addon is unchanged.
+
+The Trade Ledger and SKSE Menu Framework pages remain removed. When merging
+into a pre-0.4.0 install, remove `Interface/MarcoPoloTradeLedger.swf`; the old
+`SKSE/Plugins/MarcoPolo/ledger.json` is ignored. Debug logging exports economy and
+information JSON beside the SKSE logs when saving.

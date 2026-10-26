@@ -35,7 +35,7 @@ def main():
                 info.external_attr=0o100644<<16;archive.writestr(info,path.read_bytes())
     files = {p.relative_to(ROOT/'package').as_posix():p for p in (ROOT/'package').rglob('*') if p.is_file()}
     files['SKSE/Plugins/MarcoPolo.dll']=dll
-    for name in ('README.md','LICENSE','EXCEPTIONS.md','THIRD_PARTY_NOTICES.md','docs/TESTING.md'):
+    for name in ('README.md','LICENSE','EXCEPTIONS.md','THIRD_PARTY_NOTICES.md','docs/TESTING.md','docs/SECURITY-SIMULATION.md'):
         files[name]=ROOT/name
     files.update({p.relative_to(ROOT).as_posix():p for p in (ROOT/'licenses').iterdir() if p.is_file()})
     deps = args.dependencies or args.build/'vcpkg_installed/x64-windows-static-md'

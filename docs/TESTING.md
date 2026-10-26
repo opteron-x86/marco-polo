@@ -1,4 +1,4 @@
-# Game testing for 0.4.0
+# Game testing for 0.5.0
 
 ## Installation and save checks
 
@@ -14,9 +14,16 @@ Keep the test save’s ESS and matching SKSE co-save together.
 3. Switch characters or start a fresh game. It must not inherit the previous
    character’s market history or daily rumor batch.
 
-The existing economy and information record formats have not changed. Previous
-save/load failures were not conclusively diagnosed; this build does not claim
-to repair them.
+Economy schema 4 adds saved site observations; earlier schemas migrate without
+resetting markets. Older DLLs cannot load new schema-4 saves. Use separate test
+saves. Rumor history retains its format. Previous save/load failures were not
+conclusively diagnosed; this build does not claim to repair them.
+
+## Route security
+
+See [the prototype report](SECURITY-SIMULATION.md) for supported sites, automated
+results, and the camp/fort comparison to perform in game. This feature does not
+add new dialogue topics or location-specific rumors yet.
 
 ## Innkeeper conversations
 

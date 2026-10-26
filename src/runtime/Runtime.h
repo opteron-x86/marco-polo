@@ -41,6 +41,8 @@ bool InstallBarter();
 int RawValue(const RE::InventoryEntryData *);
 bool PlainItem(const RE::InventoryEntryData *);
 unsigned AdvanceEconomy(double now, unsigned budget);
+void InitializeWorldTrade();
+void RefreshWorldTrade(double now);
 void ObserveMarket(const std::string &market, const std::string &source);
 bool ObserveSettlement();
 void ResetInformation();

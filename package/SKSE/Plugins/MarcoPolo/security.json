@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "enabled": true,
+  "maximumPressure": 0.8,
+  "maximumExtraDemand": 0.3,
+  "sites": [
+    {
+      "location": "Skyrim.esm|0B712C",
+      "name": "Embershard Mine",
+      "market": "falkreath",
+      "kind": "bandit",
+      "threat": 0.65,
+      "routes": {
+        "whiterun-falkreath": 0.65,
+        "falkreath-whiterun": 0.65
+      }
+    },
+    {
+      "location": "Skyrim.esm|019193",
+      "name": "Halted Stream Camp",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 0.55,
+      "routes": {
+        "whiterun-pale": 0.5,
+        "pale-whiterun": 0.5
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192C5",
+      "name": "White River Watch",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 0.7,
+      "routes": {
+        "whiterun-rift": 0.65,
+        "rift-whiterun": 0.65,
+        "whiterun-eastmarch": 0.35,
+        "eastmarch-whiterun": 0.35
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192C1",
+      "name": "Valtheim Towers",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.25,
+      "routes": {
+        "whiterun-eastmarch": 1,
+        "eastmarch-whiterun": 1,
+        "whiterun-rift": 0.6,
+        "rift-whiterun": 0.6
+      }
+    },
+    {
+      "location": "Skyrim.esm|019170",
+      "name": "Red Eagle Redoubt",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 0.75,
+      "routes": {
+        "whiterun-reach": 0.45,
+        "reach-whiterun": 0.45,
+        "reach-falkreath": 0.4,
+        "falkreath-reach": 0.4
+      }
+    },
+    {
+      "location": "Skyrim.esm|01925F",
+      "name": "Karthspire",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 0.85,
+      "routes": {
+        "reach-falkreath": 0.75,
+        "falkreath-reach": 0.75
+      }
+    },
+    {
+      "location": "Skyrim.esm|018EE9",
+      "name": "Bleak Falls Barrow",
+      "market": "falkreath",
+      "kind": "crypt",
+      "threat": 0,
+      "routes": {}
+    },
+    {
+      "location": "Skyrim.esm|01917D",
+      "name": "Fort Greymoor",
+      "market": "whiterun",
+      "kind": "fort",
+      "threat": 1.1,
+      "routes": {
+        "whiterun-reach": 1,
+        "reach-whiterun": 1,
+        "whiterun-falkreath": 0.35,
+        "falkreath-whiterun": 0.35
+      },
+      "initialOccupants": "bandit",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019185",
+      "name": "Fort Sungard",
+      "market": "reach",
+      "kind": "fort",
+      "threat": 1.2,
+      "routes": {
+        "whiterun-reach": 0.8,
+        "reach-whiterun": 0.8,
+        "reach-falkreath": 0.6,
+        "falkreath-reach": 0.6
+      },
+      "initialOccupants": "forsworn",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|01917E",
+      "name": "Fort Dunstad",
+      "market": "pale",
+      "kind": "fort",
+      "threat": 1.1,
+      "routes": {
+        "whiterun-pale": 1,
+        "pale-whiterun": 1
+      },
+      "initialOccupants": "bandit",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    }
+  ]
+}

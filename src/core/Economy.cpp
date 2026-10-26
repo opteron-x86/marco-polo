@@ -107,6 +107,7 @@ void Config::Validate() const {
             Require(key != r.output && Finite(n) && n > 0, "Invalid recipe input");
         }
     }
+    security.Validate(*this);
 }
 Config Config::Parse(const json &j) {
     Require(j.at("schema").get<int>() == 1, "Unsupported economy configuration schema");
@@ -137,6 +138,8 @@ Config Config::Parse(const json &j) {
     for (auto &v : j.value("recipes", json::array()))
         c.recipes.push_back({v.at("market"), v.at("output"), v.at("amount"),
                              v.at("inputs").get<std::map<std::string, double>>()});
+    if (j.contains("security"))
+        c.security = SecurityConfig::Parse(j.at("security"));
     c.Validate();
     return c;
 }
@@ -285,6 +288,45 @@ void Economy::SetConditions(const std::string &id, double war, double disruption
     m.war = std::clamp(war, 0.0, 1.0);
     m.disruption = std::clamp(disruption, 0.0, 1.0);
 }
+bool Economy::ObserveSite(const std::string &id, SiteControl control, double now) {
+    Require(Finite(now) && now >= state_.day, "Invalid site observation time");
+    ControlName(control); // Validate the enum before touching saved state.
+    auto spec = std::find_if(config_.security.sites.begin(), config_.security.sites.end(),
+                             [&](const auto &site) { return site.id == id; });
+    Require(spec != config_.security.sites.end(), "Unconfigured security site");
+    if (!config_.security.enabled)
+        return false;
+    if (spec->kind == SiteKind::Unknown || spec->kind == SiteKind::Crypt)
+        control = SiteControl::Unknown;
+    double day = std::floor(now) + 1;
+    SiteControl last = SiteControl::Unknown;
+    if (auto current = state_.security.sites.find(id); current != state_.security.sites.end())
+        last = current->second;
+    for (const auto &change : state_.security.pending)
+        if (change.site == id) {
+            Require(change.day <= day, "Site observation moved backwards");
+            last = change.control;
+        }
+    if (last == control)
+        return false;
+    auto sameDay = std::find_if(state_.security.pending.begin(), state_.security.pending.end(),
+                                [&](const auto &v) { return v.site == id && v.day == day; });
+    if (sameDay != state_.security.pending.end())
+        sameDay->control = control;
+    else {
+        Require(state_.security.pending.size() < 8192, "Too many pending site observations");
+        state_.security.pending.push_back({id, control, day});
+        std::sort(state_.security.pending.begin(), state_.security.pending.end(),
+                  [](const auto &a, const auto &b) {
+                      return std::pair(a.day, a.site) < std::pair(b.day, b.site);
+                  });
+    }
+    ++state_.revision;
+    return true;
+}
+TradeConditions Economy::SecurityConditions() const {
+    return EvaluateSecurity(config_, state_.security);
+}
 unsigned Economy::Advance(double target, unsigned budget) {
     Require(Finite(target) && target >= 0 && budget <= 100000, "Invalid simulation advance");
     unsigned n = 0;
@@ -296,6 +338,16 @@ unsigned Economy::Advance(double target, unsigned budget) {
     return n;
 }
 void Economy::Tick() {
+    // Observations apply only to future daily ticks. A clear discovered after a
+    // long wait must not retroactively protect shipments in the catch-up period.
+    auto &pending = state_.security.pending;
+    auto applied = pending.begin();
+    while (applied != pending.end() && applied->day <= state_.day) {
+        state_.security.sites[applied->site] = applied->control;
+        ++applied;
+    }
+    pending.erase(pending.begin(), applied);
+    auto trade = SecurityConditions();
     for (auto it = state_.shipments.begin(); it != state_.shipments.end();) {
         if (it->arrives <= state_.day) {
             auto &s = state_.markets.at(it->to).goods.at(it->commodity);
@@ -321,7 +373,8 @@ void Economy::Tick() {
             output *= std::clamp(2 - Total(def.id, good.id) / Target(def.id, good.id), 0.0, 1.5);
             s.quantity += output;
             s.produced += output;
-            double wanted = Amount(def.demand, good.id) * (good.military ? 1 + m.war : 1) *
+            double wanted = (Amount(def.demand, good.id) * (good.military ? 1 + m.war : 1) +
+                             Amount(trade.demand[def.id], good.id)) *
                             (good.seasonal ? 1 + winter * 0.15 : 1);
             wanted *= std::pow(std::max(0.1, s.price), -good.elasticity * 0.4);
             double used = std::min(s.quantity, wanted);
@@ -376,9 +429,12 @@ void Economy::Tick() {
         v.lastRestock = state_.day;
     }
     for (auto &r : config_.routes) {
-        double remaining = r.capacity * (1 - std::max(state_.markets.at(r.from).disruption,
-                                                      state_.markets.at(r.to).disruption) *
-                                                 0.75);
+        const auto security = trade.routes.contains(r.id) ? trade.routes.at(r.id) : RouteSecurity{};
+        double remaining = r.capacity *
+                           (1 - std::max(state_.markets.at(r.from).disruption,
+                                         state_.markets.at(r.to).disruption) *
+                                    0.75) *
+                           security.capacity;
         for (auto &c : config_.commodities) {
             auto &src = state_.markets.at(r.from).goods.at(c.id);
             auto &dst = state_.markets.at(r.to).goods.at(c.id);
@@ -388,7 +444,7 @@ void Economy::Tick() {
                     pending += s.quantity * (1 - s.loss);
             double need = std::max(0.0, Target(r.to, c.id) - Total(r.to, c.id) - pending);
             double excess = std::max(0.0, src.quantity - Target(r.from, c.id) * 0.6);
-            if (dst.price < src.price * (1 + r.cost) &&
+            if (dst.price < src.price * (1 + r.cost * security.cost) &&
                 Total(r.to, c.id) > Target(r.to, c.id) * 0.5)
                 continue;
             double qty = std::min({remaining, need, excess});
@@ -399,9 +455,12 @@ void Economy::Tick() {
             remaining -= qty;
             double disruption =
                 std::max(state_.markets.at(r.from).disruption, state_.markets.at(r.to).disruption);
-            double loss = Random() < r.risk + disruption * 0.1 ? 0.15 + Random() * 0.35 : 0;
+            double risk = std::clamp(
+                r.risk * security.riskScale + disruption * .1 + security.extraRisk, 0.0, 1.0);
+            double loss = Random() < risk ? 0.15 + Random() * 0.35 : 0;
             state_.shipments.push_back({state_.nextID++, r.id, r.from, r.to, c.id, qty,
-                                        state_.day + r.days * (1 + disruption), loss});
+                                        state_.day + r.days * (1 + disruption) * security.delay,
+                                        loss});
         }
     }
     for (auto &def : config_.markets)
@@ -438,6 +497,7 @@ void Economy::Validate() const {
     Require(state_.schema == SaveSchema && Finite(state_.day) && state_.day >= 0 &&
                 state_.rng != 0 && state_.nextID > 0,
             "Invalid save header");
+    ValidateSecurity(state_.security, state_.day);
     Require(state_.markets.size() == config_.markets.size() && state_.merchants.size() <= 10000 &&
                 state_.shipments.size() <= 100000,
             "Invalid save dimensions");

@@ -30,14 +30,19 @@ void from_json(const json &j, Item &i) {
 }
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(Merchant, id, market, cash, items, lastVisit, lastRestock)
 NLOHMANN_DEFINE_TYPE_NON_INTRUSIVE(State, schema, day, epoch, rng, nextID, revision, markets,
-                                   merchants, shipments)
+                                   merchants, shipments, security)
 json Encode(const State &s) {
     return json(s);
 }
 State Decode(const json &j) {
     auto schema = j.at("schema").get<int>();
-    if (schema != 1 && schema != 2 && schema != SaveSchema)
+    if (schema < 1 || schema > SaveSchema)
         throw std::runtime_error("Unsupported Marco Polo save schema");
+    if (schema < 4 && !j.contains("security")) {
+        auto migrated = j;
+        migrated["security"] = SecurityState{};
+        return migrated.get<State>();
+    }
     return j.get<State>();
 }
 json Economy::Save() const {
@@ -72,8 +77,8 @@ void Economy::Load(const json &j) {
             }
         }
     }
-    // Schema 3 contains market/trading state only. Obsolete schema-1/2 fields
-    // are ignored by Decode; no paper or contract data reaches the runtime.
+    // Schema 4 adds dated security observations. Older markets, stocks, RNG and
+    // shipments are retained exactly; no historical location clears are invented.
     incoming.schema = SaveSchema;
     auto old = std::move(state_);
     state_ = std::move(incoming);

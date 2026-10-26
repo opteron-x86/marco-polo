@@ -1,4 +1,5 @@
 #pragma once
+#include "Security.h"
 #include <cstdint>
 #include <map>
 #include <nlohmann/json.hpp>
@@ -8,7 +9,7 @@
 namespace marco {
 using Money = std::int64_t;
 using json = nlohmann::json;
-inline constexpr int SaveSchema = 3;
+inline constexpr int SaveSchema = 4;
 struct Commodity {
     std::string id, name;
     double referenceValue{10}, elasticity{0.5}, shelfLife{0};
@@ -39,6 +40,7 @@ struct Config {
     double merchantTurnover{0.08};
     double barterExponent{1}, minimumBarterMargin{0};
     Money treasury{20000};
+    SecurityConfig security;
     void Validate() const;
     const Commodity &Good(const std::string &) const;
     const MarketSpec &Market(const std::string &) const;
@@ -85,6 +87,7 @@ struct State {
     std::map<std::string, Market> markets;
     std::map<std::string, Merchant> merchants;
     std::vector<Shipment> shipments;
+    SecurityState security;
 };
 struct Quote {
     Money total{};
@@ -105,6 +108,8 @@ class Economy {
                Money actualGold, int fromExternal = 0);
     void RegisterMerchant(Merchant merchant);
     void SetConditions(const std::string &market, double war, double disruption);
+    bool ObserveSite(const std::string &site, SiteControl, double observedDay);
+    TradeConditions SecurityConditions() const;
     std::vector<MarketReport> Reports(const std::string &market) const;
     json Save() const;
     void Load(const json &);

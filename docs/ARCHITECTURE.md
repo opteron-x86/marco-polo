@@ -8,6 +8,8 @@ Schema 2 adds household goods. Loading schema 1 initializes the new commodity at
 flowchart LR
   Config[JSON definitions] --> Core[Economy model]
   Time[Game calendar and Civil War] --> Core
+  Sites[Cleared sites and fort control] --> Security[Route security and garrison demand]
+  Security --> Core
   Core <--> Save[SKSE co-save]
   Trade[Confirmed barter transaction] --> Core
   Core --> Price[SkyUI list, card and quantity quotes]
@@ -25,7 +27,11 @@ flowchart LR
 
 Markets contain warehouses; merchant stock is separate. Both contribute to local availability. Production responds to storage, demand responds to price, food can spoil, and recipes consume inputs. The shipped recipes convert iron to steel; equipment production currently has no material requirements, and steel also has independent base production. Routes reserve stock when departing and deliver later, with losses decided and saved on departure. Taxes and NPC purchasing are explicit outside money sources; merchants spend cash to restock.
 
-Disruption reduces output and shipping capacity and increases shipping delays and loss risk. The runtime currently derives it from broad Civil War conditions, not individual mines or roads. Routes retain some capacity even at maximum disruption; there is no full closure state. Commodity prices respond to their own availability and configured regional factors, not to the changing costs of recipe inputs.
+The broad Civil War disruption value reduces output and shipping capacity and increases shipping delays and loss risk. Route security is separate: it changes only transport capacity, delay, loss risk and the price-gap threshold for dispatch. Neither system currently fully closes a route. Commodity prices respond to their own availability and configured regional factors, not to the changing costs of recipe inputs.
+
+`SecurityConfig` assigns named locations to directed routes. Hostile sites accumulate bounded pressure with diminishing returns; active military forts reduce that pressure and baseline shipping risk. Garrison demand is capped per market and commodity. Production has no security multiplier, though its existing response to inventory can change output indirectly. `ObserveSite` coalesces repeated observations within a day and schedules changes for the next daily tick. Catch-up therefore retains prior conditions until an observation becomes effective, and cargo already in transit retains its original ETA and reserved loss.
+
+The runtime caches only configured location records, validates their keyword categories, and polls them on the game thread when advancing the economy. It reads `IsCleared`, `CWFort` and `CWOwner`; it writes none of them. Vanilla `CWScript` excludes initial nonmilitary forts using `CWFort == -2` even though an owner is already assigned. `CWFort == 0` with owner 1 or 2 selects an Imperial or Stormcloak garrison. Negative owner values indicate a transfer in progress. Unknown values or mismatched tags are inactive. These adapters require live validation, especially with occupation overhauls.
 
 Each merchant item separates managed chest quantity from `externalQuantity`, observed in Skyrim's sale inventory through `ExtraOriginalReference` source handles. Shop displays and other sale sources contribute to availability but are never subject to simulated turnover or chest replenishment. The adapter validates the selected sale row's count, lets the engine choose the source, and accounts for the confirmed chest and external portions of the transfer separately. It preserves external counts between transactions because Skyrim's temporary sale inventory is being rebuilt. Opening the next barter session observes the external sources again. Older schema-1 saves default this new count to zero until observation.
 
@@ -37,7 +43,7 @@ Regional `priceFactors` represent structural production costs and import depende
 
 `Knowledge::Advance` wraps one-day advances without changing their order, RNG, prices or conditions, capturing each actual daily result. History is capped at 32 immutable samples. Observations copy regional rates into hidden report history. Rumors use an incoming route's configured travel time to select an earlier sample. The stored report uses a 20-percentage-point band; the conversation describes prices qualitatively. Both observation and acquisition dates are preserved. Selection uses a separate stable hash, never economy RNG. Each hold has one saved daily batch; fresher observations win.
 
-The `ECON` co-save record remains schema 3. The `KNOW` record contains information schema 1 and is bounded to 4 MiB on load. Information restores after the game calendar is available. Rejected information is logged and discarded independently of `ECON`. Saves without information history start it at the restored economy day. Revert clears both objects and invalidates pending rumor callbacks. No engine form pointers or inventory objects are serialized by this feature.
+The `ECON` co-save record now uses schema 4, adding site controls and pending dated observations. Older schemas acquire an empty security state; their existing trading data is preserved. Pre-0.5.0 DLLs cannot read schema 4. The `KNOW` record contains information schema 1 and is bounded to 4 MiB on load. Information restores after the game calendar is available. Rejected information is logged and discarded independently of `ECON`. Saves without information history start it at the restored economy day. Revert clears both objects and invalidates pending rumor callbacks. No engine form pointers or inventory objects are serialized by this feature.
 
 With `debugLogging` enabled, saving also exports the serialized economy and information to JSON files beside the SKSE log. Each file replaces its previous copy after writing a temporary file. Export failures are logged independently of co-save writes. Diagnostics have no in-game menu or notification.
 

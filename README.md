@@ -22,6 +22,7 @@ Settings are in `SKSE/Plugins/MarcoPolo/`. Restart Skyrim after changing them.
 
 - [Release notes](docs/RELEASE.md)
 - [Game testing](docs/TESTING.md)
+- [Route security test results](docs/SECURITY-SIMULATION.md)
 - [Architecture](docs/ARCHITECTURE.md)
 - [Build and release automation](docs/RELEASING.md)
 

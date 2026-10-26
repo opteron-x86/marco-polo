@@ -299,7 +299,11 @@ bool Initialize() {
     SetRumorsEnabled(false);
     try {
         std::ifstream f(std::string(DataPath) + "economy.json");
-        economy = std::make_unique<Economy>(Config::Parse(json::parse(f)));
+        auto definitions = json::parse(f);
+        std::ifstream security(std::string(DataPath) + "security.json");
+        if (security)
+            definitions["security"] = json::parse(security);
+        economy = std::make_unique<Economy>(Config::Parse(definitions));
         std::ifstream c(std::string(DataPath) + "classification.json");
         classification = json::parse(c);
         for (const char *table : {"forms", "keywords", "types"}) {
@@ -316,6 +320,7 @@ bool Initialize() {
         manageInventory = settings.value("manageInventory", true);
         debugLogging = settings.value("debugLogging", false);
         RegisterInformation();
+        InitializeWorldTrade();
         for (auto &m : economy->Definitions().markets)
             if (auto *form = Resolve(m.location))
                 locations[form->GetFormID()] = m.id;
@@ -381,6 +386,7 @@ void Start() {
     SetRumorsEnabled(active);
 }
 unsigned AdvanceEconomy(double now, unsigned budget) {
+    RefreshWorldTrade(now);
     return knowledge.Advance(*economy, now, budget);
 }
 void Tick() {
