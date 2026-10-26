@@ -1,8 +1,13 @@
-# Skyrim True Economy and Merchantry 0.3.3
+# Skyrim True Economy and Merchantry 0.3.4
 
-Adds a direct Scaleform loading fallback when the installed ledger movie is
-missing from Skyrim's resource index. It uses the game's existing loader and
-font settings. Menu loading has been confirmed in game.
+Dragging the ledger's corner now changes its width and height without enlarging
+the text. Columns expand with the window, and taller windows display more rows.
+Both dimensions are remembered between sessions.
+
+Escape dismisses the hold selector or closes the ledger. Tab and Shift + Tab
+change tabs. Keyboard navigation uses physical keys so Skyrim's menu-key
+translation cannot confuse Escape with Tab. Tooltips fit their text and wrap
+long reports at a maximum width.
 
 The hold selector blocks tooltips from the goods beneath it, including the gaps
 between buttons. Changing views also clears any open tooltip.

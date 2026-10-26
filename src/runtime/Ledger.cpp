@@ -101,7 +101,7 @@ class Bridge final : public RE::GFxFunctionHandler {
             std::lock_guard lock(preferencesMutex);
             if (action == "preferences" && value.IsObject()) {
                 auto updated = preferences.Save();
-                for (const char *name : {"x", "y", "scale"}) {
+                for (const char *name : {"x", "y", "width", "height"}) {
                     RE::GFxValue member;
                     if (value.GetMember(name, &member) && member.IsNumber() &&
                         std::isfinite(member.GetNumber()))
@@ -194,6 +194,17 @@ class LedgerMenu final : public RE::IMenu {
             message.type == RE::UI_MESSAGE_TYPE::kForceHide) {
             open = false;
             return RE::UI_MESSAGE_RESULTS::kHandled;
+        }
+        if (message.type == RE::UI_MESSAGE_TYPE::kScaleformEvent) {
+            auto data = static_cast<RE::BSUIScaleformData *>(message.data);
+            if (data && data->scaleformEvent) {
+                const auto type = data->scaleformEvent->type;
+                using Event = RE::GFxEvent::EventType;
+                // Navigation comes from physical input below. Do not also dispatch
+                // Skyrim's remapped UI keys (including Cancel as Tab) to ActionScript.
+                if (type == Event::kKeyDown || type == Event::kKeyUp || type == Event::kCharEvent)
+                    return RE::UI_MESSAGE_RESULTS::kHandled;
+            }
         }
         return RE::IMenu::ProcessMessage(message);
     }
@@ -299,6 +310,15 @@ void Toggle() {
         }
     });
 }
+bool KeyHeld(unsigned code) {
+    auto manager = RE::BSInputDeviceManager::GetSingleton();
+    auto keyboard = manager ? manager->GetKeyboard() : nullptr;
+    if (!keyboard)
+        return false;
+    // Current state avoids latching modifiers across focus changes.
+    const auto &keys = keyboard->GetRuntimeData().curState;
+    return code < std::size(keys) && (keys[code] & 0x80) != 0;
+}
 class Input final : public RE::BSTEventSink<RE::InputEvent *> {
   public:
     RE::BSEventNotifyControl ProcessEvent(RE::InputEvent *const *events,
@@ -313,16 +333,18 @@ class Input final : public RE::BSTEventSink<RE::InputEvent *> {
             if (button->GetDevice() == RE::INPUT_DEVICE::kKeyboard) {
                 if (hotkey != 0 && key == hotkey) {
                     auto modifier = hotkeyModifier.load();
-                    auto manager = RE::BSInputDeviceManager::GetSingleton();
-                    auto keyboard = manager ? manager->GetKeyboard() : nullptr;
-                    bool held = false;
-                    if (keyboard) {
-                        // Current device state avoids latching a modifier across focus changes.
-                        const auto &keys = keyboard->GetRuntimeData().curState;
-                        held = modifier < std::size(keys) && (keys[modifier] & 0x80) != 0;
-                    }
-                    if (modifier == 0 || held)
+                    if (modifier == 0 || KeyHeld(modifier)) {
                         Toggle();
+                        continue;
+                    }
+                }
+                if (open) {
+                    auto command = LedgerKeyCommand(key, key == 0x0F && (KeyHeld(0x2A) || KeyHeld(0x36)));
+                    if (!command.empty()) {
+                        if (debugLogging)
+                            SKSE::log::info("Trade ledger keyboard {}: {}", key, command);
+                        Command(std::string(command));
+                    }
                 }
             } else if (open && button->GetDevice() == RE::INPUT_DEVICE::kGamepad) {
                 switch (key) {

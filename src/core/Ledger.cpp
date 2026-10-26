@@ -5,6 +5,21 @@
 #include <stdexcept>
 
 namespace marco {
+std::string_view LedgerKeyCommand(unsigned scanCode, bool shift) {
+    // Physical keyboard scan codes, before Skyrim remaps keys for its menus.
+    switch (scanCode) {
+    case 0x01: return "close";
+    case 0x0F: return shift ? "prevTab" : "nextTab";
+    case 0x02: return "markets";
+    case 0x03: return "routes";
+    case 0x04: return "rumors";
+    case 0xCB: return "left";
+    case 0xCD: return "right";
+    case 0xC9: return "up";
+    case 0xD1: return "down";
+    default: return {};
+    }
+}
 PriceDescription DescribePrice(const TradeReport &r) {
     if (!std::isfinite(r.low) || !std::isfinite(r.high) || r.low < 0 || r.high < r.low)
         return {"Uncertain", 2};
@@ -31,7 +46,10 @@ LedgerPreferences LedgerPreferences::Parse(const json &j) {
     };
     p.x = number("x", p.x, 0, 1);
     p.y = number("y", p.y, 0, 1);
-    p.scale = number("scale", p.scale, .65, 1.75);
+    // Preserve the old window footprint while restoring the standard text size.
+    const double oldScale = number("scale", 1, .65, 1.75);
+    p.width = number("width", std::clamp(p.width * oldScale, 420.0, 1600.0), 420, 1600);
+    p.height = number("height", std::clamp(p.height * oldScale, 360.0, 1200.0), 360, 1200);
     if (j.contains("hotkey") && j["hotkey"].is_number_integer()) {
         auto code = j["hotkey"].get<double>();
         if (code >= 0 && code <= 255) {
@@ -66,7 +84,7 @@ LedgerPreferences LedgerPreferences::Parse(const json &j) {
 }
 json LedgerPreferences::Save() const {
     return {{"schema", 1},      {"x", x},           {"y", y},
-            {"scale", scale},   {"hotkey", hotkey}, {"hotkeyModifier", hotkeyModifier},
+            {"width", width}, {"height", height}, {"hotkey", hotkey}, {"hotkeyModifier", hotkeyModifier},
             {"locked", locked}, {"pins", pins}};
 }
 json LedgerPayload(const MarketReports &v, const LedgerPreferences &p) {

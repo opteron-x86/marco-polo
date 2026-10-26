@@ -42,21 +42,32 @@ int main() {
         LedgerPreferences p;
         p.x = .3;
         p.y = .7;
-        p.scale = 1.4;
+        p.width = 640;
+        p.height = 720;
         p.locked = true;
         p.pins.insert("drink:rift:pale");
         CHECK(LedgerPreferences::Parse(p.Save()).Save() == p.Save());
         auto clamped =
-            LedgerPreferences::Parse({{"x", -10}, {"y", 10}, {"scale", 99}, {"hotkey", 0}});
-        CHECK(clamped.x == 0 && clamped.y == 1 && clamped.scale == 1.75 && clamped.hotkey == 0);
+            LedgerPreferences::Parse({{"x", -10}, {"y", 10}, {"width", 99999}, {"height", -10}, {"hotkey", 0}});
+        CHECK(clamped.x == 0 && clamped.y == 1 && clamped.width == 1600 && clamped.height == 360 && clamped.hotkey == 0);
         auto invalid =
             LedgerPreferences::Parse({{"x", "bad"},
-                                      {"scale", nullptr},
+                                      {"width", nullptr},
+                                      {"height", std::numeric_limits<double>::infinity()},
                                       {"locked", "yes"},
                                       {"hotkey", std::numeric_limits<std::uint64_t>::max()},
                                       {"pins", {22, "", "valid", std::string(200, 'a')}}});
-        CHECK(invalid.x == .67 && invalid.scale == 1 && !invalid.locked && invalid.hotkey == 0x0D);
+        CHECK(invalid.x == .67 && invalid.width == 460 && invalid.height == 430 && !invalid.locked && invalid.hotkey == 0x0D);
         CHECK(invalid.pins == std::set<std::string>{"valid"});
+        auto scaled = LedgerPreferences::Parse({{"scale", 1.5}, {"x", .25}, {"pins", {"drink:rift:pale"}}});
+        CHECK(scaled.width == 690 && scaled.height == 645 && scaled.x == .25);
+        CHECK(scaled.pins.contains("drink:rift:pale"));
+        CHECK(!scaled.Save().contains("scale"));
+        CHECK(LedgerPreferences::Parse(scaled.Save()).Save() == scaled.Save());
+        auto explicitSize = LedgerPreferences::Parse({{"scale", 1.5}, {"width", 777}, {"height", 888}});
+        CHECK(explicitSize.width == 777 && explicitSize.height == 888);
+        auto tooSmall = LedgerPreferences::Parse({{"scale", .65}});
+        CHECK(tooSmall.width == 420 && tooSmall.height == 360);
         auto oldDefault =
             LedgerPreferences::Parse({{"hotkey", 0x42}, {"x", .25}, {"locked", true}});
         CHECK(oldDefault.hotkey == 0x0D && oldDefault.hotkeyModifier == 0x36);
@@ -67,6 +78,15 @@ int main() {
         CHECK(LedgerPreferences::Parse(chord.Save()).Save() == chord.Save());
         auto badModifier = LedgerPreferences::Parse({{"hotkeyModifier", 256}});
         CHECK(badModifier.hotkeyModifier == 0x36);
+        // Escape must remain distinct from Tab regardless of Skyrim's UI key translation.
+        CHECK(LedgerKeyCommand(0x01) == "close" && LedgerKeyCommand(0x01, true) == "close");
+        CHECK(LedgerKeyCommand(0x0F) == "nextTab" && LedgerKeyCommand(0x0F, true) == "prevTab");
+        CHECK(LedgerKeyCommand(0x1B).empty() && LedgerKeyCommand(0x09).empty());
+        CHECK(LedgerKeyCommand(0x0D).empty()); // Opening chord is handled separately.
+        CHECK(LedgerKeyCommand(0x02) == "markets" && LedgerKeyCommand(0x03) == "routes" &&
+              LedgerKeyCommand(0x04) == "rumors");
+        CHECK(LedgerKeyCommand(0xCB) == "left" && LedgerKeyCommand(0xCD) == "right");
+        CHECK(LedgerKeyCommand(0xC9) == "up" && LedgerKeyCommand(0xD1) == "down");
         bool rejected = false;
         try {
             LedgerPreferences::Parse({{"schema", 7}});
@@ -89,6 +109,8 @@ int main() {
         v.opportunities.push_back({r, rumor, 3});
         auto before = v.known;
         auto payload = LedgerPayload(v, p);
+        CHECK(payload["preferences"]["width"] == 640 && payload["preferences"]["height"] == 720);
+        CHECK(!payload["preferences"].contains("scale"));
         CHECK(payload["markets"].size() == 3);
         CHECK(payload["markets"][1]["id"] == "reach");
         for (auto &row : payload["markets"][1]["rows"])

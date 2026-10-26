@@ -9,10 +9,11 @@ struct PriceDescription {
     int tone; // -1 cheap, 0 fair, 1 expensive, 2 unknown/uncertain
 };
 PriceDescription DescribePrice(const TradeReport &report);
+std::string_view LedgerKeyCommand(unsigned scanCode, bool shift = false);
 
 // UI preferences are a separate file, never part of a character's economy save.
 struct LedgerPreferences {
-    double x{.67}, y{.12}, scale{1.0};
+    double x{.67}, y{.12}, width{460}, height{430};
     unsigned hotkey{0x0D};         // DirectInput Equals; zero disables the shortcut.
     unsigned hotkeyModifier{0x36}; // Right Shift; zero means no modifier.
     bool locked{};

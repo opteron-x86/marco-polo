@@ -1,4 +1,4 @@
-# Game testing for 0.3.2
+# Game testing for 0.3.4
 
 ## Trade Ledger
 
@@ -13,10 +13,14 @@ Load your existing test save and allow two seconds of unpaused play.
    the page arrows or mouse wheel, and hover a row for its source and date.
    Unvisited goods remain Unknown. No player-facing price percentages should
    appear; an old report stays old when you browse it.
-3. Drag the title and resize with the bottom-right grip. Lock the window,
-   confirm it cannot move or resize, then unlock it. Close with **Esc**, **Right Shift + =**
+3. Drag the title and resize with the bottom-right grip, horizontally and vertically.
+   Text and button heights should stay the same size. Taller windows show more rows;
+   wider windows give the columns more room. Short tooltips should fit their text.
+   Lock the window, confirm it cannot move or resize, then unlock it.
+   **Esc** dismisses an open hold selector; otherwise it closes the window without changing
+   tabs. **Tab** and **Shift + Tab** change tabs. Also close with **Right Shift + =**
    or X. Movement, camera, dialogue and inventory controls should work normally.
-4. Reopen several times, then restart Skyrim. Position, scale, lock and route
+4. Reopen several times, then restart Skyrim. Position, width, height, lock and route
    bookmarks should persist. Try a different screen resolution and confirm
    the window stays on screen. Preferences are created at
    `SKSE/Plugins/MarcoPolo/ledger.json` (possibly in MO2's Overwrite).
