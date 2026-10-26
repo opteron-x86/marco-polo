@@ -297,7 +297,7 @@ int main(int argc, char **argv) {
         auto data = json::parse(f);
         data["security"] = json::parse(s);
         auto shipped = Config::Parse(data);
-        CHECK(shipped.security.sites.size() == 10);
+        CHECK(shipped.security.sites.size() == 40);
         CHECK(shipped.security.enabled);
         Run();
         std::cout

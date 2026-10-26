@@ -28,7 +28,10 @@ void InitializeWorldTrade() {
                               "LocTypeForswornCamp", "LocTypeDraugrCrypt"})
                 if (location->HasKeywordString(name))
                     keywords.emplace_back(name);
-            if (ClassifySite(keywords) != definition.kind) {
+            bool camp =
+                definition.kind == SiteKind::Bandit || definition.kind == SiteKind::Forsworn;
+            if (ClassifySite(keywords) != definition.kind ||
+                (camp && !location->HasKeywordString("LocTypeClearable"))) {
                 SKSE::log::warn("Route security: {} has unexpected location tags; inactive",
                                 definition.name);
                 location = nullptr;

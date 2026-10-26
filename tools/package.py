@@ -24,6 +24,7 @@ def main():
         parser.error('Use an empty output directory')
     subprocess.run([sys.executable,str(ROOT/'tools/audit-dll.py'),str(dll)],check=True)
     subprocess.run([sys.executable,str(ROOT/'tools/build-rumors.py'),'--check'],check=True)
+    subprocess.run([sys.executable,str(ROOT/'tools/build_security.py'),'--check'],check=True)
     commit = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     dirty = bool(subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip())
     prefix = f'Marco-Polo-{version()}-{commit[:8]}' + ('-dirty' if dirty else '')
@@ -35,7 +36,9 @@ def main():
                 info.external_attr=0o100644<<16;archive.writestr(info,path.read_bytes())
     files = {p.relative_to(ROOT/'package').as_posix():p for p in (ROOT/'package').rglob('*') if p.is_file()}
     files['SKSE/Plugins/MarcoPolo.dll']=dll
-    for name in ('README.md','LICENSE','EXCEPTIONS.md','THIRD_PARTY_NOTICES.md','docs/TESTING.md','docs/SECURITY-SIMULATION.md','docs/TRANSPORT-SIMULATION.md'):
+    for name in ('README.md','LICENSE','EXCEPTIONS.md','THIRD_PARTY_NOTICES.md','docs/RELEASE.md','docs/TESTING.md',
+                 'docs/ARCHITECTURE.md','docs/RELEASING.md','docs/RUMOR-VOICES.md','docs/SECURITY-SIMULATION.md','docs/TRANSPORT-SIMULATION.md',
+                 'docs/CAMPAIGN-SIMULATION.md','docs/results/campaign-0.7.0.json','docs/results/campaign-0.7.0.png'):
         files[name]=ROOT/name
     files.update({p.relative_to(ROOT).as_posix():p for p in (ROOT/'licenses').iterdir() if p.is_file()})
     deps = args.dependencies or args.build/'vcpkg_installed/x64-windows-static-md'

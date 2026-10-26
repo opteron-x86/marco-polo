@@ -5,75 +5,14 @@
   "maximumExtraDemand": 0.3,
   "sites": [
     {
-      "location": "Skyrim.esm|0B712C",
-      "name": "Embershard Mine",
-      "market": "falkreath",
-      "kind": "bandit",
-      "threat": 0.65,
-      "routes": {
-        "whiterun-falkreath": 0.65,
-        "falkreath-whiterun": 0.65
-      }
-    },
-    {
-      "location": "Skyrim.esm|019193",
-      "name": "Halted Stream Camp",
+      "location": "Skyrim.esm|018EE2",
+      "name": "Swindler’s Den",
       "market": "whiterun",
       "kind": "bandit",
-      "threat": 0.55,
+      "threat": 1.5,
       "routes": {
-        "whiterun-pale": 0.5,
-        "pale-whiterun": 0.5
-      }
-    },
-    {
-      "location": "Skyrim.esm|0192C5",
-      "name": "White River Watch",
-      "market": "whiterun",
-      "kind": "bandit",
-      "threat": 0.7,
-      "routes": {
-        "whiterun-rift": 0.65,
-        "rift-whiterun": 0.65,
-        "whiterun-eastmarch": 0.35,
-        "eastmarch-whiterun": 0.35
-      }
-    },
-    {
-      "location": "Skyrim.esm|0192C1",
-      "name": "Valtheim Towers",
-      "market": "whiterun",
-      "kind": "bandit",
-      "threat": 1.25,
-      "routes": {
-        "whiterun-eastmarch": 1,
-        "eastmarch-whiterun": 1,
-        "whiterun-rift": 0.6,
-        "rift-whiterun": 0.6
-      }
-    },
-    {
-      "location": "Skyrim.esm|019170",
-      "name": "Red Eagle Redoubt",
-      "market": "reach",
-      "kind": "forsworn",
-      "threat": 0.75,
-      "routes": {
-        "whiterun-reach": 0.45,
-        "reach-whiterun": 0.45,
-        "reach-falkreath": 0.4,
-        "falkreath-reach": 0.4
-      }
-    },
-    {
-      "location": "Skyrim.esm|01925F",
-      "name": "Karthspire",
-      "market": "reach",
-      "kind": "forsworn",
-      "threat": 0.85,
-      "routes": {
-        "reach-falkreath": 0.75,
-        "falkreath-reach": 0.75
+        "whiterun-reach": 0.1,
+        "reach-whiterun": 0.1
       }
     },
     {
@@ -85,18 +24,73 @@
       "routes": {}
     },
     {
-      "location": "Skyrim.esm|01917D",
-      "name": "Fort Greymoor",
-      "market": "whiterun",
-      "kind": "fort",
-      "threat": 1.1,
+      "location": "Skyrim.esm|01914F",
+      "name": "Broken Tower Redoubt",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 1.5,
       "routes": {
-        "whiterun-reach": 1,
-        "reach-whiterun": 1,
-        "whiterun-falkreath": 0.35,
-        "falkreath-whiterun": 0.35
+        "reach-haafingar": 0.2630136986,
+        "haafingar-reach": 0.2630136986
+      }
+    },
+    {
+      "location": "Skyrim.esm|019151",
+      "name": "Bruca’s Leap Redoubt",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 1.5,
+      "routes": {
+        "reach-haafingar": 0.1168949772,
+        "haafingar-reach": 0.1168949772
+      }
+    },
+    {
+      "location": "Skyrim.esm|019159",
+      "name": "Cragslane Cavern",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "eastmarch-rift": 0.1581699346,
+        "rift-eastmarch": 0.1581699346
+      }
+    },
+    {
+      "location": "Skyrim.esm|019170",
+      "name": "Red Eagle Redoubt",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-reach": 0.1285714286,
+        "reach-whiterun": 0.1285714286
+      }
+    },
+    {
+      "location": "Skyrim.esm|019175",
+      "name": "Faldar’s Tooth",
+      "market": "rift",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.1593869732,
+        "rift-whiterun": 0.1593869732
+      }
+    },
+    {
+      "location": "Skyrim.esm|01917C",
+      "name": "Fort Amol",
+      "market": "eastmarch",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-eastmarch": 0.2918918919,
+        "eastmarch-whiterun": 0.2918918919,
+        "eastmarch-rift": 0.0575163399,
+        "rift-eastmarch": 0.0575163399
       },
-      "initialOccupants": "bandit",
+      "initialOccupants": "unknown",
       "protection": 1,
       "demand": {
         "food": 0.12,
@@ -107,18 +101,18 @@
       }
     },
     {
-      "location": "Skyrim.esm|019185",
-      "name": "Fort Sungard",
-      "market": "reach",
+      "location": "Skyrim.esm|01917D",
+      "name": "Fort Greymoor",
+      "market": "whiterun",
       "kind": "fort",
-      "threat": 1.2,
+      "threat": 1.5,
       "routes": {
-        "whiterun-reach": 0.8,
-        "reach-whiterun": 0.8,
-        "reach-falkreath": 0.6,
-        "falkreath-reach": 0.6
+        "whiterun-reach": 0.2857142857,
+        "reach-whiterun": 0.2857142857,
+        "whiterun-falkreath": 0.1282051282,
+        "falkreath-whiterun": 0.1282051282
       },
-      "initialOccupants": "forsworn",
+      "initialOccupants": "bandit",
       "protection": 1,
       "demand": {
         "food": 0.12,
@@ -133,10 +127,10 @@
       "name": "Fort Dunstad",
       "market": "pale",
       "kind": "fort",
-      "threat": 1.1,
+      "threat": 1.5,
       "routes": {
-        "whiterun-pale": 1,
-        "pale-whiterun": 1
+        "whiterun-pale": 0.2926829268,
+        "pale-whiterun": 0.2926829268
       },
       "initialOccupants": "bandit",
       "protection": 1,
@@ -146,6 +140,416 @@
         "medicine": 0.1,
         "weapons": 0.15,
         "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|01917F",
+      "name": "Fort Fellhammer",
+      "market": "winterhold",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "pale-winterhold": 0.2470588235,
+        "winterhold-pale": 0.2470588235,
+        "whiterun-pale": 0.081300813,
+        "pale-whiterun": 0.081300813
+      }
+    },
+    {
+      "location": "Skyrim.esm|019180",
+      "name": "Fort Greenwall",
+      "market": "rift",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "eastmarch-rift": 0.2875816993,
+        "rift-eastmarch": 0.2875816993
+      },
+      "initialOccupants": "unknown",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019181",
+      "name": "Fort Hraggstad",
+      "market": "haafingar",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "reach-haafingar": 0.0730593607,
+        "haafingar-reach": 0.0730593607,
+        "haafingar-hjaalmarch": 0.0729166667,
+        "hjaalmarch-haafingar": 0.0729166667
+      },
+      "initialOccupants": "unknown",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019182",
+      "name": "Fort Kastav",
+      "market": "winterhold",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "winterhold-eastmarch": 0.4909090909,
+        "eastmarch-winterhold": 0.4909090909
+      },
+      "initialOccupants": "unknown",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019183",
+      "name": "Fort Neugrad",
+      "market": "falkreath",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-falkreath": 0.1794871795,
+        "falkreath-whiterun": 0.1794871795
+      },
+      "initialOccupants": "unknown",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019184",
+      "name": "Fort Snowhawk",
+      "market": "hjaalmarch",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "haafingar-hjaalmarch": 0.2333333333,
+        "hjaalmarch-haafingar": 0.2333333333,
+        "hjaalmarch-pale": 0.4,
+        "pale-hjaalmarch": 0.4
+      },
+      "initialOccupants": "unknown",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019185",
+      "name": "Fort Sungard",
+      "market": "reach",
+      "kind": "fort",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-reach": 0.2142857143,
+        "reach-whiterun": 0.2142857143,
+        "reach-falkreath": 0.2222222222,
+        "falkreath-reach": 0.2222222222
+      },
+      "initialOccupants": "forsworn",
+      "protection": 1,
+      "demand": {
+        "food": 0.12,
+        "grain": 0.05,
+        "medicine": 0.1,
+        "weapons": 0.15,
+        "armor": 0.15
+      }
+    },
+    {
+      "location": "Skyrim.esm|019187",
+      "name": "Gallows Rock",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-eastmarch": 0.1135135135,
+        "eastmarch-whiterun": 0.1135135135
+      }
+    },
+    {
+      "location": "Skyrim.esm|01918D",
+      "name": "Cracked Tusk Keep",
+      "market": "falkreath",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "reach-falkreath": 0.2037037037,
+        "falkreath-reach": 0.2037037037
+      }
+    },
+    {
+      "location": "Skyrim.esm|019190",
+      "name": "Hag Rock Redoubt",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 1.5,
+      "routes": {
+        "reach-falkreath": 0.1851851852,
+        "falkreath-reach": 0.1851851852
+      }
+    },
+    {
+      "location": "Skyrim.esm|019193",
+      "name": "Halted Stream Camp",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-pale": 0.162601626,
+        "pale-whiterun": 0.162601626
+      }
+    },
+    {
+      "location": "Skyrim.esm|019267",
+      "name": "Lost Knife Hideout",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-eastmarch": 0.0972972973,
+        "eastmarch-whiterun": 0.0972972973,
+        "whiterun-rift": 0.0498084291,
+        "rift-whiterun": 0.0498084291
+      }
+    },
+    {
+      "location": "Skyrim.esm|019269",
+      "name": "Bilegulch Mine",
+      "market": "falkreath",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "reach-falkreath": 0.2592592593,
+        "falkreath-reach": 0.2592592593
+      }
+    },
+    {
+      "location": "Skyrim.esm|01927B",
+      "name": "Mistwatch",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "eastmarch-rift": 0.1006535948,
+        "rift-eastmarch": 0.1006535948
+      }
+    },
+    {
+      "location": "Skyrim.esm|019284",
+      "name": "Nilheim",
+      "market": "rift",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.1195402299,
+        "rift-whiterun": 0.1195402299
+      }
+    },
+    {
+      "location": "Skyrim.esm|019295",
+      "name": "Redoran’s Retreat",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-reach": 0.1,
+        "reach-whiterun": 0.1
+      }
+    },
+    {
+      "location": "Skyrim.esm|01929B",
+      "name": "Robber’s Gorge",
+      "market": "hjaalmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "reach-haafingar": 0.2922374429,
+        "haafingar-reach": 0.2922374429,
+        "haafingar-hjaalmarch": 0.0729166667,
+        "hjaalmarch-haafingar": 0.0729166667
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192A9",
+      "name": "Silent Moons Camp",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-pale": 0.1300813008,
+        "pale-whiterun": 0.1300813008,
+        "whiterun-reach": 0.0571428571,
+        "reach-whiterun": 0.0571428571
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192BD",
+      "name": "Treva’s Watch",
+      "market": "rift",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.1295019157,
+        "rift-whiterun": 0.1295019157
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192C0",
+      "name": "Uttering Hills Camp",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-eastmarch": 0.1621621622,
+        "eastmarch-whiterun": 0.1621621622,
+        "winterhold-eastmarch": 0.1090909091,
+        "eastmarch-winterhold": 0.1090909091
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192C1",
+      "name": "Valtheim Towers",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-eastmarch": 0.4540540541,
+        "eastmarch-whiterun": 0.4540540541,
+        "whiterun-rift": 0.1195402299,
+        "rift-whiterun": 0.1195402299
+      }
+    },
+    {
+      "location": "Skyrim.esm|0192C5",
+      "name": "White River Watch",
+      "market": "whiterun",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.1295019157,
+        "rift-whiterun": 0.1295019157,
+        "whiterun-eastmarch": 0.0810810811,
+        "eastmarch-whiterun": 0.0810810811
+      }
+    },
+    {
+      "location": "Skyrim.esm|080F28",
+      "name": "Stony Creek Cave",
+      "market": "eastmarch",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "eastmarch-rift": 0.0718954248,
+        "rift-eastmarch": 0.0718954248
+      }
+    },
+    {
+      "location": "Skyrim.esm|08E1B7",
+      "name": "Knifepoint Ridge",
+      "market": "falkreath",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "reach-falkreath": 0.1296296296,
+        "falkreath-reach": 0.1296296296
+      }
+    },
+    {
+      "location": "Skyrim.esm|0B2395",
+      "name": "Dragon Bridge Overlook",
+      "market": "reach",
+      "kind": "forsworn",
+      "threat": 1.5,
+      "routes": {
+        "reach-haafingar": 0.2630136986,
+        "haafingar-reach": 0.2630136986,
+        "haafingar-hjaalmarch": 0.0875,
+        "hjaalmarch-haafingar": 0.0875
+      }
+    },
+    {
+      "location": "Skyrim.esm|0B23AC",
+      "name": "Four Skull Lookout",
+      "market": "reach",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-reach": 0.1142857143,
+        "reach-whiterun": 0.1142857143,
+        "reach-haafingar": 0.0584474886,
+        "haafingar-reach": 0.0584474886
+      }
+    },
+    {
+      "location": "Skyrim.esm|0B712C",
+      "name": "Embershard Mine",
+      "market": "falkreath",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-falkreath": 0.358974359,
+        "falkreath-whiterun": 0.358974359
+      }
+    },
+    {
+      "location": "Skyrim.esm|0C2EF8",
+      "name": "Snowpoint Beacon",
+      "market": "winterhold",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "pale-winterhold": 0.3529411765,
+        "winterhold-pale": 0.3529411765
+      }
+    },
+    {
+      "location": "Skyrim.esm|0D5665",
+      "name": "Rift Watchtower",
+      "market": "rift",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.0896551724,
+        "rift-whiterun": 0.0896551724,
+        "eastmarch-rift": 0.0575163399,
+        "rift-eastmarch": 0.0575163399
+      }
+    },
+    {
+      "location": "Skyrim.esm|0D566F",
+      "name": "Ruins of Bthalft",
+      "market": "rift",
+      "kind": "bandit",
+      "threat": 1.5,
+      "routes": {
+        "whiterun-rift": 0.0697318008,
+        "rift-whiterun": 0.0697318008
       }
     }
   ]

@@ -113,6 +113,8 @@ void Economy::Dispatch(const TradeConditions &trade) {
         auto &src = state_.markets.at(r.from).goods.at(c.good);
         src.quantity -= c.quantity;
         src.exported += c.quantity;
+        if (statistics_)
+            statistics_->departed += c.quantity;
         double disruption =
             std::max(state_.markets.at(r.from).disruption, state_.markets.at(r.to).disruption);
         double risk = std::clamp(r.risk * security.riskScale + disruption * .1 + security.extraRisk,

@@ -1,11 +1,11 @@
 cmake_minimum_required(VERSION 3.28)
-project(MarcoPolo VERSION 0.6.0 LANGUAGES C CXX)
+project(MarcoPolo VERSION 0.7.0 LANGUAGES C CXX)
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 option(MARCO_BUILD_PLUGIN "Build Windows SKSE plugin" ${WIN32})
 option(MARCO_SANITIZERS "Address and undefined behavior sanitizers" OFF)
-add_library(marco_core src/core/Economy.cpp src/core/Transport.cpp src/core/Persistence.cpp src/core/Knowledge.cpp src/core/Security.cpp)
+add_library(marco_core src/core/Economy.cpp src/core/Retail.cpp src/core/Transport.cpp src/core/Persistence.cpp src/core/Knowledge.cpp src/core/Security.cpp)
 target_include_directories(marco_core PUBLIC src third_party)
 if(MSVC)
   target_compile_options(marco_core PRIVATE /EHsc /utf-8 /W4)
@@ -26,6 +26,12 @@ add_test(NAME trading COMMAND marco_trading_tests ${CMAKE_CURRENT_SOURCE_DIR}/pa
 add_executable(marco_transport_tests tests/TransportTests.cpp)
 target_link_libraries(marco_transport_tests PRIVATE marco_core)
 add_test(NAME transport COMMAND marco_transport_tests ${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo/economy.json)
+add_executable(marco_statistics_tests tests/StatisticsTests.cpp)
+target_link_libraries(marco_statistics_tests PRIVATE marco_core)
+add_test(NAME statistics COMMAND marco_statistics_tests ${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo/economy.json)
+add_executable(marco_retail_tests tests/RetailTests.cpp)
+target_link_libraries(marco_retail_tests PRIVATE marco_core)
+add_test(NAME retail COMMAND marco_retail_tests)
 add_executable(marco_knowledge_tests tests/KnowledgeTests.cpp)
 target_link_libraries(marco_knowledge_tests PRIVATE marco_core)
 add_test(NAME knowledge COMMAND marco_knowledge_tests ${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo/economy.json)
@@ -38,6 +44,12 @@ add_executable(marco_security_sim tools/SecuritySimulate.cpp)
 target_link_libraries(marco_security_sim PRIVATE marco_core)
 add_executable(marco_merchant_sim tools/MerchantSimulate.cpp)
 target_link_libraries(marco_merchant_sim PRIVATE marco_core)
+add_executable(marco_campaign_sim tools/CampaignSimulate.cpp)
+target_link_libraries(marco_campaign_sim PRIVATE marco_core)
+add_test(NAME campaign_simulation COMMAND ${CMAKE_COMMAND}
+  -DSIM=$<TARGET_FILE:marco_campaign_sim>
+  -DDATA=${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo
+  -P ${CMAKE_CURRENT_SOURCE_DIR}/tests/CampaignSimulation.cmake)
 add_test(NAME merchant_simulation COMMAND ${CMAKE_COMMAND}
   -DSIM=$<TARGET_FILE:marco_merchant_sim>
   -DDATA=${CMAKE_CURRENT_SOURCE_DIR}/package/SKSE/Plugins/MarcoPolo

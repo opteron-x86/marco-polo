@@ -1,28 +1,24 @@
-# Skyrim True Economy and Merchantry 0.6.0 — test build
+# Skyrim True Economy and Merchantry 0.7.0 — test build
 
-Trade routes now divide cargo according to shortages and viable price gaps.
-Goods and roads listed first in the configuration no longer take priority.
-Export reserves, destination requirements and road capacity are shared across
-all orders, with incoming cargo accounted for before dispatch.
+Route security now covers 39 locations: 25 bandit sites, five Forsworn sites and
+nine Civil War forts. Road exposure is shared across those locations, so adding
+more camps does not multiply a road's total threat. Clearing affects transport;
+military occupation also adds local demand. It does not grant production bonuses.
 
-The new [merchant experiment](TRANSPORT-SIMULATION.md) tests 32 paired seeds with
-60 dealers, finite funds, restocking, repeated player deliveries and save/reload.
-The four established trading routes remain profitable. Changes redistribute
-supply: some shops gain stock while others face higher prices. Production,
-barter settings and security strengths are unchanged.
+Scarce goods can now reach shop shelves before household consumption takes all
+available supply. Background shop sales count toward regional demand, fractional
+turnover uses the correct expected rate, and restocking favors depleted offers.
+Merchants still pay for stock from the warehouse.
 
-The route-security pilot still covers nine raider sites and one excluded crypt.
-Supported military forts affect transport and add garrison demand. Location and
-fort interpretation still need in-game validation. Route bindings and strengths
-are configurable in `SKSE/Plugins/MarcoPolo/security.json`; set `enabled` to false
-and restart to disable that feature.
+The [five-year campaign experiment](CAMPAIGN-SIMULATION.md) compares 512 runs
+across four world histories and four player strategies. Persistent empty offers
+were eliminated in the tested shops. Seasonal shortages and growing wealth remain
+balance issues; the report includes the results and assumptions.
 
-Save schema 4 is unchanged from 0.5.0, including cargo already in transit. Schemas
-1–3 migrate without replacing trading state; pre-0.5.0 DLLs cannot load schema 4.
-Use separate test saves. This update adds no engine hooks, save fields, ESPs or
-Papyrus scripts. The optional innkeeper dialogue addon is unchanged.
+Save schema 4 is unchanged. Existing markets, merchants and cargo load without a
+reset. Schemas 1–3 still migrate; pre-0.5.0 DLLs cannot load schema 4. New security
+observations affect future ticks. There are no new engine hooks, ESPs or scripts.
+The optional innkeeper dialogue addon is unchanged; both menus remain removed.
 
-The Trade Ledger and SKSE Menu Framework pages remain removed. When merging
-into a pre-0.4.0 install, remove `Interface/MarcoPoloTradeLedger.swf`; the old
-`SKSE/Plugins/MarcoPolo/ledger.json` is ignored. Debug logging exports economy and
-information JSON beside the SKSE logs when saving.
+See [game testing](TESTING.md) for the expanded camp/fort checks and scarce-stock
+test. Security can be disabled in `SKSE/Plugins/MarcoPolo/security.json`.

@@ -1,0 +1,6100 @@
+{
+  "before": {
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "runs": 256,
+    "end_day": 1825,
+    "scenarios": {
+      "progressive_clear/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.33470965717925,
+            "dispatched_per_day": 230.9819010976971,
+            "empty_offer_fraction": 0.1254280821917808,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5831.517948630137,
+            "mean_player_gold": 3239.3561643835615,
+            "price_ceiling_fraction": 0.1079958904109589,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3687648571488333,
+            "unmet_demand_fraction": 0.06225863027228195
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 225.00133784555902,
+            "dispatched_per_day": 227.9248683271315,
+            "empty_offer_fraction": 0.14711780821917808,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11652.414575342465,
+            "mean_player_gold": 7719.449143835616,
+            "price_ceiling_fraction": 0.1108054794520548,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3704959105296057,
+            "unmet_demand_fraction": 0.06827159767778786
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.8978454886529,
+            "dispatched_per_day": 257.426401340039,
+            "empty_offer_fraction": 0.07833801369863014,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17671.007232876713,
+            "mean_player_gold": 11980.745890410959,
+            "price_ceiling_fraction": 0.05769178082191781,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2714458800702575,
+            "unmet_demand_fraction": 0.05827985877845267
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.30300983879852,
+            "dispatched_per_day": 257.1365541830835,
+            "empty_offer_fraction": 0.07653972602739725,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 24204.44525,
+            "mean_player_gold": 15872.668493150684,
+            "price_ceiling_fraction": 0.05608287671232877,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2702415697533465,
+            "unmet_demand_fraction": 0.0582486681252327
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.55543869185485,
+            "dispatched_per_day": 250.8564527372514,
+            "empty_offer_fraction": 0.07802462686567165,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 30466.583895522388,
+            "mean_player_gold": 19753.378917910446,
+            "price_ceiling_fraction": 0.05808432835820895,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2726261484669772,
+            "unmet_demand_fraction": 0.06283562859228825
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 21701.0625,
+            "min": 19088,
+            "max": 23856
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 20701.0625,
+            "min": 18088,
+            "max": 22856
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 245.54083623706322,
+            "dispatched_per_day": 251.82741557873996,
+            "empty_offer_fraction": 0.07395897982932506,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 4603.464395849496,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.09401849315068493,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3353111636871777,
+            "unmet_demand_fraction": 0.05881863535392087
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 225.05945280677278,
+            "dispatched_per_day": 228.0375560130437,
+            "empty_offer_fraction": 0.14731506849315068,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 9514.725839041095,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11092534246575342,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3705086557741757,
+            "unmet_demand_fraction": 0.06827417322343787
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.82773174294928,
+            "dispatched_per_day": 257.4476521005924,
+            "empty_offer_fraction": 0.07822328767123288,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 15581.783976027398,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.057710958904109586,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.271486807911701,
+            "unmet_demand_fraction": 0.05829304451529177
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.45100866721614,
+            "dispatched_per_day": 257.2161604794652,
+            "empty_offer_fraction": 0.07629075342465753,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 22162.13462328767,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.056302739726027395,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2703559478330075,
+            "unmet_demand_fraction": 0.058259800497188596
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.69456915951758,
+            "dispatched_per_day": 251.01413095549174,
+            "empty_offer_fraction": 0.07732910447761193,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 28471.241126865672,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05829179104477612,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2728652025152651,
+            "unmet_demand_fraction": 0.06284389174023308
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.35984198997215,
+            "dispatched_per_day": 230.95826896278288,
+            "empty_offer_fraction": 0.12611506849315068,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5853.523753424657,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.10838972602739726,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3689112821032916,
+            "unmet_demand_fraction": 0.06224620046031874
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 225.1454860186595,
+            "dispatched_per_day": 228.12467981736438,
+            "empty_offer_fraction": 0.14799828767123288,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11717.014349315068,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11098219178082191,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3705784618587444,
+            "unmet_demand_fraction": 0.06826655389960534
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 256.1472996332736,
+            "dispatched_per_day": 257.67397978351573,
+            "empty_offer_fraction": 0.07786232876712329,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17782.46844520548,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0575486301369863,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2714646782573051,
+            "unmet_demand_fraction": 0.05827579873798816
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.50983652506895,
+            "dispatched_per_day": 257.3053747225232,
+            "empty_offer_fraction": 0.07595582191780823,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 24362.52256506849,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05611712328767123,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2701200790961567,
+            "unmet_demand_fraction": 0.05824140139079736
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.64357310612328,
+            "dispatched_per_day": 250.99271900504488,
+            "empty_offer_fraction": 0.07818694029850747,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 30673.548847014925,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05835298507462686,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2729304871981677,
+            "unmet_demand_fraction": 0.06284541992076195
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 222.9886869663681,
+            "dispatched_per_day": 229.65255918660355,
+            "empty_offer_fraction": 0.11867431506849316,
+            "low_cash_fraction": 0.0006095890410958904,
+            "mean_merchant_gold": 5735.9234212328765,
+            "mean_player_gold": 19886.521061643834,
+            "price_ceiling_fraction": 0.09968972602739726,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3661717220721052,
+            "unmet_demand_fraction": 0.06237875330293374
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.27277760584727,
+            "dispatched_per_day": 227.17004808534912,
+            "empty_offer_fraction": 0.13973150684931507,
+            "low_cash_fraction": 0.002756849315068493,
+            "mean_merchant_gold": 11526.731205479451,
+            "mean_player_gold": 50997.031506849315,
+            "price_ceiling_fraction": 0.10566849315068493,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3691589685905705,
+            "unmet_demand_fraction": 0.0683229492608278
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.15914806902381,
+            "dispatched_per_day": 256.688119967811,
+            "empty_offer_fraction": 0.0706736301369863,
+            "low_cash_fraction": 0.00422945205479452,
+            "mean_merchant_gold": 17521.96993150685,
+            "mean_player_gold": 77093.61660958904,
+            "price_ceiling_fraction": 0.05238013698630137,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.269132014391884,
+            "unmet_demand_fraction": 0.05837501849485943
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 254.48478315908983,
+            "dispatched_per_day": 256.328677023862,
+            "empty_offer_fraction": 0.06849178082191781,
+            "low_cash_fraction": 0.004780821917808219,
+            "mean_merchant_gold": 24013.12994520548,
+            "mean_player_gold": 102953.58407534247,
+            "price_ceiling_fraction": 0.05038904109589041,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2673676808347312,
+            "unmet_demand_fraction": 0.05836068261873454
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 247.7305303165372,
+            "dispatched_per_day": 250.00924359316943,
+            "empty_offer_fraction": 0.07060783582089553,
+            "low_cash_fraction": 0.004716417910447761,
+            "mean_merchant_gold": 30234.573757462687,
+            "mean_player_gold": 127634.09029850746,
+            "price_ceiling_fraction": 0.05243731343283582,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2695742485003332,
+            "unmet_demand_fraction": 0.06295468372223387
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3455.1875,
+            "min": 3356,
+            "max": 3556
+          },
+          "cash_limited_days": {
+            "mean": 2.375,
+            "min": 0,
+            "max": 12
+          },
+          "completed_sales": {
+            "mean": 403.3125,
+            "min": 394,
+            "max": 414
+          },
+          "gold": {
+            "mean": 139695.75,
+            "min": 138287,
+            "max": 141289
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 164282.75,
+            "min": 160204,
+            "max": 167275
+          },
+          "received": {
+            "mean": 302978.5,
+            "min": 297491,
+            "max": 307564
+          },
+          "sold": {
+            "mean": 3455.1875,
+            "min": 3356,
+            "max": 3556
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.63333812619763,
+            "dispatched_per_day": 224.6905966654723,
+            "empty_offer_fraction": 0.12874691780821917,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5816.165332191781,
+            "mean_player_gold": 3251.908390410959,
+            "price_ceiling_fraction": 0.10954931506849315,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3729381508170382,
+            "unmet_demand_fraction": 0.06741398453044227
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.60054187264285,
+            "dispatched_per_day": 224.65330602514578,
+            "empty_offer_fraction": 0.1491458904109589,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11620.919188356163,
+            "mean_player_gold": 7732.09845890411,
+            "price_ceiling_fraction": 0.11181780821917808,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3756416744677062,
+            "unmet_demand_fraction": 0.06754374840281263
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.6832581324663,
+            "dispatched_per_day": 224.68768424409154,
+            "empty_offer_fraction": 0.14990034246575343,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17399.743102739725,
+            "mean_player_gold": 12240.596575342466,
+            "price_ceiling_fraction": 0.11193630136986302,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3758285790524667,
+            "unmet_demand_fraction": 0.0675607578082027
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.40007903376596,
+            "dispatched_per_day": 224.44068241073433,
+            "empty_offer_fraction": 0.14941917808219177,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23182.06255136986,
+            "mean_player_gold": 16644.617123287673,
+            "price_ceiling_fraction": 0.11153493150684932,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.375632462031138,
+            "unmet_demand_fraction": 0.06754790891563789
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 212.52798500912408,
+            "dispatched_per_day": 218.9543264942769,
+            "empty_offer_fraction": 0.15097164179104477,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 28721.788843283583,
+            "mean_player_gold": 20987.33563432836,
+            "price_ceiling_fraction": 0.11365074626865672,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3780479880510097,
+            "unmet_demand_fraction": 0.07177192736124077
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 23165.6875,
+            "min": 20484,
+            "max": 25214
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 22165.6875,
+            "min": 19484,
+            "max": 24214
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 239.65866158932695,
+            "dispatched_per_day": 245.42596625147968,
+            "empty_offer_fraction": 0.07572536850271529,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 4590.455275407293,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.09563356164383562,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3394912885232333,
+            "unmet_demand_fraction": 0.06426398189180754
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.73407967514868,
+            "dispatched_per_day": 224.80582467538574,
+            "empty_offer_fraction": 0.14965376712328768,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 9502.30170890411,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11196369863013698,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3756723483614814,
+            "unmet_demand_fraction": 0.06754601400782995
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.7956231135462,
+            "dispatched_per_day": 224.77823683912786,
+            "empty_offer_fraction": 0.15013356164383562,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 15319.36837671233,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.1121082191780822,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3757202190362663,
+            "unmet_demand_fraction": 0.06753730883768075
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.63852838527185,
+            "dispatched_per_day": 224.68209954581678,
+            "empty_offer_fraction": 0.1497458904109589,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 21138.483537671233,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11214178082191781,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3757643158156934,
+            "unmet_demand_fraction": 0.06755904720745898
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 212.5178783841471,
+            "dispatched_per_day": 219.0112767297967,
+            "empty_offer_fraction": 0.15215149253731344,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 26715.452421641792,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11383805970149254,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.378003731806377,
+            "unmet_demand_fraction": 0.07178314793398996
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.7332176685841,
+            "dispatched_per_day": 224.74265377540323,
+            "empty_offer_fraction": 0.12868253424657533,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5843.3823630136985,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.10938835616438355,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3730304587499405,
+            "unmet_demand_fraction": 0.06740441687031234
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.6431155964576,
+            "dispatched_per_day": 224.65373824709894,
+            "empty_offer_fraction": 0.1499986301369863,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11700.091630136987,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11208150684931507,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3757332830967068,
+            "unmet_demand_fraction": 0.06754683283323942
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.76454174950527,
+            "dispatched_per_day": 224.72958255818895,
+            "empty_offer_fraction": 0.14983150684931507,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17515.175746575344,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11216369863013699,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3757957987226654,
+            "unmet_demand_fraction": 0.06753855554360627
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.60851050942935,
+            "dispatched_per_day": 224.68972935419245,
+            "empty_offer_fraction": 0.1502150684931507,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23331.89910958904,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11218698630136986,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3757202840967966,
+            "unmet_demand_fraction": 0.06754729825866791
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 212.62059315799988,
+            "dispatched_per_day": 219.08254101582455,
+            "empty_offer_fraction": 0.15156305970149253,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 28909.323798507463,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11382089552238805,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3780045877631817,
+            "unmet_demand_fraction": 0.07178193510243919
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 217.61032961249384,
+            "dispatched_per_day": 223.5943034887212,
+            "empty_offer_fraction": 0.12251198630136986,
+            "low_cash_fraction": 0.00031506849315068495,
+            "mean_merchant_gold": 5732.760883561644,
+            "mean_player_gold": 19593.895034246576,
+            "price_ceiling_fraction": 0.10321849315068493,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3711032391994749,
+            "unmet_demand_fraction": 0.0674979155711315
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 217.81804670962623,
+            "dispatched_per_day": 223.88377625357057,
+            "empty_offer_fraction": 0.14165342465753425,
+            "low_cash_fraction": 0.00263013698630137,
+            "mean_merchant_gold": 11502.15277739726,
+            "mean_player_gold": 50441.00787671233,
+            "price_ceiling_fraction": 0.10528287671232876,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3738364839868187,
+            "unmet_demand_fraction": 0.06762360546271548
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.0212772604577,
+            "dispatched_per_day": 223.96917770184808,
+            "empty_offer_fraction": 0.14371746575342467,
+            "low_cash_fraction": 0.001815068493150685,
+            "mean_merchant_gold": 17262.426065068492,
+            "mean_player_gold": 76378.26386986302,
+            "price_ceiling_fraction": 0.10728287671232876,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.37442850937111,
+            "unmet_demand_fraction": 0.06757462455518617
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 217.77563607440914,
+            "dispatched_per_day": 223.84027055258116,
+            "empty_offer_fraction": 0.14491883561643837,
+            "low_cash_fraction": 0.0025410958904109587,
+            "mean_merchant_gold": 23009.046229452055,
+            "mean_player_gold": 102082.84606164384,
+            "price_ceiling_fraction": 0.10731095890410959,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3744471460061207,
+            "unmet_demand_fraction": 0.06758492996300776
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 211.9393822490353,
+            "dispatched_per_day": 218.25944014558738,
+            "empty_offer_fraction": 0.14801455223880597,
+            "low_cash_fraction": 0.0025634328358208956,
+            "mean_merchant_gold": 28512.11279477612,
+            "mean_player_gold": 126938.86082089553,
+            "price_ceiling_fraction": 0.10933507462686567,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3767374007401298,
+            "unmet_demand_fraction": 0.07181535348911391
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3358,
+            "min": 3302,
+            "max": 3430
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 401.9375,
+            "min": 396,
+            "max": 411
+          },
+          "gold": {
+            "mean": 139087.25,
+            "min": 136953,
+            "max": 142041
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 167155.875,
+            "min": 163388,
+            "max": 171511
+          },
+          "received": {
+            "mean": 305243.125,
+            "min": 300530,
+            "max": 311823
+          },
+          "sold": {
+            "mean": 3358,
+            "min": 3302,
+            "max": 3430
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.78083593617654,
+            "dispatched_per_day": 233.14264862081978,
+            "empty_offer_fraction": 0.12355582191780821,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5828.163955479452,
+            "mean_player_gold": 3235.9217465753422,
+            "price_ceiling_fraction": 0.10746917808219178,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3668530141353925,
+            "unmet_demand_fraction": 0.06058501976293402
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.7800687228123,
+            "dispatched_per_day": 233.1880104055033,
+            "empty_offer_fraction": 0.14397842465753424,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11685.794626712328,
+            "mean_player_gold": 7686.275171232876,
+            "price_ceiling_fraction": 0.1097958904109589,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3698164145410738,
+            "unmet_demand_fraction": 0.06073393114713127
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.91368104975984,
+            "dispatched_per_day": 233.21679815252955,
+            "empty_offer_fraction": 0.14390650684931505,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17511.655633561644,
+            "mean_player_gold": 12153.838356164384,
+            "price_ceiling_fraction": 0.1098068493150685,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3697739345220423,
+            "unmet_demand_fraction": 0.060716427877504336
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.91505064626088,
+            "dispatched_per_day": 233.24208516593842,
+            "empty_offer_fraction": 0.14372534246575341,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23341.53534931507,
+            "mean_player_gold": 16515.55256849315,
+            "price_ceiling_fraction": 0.10978630136986302,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3698561433589216,
+            "unmet_demand_fraction": 0.06070559883555512
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 218.37983415056974,
+            "dispatched_per_day": 227.29784639473465,
+            "empty_offer_fraction": 0.14600634328358209,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 28930.068350746267,
+            "mean_player_gold": 20822.440111940297,
+            "price_ceiling_fraction": 0.1116679104477612,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.372212335006617,
+            "unmet_demand_fraction": 0.06500023117285306
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 22987.6875,
+            "min": 20370,
+            "max": 25024
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 21987.6875,
+            "min": 19370,
+            "max": 24024
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 245.59599134728674,
+            "dispatched_per_day": 253.59530409799507,
+            "empty_offer_fraction": 0.07220665244375485,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 4611.494108805276,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.09314315068493151,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3333186125413055,
+            "unmet_demand_fraction": 0.057092670332241385
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 225.0977117668038,
+            "dispatched_per_day": 233.4460285341012,
+            "empty_offer_fraction": 0.1443373287671233,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 9559.869924657534,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11021575342465753,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3697750613282729,
+            "unmet_demand_fraction": 0.06069722843992316
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.82027513168083,
+            "dispatched_per_day": 233.21436969815946,
+            "empty_offer_fraction": 0.14444383561643837,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 15427.748729452054,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11011027397260274,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3699107427719073,
+            "unmet_demand_fraction": 0.06071646096576549
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.8546466733398,
+            "dispatched_per_day": 233.27056903342483,
+            "empty_offer_fraction": 0.14459041095890413,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 21301.305743150686,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11017671232876712,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.36985536733031,
+            "unmet_demand_fraction": 0.060716377679653426
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 218.46891689729804,
+            "dispatched_per_day": 227.42843026448622,
+            "empty_offer_fraction": 0.14660820895522386,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 26925.02941791045,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11210671641791045,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.372141017619245,
+            "unmet_demand_fraction": 0.06500800137595196
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.8622989989765,
+            "dispatched_per_day": 233.3232753624133,
+            "empty_offer_fraction": 0.12400616438356164,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5853.13,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.10773082191780822,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3669805271571418,
+            "unmet_demand_fraction": 0.060572494392718314
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 225.0302457667336,
+            "dispatched_per_day": 233.38844115558183,
+            "empty_offer_fraction": 0.1446099315068493,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11755.280075342465,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11007054794520547,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3698435616831133,
+            "unmet_demand_fraction": 0.06071740841926597
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.80908040994865,
+            "dispatched_per_day": 233.2611483101629,
+            "empty_offer_fraction": 0.1445208904109589,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 17618.696157534247,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.10999726027397261,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3697543719069127,
+            "unmet_demand_fraction": 0.060736430758951236
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.948543602114,
+            "dispatched_per_day": 233.37858601572944,
+            "empty_offer_fraction": 0.14391335616438355,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23484.663565068495,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11020342465753424,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3697512652548423,
+            "unmet_demand_fraction": 0.060742246348899236
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 218.6031470015475,
+            "dispatched_per_day": 227.51205183325123,
+            "empty_offer_fraction": 0.14659850746268657,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 29111.92753358209,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.11182014925373135,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.372198503052093,
+            "unmet_demand_fraction": 0.06500340626337756
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 223.68193832796706,
+            "dispatched_per_day": 231.97409487157478,
+            "empty_offer_fraction": 0.11662465753424657,
+            "low_cash_fraction": 0.0006267123287671233,
+            "mean_merchant_gold": 5738.2296232876715,
+            "mean_player_gold": 19817.81934931507,
+            "price_ceiling_fraction": 0.09838493150684932,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.364065469554583,
+            "unmet_demand_fraction": 0.06068900854213306
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.02958953073244,
+            "dispatched_per_day": 232.3096031050408,
+            "empty_offer_fraction": 0.1357181506849315,
+            "low_cash_fraction": 0.002726027397260274,
+            "mean_merchant_gold": 11569.793565068494,
+            "mean_player_gold": 52156.353253424655,
+            "price_ceiling_fraction": 0.10432739726027397,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3685098824634538,
+            "unmet_demand_fraction": 0.06077808345514107
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 223.97885514358452,
+            "dispatched_per_day": 232.34264445399222,
+            "empty_offer_fraction": 0.13863150684931508,
+            "low_cash_fraction": 0.002934931506849315,
+            "mean_merchant_gold": 17379.526489726028,
+            "mean_player_gold": 79849.33835616439,
+            "price_ceiling_fraction": 0.10521095890410959,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.368446382981762,
+            "unmet_demand_fraction": 0.060751617077540995
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 224.03961802380707,
+            "dispatched_per_day": 232.37431682450665,
+            "empty_offer_fraction": 0.14039794520547946,
+            "low_cash_fraction": 0.002976027397260274,
+            "mean_merchant_gold": 23171.903640410957,
+            "mean_player_gold": 106480.00496575343,
+            "price_ceiling_fraction": 0.10553013698630137,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3684604104752096,
+            "unmet_demand_fraction": 0.060761080840308956
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 217.72442511517508,
+            "dispatched_per_day": 226.56701560802748,
+            "empty_offer_fraction": 0.1429044776119403,
+            "low_cash_fraction": 0.002044776119402985,
+            "mean_merchant_gold": 28717.38147761194,
+            "mean_player_gold": 131735.02276119404,
+            "price_ceiling_fraction": 0.10729253731343283,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3708960148211653,
+            "unmet_demand_fraction": 0.06502805260240432
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3406.5,
+            "min": 3340,
+            "max": 3445
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 410.5,
+            "min": 404,
+            "max": 424
+          },
+          "gold": {
+            "mean": 144089.625,
+            "min": 140886,
+            "max": 146185
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 169667.1875,
+            "min": 166485,
+            "max": 175819
+          },
+          "received": {
+            "mean": 312756.8125,
+            "min": 308511,
+            "max": 321004
+          },
+          "sold": {
+            "mean": 3406.5,
+            "min": 3340,
+            "max": 3445
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 229.93732855667002,
+            "dispatched_per_day": 237.18578151854902,
+            "empty_offer_fraction": 0.11961917808219179,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5821.778859589041,
+            "mean_player_gold": 3235.8561643835615,
+            "price_ceiling_fraction": 0.1056,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.36149249140666,
+            "unmet_demand_fraction": 0.060233095732862264
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.86455057144778,
+            "dispatched_per_day": 257.50568948187447,
+            "empty_offer_fraction": 0.07594486301369863,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11918.345952054795,
+            "mean_player_gold": 7455.622431506849,
+            "price_ceiling_fraction": 0.05730958904109589,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2710861508297908,
+            "unmet_demand_fraction": 0.05826533578467607
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.18413759072348,
+            "dispatched_per_day": 257.05505985497086,
+            "empty_offer_fraction": 0.07608184931506849,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18454.008339041095,
+            "mean_player_gold": 11469.086130136986,
+            "price_ceiling_fraction": 0.05618767123287671,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2703320766629196,
+            "unmet_demand_fraction": 0.05826731070300874
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.3636525611271,
+            "dispatched_per_day": 257.12561089928477,
+            "empty_offer_fraction": 0.07597671232876713,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 24992.897979452053,
+            "mean_player_gold": 15354.041952054795,
+            "price_ceiling_fraction": 0.05599383561643836,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.270263278483302,
+            "unmet_demand_fraction": 0.05825158521145938
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.67607502770363,
+            "dispatched_per_day": 250.96490433849544,
+            "empty_offer_fraction": 0.07791343283582089,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 31261.131048507465,
+            "mean_player_gold": 19224.497947761192,
+            "price_ceiling_fraction": 0.058143283582089554,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2727028378376852,
+            "unmet_demand_fraction": 0.06283333128137886
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 21168.375,
+            "min": 18783,
+            "max": 23334
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 20168.375,
+            "min": 17783,
+            "max": 22334
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 250.64507464553418,
+            "dispatched_per_day": 257.47281052141307,
+            "empty_offer_fraction": 0.06697682311869667,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 4602.597430178433,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.09126369863013699,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3279575911455415,
+            "unmet_demand_fraction": 0.056734184654430024
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.65415039676978,
+            "dispatched_per_day": 257.34137661967054,
+            "empty_offer_fraction": 0.07602705479452054,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 9793.466078767124,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.057473972602739724,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2712628923093476,
+            "unmet_demand_fraction": 0.05826204487603425
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.35272006074055,
+            "dispatched_per_day": 257.2162577504389,
+            "empty_offer_fraction": 0.0762859589041096,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 16377.449023972602,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05652808219178082,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.270460814250489,
+            "unmet_demand_fraction": 0.05827181753852362
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.53766543180072,
+            "dispatched_per_day": 257.3238330945117,
+            "empty_offer_fraction": 0.07566780821917808,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 22958.448253424656,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05613493150684932,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2703125336912215,
+            "unmet_demand_fraction": 0.05826163807884313
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.92492733811437,
+            "dispatched_per_day": 251.2673247639626,
+            "empty_offer_fraction": 0.07836791044776119,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 29266.747970149256,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.058255223880597014,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2728882842163098,
+            "unmet_demand_fraction": 0.06283402254800868
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 230.05204021347623,
+            "dispatched_per_day": 237.384615332117,
+            "empty_offer_fraction": 0.12013356164383562,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 5846.95043150685,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.10587260273972603,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3616264434949434,
+            "unmet_demand_fraction": 0.06021803328757961
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 256.0632366433219,
+            "dispatched_per_day": 257.67248338632413,
+            "empty_offer_fraction": 0.07654931506849315,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 11987.368684931507,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05767054794520548,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2712582250207287,
+            "unmet_demand_fraction": 0.05825393075432457
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.57269674984104,
+            "dispatched_per_day": 257.4179909981331,
+            "empty_offer_fraction": 0.07601335616438357,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18562.445143835615,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05626780821917808,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2702931444465737,
+            "unmet_demand_fraction": 0.058246054432900436
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 255.61585036431424,
+            "dispatched_per_day": 257.4578115661662,
+            "empty_offer_fraction": 0.07601883561643835,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 25144.6700239726,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.056136986301369866,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2703613684192878,
+            "unmet_demand_fraction": 0.05824995162938979
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.79687628775437,
+            "dispatched_per_day": 251.0547448215576,
+            "empty_offer_fraction": 0.07800746268656716,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 31457.819779850746,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.05828134328358209,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2729116866208596,
+            "unmet_demand_fraction": 0.06283993356448538
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 228.76235867222294,
+            "dispatched_per_day": 235.88142718798014,
+            "empty_offer_fraction": 0.11273527397260275,
+            "low_cash_fraction": 0.0008013698630136986,
+            "mean_merchant_gold": 5731.819719178082,
+            "mean_player_gold": 19808.87859589041,
+            "price_ceiling_fraction": 0.0967068493150685,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.3586271895148445,
+            "unmet_demand_fraction": 0.0603396896213879
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 254.8690748283721,
+            "dispatched_per_day": 256.52153269083317,
+            "empty_offer_fraction": 0.06736712328767124,
+            "low_cash_fraction": 0.0032876712328767125,
+            "mean_merchant_gold": 11789.577657534246,
+            "mean_player_gold": 51620.4125,
+            "price_ceiling_fraction": 0.05222465753424657,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.268513211459311,
+            "unmet_demand_fraction": 0.05836941999811863
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 254.42126208822003,
+            "dispatched_per_day": 256.2977164221976,
+            "empty_offer_fraction": 0.06819417808219178,
+            "low_cash_fraction": 0.005719178082191781,
+            "mean_merchant_gold": 18273.678965753425,
+            "mean_player_gold": 79504.61592465754,
+            "price_ceiling_fraction": 0.05071986301369863,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2672072336383162,
+            "unmet_demand_fraction": 0.058361961580132876
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 254.57225720974793,
+            "dispatched_per_day": 256.40372823502975,
+            "empty_offer_fraction": 0.06902602739726027,
+            "low_cash_fraction": 0.004821917808219178,
+            "mean_merchant_gold": 24759.748116438357,
+            "mean_player_gold": 105442.74571917808,
+            "price_ceiling_fraction": 0.050580821917808216,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2671560100289494,
+            "unmet_demand_fraction": 0.05836762404295688
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 248.02214494871976,
+            "dispatched_per_day": 250.32361328576144,
+            "empty_offer_fraction": 0.06989440298507463,
+            "low_cash_fraction": 0.00548134328358209,
+            "mean_merchant_gold": 30978.689044776118,
+            "mean_player_gold": 130211.09402985075,
+            "price_ceiling_fraction": 0.0527955223880597,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.269666862573078,
+            "unmet_demand_fraction": 0.0629488622419504
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3511.125,
+            "min": 3410,
+            "max": 3597
+          },
+          "cash_limited_days": {
+            "mean": 8.6875,
+            "min": 2,
+            "max": 30
+          },
+          "completed_sales": {
+            "mean": 407.9375,
+            "min": 398,
+            "max": 414
+          },
+          "gold": {
+            "mean": 142160.6875,
+            "min": 140741,
+            "max": 144313
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 164905.4375,
+            "min": 161567,
+            "max": 167335
+          },
+          "received": {
+            "mean": 306066.125,
+            "min": 301358,
+            "max": 310648
+          },
+          "sold": {
+            "mean": 3511.125,
+            "min": 3410,
+            "max": 3597
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    "maximum_stock_accounting_error": 5.972509597995668e-09,
+    "maximum_save_bytes": 213166,
+    "maximum_shipments": 544,
+    "final_year_discovery_price_difference_pct": {
+      "unrest": 0.13749747876791288,
+      "progressive_clear": 0.12903043775781511,
+      "war_to_peace": 0.1314466722462444,
+      "recurring_unrest": 0.13493808248988176
+    },
+    "final_year_chronically_empty_categories": {
+      "unrest": 15,
+      "progressive_clear": 4,
+      "war_to_peace": 4,
+      "recurring_unrest": 16
+    },
+    "persistent_shortages": [
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.591234859923875,
+        "ceiling_fraction": 0.8268656716419375,
+        "empty_fraction": 0.494496268656625,
+        "price": 2.929942507135
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.573635968692125,
+        "ceiling_fraction": 0.788619402985375,
+        "empty_fraction": 0.4458955223880625,
+        "price": 2.888655771641875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.5058961392835625,
+        "ceiling_fraction": 0.8628731343281876,
+        "empty_fraction": 0.5505597014925,
+        "price": 2.944373932253125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.4797028111714375,
+        "ceiling_fraction": 0.7356343283583126,
+        "empty_fraction": 0.331063432835875,
+        "price": 2.843569630456875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.3849659512576875,
+        "ceiling_fraction": 0.7376865671643751,
+        "empty_fraction": 0.3337686567163125,
+        "price": 2.848352846716875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.3571640869530625,
+        "ceiling_fraction": 0.7177238805973125,
+        "empty_fraction": 0.3421641791044375,
+        "price": 2.8659357465925
+      },
+      {
+        "world": "progressive_clear",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.2965719047985625,
+        "ceiling_fraction": 0.751865671641625,
+        "empty_fraction": 0.3338619402984375,
+        "price": 2.864935226341875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.287151432558375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.219216417910625,
+        "price": 1.349374698915625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.281188996492875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.40746268656725,
+        "price": 2.533442651325
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.2376933626535,
+        "ceiling_fraction": 0.472014925373375,
+        "empty_fraction": 0.13563432835820624,
+        "price": 2.534581735104375
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.2144258950356875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.1958932778238125,
+        "ceiling_fraction": 0.515298507462875,
+        "empty_fraction": 0.158022388059725,
+        "price": 2.74444392544625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1928117085188125,
+        "ceiling_fraction": 0.6494402985076875,
+        "empty_fraction": 0.2684701492538125,
+        "price": 2.8240679545800003
+      },
+      {
+        "world": "progressive_clear",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.1784638684234375,
+        "ceiling_fraction": 0.5322761194029375,
+        "empty_fraction": 0.16856343283571248,
+        "price": 2.72558793058625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.17540321444006252,
+        "ceiling_fraction": 0.5636194029851875,
+        "empty_fraction": 0.179850746268625,
+        "price": 2.611982816296875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.17017186688893748,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1293843283582,
+        "price": 1.04562797131125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.1371135395401875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11735074626863125,
+        "price": 1.322048735521875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.1358841621730625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.16660447761194375,
+        "price": 1.37253365093875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.1183778630249375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.09822761194024375,
+        "price": 1.29418960025375
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.1175170704098125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11082089552246249,
+        "price": 1.340453351816875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.0864700626086,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.0449459745454,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.0449459745454,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "solstheim",
+        "good": "silver",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.616247150567125,
+        "ceiling_fraction": 0.955037313432875,
+        "empty_fraction": 0.584235074627,
+        "price": 2.991697402093125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "weapons",
+        "unmet_fraction": 0.6078837074013125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.5949266750244375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.5924155259145,
+        "ceiling_fraction": 0.8283582089553125,
+        "empty_fraction": 0.4786380597015625,
+        "price": 2.9331733387025
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.5508093692913125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.6926305970150625,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.5320232478735625,
+        "ceiling_fraction": 0.8395522388058125,
+        "empty_fraction": 0.4191231343285,
+        "price": 2.937092001254375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.4050094115523125,
+        "ceiling_fraction": 0.781529850746375,
+        "empty_fraction": 0.3924440298508125,
+        "price": 2.889782834943125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.3630642052586875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.3567543725340625,
+        "ceiling_fraction": 0.7186567164178125,
+        "empty_fraction": 0.3276119402985625,
+        "price": 2.871191073350625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "weapons",
+        "unmet_fraction": 0.35488443214525,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.3510556682824375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "weapons",
+        "unmet_fraction": 0.3390321817269375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.331411723721,
+        "ceiling_fraction": 0.856156716417875,
+        "empty_fraction": 0.402052238806,
+        "price": 2.9508755844975
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "armor",
+        "unmet_fraction": 0.32414010132,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.3113888019368125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.452985074626875,
+        "price": 2.5617389324474997
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "weapons",
+        "unmet_fraction": 0.305160951191375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "armor",
+        "unmet_fraction": 0.3011248014901875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.300972305125375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.240485074626875,
+        "price": 1.3697979074168751
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.2914429224635,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.275828969994,
+        "ceiling_fraction": 0.5263059701490626,
+        "empty_fraction": 0.16464552238791874,
+        "price": 2.60764307595
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "armor",
+        "unmet_fraction": 0.247071239267375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.230893989728875,
+        "ceiling_fraction": 0.5582089552238125,
+        "empty_fraction": 0.1819962686568125,
+        "price": 2.775886606825
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.2299194516363125,
+        "ceiling_fraction": 0.652238805970125,
+        "empty_fraction": 0.2626865671640625,
+        "price": 2.72810502429875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.1967467999851875,
+        "ceiling_fraction": 0.5666044776120001,
+        "empty_fraction": 0.19561567164174376,
+        "price": 2.763999211615
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1916426455076875,
+        "ceiling_fraction": 0.652985074626875,
+        "empty_fraction": 0.2570895522388125,
+        "price": 2.835510272058125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.181824378876,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.12714552238803126,
+        "price": 1.058255646675625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "medicine",
+        "unmet_fraction": 0.173488955658875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.15921996528075,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1402985074626875,
+        "price": 1.338977360759375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "weapons",
+        "unmet_fraction": 0.1577056556175,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.14764372290975,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.12164179104476874,
+        "price": 1.327917518873125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.1390548790415,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1449626865672375,
+        "price": 1.35450703693875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.1339725104606875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.15447761194035625,
+        "price": 1.36787331536
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "falkreath",
+        "good": "armor",
+        "unmet_fraction": 0.1323501775874375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "grain",
+        "unmet_fraction": 0.1152019798174375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.12070895522389376,
+        "price": 1.3586484571975
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "food",
+        "unmet_fraction": 0.1054440010981875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1028917910447625,
+        "price": 1.328300185759375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "meat",
+        "unmet_fraction": 0.1051969500224375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.128078358208925,
+        "price": 1.326183870763125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "meat",
+        "unmet_fraction": 0.1037181426568125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11380597014922937,
+        "price": 1.318142101501875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.0783728654363,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "rift",
+        "good": "armor",
+        "unmet_fraction": 0.07436004045556249,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "drink",
+        "unmet_fraction": 0.0301173858964875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.3328358208956875,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "drink",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "silver",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.575375885384875,
+        "ceiling_fraction": 0.80223880597025,
+        "empty_fraction": 0.452052238806,
+        "price": 2.899561181759375
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.5706554486543125,
+        "ceiling_fraction": 0.8309701492540625,
+        "empty_fraction": 0.5567164179104375,
+        "price": 2.9144174576556248
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.569907337204,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "weapons",
+        "unmet_fraction": 0.5472473990689375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.53207317204375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.62425373134325,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.5318029067694375,
+        "ceiling_fraction": 0.8453358208955625,
+        "empty_fraction": 0.4223880597015,
+        "price": 2.943277675446875
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.385470611640625,
+        "ceiling_fraction": 0.7604477611942501,
+        "empty_fraction": 0.37061567164181247,
+        "price": 2.864614747485
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.3311283390905625,
+        "ceiling_fraction": 0.8611940298505,
+        "empty_fraction": 0.3805037313433125,
+        "price": 2.955498391224375
+      },
+      {
+        "world": "unrest",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.32414010132,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.32414010132,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "armor",
+        "unmet_fraction": 0.32414010132,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "weapons",
+        "unmet_fraction": 0.316181317774,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "weapons",
+        "unmet_fraction": 0.3039510212635625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.3010046628915,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.22714552238806252,
+        "price": 1.368940027530625
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.2979721025403125,
+        "ceiling_fraction": 0.6345149253733124,
+        "empty_fraction": 0.239738805970125,
+        "price": 2.81691161743875
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.2763330509081875,
+        "ceiling_fraction": 0.5261194029849375,
+        "empty_fraction": 0.15251865671646875,
+        "price": 2.607401275165
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.275002796908125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.386007462686625,
+        "price": 2.493476478743125
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "weapons",
+        "unmet_fraction": 0.262698292349,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.262698292349,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "armor",
+        "unmet_fraction": 0.259196427589,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.235766140461625,
+        "ceiling_fraction": 0.677798507462875,
+        "empty_fraction": 0.25615671641793747,
+        "price": 2.750859397858125
+      },
+      {
+        "world": "unrest",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.20473186086275,
+        "ceiling_fraction": 0.5246268656714375,
+        "empty_fraction": 0.1585820895521625,
+        "price": 2.75443329336
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "armor",
+        "unmet_fraction": 0.201256483378,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.1818393598995,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.14225746268656875,
+        "price": 1.05783693442875
+      },
+      {
+        "world": "unrest",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.175813424432125,
+        "ceiling_fraction": 0.5352611940299375,
+        "empty_fraction": 0.174720149253775,
+        "price": 2.74655153742875
+      },
+      {
+        "world": "unrest",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.1593202401415,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.14766791044784375,
+        "price": 1.340976228205625
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "medicine",
+        "unmet_fraction": 0.139814674407,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1396502764154375,
+        "ceiling_fraction": 0.5606343283584375,
+        "empty_fraction": 0.2015858208955,
+        "price": 2.770731176925
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.13204600779575,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.08488805970147688,
+        "price": 1.31631172984
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.1056311050101875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11641791044776875,
+        "price": 1.3407199762
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "meat",
+        "unmet_fraction": 0.1053906946654375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1063432835820375,
+        "price": 1.32409993849875
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "food",
+        "unmet_fraction": 0.1053662458705625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11016791044778125,
+        "price": 1.32803031324375
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "meat",
+        "unmet_fraction": 0.1035451367435625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.1298507462685875,
+        "price": 1.321655299563125
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "grain",
+        "unmet_fraction": 0.1024097809629375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.14673507462689375,
+        "price": 1.348397926660625
+      },
+      {
+        "world": "unrest",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.10117379035945,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.125186567164125,
+        "price": 1.322254736465
+      },
+      {
+        "world": "unrest",
+        "market": "falkreath",
+        "good": "armor",
+        "unmet_fraction": 0.0783728654363,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.0783728654363,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "drink",
+        "unmet_fraction": 0.03302580606229375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.339365671641875,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "rift",
+        "good": "armor",
+        "unmet_fraction": 0.0169310564654,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "weapons",
+        "unmet_fraction": 0.011585652352524374,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.6262126865671875,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "drink",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "silver",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.591147020321625,
+        "ceiling_fraction": 0.827238805970375,
+        "empty_fraction": 0.549533582089625,
+        "price": 2.928566781755625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.5736291816890625,
+        "ceiling_fraction": 0.78787313432875,
+        "empty_fraction": 0.4541977611939375,
+        "price": 2.888081945829375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.5062582364586875,
+        "ceiling_fraction": 0.8624999999998125,
+        "empty_fraction": 0.520242537313375,
+        "price": 2.94384902366625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.4795042051726875,
+        "ceiling_fraction": 0.7363805970150625,
+        "empty_fraction": 0.3200559701491875,
+        "price": 2.843681217958125
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.3849085047261875,
+        "ceiling_fraction": 0.7376865671643751,
+        "empty_fraction": 0.3696828358209375,
+        "price": 2.84792611961625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.3572326513601875,
+        "ceiling_fraction": 0.716604477612125,
+        "empty_fraction": 0.3120335820895,
+        "price": 2.865585652794375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.296719975453,
+        "ceiling_fraction": 0.751119402984875,
+        "empty_fraction": 0.29822761194025,
+        "price": 2.8650799256
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.28708539432,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.20923507462690624,
+        "price": 1.3505265944825
+      },
+      {
+        "world": "war_to_peace",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.2809619465255625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.461567164179,
+        "price": 2.540043722190625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.236665892244,
+        "ceiling_fraction": 0.4703358208956875,
+        "empty_fraction": 0.12304104477599374,
+        "price": 2.534042893786875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.2144280360295625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.1958987241469375,
+        "ceiling_fraction": 0.5143656716419375,
+        "empty_fraction": 0.138899253731225,
+        "price": 2.74437116111375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.19288777039375,
+        "ceiling_fraction": 0.6479477611941875,
+        "empty_fraction": 0.21436567164175,
+        "price": 2.823779785301875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.1784754757305,
+        "ceiling_fraction": 0.5326492537313126,
+        "empty_fraction": 0.17145522388043125,
+        "price": 2.7255356653768747
+      },
+      {
+        "world": "war_to_peace",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.1752425787600625,
+        "ceiling_fraction": 0.5626865671643125,
+        "empty_fraction": 0.18507462686555,
+        "price": 2.611881499755
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.17024708852975,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.11175373134325625,
+        "price": 1.04413526935
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.1375269022315,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.09608208955225,
+        "price": 1.3203561053825
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.135884547532375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.16735074626866875,
+        "price": 1.371689137575
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.1182382982639375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.105690298507425,
+        "price": 1.294644763268125
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.1173788720403125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.12220149253724563,
+        "price": 1.339878936995625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.0864700626086,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.0449459745454,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.0449459745454,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 1.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "solstheim",
+        "good": "silver",
+        "unmet_fraction": 0.0,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.5,
+        "price": 3.0
+      }
+    ]
+  },
+  "after": {
+    "seeds": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+    ],
+    "runs": 256,
+    "end_day": 1825,
+    "scenarios": {
+      "progressive_clear/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 217.36144422888958,
+            "dispatched_per_day": 223.5062737987764,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10052.672116438356,
+            "mean_player_gold": 3134.1662671232875,
+            "price_ceiling_fraction": 0.07237260273972602,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.277787426337959,
+            "unmet_demand_fraction": 0.058775124292339206
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.55561483408528,
+            "dispatched_per_day": 222.03151880877374,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23857.248852739725,
+            "mean_player_gold": 7398.305993150685,
+            "price_ceiling_fraction": 0.07271506849315068,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2779632149908233,
+            "unmet_demand_fraction": 0.06464466500421806
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.14766917941188,
+            "dispatched_per_day": 233.061178386033,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37250.84859246575,
+            "mean_player_gold": 11487.48493150685,
+            "price_ceiling_fraction": 0.04297465753424658,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1980350944168743,
+            "unmet_demand_fraction": 0.0551096204910114
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.90122954217105,
+            "dispatched_per_day": 233.49670824857265,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 50316.1877020548,
+            "mean_player_gold": 15244.632020547946,
+            "price_ceiling_fraction": 0.04294657534246575,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977710694441697,
+            "unmet_demand_fraction": 0.05501913703022217
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 224.8471622238703,
+            "dispatched_per_day": 226.64935373208974,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 62861.35845522388,
+            "mean_player_gold": 19004.37089552239,
+            "price_ceiling_fraction": 0.04516268656716418,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2002647839470022,
+            "unmet_demand_fraction": 0.05969068421178885
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 20886.5625,
+            "min": 18397,
+            "max": 23074
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 19886.5625,
+            "min": 17397,
+            "max": 22074
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 233.36935120125776,
+            "dispatched_per_day": 239.3084621288798,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 7184.363634600465,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07436849315068493,
+            "price_floor_fraction": 1.0958904109589042e-05,
+            "price_index": 1.2763201481412751,
+            "unmet_demand_fraction": 0.056287556452029354
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.59744786478583,
+            "dispatched_per_day": 222.03197885997608,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18462.88506849315,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07277123287671233,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2780519704492865,
+            "unmet_demand_fraction": 0.06465370469968708
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.42432495776137,
+            "dispatched_per_day": 233.3207870896908,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 31898.35873630137,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.042986986301369864,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1981329680203865,
+            "unmet_demand_fraction": 0.055106282833986546
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.56039402266416,
+            "dispatched_per_day": 233.22071430187185,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 44998.81380136986,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0429513698630137,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1978197551233425,
+            "unmet_demand_fraction": 0.055019971761228
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 224.86441208041333,
+            "dispatched_per_day": 226.63527743364247,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 57563.02542537313,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04518358208955224,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2003389802230722,
+            "unmet_demand_fraction": 0.05969545296022191
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 217.46065182125437,
+            "dispatched_per_day": 223.6112656030629,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10079.278363013698,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0724554794520548,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.277905803388986,
+            "unmet_demand_fraction": 0.05877580635086297
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.28551202055078,
+            "dispatched_per_day": 221.76776480549924,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23944.41228767123,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07275068493150685,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2780567650364647,
+            "unmet_demand_fraction": 0.06465764590874251
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.16313493887444,
+            "dispatched_per_day": 233.0440015008015,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37378.373301369866,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04297260273972603,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1980790546102225,
+            "unmet_demand_fraction": 0.05510529282721568
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.54814868524016,
+            "dispatched_per_day": 233.12267362657695,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 50490.26545890411,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04295,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977961903531391,
+            "unmet_demand_fraction": 0.055021929252180045
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 225.04689276680097,
+            "dispatched_per_day": 226.84506175870823,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 63074.76492164179,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04518358208955224,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.200345402551712,
+            "unmet_demand_fraction": 0.059689227096039736
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "progressive_clear/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.70327728321269,
+            "dispatched_per_day": 222.9002017170703,
+            "empty_offer_fraction": 0.0006328767123287671,
+            "low_cash_fraction": 0.00032191780821917807,
+            "mean_merchant_gold": 9972.093051369862,
+            "mean_player_gold": 23184.815924657534,
+            "price_ceiling_fraction": 0.06481232876712328,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2763071852878103,
+            "unmet_demand_fraction": 0.05839847653827098
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.1256164610039,
+            "dispatched_per_day": 221.58406780673363,
+            "empty_offer_fraction": 0.0005537671232876712,
+            "low_cash_fraction": 0.000565068493150685,
+            "mean_merchant_gold": 23695.311143835617,
+            "mean_player_gold": 63737.04554794521,
+            "price_ceiling_fraction": 0.06554041095890412,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2765878714760148,
+            "unmet_demand_fraction": 0.06429544233458279
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 230.6031043405912,
+            "dispatched_per_day": 232.4358243193787,
+            "empty_offer_fraction": 0.000551027397260274,
+            "low_cash_fraction": 0.0008253424657534246,
+            "mean_merchant_gold": 36973.78444520548,
+            "mean_player_gold": 102622.78561643836,
+            "price_ceiling_fraction": 0.03533150684931507,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1955490096788814,
+            "unmet_demand_fraction": 0.05494870809413164
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 230.92559334391493,
+            "dispatched_per_day": 232.56011197503506,
+            "empty_offer_fraction": 0.0005582191780821918,
+            "low_cash_fraction": 0.0009417808219178083,
+            "mean_merchant_gold": 49875.59219863014,
+            "mean_player_gold": 141881.05890410958,
+            "price_ceiling_fraction": 0.035297260273972605,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1953200980699572,
+            "unmet_demand_fraction": 0.05486404899707424
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 224.30682740721454,
+            "dispatched_per_day": 226.006216937801,
+            "empty_offer_fraction": 0.0005470149253731343,
+            "low_cash_fraction": 0.000873134328358209,
+            "mean_merchant_gold": 62262.01854850746,
+            "mean_player_gold": 179408.3270522388,
+            "price_ceiling_fraction": 0.0374544776119403,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1978452784795321,
+            "unmet_demand_fraction": 0.05953208746967644
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 4013.25,
+            "min": 3964,
+            "max": 4062
+          },
+          "cash_limited_days": {
+            "mean": 0.9375,
+            "min": 0,
+            "max": 4
+          },
+          "completed_sales": {
+            "mean": 510.625,
+            "min": 507,
+            "max": 515
+          },
+          "gold": {
+            "mean": 197657.6875,
+            "min": 196597,
+            "max": 198579
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 204854.4375,
+            "min": 203411,
+            "max": 206179
+          },
+          "received": {
+            "mean": 401512.125,
+            "min": 399008,
+            "max": 403758
+          },
+          "sold": {
+            "mean": 4013.25,
+            "min": 3964,
+            "max": 4062
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.74702849356063,
+            "dispatched_per_day": 217.4159083697211,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10057.404342465754,
+            "mean_player_gold": 3141.8109589041096,
+            "price_ceiling_fraction": 0.07337945205479453,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2810595884222091,
+            "unmet_demand_fraction": 0.06391565299883617
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.90609592292452,
+            "dispatched_per_day": 217.69136469611533,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23875.083547945203,
+            "mean_player_gold": 7411.403253424657,
+            "price_ceiling_fraction": 0.07368767123287671,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.281982033739037,
+            "unmet_demand_fraction": 0.06411647979633511
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.89475744368735,
+            "dispatched_per_day": 217.5573813867818,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37690.28064041096,
+            "mean_player_gold": 11720.742808219178,
+            "price_ceiling_fraction": 0.07368424657534246,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2820360708272442,
+            "unmet_demand_fraction": 0.0640949154900089
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.8502740819871,
+            "dispatched_per_day": 217.51521770236388,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 51511.07402739726,
+            "mean_player_gold": 15912.721061643835,
+            "price_ceiling_fraction": 0.07367123287671233,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2819955361422772,
+            "unmet_demand_fraction": 0.06410407362514582
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 205.30093327003405,
+            "dispatched_per_day": 211.50927816384691,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 64766.5094738806,
+            "mean_player_gold": 20052.971268656718,
+            "price_ceiling_fraction": 0.0757,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.284360305985649,
+            "unmet_demand_fraction": 0.06852906798699643
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 22134.125,
+            "min": 19398,
+            "max": 24282
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 21134.125,
+            "min": 18398,
+            "max": 23282
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 227.6645035099975,
+            "dispatched_per_day": 233.05047518897072,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 7208.937994569434,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07592123287671233,
+            "price_floor_fraction": 1.0958904109589042e-05,
+            "price_index": 1.2801252818937006,
+            "unmet_demand_fraction": 0.06162040516986286
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.79700923861054,
+            "dispatched_per_day": 217.53759659165763,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18496.239188356165,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07372465753424658,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2821127231686085,
+            "unmet_demand_fraction": 0.06412152918673472
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.87946227208923,
+            "dispatched_per_day": 217.58734062289054,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 32347.403284246575,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07377191780821918,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2821145661439317,
+            "unmet_demand_fraction": 0.06411341357549358
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.8949703942689,
+            "dispatched_per_day": 217.67419323389998,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 46189.39899657534,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07378082191780821,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2820761265691387,
+            "unmet_demand_fraction": 0.06410409989326606
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 205.27452145672152,
+            "dispatched_per_day": 211.47591722646942,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 59488.47679104478,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07575597014925373,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2844474708752505,
+            "unmet_demand_fraction": 0.06854138171551848
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.91341771274696,
+            "dispatched_per_day": 217.6369304870135,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10085.375041095891,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07348630136986302,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2811752283435032,
+            "unmet_demand_fraction": 0.06393591043870384
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.78374897710466,
+            "dispatched_per_day": 217.51377100451998,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23935.039376712328,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07374041095890412,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2820870708789518,
+            "unmet_demand_fraction": 0.06411263243440418
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 212.01938308182602,
+            "dispatched_per_day": 217.71735126379045,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37782.13467808219,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0737082191780822,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2821184868393773,
+            "unmet_demand_fraction": 0.06411044234161567
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.87672604965826,
+            "dispatched_per_day": 217.54543927507441,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 51639.19214726028,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0737513698630137,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2821174925883758,
+            "unmet_demand_fraction": 0.06410250722167679
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 205.3187532178145,
+            "dispatched_per_day": 211.51234293767683,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 64946.00535447761,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0757544776119403,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2844794465143292,
+            "unmet_demand_fraction": 0.06854859277561044
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "recurring_unrest/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.1721889778912,
+            "dispatched_per_day": 216.8344380588702,
+            "empty_offer_fraction": 0.0006315068493150685,
+            "low_cash_fraction": 0.00029794520547945206,
+            "mean_merchant_gold": 9991.00830479452,
+            "mean_player_gold": 22976.766952054793,
+            "price_ceiling_fraction": 0.06585616438356164,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2795919841335184,
+            "unmet_demand_fraction": 0.06353992099259718
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.47711047870789,
+            "dispatched_per_day": 217.24733517352522,
+            "empty_offer_fraction": 0.0005534246575342466,
+            "low_cash_fraction": 0.0005273972602739726,
+            "mean_merchant_gold": 23725.022952054795,
+            "mean_player_gold": 63183.14743150685,
+            "price_ceiling_fraction": 0.06666917808219178,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2807473205263753,
+            "unmet_demand_fraction": 0.0637485152628976
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.21587402621222,
+            "dispatched_per_day": 216.85718582343048,
+            "empty_offer_fraction": 0.0005571917808219178,
+            "low_cash_fraction": 0.0006232876712328767,
+            "mean_merchant_gold": 37466.06,
+            "mean_player_gold": 101648.03715753424,
+            "price_ceiling_fraction": 0.06672808219178082,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.280752036592039,
+            "unmet_demand_fraction": 0.06375036086248732
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 211.38651563084298,
+            "dispatched_per_day": 217.13894900170183,
+            "empty_offer_fraction": 0.0005523972602739726,
+            "low_cash_fraction": 0.0005547945205479452,
+            "mean_merchant_gold": 51203.34439041096,
+            "mean_player_gold": 140068.4640410959,
+            "price_ceiling_fraction": 0.06667808219178083,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.280753887787275,
+            "unmet_demand_fraction": 0.06373841614302714
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 204.90552145992342,
+            "dispatched_per_day": 211.08729711619912,
+            "empty_offer_fraction": 0.0005440298507462686,
+            "low_cash_fraction": 0.0005,
+            "mean_merchant_gold": 64383.29323134328,
+            "mean_player_gold": 176721.0714552239,
+            "price_ceiling_fraction": 0.06862238805970149,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.283039869868675,
+            "unmet_demand_fraction": 0.06817828530897281
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3829,
+            "min": 3784,
+            "max": 3882
+          },
+          "cash_limited_days": {
+            "mean": 1.375,
+            "min": 0,
+            "max": 4
+          },
+          "completed_sales": {
+            "mean": 509.875,
+            "min": 506,
+            "max": 515
+          },
+          "gold": {
+            "mean": 194549.375,
+            "min": 192664,
+            "max": 195856
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 214257.4375,
+            "min": 212609,
+            "max": 216956
+          },
+          "received": {
+            "mean": 407806.8125,
+            "min": 405607,
+            "max": 411496
+          },
+          "sold": {
+            "mean": 3829,
+            "min": 3784,
+            "max": 3882
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.8954948598162,
+            "dispatched_per_day": 223.7388692149022,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10044.872434931507,
+            "mean_player_gold": 3132.205479452055,
+            "price_ceiling_fraction": 0.07207260273972603,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.276350597233459,
+            "unmet_demand_fraction": 0.05735791998750937
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.00147019218502,
+            "dispatched_per_day": 223.86355963327816,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23831.029,
+            "mean_player_gold": 7380.565924657534,
+            "price_ceiling_fraction": 0.07238287671232876,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.277189508457968,
+            "unmet_demand_fraction": 0.057531147675174976
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.97947496456675,
+            "dispatched_per_day": 223.828816641924,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37610.79630479452,
+            "mean_player_gold": 11663.146061643836,
+            "price_ceiling_fraction": 0.0724445205479452,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2771873975261747,
+            "unmet_demand_fraction": 0.05754412468547813
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.97468656111803,
+            "dispatched_per_day": 223.82568364594442,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 51404.27343493151,
+            "mean_player_gold": 15820.782363013699,
+            "price_ceiling_fraction": 0.07237123287671232,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2771674133648483,
+            "unmet_demand_fraction": 0.05753222551516151
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 208.6697980589953,
+            "dispatched_per_day": 217.06758096452944,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 64618.8139402985,
+            "mean_player_gold": 19932.46343283582,
+            "price_ceiling_fraction": 0.07456492537313433,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2796774841668768,
+            "unmet_demand_fraction": 0.06192369566313203
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 22003.625,
+            "min": 19349,
+            "max": 24169
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 21003.625,
+            "min": 18349,
+            "max": 23169
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 232.01277185567713,
+            "dispatched_per_day": 239.5021071332283,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 7184.09607738557,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07408904109589041,
+            "price_floor_fraction": 1.0958904109589042e-05,
+            "price_index": 1.2747211860971668,
+            "unmet_demand_fraction": 0.054857638594930994
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.96323983883735,
+            "dispatched_per_day": 223.8356528190089,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18436.323839041095,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0725027397260274,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2772682096711747,
+            "unmet_demand_fraction": 0.05754667146912947
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.09168624368476,
+            "dispatched_per_day": 223.9007999094089,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 32243.10890410959,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07246575342465754,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2772236826200456,
+            "unmet_demand_fraction": 0.0575377991890218
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.0866769320352,
+            "dispatched_per_day": 223.9018695854045,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 46062.815657534244,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07244315068493151,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2772457469727068,
+            "unmet_demand_fraction": 0.057539309254456286
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 208.67620367933065,
+            "dispatched_per_day": 216.96378980543219,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 59322.319317164176,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07455149253731343,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2797023077141474,
+            "unmet_demand_fraction": 0.06193139548181274
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.06363984488956,
+            "dispatched_per_day": 223.89560900567906,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10071.619585616438,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07218972602739726,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2763309925054396,
+            "unmet_demand_fraction": 0.05736347396922879
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.09145824568344,
+            "dispatched_per_day": 223.99444227630175,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23899.053787671233,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07239246575342466,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.277281474271525,
+            "unmet_demand_fraction": 0.05753838136083399
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 216.05644711810143,
+            "dispatched_per_day": 223.96640571148998,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 37729.15808219178,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07241917808219178,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.277261512257335,
+            "unmet_demand_fraction": 0.05753380675773361
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.9308149726202,
+            "dispatched_per_day": 223.81762898457836,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 51563.256476027396,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07239520547945205,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2772957632788036,
+            "unmet_demand_fraction": 0.057539017258347445
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 208.78075538726543,
+            "dispatched_per_day": 217.06855018482526,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 64824.98402985075,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07459029850746268,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2797330713444586,
+            "unmet_demand_fraction": 0.06191581728563165
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "unrest/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.28445092773586,
+            "dispatched_per_day": 223.07591279794582,
+            "empty_offer_fraction": 0.0006363013698630137,
+            "low_cash_fraction": 0.00035273972602739724,
+            "mean_merchant_gold": 9965.497976027396,
+            "mean_player_gold": 23291.746575342466,
+            "price_ceiling_fraction": 0.06452671232876712,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.274736440989795,
+            "unmet_demand_fraction": 0.05696089160577471
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.39226737046556,
+            "dispatched_per_day": 223.34331848030288,
+            "empty_offer_fraction": 0.0005530821917808219,
+            "low_cash_fraction": 0.0004897260273972602,
+            "mean_merchant_gold": 23618.833979452054,
+            "mean_player_gold": 64406.4948630137,
+            "price_ceiling_fraction": 0.06540479452054794,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.275826456853722,
+            "unmet_demand_fraction": 0.05717320241310767
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.48871407046175,
+            "dispatched_per_day": 223.3080322283405,
+            "empty_offer_fraction": 0.0005595890410958905,
+            "low_cash_fraction": 0.0005753424657534246,
+            "mean_merchant_gold": 37291.37745547945,
+            "mean_player_gold": 103492.71729452055,
+            "price_ceiling_fraction": 0.06540342465753425,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2758337324193922,
+            "unmet_demand_fraction": 0.0571739040773427
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 215.50887470298855,
+            "dispatched_per_day": 223.35726030388943,
+            "empty_offer_fraction": 0.0005551369863013699,
+            "low_cash_fraction": 0.0006164383561643835,
+            "mean_merchant_gold": 50985.80668150685,
+            "mean_player_gold": 142545.10273972602,
+            "price_ceiling_fraction": 0.06546301369863014,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2758256538446102,
+            "unmet_demand_fraction": 0.057167876843497646
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 208.2465799030383,
+            "dispatched_per_day": 216.53454083326332,
+            "empty_offer_fraction": 0.0005552238805970149,
+            "low_cash_fraction": 0.0005223880597014926,
+            "mean_merchant_gold": 64115.101742537314,
+            "mean_player_gold": 180104.51268656718,
+            "price_ceiling_fraction": 0.06752985074626866,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.278295333523141,
+            "unmet_demand_fraction": 0.06153873005934904
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 3844.375,
+            "min": 3800,
+            "max": 3888
+          },
+          "cash_limited_days": {
+            "mean": 1.25,
+            "min": 0,
+            "max": 6
+          },
+          "completed_sales": {
+            "mean": 513.4375,
+            "min": 508,
+            "max": 524
+          },
+          "gold": {
+            "mean": 198372.75,
+            "min": 196943,
+            "max": 200568
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 212738.875,
+            "min": 210297,
+            "max": 217769
+          },
+          "received": {
+            "mean": 410111.625,
+            "min": 406240,
+            "max": 417337
+          },
+          "sold": {
+            "mean": 3844.375,
+            "min": 3800,
+            "max": 3888
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/adventurer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.292168015521,
+            "dispatched_per_day": 225.63478303458078,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10042.369476027397,
+            "mean_player_gold": 3132.1068493150683,
+            "price_ceiling_fraction": 0.07074041095890411,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2718755450946784,
+            "unmet_demand_fraction": 0.05699683007322622
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.31860736552457,
+            "dispatched_per_day": 233.13512118150064,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23416.516496575343,
+            "mean_player_gold": 7182.606678082192,
+            "price_ceiling_fraction": 0.042955479452054794,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1979678371507987,
+            "unmet_demand_fraction": 0.05503166559227632
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.75081000690554,
+            "dispatched_per_day": 233.37931255699533,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 36480.753732876714,
+            "mean_player_gold": 11055.258219178082,
+            "price_ceiling_fraction": 0.0429472602739726,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977720707856119,
+            "unmet_demand_fraction": 0.055025664164751686
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.45971887206082,
+            "dispatched_per_day": 233.11486382747438,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 49542.89449657534,
+            "mean_player_gold": 14813.095376712328,
+            "price_ceiling_fraction": 0.0429541095890411,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977328066259552,
+            "unmet_demand_fraction": 0.05502793732737334
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 224.84640106684205,
+            "dispatched_per_day": 226.68537593011425,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 62077.33925373134,
+            "mean_player_gold": 18571.71287313433,
+            "price_ceiling_fraction": 0.04515522388059701,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.200273936643493,
+            "unmet_demand_fraction": 0.059689305268747425
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 197,
+            "min": 197,
+            "max": 197
+          },
+          "gold": {
+            "mean": 20455.0625,
+            "min": 18093,
+            "max": 22518
+          },
+          "looted": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 19455.0625,
+            "min": 17093,
+            "max": 21518
+          },
+          "sold": {
+            "mean": 328.25,
+            "min": 307,
+            "max": 355
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/explorer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 235.42365078944582,
+            "dispatched_per_day": 241.3912163969794,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 7180.414929208689,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.0728041095890411,
+            "price_floor_fraction": 1.0958904109589042e-05,
+            "price_index": 1.2702558370735548,
+            "unmet_demand_fraction": 0.05449038607182837
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.37838434515308,
+            "dispatched_per_day": 233.29917578611122,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 18025.599938356165,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.042981506849315065,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.198076315012452,
+            "unmet_demand_fraction": 0.0550373090873263
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.27734508261946,
+            "dispatched_per_day": 232.94999062849357,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 31119.520589041094,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04295890410958904,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977944118784722,
+            "unmet_demand_fraction": 0.05502795362444935
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.33602552582767,
+            "dispatched_per_day": 232.93996691373292,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 44227.89930821918,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.042958219178082194,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977789460508772,
+            "unmet_demand_fraction": 0.055024514853744724
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 225.09419821776564,
+            "dispatched_per_day": 226.93662301391572,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 56810.20970149254,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04517985074626866,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2003674203754957,
+            "unmet_demand_fraction": 0.05968982891333429
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/observer": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 219.47764818657012,
+            "dispatched_per_day": 225.818007267385,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 10068.96993150685,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.07089178082191781,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2718556865885884,
+            "unmet_demand_fraction": 0.05700343123664974
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.40413082790627,
+            "dispatched_per_day": 233.25436259161845,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 23469.31732191781,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.042960958904109586,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1980579834442548,
+            "unmet_demand_fraction": 0.05504086281149122
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.50500795684238,
+            "dispatched_per_day": 233.13514528982125,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 36559.163020547945,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04296849315068493,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1977982089682035,
+            "unmet_demand_fraction": 0.05502348062784888
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.35548755674185,
+            "dispatched_per_day": 233.02041384397657,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 49670.98685616438,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.042965753424657534,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1978058302514567,
+            "unmet_demand_fraction": 0.055028019287283285
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 225.03033952550803,
+            "dispatched_per_day": 226.77062421785828,
+            "empty_offer_fraction": 0.0,
+            "low_cash_fraction": 0.0,
+            "mean_merchant_gold": 62241.79607835821,
+            "mean_player_gold": 1000.0,
+            "price_ceiling_fraction": 0.04518134328358209,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2003406995919461,
+            "unmet_demand_fraction": 0.059692119165762184
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "cash_limited_days": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "completed_sales": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "gold": {
+            "mean": 1000,
+            "min": 1000,
+            "max": 1000
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "received": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "sold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      },
+      "war_to_peace/trader": {
+        "years": [
+          {
+            "days": 365.0,
+            "delivered_per_day": 218.70639788552631,
+            "dispatched_per_day": 224.97714784731951,
+            "empty_offer_fraction": 0.0006342465753424657,
+            "low_cash_fraction": 0.00035273972602739724,
+            "mean_merchant_gold": 9963.110619863013,
+            "mean_player_gold": 23289.180308219176,
+            "price_ceiling_fraction": 0.06307397260273973,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.2701951836507326,
+            "unmet_demand_fraction": 0.05661791900469834
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 230.61611839352437,
+            "dispatched_per_day": 232.5023889531612,
+            "empty_offer_fraction": 0.0005513698630136986,
+            "low_cash_fraction": 0.000815068493150685,
+            "mean_merchant_gold": 23171.033630136986,
+            "mean_player_gold": 64585.62842465754,
+            "price_ceiling_fraction": 0.03537328767123288,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1955225464048445,
+            "unmet_demand_fraction": 0.054877015221208865
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 230.9412185389166,
+            "dispatched_per_day": 232.58163828981955,
+            "empty_offer_fraction": 0.0005541095890410959,
+            "low_cash_fraction": 0.0008801369863013699,
+            "mean_merchant_gold": 36066.23101027397,
+            "mean_player_gold": 103805.20890410959,
+            "price_ceiling_fraction": 0.035297260273972605,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.195365382922369,
+            "unmet_demand_fraction": 0.054871092554250954
+          },
+          {
+            "days": 365.0,
+            "delivered_per_day": 231.03948871570674,
+            "dispatched_per_day": 232.7426356830718,
+            "empty_offer_fraction": 0.0005541095890410959,
+            "low_cash_fraction": 0.0009006849315068493,
+            "mean_merchant_gold": 48976.5821130137,
+            "mean_player_gold": 143013.69229452056,
+            "price_ceiling_fraction": 0.03531643835616438,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.1953640554173457,
+            "unmet_demand_fraction": 0.05487468032994408
+          },
+          {
+            "days": 335.0,
+            "delivered_per_day": 224.24490878046788,
+            "dispatched_per_day": 225.98083155329928,
+            "empty_offer_fraction": 0.0005499999999999999,
+            "low_cash_fraction": 0.0010186567164179104,
+            "mean_merchant_gold": 61358.76628358209,
+            "mean_player_gold": 180682.53003731344,
+            "price_ceiling_fraction": 0.037505223880597016,
+            "price_floor_fraction": 0.0,
+            "price_index": 1.197868524048984,
+            "unmet_demand_fraction": 0.05953494932639137
+          }
+        ],
+        "player_totals": {
+          "bought": {
+            "mean": 4059.25,
+            "min": 3980,
+            "max": 4114
+          },
+          "cash_limited_days": {
+            "mean": 0.1875,
+            "min": 0,
+            "max": 2
+          },
+          "completed_sales": {
+            "mean": 510.75,
+            "min": 508,
+            "max": 515
+          },
+          "gold": {
+            "mean": 198884.9375,
+            "min": 197789,
+            "max": 200435
+          },
+          "looted": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          },
+          "paid": {
+            "mean": 201242,
+            "min": 199920,
+            "max": 202580
+          },
+          "received": {
+            "mean": 399126.9375,
+            "min": 396709,
+            "max": 401116
+          },
+          "sold": {
+            "mean": 4059.25,
+            "min": 3980,
+            "max": 4114
+          },
+          "unsold": {
+            "mean": 0,
+            "min": 0,
+            "max": 0
+          }
+        }
+      }
+    },
+    "maximum_stock_accounting_error": 1.0784503956529079e-08,
+    "maximum_save_bytes": 191962,
+    "maximum_shipments": 468,
+    "final_year_discovery_price_difference_pct": {
+      "unrest": 0.0238007105025556,
+      "progressive_clear": 0.009373400467580308,
+      "war_to_peace": 0.009251684645165357,
+      "recurring_unrest": 0.02604296014819683
+    },
+    "final_year_chronically_empty_categories": {
+      "unrest": 0,
+      "progressive_clear": 0,
+      "war_to_peace": 0,
+      "recurring_unrest": 0
+    },
+    "persistent_shortages": [
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.5810393446929375,
+        "ceiling_fraction": 0.7796641791045625,
+        "empty_fraction": 0.0,
+        "price": 2.874786530020625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.5523802971925625,
+        "ceiling_fraction": 0.7505597014923125,
+        "empty_fraction": 0.0,
+        "price": 2.8501556707525
+      },
+      {
+        "world": "progressive_clear",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.4890901664600625,
+        "ceiling_fraction": 0.8132462686563126,
+        "empty_fraction": 0.0,
+        "price": 2.905604554853125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.4202450878745,
+        "ceiling_fraction": 0.62462686567175,
+        "empty_fraction": 0.0,
+        "price": 2.770314072659375
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.3711220881258125,
+        "ceiling_fraction": 0.6874999999999375,
+        "empty_fraction": 0.0,
+        "price": 2.81252753656125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.341109266299125,
+        "ceiling_fraction": 0.668656716418,
+        "empty_fraction": 0.0,
+        "price": 2.835717143365625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.2846405249859375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.297642536213125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.28127476704050003,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.39693265026875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.2645751518008125,
+        "ceiling_fraction": 0.634328358209,
+        "empty_fraction": 0.0,
+        "price": 2.789591475215
+      },
+      {
+        "world": "progressive_clear",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.179931665695875,
+        "ceiling_fraction": 0.5916044776115624,
+        "empty_fraction": 0.0,
+        "price": 2.78293811772625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.175813938993375,
+        "ceiling_fraction": 0.4666044776119375,
+        "empty_fraction": 0.0,
+        "price": 2.711091575355
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.168570738908625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.0123320129987499
+      },
+      {
+        "world": "progressive_clear",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.161614254494125,
+        "ceiling_fraction": 0.4837686567161875,
+        "empty_fraction": 0.0,
+        "price": 2.690695473701875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.160960481243,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.15603303904718752,
+        "ceiling_fraction": 0.3572761194030625,
+        "empty_fraction": 0.0,
+        "price": 2.4209668201575
+      },
+      {
+        "world": "progressive_clear",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.1457921177960625,
+        "ceiling_fraction": 0.4380597014923125,
+        "empty_fraction": 0.0,
+        "price": 2.48168367877125
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.135551626955,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.3283665022
+      },
+      {
+        "world": "progressive_clear",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.1302116217381875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.283787574680625
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.1129434836756875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.251161420414375
+      },
+      {
+        "world": "progressive_clear",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.11180079518425,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.29868694671875
+      },
+      {
+        "world": "progressive_clear",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.0864700626086,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.0457243933621875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "progressive_clear",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.04500467264644375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.595076283276125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "weapons",
+        "unmet_fraction": 0.593390831249625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.5915466155436875,
+        "ceiling_fraction": 0.8285447761195626,
+        "empty_fraction": 0.0,
+        "price": 2.93403177556875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.576959616565875,
+        "ceiling_fraction": 0.7843283582090625,
+        "empty_fraction": 0.0,
+        "price": 2.88423087581375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.5235717852920625,
+        "ceiling_fraction": 0.898880597015,
+        "empty_fraction": 0.0,
+        "price": 2.986252288903125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.4742217430529375,
+        "ceiling_fraction": 0.7328358208955,
+        "empty_fraction": 0.0,
+        "price": 2.853575504815625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.3918582430581875,
+        "ceiling_fraction": 0.741417910447875,
+        "empty_fraction": 0.0,
+        "price": 2.851721008816875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.362875905755625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "weapons",
+        "unmet_fraction": 0.3548573288101875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.3514835485300625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.3401960329425625,
+        "ceiling_fraction": 0.6652985074628125,
+        "empty_fraction": 0.0,
+        "price": 2.840992611069375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "weapons",
+        "unmet_fraction": 0.329915377561125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "armor",
+        "unmet_fraction": 0.32420057521949996,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "armor",
+        "unmet_fraction": 0.3201245052429375,
+        "ceiling_fraction": 0.0007462686567168749,
+        "empty_fraction": 0.0,
+        "price": 2.6521139436525
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.312663643265125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.41266790523375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "weapons",
+        "unmet_fraction": 0.305165143404375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.2998458879685625,
+        "ceiling_fraction": 0.7292910447759375,
+        "empty_fraction": 0.0,
+        "price": 2.86170287640125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.29922003027725,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.316231720933125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.291436947887875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "armor",
+        "unmet_fraction": 0.2673777656140625,
+        "ceiling_fraction": 0.000559701492538125,
+        "empty_fraction": 0.0,
+        "price": 2.65390263317625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.21398320290168749,
+        "ceiling_fraction": 0.4139925373133125,
+        "empty_fraction": 0.0,
+        "price": 2.492042476916875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.2106449401,
+        "ceiling_fraction": 0.508582089552125,
+        "empty_fraction": 0.0,
+        "price": 2.7465164067975
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.19951396040206248,
+        "ceiling_fraction": 0.5289179104478126,
+        "empty_fraction": 0.0,
+        "price": 2.597177848969375
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "medicine",
+        "unmet_fraction": 0.198662527666,
+        "ceiling_fraction": 0.00149253731343125,
+        "empty_fraction": 0.0,
+        "price": 2.606217020531875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "falkreath",
+        "good": "armor",
+        "unmet_fraction": 0.1869354562564375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.2324563523675
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.18086241594575,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.02477223177625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.1798726680978125,
+        "ceiling_fraction": 0.513059701492375,
+        "empty_fraction": 0.0,
+        "price": 2.727344069985625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1777702367023125,
+        "ceiling_fraction": 0.590671641790875,
+        "empty_fraction": 0.0,
+        "price": 2.79413865931125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.154332157553375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.290048719860625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "rift",
+        "good": "armor",
+        "unmet_fraction": 0.1476044326680625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.062473924205625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "weapons",
+        "unmet_fraction": 0.1458656564788125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.14057263168125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.289439425545625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.1334682750313125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.32443173654625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.1322886023725,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.30917693610625
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "grain",
+        "unmet_fraction": 0.1137616294734375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.315551288861875
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "food",
+        "unmet_fraction": 0.104390542600375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.289980661325
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "solstheim",
+        "good": "meat",
+        "unmet_fraction": 0.10424759626437499,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.282936596678125
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "haafingar",
+        "good": "meat",
+        "unmet_fraction": 0.102478015641875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.2774924177825
+      },
+      {
+        "world": "recurring_unrest",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.07856657565474374,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.570144912832125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.5602788637606875,
+        "ceiling_fraction": 0.7863805970153125,
+        "empty_fraction": 0.0,
+        "price": 2.87103814335875
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.5558292194395,
+        "ceiling_fraction": 0.7652985074626875,
+        "empty_fraction": 0.0,
+        "price": 2.8599202662175
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "weapons",
+        "unmet_fraction": 0.5284693643189375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.51411786953275,
+        "ceiling_fraction": 0.8988805970150625,
+        "empty_fraction": 0.0,
+        "price": 2.994795367536875
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.474818970387375,
+        "ceiling_fraction": 0.73955223880625,
+        "empty_fraction": 0.0,
+        "price": 2.8561995245493748
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.37176246920031253,
+        "ceiling_fraction": 0.707835820895375,
+        "empty_fraction": 0.0,
+        "price": 2.828368898224375
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.324540380670125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.324219293196125,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "armor",
+        "unmet_fraction": 0.32414010132,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "weapons",
+        "unmet_fraction": 0.31616460606425,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.29977978124418747,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.31734561779375
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.29955811174475,
+        "ceiling_fraction": 0.731716417910375,
+        "empty_fraction": 0.0,
+        "price": 2.863685599085
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "weapons",
+        "unmet_fraction": 0.29588454497775,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.28055404569243747,
+        "ceiling_fraction": 0.5869402985076875,
+        "empty_fraction": 0.0,
+        "price": 2.782520629845625
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "armor",
+        "unmet_fraction": 0.27908575546975,
+        "ceiling_fraction": 0.00074626865671625,
+        "empty_fraction": 0.0,
+        "price": 2.6535374873856252
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.2709558949495,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.35887942856125
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "medicine",
+        "unmet_fraction": 0.26288835285175,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "weapons",
+        "unmet_fraction": 0.2626261463259375,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "armor",
+        "unmet_fraction": 0.22275783781325,
+        "ceiling_fraction": 0.000373134328358125,
+        "empty_fraction": 0.0,
+        "price": 2.64910891716125
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.2142727697229375,
+        "ceiling_fraction": 0.411940298507375,
+        "empty_fraction": 0.0,
+        "price": 2.490791234161875
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.2075312671970625,
+        "ceiling_fraction": 0.55802238805975,
+        "empty_fraction": 0.0,
+        "price": 2.622187153008125
+      },
+      {
+        "world": "unrest",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.1820525690245,
+        "ceiling_fraction": 0.474067164179375,
+        "empty_fraction": 0.0,
+        "price": 2.72560252390875
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.1809243047810625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.024961837360625
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "medicine",
+        "unmet_fraction": 0.16742231615175,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.5903031917075
+      },
+      {
+        "world": "unrest",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.1583522872178125,
+        "ceiling_fraction": 0.482835820895375,
+        "empty_fraction": 0.0,
+        "price": 2.7101539381856248
+      },
+      {
+        "world": "unrest",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.154359704931375,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.2907674357475
+      },
+      {
+        "world": "unrest",
+        "market": "falkreath",
+        "good": "armor",
+        "unmet_fraction": 0.136746013989875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.228661411393125
+      },
+      {
+        "world": "unrest",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1273452267485,
+        "ceiling_fraction": 0.502985074626625,
+        "empty_fraction": 0.0,
+        "price": 2.733520090525
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.1241989187563125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.278462500385625
+      },
+      {
+        "world": "unrest",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.104599790383,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.30394581332
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "food",
+        "unmet_fraction": 0.1043647108735625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.287704411918125
+      },
+      {
+        "world": "unrest",
+        "market": "solstheim",
+        "good": "meat",
+        "unmet_fraction": 0.104311875212,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.2831961642
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "meat",
+        "unmet_fraction": 0.1024819805843125,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.277546983265625
+      },
+      {
+        "world": "unrest",
+        "market": "haafingar",
+        "good": "grain",
+        "unmet_fraction": 0.100844871403,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.30601199047
+      },
+      {
+        "world": "unrest",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.07871007360511875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "unrest",
+        "market": "pale",
+        "good": "weapons",
+        "unmet_fraction": 2.374800492319375e-05,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "food",
+        "unmet_fraction": 0.5809693428311875,
+        "ceiling_fraction": 0.7789179104478124,
+        "empty_fraction": 0.0,
+        "price": 2.87516465320875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "grain",
+        "unmet_fraction": 0.552519502314625,
+        "ceiling_fraction": 0.751865671641625,
+        "empty_fraction": 0.0,
+        "price": 2.850100821634375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "solstheim",
+        "good": "grain",
+        "unmet_fraction": 0.48937906697162503,
+        "ceiling_fraction": 0.81268656716375,
+        "empty_fraction": 0.0,
+        "price": 2.904862903534375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "timber",
+        "unmet_fraction": 0.420131828103125,
+        "ceiling_fraction": 0.62313432835825,
+        "empty_fraction": 0.0,
+        "price": 2.769782886998125
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "grain",
+        "unmet_fraction": 0.3711849572995625,
+        "ceiling_fraction": 0.6878731343283125,
+        "empty_fraction": 0.0,
+        "price": 2.812705193803125
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "food",
+        "unmet_fraction": 0.34109054822125,
+        "ceiling_fraction": 0.6677238805970624,
+        "empty_fraction": 0.0,
+        "price": 2.835381324054375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "meat",
+        "unmet_fraction": 0.2846876572766875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.29766990435625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "haafingar",
+        "good": "food",
+        "unmet_fraction": 0.281351768566875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 2.3968460318325002
+      },
+      {
+        "world": "war_to_peace",
+        "market": "solstheim",
+        "good": "timber",
+        "unmet_fraction": 0.2645058177095625,
+        "ceiling_fraction": 0.63395522388075,
+        "empty_fraction": 0.0,
+        "price": 2.789060020099375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "reach",
+        "good": "food",
+        "unmet_fraction": 0.1799842841830625,
+        "ceiling_fraction": 0.59179104477575,
+        "empty_fraction": 0.0,
+        "price": 2.782897891680625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "grain",
+        "unmet_fraction": 0.175558914559125,
+        "ceiling_fraction": 0.46791044776125,
+        "empty_fraction": 0.0,
+        "price": 2.710824088471875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "meat",
+        "unmet_fraction": 0.1685677050296875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.012334905006875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "reach",
+        "good": "grain",
+        "unmet_fraction": 0.16163298103825,
+        "ceiling_fraction": 0.4837686567161875,
+        "empty_fraction": 0.0,
+        "price": 2.690670762949375
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "armor",
+        "unmet_fraction": 0.160903171095,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "timber",
+        "unmet_fraction": 0.1561588332399375,
+        "ceiling_fraction": 0.35746268656725,
+        "empty_fraction": 0.0,
+        "price": 2.421510187545
+      },
+      {
+        "world": "war_to_peace",
+        "market": "haafingar",
+        "good": "timber",
+        "unmet_fraction": 0.14582576449275,
+        "ceiling_fraction": 0.4382462686564375,
+        "empty_fraction": 0.0,
+        "price": 2.481701858163125
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "food",
+        "unmet_fraction": 0.135551626955,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.3283665022
+      },
+      {
+        "world": "war_to_peace",
+        "market": "pale",
+        "good": "grain",
+        "unmet_fraction": 0.1302694379061875,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.28373217503875
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "meat",
+        "unmet_fraction": 0.1129770531795625,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.251186821915625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "eastmarch",
+        "good": "food",
+        "unmet_fraction": 0.11180103211768751,
+        "ceiling_fraction": 0.0,
+        "empty_fraction": 0.0,
+        "price": 1.298671338220625
+      },
+      {
+        "world": "war_to_peace",
+        "market": "hjaalmarch",
+        "good": "armor",
+        "unmet_fraction": 0.0864700626086,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "winterhold",
+        "good": "silver",
+        "unmet_fraction": 0.04464061956706875,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      },
+      {
+        "world": "war_to_peace",
+        "market": "falkreath",
+        "good": "medicine",
+        "unmet_fraction": 0.04442852629915625,
+        "ceiling_fraction": 1.0,
+        "empty_fraction": 0.0,
+        "price": 3.0
+      }
+    ]
+  }
+}

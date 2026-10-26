@@ -150,6 +150,8 @@ Economy::Economy(Config c) : config_(std::move(c)) {
 void Economy::NewGame(double day, std::uint64_t seed) {
     Require(Finite(day) && day >= 0, "Invalid game time");
     state_ = {};
+    if (statistics_)
+        *statistics_ = {};
     state_.day = std::floor(day);
     state_.epoch = state_.day;
     state_.rng = seed ? seed : 1;
@@ -338,6 +340,11 @@ unsigned Economy::Advance(double target, unsigned budget) {
     return n;
 }
 void Economy::Tick() {
+    if (statistics_) {
+        statistics_->day = state_.day;
+        statistics_->departed = statistics_->arrived = statistics_->transitLost = 0;
+        statistics_->demand.clear();
+    }
     // Observations apply only to future daily ticks. A clear discovered after a
     // long wait must not retroactively protect shipments in the catch-up period.
     auto &pending = state_.security.pending;
@@ -350,6 +357,10 @@ void Economy::Tick() {
     auto trade = SecurityConditions();
     for (auto it = state_.shipments.begin(); it != state_.shipments.end();) {
         if (it->arrives <= state_.day) {
+            if (statistics_) {
+                statistics_->arrived += it->quantity * (1 - it->loss);
+                statistics_->transitLost += it->quantity * it->loss;
+            }
             auto &s = state_.markets.at(it->to).goods.at(it->commodity);
             s.quantity += it->quantity * (1 - it->loss);
             s.imported += it->quantity;
@@ -358,6 +369,7 @@ void Economy::Tick() {
         } else
             ++it;
     }
+    std::map<std::pair<std::string, std::string>, DemandSample> demand;
     double winter =
         (1 + std::cos(2 * 3.141592653589793 * std::fmod(state_.day + 227, 365.0) / 365.0)) / 2;
     for (auto &def : config_.markets) {
@@ -377,16 +389,10 @@ void Economy::Tick() {
                              Amount(trade.demand[def.id], good.id)) *
                             (good.seasonal ? 1 + winter * 0.15 : 1);
             wanted *= std::pow(std::max(0.1, s.price), -good.elasticity * 0.4);
-            double used = std::min(s.quantity, wanted);
-            s.quantity -= used;
-            s.consumed += used;
-            if (good.shelfLife > 0) {
-                double loss = s.quantity / good.shelfLife;
-                s.quantity -= loss;
-                s.lost += loss;
-            }
+            demand[{def.id, good.id}] = {def.id, good.id, wanted, 0};
         }
     }
+    Retail(demand);
     for (auto &r : config_.recipes) {
         auto &m = state_.markets.at(r.market);
         double batches =
@@ -399,34 +405,6 @@ void Economy::Tick() {
         }
         m.goods.at(r.output).quantity += r.amount * batches;
         m.goods.at(r.output).produced += r.amount * batches;
-    }
-    for (auto &[id, v] : state_.merchants) {
-        auto &m = state_.markets.at(v.market);
-        for (auto &[form, i] : v.items) {
-            if (i.protectedItem)
-                continue;
-            auto &s = m.goods.at(i.commodity);
-            int sales = static_cast<int>(std::floor(i.quantity * config_.merchantTurnover));
-            if (sales == 0 && i.quantity > 0 && Random() < config_.merchantTurnover)
-                sales = 1;
-            i.quantity -= sales;
-            s.consumed += sales * i.units;
-            // Background customers and restocking must use the same local
-            // value scale, or import merchants lose money on every NPC sale.
-            v.cash += static_cast<Money>(std::min(static_cast<double>(1000000000 - v.cash),
-                                                  std::floor(sales * i.value * 0.5 * s.price)));
-            int need = std::max(0, i.target - i.quantity);
-            double cost = std::max(1.0, i.value * 0.35 * s.price);
-            int delivery = std::min(
-                {need, static_cast<int>(std::min(100000.0, std::floor(s.quantity / i.units))),
-                 static_cast<int>(std::min(100000.0, std::floor(v.cash / cost)))});
-            i.quantity += delivery;
-            s.quantity -= delivery * i.units;
-            Money paid = static_cast<Money>(std::ceil(delivery * cost));
-            v.cash -= paid;
-            m.treasury = std::min(config_.treasury, m.treasury + paid);
-        }
-        v.lastRestock = state_.day;
     }
     Dispatch(trade);
     for (auto &def : config_.markets)

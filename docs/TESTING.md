@@ -1,4 +1,4 @@
-# Game testing for 0.6.0
+# Game testing for 0.7.0
 
 ## Installation and save checks
 
@@ -21,15 +21,28 @@ conclusively diagnosed; this build does not claim to repair them.
 
 ## Route security
 
-See [the prototype report](SECURITY-SIMULATION.md) for supported sites, automated
-results, and the camp/fort comparison to perform in game. This feature does not
-add new dialogue topics or location-specific rumors yet.
+The [campaign report](CAMPAIGN-SIMULATION.md) describes the 39 supported locations
+and coverage limits. With debug logging enabled, a fresh session should report
+40 configured profiles, including the inactive Bleak Falls Barrow control.
 
-The [merchant experiment](TRANSPORT-SIMULATION.md) covers the current cargo
-allocator. Compare actual shop inventories and quotes after allowing several
-days for deliveries. Clearing a camp need not reduce every price: exporters can
-become dearer, and well-supplied markets may barely change. Existing shipments
-retain their original arrival dates and losses when updating from 0.5.0.
+- Save before clearing a supported camp such as Embershard, Valtheim or
+  Knifepoint Ridge. Clear it normally, leave the location, and allow unpaused
+  time for observation. The log should name that site changing to `cleared`.
+  A dead boss alone is insufficient if Skyrim has not marked the location clear.
+- Compare a few days of local and connected shop prices against the uncleared
+  save. Deliveries take time, other camps still matter, and exporters may become
+  dearer. A single clear need not produce a visible price change everywhere.
+- Check Fort Greymoor before and after a normal Civil War occupation. Its log
+  should distinguish hostile, cleared, and the occupying military faction.
+  Repeat with Fort Amol or another newly covered fort: unverified initial
+  occupants remain inactive until military control is recognized.
+- Clearing Bleak Falls Barrow or another crypt must not add supplies or protect
+  routes. Karthspire is excluded because its location lacks the clearable tag.
+- Save and reload after a clear or occupation. The site state and pending dates
+  must survive; cargo already traveling keeps its original arrival and loss.
+
+Occupation overhauls can change the vanilla keyword meanings; capture the log
+and mod list if a fort fails to change. No location-specific rumors were added.
 
 ## Innkeeper conversations
 
@@ -68,6 +81,12 @@ quest and response checks. An absent addon is reported separately at load.
   purchasable.
 - Revisit after several days. Ordinary stock should respond to supply;
   protected quest, enchanted and custom items must retain their protections.
+- Visit an import-dependent shop, buy down a tracked category, and revisit on
+  several later days. Some replacement stock should arrive while supply and
+  merchant funds permit it. Check Winterhold equipment or northern provisions
+  in particular. This does not promise a full restock or new item types.
+- Compare the merchant's displayed gold with the amount available for a sale
+  after repeated visits. Funds should not reset to their original value each day.
 
 ## Diagnostics
 

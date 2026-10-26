@@ -88,5 +88,7 @@ void Economy::Load(const json &j) {
         state_ = std::move(old);
         throw;
     }
+    if (statistics_)
+        *statistics_ = {};
 }
 } // namespace marco

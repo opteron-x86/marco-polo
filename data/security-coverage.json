@@ -1,0 +1,2135 @@
+{
+  "schema": 1,
+  "sources": [
+    {
+      "plugin": "Skyrim.esm",
+      "sha256": "2bbc77fdec35a70ef96b710f8c525e50a1db9e63e11a391a0eb9ee8f56d36107"
+    },
+    {
+      "plugin": "Update.esm",
+      "sha256": "5f2985b205ea57428164b47e1a5df57f9b5a1ac0399d4c8b5cf30fc0a60fb008"
+    },
+    {
+      "plugin": "Dawnguard.esm",
+      "sha256": "1208e5153e35366e0ada1a887720d6d636e2d8592d007fe142b37a57e46b476e"
+    },
+    {
+      "plugin": "HearthFires.esm",
+      "sha256": "70e0d5d6dc42224349d33e8c7bca73da447463f671cacc9c15fc0273c93e0008"
+    },
+    {
+      "plugin": "Dragonborn.esm",
+      "sha256": "3b8bf5ead27337f829fa4d474f0363324124a9696d33fe1aee7b01262eff5bd1"
+    }
+  ],
+  "scope": "Official master location categories; curated regional corridors. Mod-added sites require an explicit profile.",
+  "corridorThreatBudgets": {
+    "whiterun-reach": 1.5,
+    "whiterun-rift": 1.3,
+    "whiterun-eastmarch": 1.8,
+    "whiterun-pale": 1.0,
+    "whiterun-falkreath": 1.0,
+    "reach-haafingar": 1.6,
+    "reach-falkreath": 1.5,
+    "haafingar-hjaalmarch": 0.7,
+    "hjaalmarch-pale": 0.6,
+    "pale-winterhold": 0.9,
+    "winterhold-eastmarch": 0.9,
+    "eastmarch-rift": 1.1
+  },
+  "candidates": [
+    {
+      "location": "Dawnguard.esm|004EE8",
+      "editor_id": "DLC1DimhollowCryptLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Dawnguard.esm|002F6F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        5444.957,
+        64838.246,
+        -4945.424
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Dragonborn.esm|01429A",
+      "editor_id": "DLC2RavenRockMineLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Dragonborn.esm|01429C",
+      "editor_id": "DLC2BrodirGroveLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Dragonborn.esm|0142B6",
+      "editor_id": "DLC2TempleOfMiraakLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "DLC2LocTypePillar",
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Dragonborn.esm|0142BA",
+      "editor_id": "DLC2VahloksTombLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Dragonborn.esm|0142BB",
+      "editor_id": "DLC2KolbjornBarrowLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Dragonborn.esm|0142C2",
+      "editor_id": "DLC2HaknirsShoalLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Dragonborn.esm|0142C3",
+      "editor_id": "DLC2HrodulfsHouseLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Dragonborn.esm|0142C9",
+      "editor_id": "DLC2StridentSquallLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeShipwreck"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Dragonborn.esm|0296DA",
+      "editor_id": "DLC2DamphallMineLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Dragonborn.esm|03A07F",
+      "editor_id": "DLC2BloodskalBarrowBanditLocation",
+      "parent": "Dragonborn.esm|016E2A",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Dragonborn.esm",
+      "market": "solstheim",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Solstheim has a sea link but no local overland corridors in this model; inland camp clearing is not treated as maritime protection."
+    },
+    {
+      "location": "Skyrim.esm|018EE2",
+      "editor_id": "SwindlersDenLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|015D4D",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -46078.734,
+        2081.433,
+        -6457.218
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "whiterun",
+      "name": "Swindler’s Den",
+      "corridors": {
+        "whiterun-reach": 0.35
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|018EE3",
+      "editor_id": "AngarvundeLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|015D51",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        113490.734,
+        -97166.719,
+        13467.749
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|018EE9",
+      "editor_id": "BleakFallsBarrowLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016232",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        1482.456,
+        -41162.32,
+        5726.513
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "falkreath",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01914E",
+      "editor_id": "BrokenHelmHollowLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016219",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        191590.828,
+        -109394.969,
+        10859.895
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Beyond the regional trunk corridors south-east of Riften."
+    },
+    {
+      "location": "Skyrim.esm|01914F",
+      "editor_id": "BrokenTowerRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetMilitaryFort",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01621A",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -108567.984,
+        40085.238,
+        -5231.629
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Broken Tower Redoubt",
+      "corridors": {
+        "reach-haafingar": 0.9
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019151",
+      "editor_id": "BrucasLeapRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01621C",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -124953.648,
+        63580.449,
+        -8979.555
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Bruca’s Leap Redoubt",
+      "corridors": {
+        "reach-haafingar": 0.4
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019153",
+      "editor_id": "BrokenOarGrottoLocation",
+      "parent": "Skyrim.esm|016770",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0B77C3",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -66962.867,
+        141811.984,
+        -13643.257
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "haafingar",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Northern coastal cave; no matching coastal shipping corridor in this model."
+    },
+    {
+      "location": "Skyrim.esm|019159",
+      "editor_id": "CragslaneCavernLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016226",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        167053.703,
+        -34010.234,
+        -1629.716
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Cragslane Cavern",
+      "corridors": {
+        "eastmarch-rift": 0.55
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019161",
+      "editor_id": "DeadMensRespiteLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|01622E",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -67284.109,
+        52917.941,
+        -10688.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019162",
+      "editor_id": "DeepwoodRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01622F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -132981.609,
+        80260.656,
+        -4936.582
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Remote western spur; no direct exposure assigned to the regional trunk road."
+    },
+    {
+      "location": "Skyrim.esm|01916F",
+      "editor_id": "DruadachRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01623C",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -153779.797,
+        58854.895,
+        -5961.329
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Remote western spur and quest-sensitive occupation; no direct road exposure assigned."
+    },
+    {
+      "location": "Skyrim.esm|019170",
+      "editor_id": "RedEagleRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01623D",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -125628.227,
+        15531.677,
+        -4911.297
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "reach",
+      "name": "Red Eagle Redoubt",
+      "corridors": {
+        "whiterun-reach": 0.45
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019173",
+      "editor_id": "DustmansCairnLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019175",
+      "editor_id": "FaldarsToothLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocSetMilitaryFort",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016242",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        145743.562,
+        -92383.422,
+        12444.58
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "name": "Faldar’s Tooth",
+      "corridors": {
+        "whiterun-rift": 0.8
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019179",
+      "editor_id": "FolgunthurLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016246",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -47866.488,
+        91436.531,
+        -13388.649
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01917B",
+      "editor_id": "ForsakenCaveLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetCave",
+        "LocSetCaveIce",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016248",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        87222.711,
+        50363.602,
+        -6457.161
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01917C",
+      "editor_id": "FortAmolLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|016249",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        100335.922,
+        -22860.756,
+        -9312.757
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Fort Amol",
+      "corridors": {
+        "whiterun-eastmarch": 0.9,
+        "eastmarch-rift": 0.2
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|01917D",
+      "editor_id": "FortGreymoorLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|01624A",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -13759.418,
+        -8447.581,
+        -5552.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "Fort Greymoor",
+      "corridors": {
+        "whiterun-reach": 1,
+        "whiterun-falkreath": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier.",
+      "initialOccupants": "bandit"
+    },
+    {
+      "location": "Skyrim.esm|01917E",
+      "editor_id": "FortDunstadLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|01624B",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        28971.441,
+        61698.914,
+        -8535.681
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "name": "Fort Dunstad",
+      "corridors": {
+        "whiterun-pale": 0.9
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier.",
+      "initialOccupants": "bandit"
+    },
+    {
+      "location": "Skyrim.esm|01917F",
+      "editor_id": "FortFellhammerLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|01624C",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        42938.781,
+        70896.492,
+        -8814.582
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "name": "Fort Fellhammer",
+      "corridors": {
+        "pale-winterhold": 0.35,
+        "whiterun-pale": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019180",
+      "editor_id": "FortGreenwallLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|01624D",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        167975.922,
+        -72408.703,
+        9118.492
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "name": "Fort Greenwall",
+      "corridors": {
+        "eastmarch-rift": 1
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|019181",
+      "editor_id": "FortHraggstadLocation",
+      "parent": "Skyrim.esm|016770",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|03F510",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -112292.047,
+        114083.422,
+        -5402.292
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "haafingar",
+      "name": "Fort Hraggstad",
+      "corridors": {
+        "reach-haafingar": 0.25,
+        "haafingar-hjaalmarch": 0.25
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|019182",
+      "editor_id": "FortKastavLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|01624F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        112485.68,
+        53760.879,
+        -3032.262
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "name": "Fort Kastav",
+      "corridors": {
+        "winterhold-eastmarch": 0.9
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|019183",
+      "editor_id": "FortNeugradLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|016250",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        33279.238,
+        -91842.0,
+        13181.805
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "name": "Fort Neugrad",
+      "corridors": {
+        "whiterun-falkreath": 0.35
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|019184",
+      "editor_id": "FortSnowhawkLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|016251",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -57033.516,
+        69661.93,
+        -11154.65
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "name": "Fort Snowhawk",
+      "corridors": {
+        "haafingar-hjaalmarch": 0.8,
+        "hjaalmarch-pale": 0.3
+      },
+      "decision": "include",
+      "reason": "Supported Civil War garrison; initial nonmilitary occupants remain inactive until separately verified.",
+      "initialOccupants": "unknown"
+    },
+    {
+      "location": "Skyrim.esm|019185",
+      "editor_id": "FortSungardLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|016252",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -72571.375,
+        -24475.152,
+        182.524
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Fort Sungard",
+      "corridors": {
+        "whiterun-reach": 0.75,
+        "reach-falkreath": 0.6
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier.",
+      "initialOccupants": "forsworn"
+    },
+    {
+      "location": "Skyrim.esm|019187",
+      "editor_id": "GallowsRockLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocSetMilitaryFort",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016254",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        100513.664,
+        5877.517,
+        -7900.156
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Gallows Rock",
+      "corridors": {
+        "whiterun-eastmarch": 0.35
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019188",
+      "editor_id": "GeirmundsHallLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016255",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        89472.656,
+        -64540.473,
+        11001.942
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01918D",
+      "editor_id": "CrackedTuskKeepLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|029DC0",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -54994.629,
+        -87456.414,
+        -2341.921
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "name": "Cracked Tusk Keep",
+      "corridors": {
+        "reach-falkreath": 0.55
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019190",
+      "editor_id": "HagRockRedoubtLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01625E",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -173318.172,
+        -17115.703,
+        4318.812
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Hag Rock Redoubt",
+      "corridors": {
+        "reach-falkreath": 0.5
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019192",
+      "editor_id": "HalldirsCairnLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016260",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -42999.379,
+        -96533.422,
+        137.056
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019193",
+      "editor_id": "HaltedStreamCampLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016261",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        16500.277,
+        18918.969,
+        -4177.377
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "Halted Stream Camp",
+      "corridors": {
+        "whiterun-pale": 0.5
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019196",
+      "editor_id": "HillgrundsTombLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|0162CB",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        80895.797,
+        -17224.867,
+        -5820.893
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01925F",
+      "editor_id": "KarthspireLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeDungeon",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|01626C",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -132336.828,
+        6655.897,
+        -7162.832
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "No LocTypeClearable keyword; the cleared flag is not a reliable recovery signal."
+    },
+    {
+      "location": "Skyrim.esm|019261",
+      "editor_id": "KorvanjundLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016224",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        55348.703,
+        34571.23,
+        -8172.378
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019265",
+      "editor_id": "YsgramorsTombLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|0162D2",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        94632.969,
+        120811.844,
+        -13480.66
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019267",
+      "editor_id": "LostKnifeHideoutLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016273",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        95320.977,
+        -28958.369,
+        -9470.908
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Lost Knife Hideout",
+      "corridors": {
+        "whiterun-eastmarch": 0.3,
+        "whiterun-rift": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019269",
+      "editor_id": "BilegulchMineLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeMine"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016275",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -78224.078,
+        -40253.723,
+        2932.311
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "name": "Bilegulch Mine",
+      "corridors": {
+        "reach-falkreath": 0.7
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|01927B",
+      "editor_id": "MistwatchLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeMilitaryFort",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016286",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        137472.0,
+        -34240.0,
+        -9749.401
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Mistwatch",
+      "corridors": {
+        "eastmarch-rift": 0.35
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019284",
+      "editor_id": "NilheimLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|01628F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        100682.922,
+        -58661.613,
+        11857.968
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "name": "Nilheim",
+      "corridors": {
+        "whiterun-rift": 0.6
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019286",
+      "editor_id": "OrotheimLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|016291",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -67686.008,
+        36949.391,
+        -8254.665
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Off the represented trunk corridors; no road exposure assigned."
+    },
+    {
+      "location": "Skyrim.esm|019292",
+      "editor_id": "ReachcliffCaveLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|01629D",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -133685.328,
+        -11703.219,
+        -5329.334
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019293",
+      "editor_id": "ReachwaterRockLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|01629E",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -140947.844,
+        -3609.046,
+        -7280.979
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|019295",
+      "editor_id": "RedoransRetreatLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|01629F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -15254.3,
+        7226.891,
+        -7369.2
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "Redoran’s Retreat",
+      "corridors": {
+        "whiterun-reach": 0.35
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|019299",
+      "editor_id": "SaarthalLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|0162A5",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        92005.148,
+        91812.227,
+        -11426.98
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|01929B",
+      "editor_id": "RobbersGorgeLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162A7",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -80784.0,
+        47328.0,
+        -12288.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "name": "Robber’s Gorge",
+      "corridors": {
+        "reach-haafingar": 1,
+        "haafingar-hjaalmarch": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192A4",
+      "editor_id": "WinterWarLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeShipwreck"
+      ],
+      "kind": "bandit",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Coastal shipwreck; no matching coastal shipping corridor in this model."
+    },
+    {
+      "location": "Skyrim.esm|0192A9",
+      "editor_id": "SilentMoonsCampLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162B4",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        2903.727,
+        15858.529,
+        -4342.333
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "Silent Moons Camp",
+      "corridors": {
+        "whiterun-pale": 0.4,
+        "whiterun-reach": 0.2
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192AA",
+      "editor_id": "SilverdriftLairLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|0162B5",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        59246.516,
+        53587.25,
+        -7717.842
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0192AF",
+      "editor_id": "SnowVeilSanctumLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0192B1",
+      "editor_id": "SoljundsSinkholeLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon",
+        "LocTypeHabitation",
+        "LocTypeSettlement",
+        "WIDragonAttacked"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|0162BB",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -117661.102,
+        6256.962,
+        -5419.404
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0192B8",
+      "editor_id": "FrostmereCryptLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162C2",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        10241.499,
+        71188.25,
+        -9632.0
+      ],
+      "winning_official_plugin": "Update.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Mixed Nordic ruin with a bandit tag; clearing the entire ruin is not a road-security observation."
+    },
+    {
+      "location": "Skyrim.esm|0192BD",
+      "editor_id": "TrevasWatchLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocSetMilitaryFort",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162C6",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        112108.891,
+        -82836.672,
+        11123.919
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "name": "Treva’s Watch",
+      "corridors": {
+        "whiterun-rift": 0.65
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192BF",
+      "editor_id": "UstengravLocation",
+      "parent": "Skyrim.esm|01676E",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|01621F",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -23079.791,
+        88176.742,
+        -13778.176
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "hjaalmarch",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Nordic ruin with a bandit tag; clearing the entire ruin is not a road-security observation."
+    },
+    {
+      "location": "Skyrim.esm|0192C0",
+      "editor_id": "UtteringHillsCampLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162C8",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        103645.711,
+        20255.207,
+        -8031.655
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Uttering Hills Camp",
+      "corridors": {
+        "whiterun-eastmarch": 0.5,
+        "winterhold-eastmarch": 0.2
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192C1",
+      "editor_id": "ValtheimKeepLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "SilverHandTarget"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162C9",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        74450.352,
+        -1043.84,
+        -4292.759
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "Valtheim Towers",
+      "corridors": {
+        "whiterun-eastmarch": 1.4,
+        "whiterun-rift": 0.6
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192C3",
+      "editor_id": "VolunruudLocation",
+      "parent": "Skyrim.esm|01676D",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016264",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        10419.26,
+        31079.822,
+        -831.451
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "pale",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0192C4",
+      "editor_id": "SerpentsBluffRedoubtLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeDungeon",
+        "LocTypeForswornCamp",
+        "LocTypeHagravenNest"
+      ],
+      "kind": "forsworn",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "No verified world marker in this catalogue; defer road assignment."
+    },
+    {
+      "location": "Skyrim.esm|0192C5",
+      "editor_id": "WhiteRiverWatchLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162CD",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        41828.301,
+        -14683.134,
+        -1806.941
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "name": "White River Watch",
+      "corridors": {
+        "whiterun-rift": 0.65,
+        "whiterun-eastmarch": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0192C9",
+      "editor_id": "YngolBarrowLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|016271",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        157767.078,
+        47259.234,
+        -13372.472
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0350BC",
+      "editor_id": "IronbindBarrowLocation",
+      "parent": "Skyrim.esm|0130FF",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": null,
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|06CCC6",
+      "editor_id": "ShroudHearthBarrowLocation",
+      "parent": "Skyrim.esm|018A4B",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeClearable",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": "Skyrim.esm|01622E",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -67284.109,
+        52917.941,
+        -10688.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": null,
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|080F28",
+      "editor_id": "StonyCreekCaveLocation",
+      "parent": "Skyrim.esm|01676A",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|080F13",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        174741.984,
+        -24827.777,
+        -3350.071
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "eastmarch",
+      "name": "Stony Creek Cave",
+      "corridors": {
+        "eastmarch-rift": 0.25
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|08E1B7",
+      "editor_id": "KnifepointRidgeLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0162A7",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -80784.0,
+        47328.0,
+        -12288.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "name": "Knifepoint Ridge",
+      "corridors": {
+        "reach-falkreath": 0.35
+      },
+      "decision": "include",
+      "reason": "Official MNAM points to Robber’s Gorge; road review uses the separately verified KnifepointRidgeMapMarker.",
+      "marker_correction": {
+        "marker": "Skyrim.esm|08E03C",
+        "editor_id": "KnifepointRidgeMapMarker",
+        "position": [
+          -70131.266,
+          -66860.656,
+          2777.185
+        ]
+      }
+    },
+    {
+      "location": "Skyrim.esm|0998BE",
+      "editor_id": "E3DemoBleakFallsBarrowLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocSetNordicRuin",
+        "LocTypeDraugrCrypt",
+        "LocTypeDungeon"
+      ],
+      "kind": "crypt",
+      "marker": null,
+      "world": null,
+      "position": null,
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Draugr crypt: no transport or production effect from clearing."
+    },
+    {
+      "location": "Skyrim.esm|0B2395",
+      "editor_id": "DragonBridgeOverlookLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeClearable",
+        "LocTypeForswornCamp"
+      ],
+      "kind": "forsworn",
+      "marker": "Skyrim.esm|0B2393",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -104248.062,
+        68533.117,
+        -7767.816
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Dragon Bridge Overlook",
+      "corridors": {
+        "reach-haafingar": 0.9,
+        "haafingar-hjaalmarch": 0.3
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0B23AC",
+      "editor_id": "FourSkullLookoutLocation",
+      "parent": "Skyrim.esm|016769",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0B23A7",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -132699.812,
+        22432.119,
+        -4204.974
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "reach",
+      "name": "Four Skull Lookout",
+      "corridors": {
+        "whiterun-reach": 0.4,
+        "reach-haafingar": 0.2
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0B712C",
+      "editor_id": "EmbershardLocation",
+      "parent": "Skyrim.esm|01676F",
+      "keywords": [
+        "LocSetCave",
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0B6CDF",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        8248.99,
+        -57382.938,
+        1490.984
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "falkreath",
+      "name": "Embershard Mine",
+      "corridors": {
+        "whiterun-falkreath": 0.7
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0C2EF8",
+      "editor_id": "SnowpointBeaconLocation",
+      "parent": "Skyrim.esm|01676B",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0C2EF6",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        53805.699,
+        70741.633,
+        -1339.821
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "winterhold",
+      "name": "Snowpoint Beacon",
+      "corridors": {
+        "pale-winterhold": 0.5
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0D5665",
+      "editor_id": "RiftWatchtowerLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0D3930",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        122814.352,
+        -66093.773,
+        11985.245
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "rift",
+      "name": "Rift Watchtower",
+      "corridors": {
+        "whiterun-rift": 0.45,
+        "eastmarch-rift": 0.2
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0D566F",
+      "editor_id": "BthalftLocation",
+      "parent": "Skyrim.esm|01676C",
+      "keywords": [
+        "LocTypeBanditCamp",
+        "LocTypeClearable",
+        "LocTypeDungeon"
+      ],
+      "kind": "bandit",
+      "marker": "Skyrim.esm|0D393C",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        87427.055,
+        -86991.859,
+        11995.472
+      ],
+      "winning_official_plugin": "Dawnguard.esm",
+      "market": "rift",
+      "name": "Ruins of Bthalft",
+      "corridors": {
+        "whiterun-rift": 0.35
+      },
+      "decision": "include",
+      "reason": "Reviewed regional road exposure; marker position is an audit aid, not an automatic distance multiplier."
+    },
+    {
+      "location": "Skyrim.esm|0D9079",
+      "editor_id": "WhiterunWatchtowerLocation",
+      "parent": "Skyrim.esm|016772",
+      "keywords": [
+        "CWCost",
+        "CWEventHappening",
+        "CWFort",
+        "CWOwner",
+        "CWPurchasedByAttacker",
+        "LocTypeMilitaryFort",
+        "WIComplexInteractionToggle"
+      ],
+      "kind": "fort",
+      "marker": "Skyrim.esm|01624A",
+      "world": "Skyrim.esm|00003C",
+      "position": [
+        -13759.418,
+        -8447.581,
+        -5552.0
+      ],
+      "winning_official_plugin": "Skyrim.esm",
+      "market": "whiterun",
+      "decision": "exclude",
+      "corridors": {},
+      "reason": "Quest watchtower, not one of the nine standalone Civil War forts; shares Greymoor’s location marker."
+    }
+  ]
+}

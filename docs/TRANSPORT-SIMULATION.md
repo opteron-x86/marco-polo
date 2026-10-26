@@ -1,6 +1,8 @@
 # Cargo allocation and merchant tests
 
-Version 0.6.0. These are portable simulation results, not an in-game test.
+Historical results from version 0.6.0, commit `695b47f`. These are portable
+simulation results, not an in-game test. Version 0.7.0 changes retail consumption
+and expands security coverage; see [the campaign report](CAMPAIGN-SIMULATION.md).
 
 ## Allocation
 
@@ -111,6 +113,9 @@ Skyrim testing. The curated site coverage and fort limitations in the
 they do not explain named route events or production costs.
 
 ## Reproduce
+
+Use the source at commit `695b47f` for these historical results. Current builds
+retain the allocator but change retail consumption and site coverage.
 
 ```sh
 cmake -S . -B build/security-simulation -G Ninja -DMARCO_BUILD_PLUGIN=OFF -DMARCO_SANITIZERS=OFF -DCMAKE_BUILD_TYPE=Release

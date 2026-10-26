@@ -94,6 +94,16 @@ struct Quote {
     int quantity{};
     double multiplier{1};
 };
+// Optional experiment telemetry. Never saved and never used to choose an action.
+struct DemandSample {
+    std::string market, commodity;
+    double wanted{}, supplied{};
+};
+struct DailyStatistics {
+    double day{-1};
+    double departed{}, arrived{}, transitLost{};
+    std::vector<DemandSample> demand;
+};
 class Economy {
   public:
     explicit Economy(Config config);
@@ -114,6 +124,12 @@ class Economy {
     json Save() const;
     void Load(const json &);
     void Validate() const;
+    void CollectStatistics(bool enabled) {
+        statistics_ = enabled ? std::optional{DailyStatistics{}} : std::nullopt;
+    }
+    const std::optional<DailyStatistics> &Statistics() const {
+        return statistics_;
+    }
     const Config &Definitions() const {
         return config_;
     }
@@ -127,7 +143,9 @@ class Economy {
   private:
     Config config_;
     State state_;
+    std::optional<DailyStatistics> statistics_;
     void Tick();
+    void Retail(std::map<std::pair<std::string, std::string>, DemandSample> &);
     void Dispatch(const TradeConditions &);
     double Random();
     double Target(const std::string &, const std::string &) const;
